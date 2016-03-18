@@ -394,7 +394,7 @@ global.FlareJ = global.fj = _core2.default;
 
 exports.default = _core2.default;
 
-},{"./core":2,"./utils/utils":4}],2:[function(require,module,exports){
+},{"./core":2,"./utils/utils":6}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -500,6 +500,83 @@ var isMobile = exports.isMobile = isAndroid || isIos || isWindowsPhone;
 var isWebkit = exports.isWebkit = isChrome || isSafari || isAndroid || isIos;
 
 },{}],4:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//Get global unique id
+var guid = exports.guid = function guid() {
+  return new Date().getTime() + Math.random().toFixed(6).substr(2);
+};
+
+},{}],5:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//Lazy do something
+var lazyDo = exports.lazyDo = function lazyDo(fn, timeOut, doName, obj) {
+  var dn = doName != null,
+      sto = null;
+
+  if (!obj) {
+    obj = window;
+  }
+  if (timeOut == null) {
+    timeOut = 25;
+  }
+
+  //If before the implementation of the operation has not exceeded the time,then make it cancel.
+  if (dn && obj[doName]) {
+    clearTimeout(obj[doName]);
+  }
+
+  //Delay for a period of time to perform the operation.
+  sto = setTimeout(function () {
+    fn.call(obj);
+  }, timeOut);
+
+  if (dn) {
+    obj[doName] = sto;
+  }
+
+  return sto;
+};
+
+//Poll do something
+var pollDo = exports.pollDo = function pollDo(fn, timeOut, doName, obj) {
+  var dn = doName != null,
+      siv = null;
+
+  if (!obj) {
+    obj = window;
+  }
+  if (timeOut == null) {
+    timeOut = 100;
+  }
+
+  //If the previous poll operation is exist,then make it cancel.
+  if (dn && obj[doName]) {
+    clearInterval(obj[doName]);
+  }
+
+  //Polling execution operations every interval a period of time.
+  siv = setInterval(function () {
+    if (fn.call(obj) === false) {
+      clearInterval(siv);
+    }
+  }, timeOut);
+
+  if (dn) {
+    obj[doName] = siv;
+  }
+
+  return siv;
+};
+
+},{}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -510,14 +587,22 @@ var _core = require('../core');
 
 var _core2 = babelHelpers.interopRequireDefault(_core);
 
+var _common = require('./common');
+
+var common = babelHelpers.interopRequireWildcard(_common);
+
 var _browsers = require('./browsers');
 
 var browsers = babelHelpers.interopRequireWildcard(_browsers);
 
+var _delayOperate = require('./delayOperate');
 
-babelHelpers.extends(_core2.default, browsers);
+var delayOperate = babelHelpers.interopRequireWildcard(_delayOperate);
+
+
+babelHelpers.extends(_core2.default, common, browsers, delayOperate);
 
 exports.default = _core2.default;
 
-},{"../core":2,"./browsers":3}]},{},[1])(1)
+},{"../core":2,"./browsers":3,"./common":4,"./delayOperate":5}]},{},[1])(1)
 });
