@@ -1,4 +1,4 @@
-﻿(function (global) {
+(function (global) {
   var babelHelpers = global.babelHelpers = {};
   babelHelpers.typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
     return typeof obj;
@@ -376,3 +376,148 @@
     }
   };
 })(typeof global === "undefined" ? self : global);
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.FlareJ = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _core = require('./core');
+
+var _core2 = babelHelpers.interopRequireDefault(_core);
+
+require('./utils/utils');
+
+var global = typeof self !== "undefined" ? self : undefined;
+global.FlareJ = global.fj = _core2.default;
+
+exports.default = _core2.default;
+
+},{"./core":2,"./utils/utils":4}],2:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var fj = {
+    rootPath: "../../flarej/",
+    initTheme: "concise",
+    ver: null,
+    themeStoreName: "fj_theme"
+};
+
+//Set globel configs
+fj.setConfig = function (config) {
+    return babelHelpers.extends(fj, config);
+};
+
+exports.default = fj;
+
+},{}],3:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _win = window,
+    _docMode = document.documentMode,
+    _ua = navigator.userAgent.toLowerCase();
+
+var _browser = {
+    version: (_ua.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [0, '0'])[1],
+    opera: /opera/i.test(_ua),
+    firefox: /firefox/i.test(_ua),
+    ie: /msie/i.test(_ua) && !/opera/.test(_ua),
+    chrome: /chrome/i.test(_ua) && /webkit/i.test(_ua) && /mozilla/i.test(_ua),
+    android: _ua.indexOf('android') > -1,
+    iphone: _ua.indexOf('iphone') > -1,
+    ipad: _ua.indexOf('ipad') > -1,
+    ipod: _ua.indexOf('ipod') > -1,
+    windowsPhone: _ua.indexOf('windows phone') > -1
+};
+_browser.safari = /webkit/i.test(_ua) && !_browser.chrome;
+_browser.mozilla = /mozilla/i.test(_ua) && !/(compatible|webkit)/.test(_ua) && !_browser.chrome;
+
+//IE
+var isIE = exports.isIE = _browser.ie;
+
+//IE9
+var isIE9 = exports.isIE9 = isIE && _browser.version == 9.0 && (!_docMode || _docMode == 9) || _docMode == 9;
+
+//IE10
+var isIE10 = exports.isIE10 = isIE && _browser.version == 10.0 && (!_docMode || _docMode == 10) || _docMode == 10;
+
+//IE11
+var isIE11 = exports.isIE11 = isIE && _browser.version == 11.0 && (!_docMode || _docMode == 11) || _docMode == 11;
+
+//IE version less than 9
+var isIElt9 = exports.isIElt9 = isIE && !isIE9 && !isIE10 && !isIE11;
+
+//IE version less than 11
+var isIElt11 = exports.isIElt11 = isIE9 || isIE10;
+
+//IE version more than 10
+var isIEgt10 = exports.isIEgt10 = isIE10 || isIE11;
+
+//IE version more than 9
+var isIEgt9 = exports.isIEgt9 = isIE9 || isIEgt10;
+
+//FireFox
+var isFF = exports.isFF = _browser.mozilla;
+
+//Chrome
+var isChrome = exports.isChrome = _browser.chrome;
+
+//Safari
+var isSafari = exports.isSafari = _browser.safari;
+
+//Opera
+var isOpera = exports.isOpera = _browser.opera;
+
+//Android
+var isAndroid = exports.isAndroid = _browser.android;
+
+//Iphone
+var isIphone = exports.isIphone = _browser.iphone;
+
+//Ipad
+var isIpad = exports.isIpad = _browser.ipad;
+
+//Ipod
+var isIpod = exports.isIpod = _browser.ipod;
+
+//Ios
+var isIos = exports.isIos = isIphone || isIpad || isIpod;
+
+//Windows Phone
+var isWindowsPhone = exports.isWindowsPhone = _browser.windowsPhone;
+
+//Mobile browser
+var isMobile = exports.isMobile = isAndroid || isIos || isWindowsPhone;
+
+//Webkit and blink core browser
+var isWebkit = exports.isWebkit = isChrome || isSafari || isAndroid || isIos;
+
+},{}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _core = require('../core');
+
+var _core2 = babelHelpers.interopRequireDefault(_core);
+
+var _browsers = require('./browsers');
+
+var browsers = babelHelpers.interopRequireWildcard(_browsers);
+
+
+babelHelpers.extends(_core2.default, browsers);
+
+exports.default = _core2.default;
+
+},{"../core":2,"./browsers":3}]},{},[1])(1)
+});

@@ -20,7 +20,6 @@ function getJsLibName() {
   return libName;
 }
 
-
 gulp.task('build js', function () {
   return browserify({
     entries: './src/base.js',
@@ -30,7 +29,9 @@ gulp.task('build js', function () {
       presets: ['es2015', 'stage-0', 'react'],
       plugins: [
           'transform-object-assign',
-          'external-helpers'
+          'external-helpers',
+          ['transform-es2015-classes', { "loose": false }],
+          ['transform-es2015-modules-commonjs', { "loose": false }]
       ]
     })
     .bundle()
