@@ -1,4 +1,4 @@
-﻿//Lazy do something
+﻿//Lazy to do something
 export const lazyDo = (fn, timeOut, doName, obj) => {
   let dn = doName != null,
     sto = null;
@@ -27,7 +27,7 @@ export const lazyDo = (fn, timeOut, doName, obj) => {
   return sto;
 };
 
-//Poll do something
+//Poll to do something
 export const pollDo = (fn, timeOut, doName, obj) => {
   var dn = doName != null,
     siv = null;
