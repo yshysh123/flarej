@@ -1,18 +1,17 @@
-﻿let _win = window,
-    _docMode = document.documentMode,
-    _ua = navigator.userAgent.toLowerCase();
+﻿let _docMode = document.documentMode,
+  _ua = navigator.userAgent.toLowerCase();
 
 let _browser = {
-    version: (_ua.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [0, '0'])[1],
-    opera: /opera/i.test(_ua),
-    firefox: /firefox/i.test(_ua),
-    ie: /msie/i.test(_ua) && !/opera/.test(_ua),
-    chrome: /chrome/i.test(_ua) && /webkit/i.test(_ua) && /mozilla/i.test(_ua),
-    android: _ua.indexOf('android') > -1,
-    iphone: _ua.indexOf('iphone') > -1,
-    ipad: _ua.indexOf('ipad') > -1,
-    ipod: _ua.indexOf('ipod') > -1,
-    windowsPhone: _ua.indexOf('windows phone') > -1
+  version: (_ua.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [0, '0'])[1],
+  opera: /opera/i.test(_ua),
+  firefox: /firefox/i.test(_ua),
+  ie: /msie/i.test(_ua) && !/opera/.test(_ua),
+  chrome: /chrome/i.test(_ua) && /webkit/i.test(_ua) && /mozilla/i.test(_ua),
+  android: _ua.indexOf('android') > -1,
+  iphone: _ua.indexOf('iphone') > -1,
+  ipad: _ua.indexOf('ipad') > -1,
+  ipod: _ua.indexOf('ipod') > -1,
+  windowsPhone: _ua.indexOf('windows phone') > -1
 };
 _browser.safari = /webkit/i.test(_ua) && !_browser.chrome;
 _browser.mozilla = /mozilla/i.test(_ua) && !/(compatible|webkit)/.test(_ua) && !_browser.chrome;

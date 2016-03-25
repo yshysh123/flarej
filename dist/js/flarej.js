@@ -389,22 +389,22 @@ var _core2 = babelHelpers.interopRequireDefault(_core);
 
 require('./utils/utils');
 
-var global = typeof self !== "undefined" ? self : undefined;
+var global = typeof self !== 'undefined' ? self : undefined;
 global.FlareJ = global.fj = _core2.default;
 
 exports.default = _core2.default;
 
 },{"./core":2,"./utils/utils":6}],2:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 var fj = {
-    rootPath: "../../flarej/",
-    initTheme: "concise",
+    rootPath: '../../flarej/',
+    initTheme: 'concise',
     ver: null,
-    themeStoreName: "fj_theme"
+    themeStoreName: 'fj_theme'
 };
 
 //Set globel configs
@@ -418,23 +418,22 @@ exports.default = fj;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-var _win = window,
-    _docMode = document.documentMode,
+var _docMode = document.documentMode,
     _ua = navigator.userAgent.toLowerCase();
 
 var _browser = {
-    version: (_ua.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [0, '0'])[1],
-    opera: /opera/i.test(_ua),
-    firefox: /firefox/i.test(_ua),
-    ie: /msie/i.test(_ua) && !/opera/.test(_ua),
-    chrome: /chrome/i.test(_ua) && /webkit/i.test(_ua) && /mozilla/i.test(_ua),
-    android: _ua.indexOf('android') > -1,
-    iphone: _ua.indexOf('iphone') > -1,
-    ipad: _ua.indexOf('ipad') > -1,
-    ipod: _ua.indexOf('ipod') > -1,
-    windowsPhone: _ua.indexOf('windows phone') > -1
+  version: (_ua.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [0, '0'])[1],
+  opera: /opera/i.test(_ua),
+  firefox: /firefox/i.test(_ua),
+  ie: /msie/i.test(_ua) && !/opera/.test(_ua),
+  chrome: /chrome/i.test(_ua) && /webkit/i.test(_ua) && /mozilla/i.test(_ua),
+  android: _ua.indexOf('android') > -1,
+  iphone: _ua.indexOf('iphone') > -1,
+  ipad: _ua.indexOf('ipad') > -1,
+  ipod: _ua.indexOf('ipod') > -1,
+  windowsPhone: _ua.indexOf('windows phone') > -1
 };
 _browser.safari = /webkit/i.test(_ua) && !_browser.chrome;
 _browser.mozilla = /mozilla/i.test(_ua) && !/(compatible|webkit)/.test(_ua) && !_browser.chrome;
@@ -516,7 +515,7 @@ var guid = exports.guid = function guid() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-//Lazy do something
+//Lazy to do something
 var lazyDo = exports.lazyDo = function lazyDo(fn, timeOut, doName, obj) {
   var dn = doName != null,
       sto = null;
@@ -545,7 +544,7 @@ var lazyDo = exports.lazyDo = function lazyDo(fn, timeOut, doName, obj) {
   return sto;
 };
 
-//Poll do something
+//Poll to do something
 var pollDo = exports.pollDo = function pollDo(fn, timeOut, doName, obj) {
   var dn = doName != null,
       siv = null;

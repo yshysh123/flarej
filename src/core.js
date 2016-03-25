@@ -1,8 +1,8 @@
 ﻿let fj = {
-    rootPath: "../../flarej/",
-    initTheme: "concise",
+    rootPath: '../../flarej/',
+    initTheme: 'concise',
     ver: null,
-    themeStoreName: "fj_theme"
+    themeStoreName: 'fj_theme'
 };
 
 //Set globel configs
