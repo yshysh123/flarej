@@ -1,4 +1,5 @@
 ﻿import fj from './core';
+import nj from 'nornj';
 import './utils/utils';
 
 let global = typeof self !== 'undefined' ? self : this;

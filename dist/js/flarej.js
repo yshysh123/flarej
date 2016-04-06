@@ -387,6 +387,10 @@ var _core = require('./core');
 
 var _core2 = babelHelpers.interopRequireDefault(_core);
 
+var _nornj = (typeof window !== "undefined" ? window['nj'] : typeof global !== "undefined" ? global['nj'] : null);
+
+var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
+
 require('./utils/utils');
 
 var global = typeof self !== 'undefined' ? self : undefined;
