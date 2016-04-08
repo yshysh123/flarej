@@ -391,6 +391,14 @@ var _nornj = (typeof window !== "undefined" ? window['nj'] : typeof global !== "
 
 var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
 
+var _react = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null);
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactDom = (typeof window !== "undefined" ? window['ReactDOM'] : typeof global !== "undefined" ? global['ReactDOM'] : null);
+
+var _reactDom2 = babelHelpers.interopRequireDefault(_reactDom);
+
 require('./utils/utils');
 
 var global = typeof self !== 'undefined' ? self : undefined;
