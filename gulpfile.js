@@ -1,9 +1,10 @@
 ﻿var gulp = require('gulp'),
   browserify = require('browserify'),
-  babelify = require('babelify'),
-  uglify = require('gulp-uglify'),
   source = require('vinyl-source-stream'),
   buffer = require('vinyl-buffer'),
+  dependify = require('dependify'),
+  babelify = require('babelify'),
+  uglify = require('gulp-uglify'),
   jasmine = require('gulp-jasmine'),
   rename = require('gulp-rename'),
   concat = require('gulp-concat'),
@@ -36,10 +37,17 @@ function getCssLibName() {
 
 gulp.task('build-js', function () {
   return browserify({
-    entries: './src/base.js',
-    standalone: 'FlareJ'
+    entries: './src/base.js'
   })
-    .transform(babelify, {
+    .plugin(dependify, {  //Build UMD standalone bundle and support dependencies.
+      name: 'FlareJ',
+      deps: {
+        'nornj': 'nj',
+        'react': 'React',
+        'react-dom': 'ReactDOM'
+      }
+    })
+    .transform(babelify, {  //Transform es6 to es5.
       presets: ['es2015', 'stage-0', 'react'],
       plugins: [
           'transform-object-assign',

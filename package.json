@@ -53,16 +53,7 @@
     "react-dom": "^0.14.8",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "yargs": "^4.2.0"
-  },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browserify-shim": {
-    "nornj": "global:nj",
-    "react": "global:React",
-    "react-dom": "global:ReactDOM"
+    "yargs": "^4.2.0",
+    "dependify": "^0.0.1"
   }
 }

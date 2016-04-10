@@ -376,7 +376,7 @@
     }
   };
 })(typeof global === "undefined" ? self : global);
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.FlareJ = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(g, f) { var r = (typeof require === 'function' ? require : function(name) { return {"nornj":nj,"react":React,"react-dom":ReactDOM}[name]; }); if (typeof exports === 'object' && typeof module !== 'undefined') { module.exports = f(r) } else if (typeof define === 'function' && define.amd) { define(["nornj","react","react-dom"], f.bind(g,r)) } else { g.FlareJ = f(r) } })(this, function(require,define, module,exports) { return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -387,15 +387,15 @@ var _core = require('./core');
 
 var _core2 = babelHelpers.interopRequireDefault(_core);
 
-var _nornj = (typeof window !== "undefined" ? window['nj'] : typeof global !== "undefined" ? global['nj'] : null);
+var _nornj = require('nornj');
 
 var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
 
-var _react = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null);
+var _react = require('react');
 
 var _react2 = babelHelpers.interopRequireDefault(_react);
 
-var _reactDom = (typeof window !== "undefined" ? window['ReactDOM'] : typeof global !== "undefined" ? global['ReactDOM'] : null);
+var _reactDom = require('react-dom');
 
 var _reactDom2 = babelHelpers.interopRequireDefault(_reactDom);
 
@@ -406,7 +406,7 @@ global.FlareJ = global.fj = _core2.default;
 
 exports.default = _core2.default;
 
-},{"./core":2,"./utils/utils":6}],2:[function(require,module,exports){
+},{"./core":2,"./utils/utils":6,"nornj":"nornj","react":"react","react-dom":"react-dom"}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -615,5 +615,5 @@ babelHelpers.extends(_core2.default, common, browsers, delayOperate);
 
 exports.default = _core2.default;
 
-},{"../core":2,"./browsers":3,"./common":4,"./delayOperate":5}]},{},[1])(1)
-});
+},{"../core":2,"./browsers":3,"./common":4,"./delayOperate":5}]},{},[1]);
+(1); });
