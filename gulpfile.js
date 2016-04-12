@@ -63,8 +63,9 @@ gulp.task('build-js', function () {
 });
 
 gulp.task('concat-js', function () {
-  return gulp.src(['./vendor/babelHelpers.js', './dist/js/' + getJsLibName()])
-    .pipe(concat(getJsLibName()))
+  var jsLibName = getJsLibName();
+  return gulp.src(['./vendor/babelHelpers.js', './dist/js/' + jsLibName])
+    .pipe(concat(jsLibName))
     .pipe(gulpif(argv.min, uglify()))
     .pipe(gulp.dest('./dist/js'));
 });
@@ -79,8 +80,9 @@ gulp.task('build-css', function () {
 });
 
 gulp.task('concat-css', function () {
-  return gulp.src(['./vendor/normalize.css', './dist/css/' + getCssLibName()])
-    .pipe(concat(getCssLibName()))
+  var cssLibName = getCssLibName();
+  return gulp.src(['./vendor/normalize.css', './dist/css/' + cssLibName])
+    .pipe(concat(cssLibName))
     .pipe(gulpif(argv.min, cssnano()))
     .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
     .pipe(gulp.dest('./dist/css'));
