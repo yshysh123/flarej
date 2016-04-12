@@ -401,12 +401,87 @@ var _reactDom2 = babelHelpers.interopRequireDefault(_reactDom);
 
 require('./utils/utils');
 
+var _pagination = require('./components/pagination');
+
+var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
+
+babelHelpers.extends(_core2.default, { Pagination: _pagination2.default });
+
 var global = typeof self !== 'undefined' ? self : undefined;
 global.FlareJ = global.fj = _core2.default;
 
 exports.default = _core2.default;
 
-},{"./core":2,"./utils/utils":6,"nornj":"nornj","react":"react","react-dom":"react-dom"}],2:[function(require,module,exports){
+},{"./components/pagination":2,"./core":4,"./utils/utils":8,"nornj":"nornj","react":"react","react-dom":"react-dom"}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _templateObject = babelHelpers.taggedTemplateLiteral(['<div>test', '</div>'], ['<div>test', '</div>']);
+
+var _widget = require('./widget');
+
+var _widget2 = babelHelpers.interopRequireDefault(_widget);
+
+var _nornj = require('nornj');
+
+var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
+
+var Pagination = function (_Widget) {
+babelHelpers.inherits(Pagination, _Widget);
+
+  function Pagination() {
+babelHelpers.classCallCheck(this, Pagination);
+    return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Pagination).apply(this, arguments));
+  }
+
+babelHelpers.createClass(Pagination, [{
+    key: 'show',
+    value: function show() {
+      return babelHelpers.get(Object.getPrototypeOf(Pagination.prototype), 'show', this).call(this);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _nornj2.default.compileComponent((0, _nornj2.default)(_templateObject, this.show()))();
+    }
+  }]);
+  return Pagination;
+}(_widget2.default);
+
+exports.default = Pagination;
+
+},{"./widget":3,"nornj":"nornj"}],3:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var Widget = function (_Component) {
+  babelHelpers.inherits(Widget, _Component);
+
+  function Widget() {
+    babelHelpers.classCallCheck(this, Widget);
+    return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Widget).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(Widget, [{
+    key: 'show',
+    value: function show() {
+      return '1';
+    }
+  }]);
+  return Widget;
+}(_react.Component);
+
+exports.default = Widget;
+
+},{"react":"react"}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -426,7 +501,7 @@ fj.setConfig = function (config) {
 
 exports.default = fj;
 
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -510,7 +585,7 @@ var isMobile = exports.isMobile = isAndroid || isIos || isWindowsPhone;
 //Webkit and blink core browser
 var isWebkit = exports.isWebkit = isChrome || isSafari || isAndroid || isIos;
 
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -521,7 +596,7 @@ var guid = exports.guid = function guid() {
   return new Date().getTime() + Math.random().toFixed(6).substr(2);
 };
 
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -587,7 +662,7 @@ var pollDo = exports.pollDo = function pollDo(fn, timeOut, doName, obj) {
   return siv;
 };
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -615,5 +690,5 @@ babelHelpers.extends(_core2.default, common, browsers, delayOperate);
 
 exports.default = _core2.default;
 
-},{"../core":2,"./browsers":3,"./common":4,"./delayOperate":5}]},{},[1]);
+},{"../core":4,"./browsers":5,"./common":6,"./delayOperate":7}]},{},[1]);
 (1); });

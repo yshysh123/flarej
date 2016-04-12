@@ -12,6 +12,12 @@
 <body>
   <script>
     console.log(fj.guid());
+
+    nj.registerTagNamespace('fj');
+    nj.registerComponent('Pagination', fj.Pagination);
   </script>
+  <div>
+    <fj-Pagination class="fj-component"></fj-Pagination>
+  </div>
 </body>
 </html>
