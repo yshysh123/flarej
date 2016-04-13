@@ -405,7 +405,11 @@ var _pagination = require('./components/pagination');
 
 var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
-babelHelpers.extends(_core2.default, { Pagination: _pagination2.default });
+var widgets = { Pagination: _pagination2.default };
+babelHelpers.extends(_core2.default, widgets);
+
+_nornj2.default.registerTagNamespace('fj');
+_nornj2.default.registerComponent(widgets);
 
 var global = typeof self !== 'undefined' ? self : undefined;
 global.FlareJ = global.fj = _core2.default;

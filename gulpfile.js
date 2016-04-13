@@ -3,6 +3,7 @@
   source = require('vinyl-source-stream'),
   buffer = require('vinyl-buffer'),
   dependify = require('dependify'),
+  watchify = require('watchify'),
   babelify = require('babelify'),
   uglify = require('gulp-uglify'),
   jasmine = require('gulp-jasmine'),
@@ -35,42 +36,56 @@ function getCssLibName() {
   return libName;
 }
 
-gulp.task('build-js', function () {
-  return browserify({
-    entries: './src/base.js'
-  })
-    .plugin(dependify, {  //Build UMD standalone bundle and support dependencies.
-      name: 'FlareJ',
-      deps: {
-        'nornj': 'nj',
-        'react': 'React',
-        'react-dom': 'ReactDOM'
-      }
-    })
-    .transform(babelify, {  //Transform es6 to es5.
-      presets: ['es2015', 'stage-0', 'react'],
-      plugins: [
-          'transform-object-assign',
-          'external-helpers',
-          ['transform-es2015-classes', { "loose": false }],
-          ['transform-es2015-modules-commonjs', { "loose": false }]
-      ]
-    })
-    .bundle()
-    .pipe(source(getJsLibName()))
-    .pipe(buffer())
-    .pipe(gulp.dest('./dist/js'));
+var b = browserify({
+  entries: './src/base.js'
+})
+.plugin(dependify, {  //Build UMD standalone bundle and support dependencies.
+  name: 'FlareJ',
+  deps: {
+    'nornj': 'nj',
+    'react': 'React',
+    'react-dom': 'ReactDOM'
+  }
+})
+.transform(babelify, {  //Transform es6 to es5.
+  presets: ['es2015', 'stage-0', 'react'],
+  plugins: [
+      'transform-object-assign',
+      'external-helpers',
+      ['transform-es2015-classes', { "loose": false }],
+      ['transform-es2015-modules-commonjs', { "loose": false }]
+  ]
 });
 
-gulp.task('concat-js', function () {
+function bundle() {
   var jsLibName = getJsLibName();
-  return gulp.src(['./vendor/babelHelpers.js', './dist/js/' + jsLibName])
-    .pipe(concat(jsLibName))
-    .pipe(gulpif(argv.min, uglify()))
-    .pipe(gulp.dest('./dist/js'));
-});
 
-gulp.task('build-all-js', sequence('build-js', 'concat-js'));
+  return b.bundle()
+    .pipe(source(jsLibName))
+    .pipe(buffer())
+    .pipe(gulp.dest('./dist/js').on('end', function() {
+      gulp.src(['./vendor/babelHelpers.js', './dist/js/' + jsLibName])
+      .pipe(concat(jsLibName))
+      .pipe(gulpif(argv.min, uglify()))
+      .pipe(gulp.dest('./dist/js'))
+    }));
+}
+
+gulp.task('build-all-js', bundle);
+
+//Monitor changes of JS files to bundle again
+gulp.task('watch-js', function() {
+  b.plugin(watchify);
+  b.on('update', function(ids) {
+    ids.forEach(function(v) {
+      console.log('bundle changed file:' + v);
+    });
+
+    gulp.start('build-all-js');
+  });
+
+  return bundle();
+});
 
 gulp.task('build-css', function () {
   return gulp.src('./src/styles/base.less')
@@ -101,8 +116,8 @@ gulp.task('build-lib-font', function () {
     .pipe(gulp.dest('./dist/fonts'));
 });
 
-gulp.task('build-lib', ['build-lib-css', 'build-lib-font']);
-gulp.task('build', ['build-all-js', 'build-all-css', 'build-lib']);
+gulp.task('build-all-lib', ['build-lib-css', 'build-lib-font']);
+gulp.task('build', ['build-all-js', 'build-all-css', 'build-all-lib']);
 
 //Unit testing
 gulp.task("test", function () {
