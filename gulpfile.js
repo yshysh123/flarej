@@ -57,7 +57,10 @@ var b = browserify({
   ]
 });
 
+var isBundling = false;
+
 function bundle() {
+  isBundling = true;
   var jsLibName = getJsLibName();
 
   return b.bundle()
@@ -67,7 +70,9 @@ function bundle() {
       gulp.src(['./vendor/babelHelpers.js', './dist/js/' + jsLibName])
       .pipe(concat(jsLibName))
       .pipe(gulpif(argv.min, uglify()))
-      .pipe(gulp.dest('./dist/js'))
+      .pipe(gulp.dest('./dist/js').on('end', function() {
+        isBundling = false;
+      }));
     }));
 }
 
@@ -77,6 +82,10 @@ gulp.task('build-all-js', bundle);
 gulp.task('watch-js', function() {
   b.plugin(watchify);
   b.on('update', function(ids) {
+    if(isBundling) {
+      return;
+    }
+
     ids.forEach(function(v) {
       console.log('bundle changed file:' + v);
     });

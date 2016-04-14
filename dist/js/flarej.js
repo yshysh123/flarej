@@ -436,9 +436,11 @@ var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
 var Pagination = function (_Widget) {
 babelHelpers.inherits(Pagination, _Widget);
 
-  function Pagination() {
+  function Pagination(props) {
 babelHelpers.classCallCheck(this, Pagination);
-    return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Pagination).apply(this, arguments));
+
+    console.log(props);
+    return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Pagination).call(this, props));
   }
 
 babelHelpers.createClass(Pagination, [{
@@ -469,9 +471,11 @@ var _react = require('react');
 var Widget = function (_Component) {
   babelHelpers.inherits(Widget, _Component);
 
-  function Widget() {
+  function Widget(props) {
     babelHelpers.classCallCheck(this, Widget);
-    return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Widget).apply(this, arguments));
+
+    console.log(props);
+    return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Widget).call(this, props));
   }
 
   babelHelpers.createClass(Widget, [{

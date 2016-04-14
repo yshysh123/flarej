@@ -2,6 +2,11 @@
 import nj from 'nornj';
 
 class Pagination extends Widget {
+  constructor(props) {
+    console.log(props);
+    super(props);
+  }
+
   show() {
     return super.show();
   }
