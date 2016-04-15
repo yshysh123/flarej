@@ -3,7 +3,7 @@ import nj from 'nornj';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './utils/utils';
-import Pagination from './components/pagination';
+import Pagination from './components/pagination/component';
 
 const widgets = { Pagination };
 Object.assign(fj, widgets);

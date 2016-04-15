@@ -1,5 +1,7 @@
-﻿import Widget from './widget';
-import nj from 'nornj';
+﻿import { compileComponent } from 'nornj';
+import Widget from '../widget';
+import tmpl from './template';
+const template = compileComponent(tmpl);
 
 class Pagination extends Widget {
   constructor(props) {
@@ -12,7 +14,7 @@ class Pagination extends Widget {
   }
 
   render() {
-    return nj.compileComponent(nj`<div>test${this.show()}</div>`)();
+    return template({ id: this.show() });
   }
 }
 

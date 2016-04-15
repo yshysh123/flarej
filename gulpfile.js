@@ -16,7 +16,8 @@
   eslint = require('gulp-eslint'),
   postcss = require('gulp-postcss'),
   autoprefixer = require('autoprefixer'),
-  argv = require('yargs').argv;
+  argv = require('yargs').argv,
+  precompiler = require('nornj/precompiler');
 
 function getJsLibName() {
   var libName = 'flarej.js';
@@ -63,14 +64,17 @@ function bundle() {
   isBundling = true;
   var jsLibName = getJsLibName();
 
+  //Precompile nornj templates
+  precompiler({ source: __dirname + '/src/components/**/*.nj.js', esVersion: 'es6' });
+
   return b.bundle()
     .pipe(source(jsLibName))
     .pipe(buffer())
-    .pipe(gulp.dest('./dist/js').on('end', function() {
+    .pipe(gulp.dest('./dist/js').on('end', function () {
       gulp.src(['./vendor/babelHelpers.js', './dist/js/' + jsLibName])
       .pipe(concat(jsLibName))
       .pipe(gulpif(argv.min, uglify()))
-      .pipe(gulp.dest('./dist/js').on('end', function() {
+      .pipe(gulp.dest('./dist/js').on('end', function () {
         isBundling = false;
       }));
     }));
@@ -79,18 +83,28 @@ function bundle() {
 gulp.task('build-all-js', bundle);
 
 //Monitor changes of JS files to bundle again
-gulp.task('watch-js', function() {
+gulp.task('watch-js', function () {
   b.plugin(watchify);
-  b.on('update', function(ids) {
-    if(isBundling) {
+  b.on('update', function (ids) {
+    if (isBundling) {
       return;
     }
 
-    ids.forEach(function(v) {
+    var bundleJs = true;
+    ids.every(function (v) {
+      var fileName = v.substr(v.lastIndexOf('\\') + 1);
+      if(fileName === 'template.js') {
+        bundleJs = false;
+        return false;
+      }
+
       console.log('bundle changed file:' + v);
+      return true;
     });
 
-    gulp.start('build-all-js');
+    if(bundleJs) {
+      gulp.start('build-all-js');
+    }
   });
 
   return bundle();
