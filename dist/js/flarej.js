@@ -442,7 +442,7 @@ var Pagination = function (_Widget) {
   function Pagination(props) {
     babelHelpers.classCallCheck(this, Pagination);
 
-    var _this = babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Pagination).call(this, props, {}));
+    var _this = babelHelpers.possibleConstructorReturn(this, _Widget.call(this, props, {}));
 
     _this.template = (0, _nornj.compileComponent)(_template2.default);
 
@@ -451,30 +451,26 @@ var Pagination = function (_Widget) {
     return _this;
   }
 
-  babelHelpers.createClass(Pagination, [{
-    key: 'show',
-    value: function show() {
-      return babelHelpers.get(Object.getPrototypeOf(Pagination.prototype), 'show', this).call(this);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      alert(this.props);
-      return this.template({ id: this.show() });
-    }
-  }]);
+  Pagination.prototype.show = function show() {
+    return _Widget.prototype.show.call(this);
+  };
+
+  Pagination.prototype.render = function render() {
+    return this.template({ id: this.show() });
+  };
+
   return Pagination;
 }(_widget2.default);
 
 Pagination.defaultProps = {
-  fjType: 'Pagination',
-  responsive: false,
+  fjType: 'pagination',
+  responsive: true,
   responsiveParam: {
-    "(max-width: 768px)|Pagination": {
+    '(max-width: 768px)|pagination': {
       state: { objId: 10000 },
       delay: 100
     },
-    "(min-width: 769px)|Pagination": {
+    '(min-width: 769px)|pagination': {
       state: { objId: 20000 },
       delay: 100
     }
@@ -515,7 +511,7 @@ var Widget = function (_Component) {
   function Widget(props, initialState) {
     babelHelpers.classCallCheck(this, Widget);
 
-    var _this = babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Widget).call(this, props));
+    var _this = babelHelpers.possibleConstructorReturn(this, _Component.call(this, props));
 
     _this.state = {
       objId: _utils2.default.guid()
@@ -526,7 +522,7 @@ var Widget = function (_Component) {
     return _this;
   } //响应式配置
   /*
-  '(max-width: 768px)|Widget': {  //格式同css媒体查询相同,附加fjType是为了解决mixin时对象名相同
+  '(max-width: 768px)|widget': {  //格式同css媒体查询相同,附加fjType是为了解决mixin时对象名相同
     state: { width: 320 },
     preHandler: function(isInit) {
       ...
@@ -539,111 +535,105 @@ var Widget = function (_Component) {
   */
 
 
-  babelHelpers.createClass(Widget, [{
-    key: 'init',
-    value: function init() {}
-    //this.bindResponsiveEvts();
+  Widget.prototype.init = function init() {
+    this.bindResponsiveEvts();
+  };
+
+  //绑定响应式事件
 
 
-    //绑定响应式事件
+  Widget.prototype.bindResponsiveEvts = function bindResponsiveEvts() {
+    var _this2 = this;
 
-  }, {
-    key: 'bindResponsiveEvts',
-    value: function bindResponsiveEvts() {
-      var _this2 = this;
-
-      var props = this.props;
-      if (!props.responsive) {
-        return;
-      }
-
-      var fn = this.responsiveResize = function () {
-        //页面尺寸改变时触发响应式处理
-        _utils2.default.lazyDo(function () {
-          var isRh = true;
-          if (props.responsiveOnlyWidth) {
-            //只有在页面宽度改变时执行响应式处理
-            var w = _utils2.default.pageWidth();
-            if (w !== _this2.globalWidth) {
-              //页面宽度和上一次不同
-              _this2.globalWidth = w;
-              isRh = true;
-            } else {
-              isRh = false;
-            }
-          }
-
-          if (isRh) {
-            //响应式处理
-            _this2.responsiveHandle();
-          }
-        }, props.responsiveDelay, 'ld_' + props.fjType + '_responsive', _this2);
-      };
-
-      _utils2.default.on('resize', fn, win);
-
-      fn(true); //初始化时执行一次响应式处理
+    var props = this.props;
+    if (!props.responsive) {
+      return;
     }
 
-    //响应式处理
-
-  }, {
-    key: 'responsiveHandle',
-    value: function responsiveHandle(isInit) {
-      var _this3 = this;
-
-      var props = this.props;
-
-      _nornj2.default.each(props.responsiveParam, function (rpp, o) {
-        var fnP = function fnP() {
-          if (rpp.preHandler) {
-            //执行响应前操作
-            rpp.preHandler.call(_this3, isInit);
-          }
-          if (rpp.state) {
-            //设置响应状态值
-            _this3.setState(rpp.state);
-          }
-          if (rpp.handler) {
-            //执行响应操作
-            rpp.handler.call(_this3, isInit);
-          }
-        };
-
-        if (fj.mediaQuery(o.split("|")[0])) {
-          //符合条件时执行响应式处理
-          if (rpp.delay) {
-            //可延迟执行时间
-            fj.lazyDo(function () {
-              fnP();
-            }, rpp.delay);
+    var fn = this.responsiveResize = function () {
+      //页面尺寸改变时触发响应式处理
+      _utils2.default.lazyDo(function () {
+        var isRh = true;
+        if (props.responsiveOnlyWidth) {
+          //只有在页面宽度改变时执行响应式处理
+          var w = _utils2.default.pageWidth();
+          if (w !== _this2.globalWidth) {
+            //页面宽度和上一次不同
+            _this2.globalWidth = w;
+            isRh = true;
           } else {
-            fnP();
+            isRh = false;
           }
         }
-      }, false, false);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      var responsiveResize = this.responsiveResize;
 
-      //移除响应式事件
-      if (responsiveResize) {
-        _utils2.default.off("resize", responsiveResize, win);
+        if (isRh) {
+          //响应式处理
+          _this2.responsiveHandle();
+        }
+      }, props.responsiveDelay, 'ld_' + props.fjType + '_responsive', _this2);
+    };
+
+    _utils2.default.on('resize', fn, win);
+
+    fn(true); //初始化时执行一次响应式处理
+  };
+
+  //响应式处理
+
+
+  Widget.prototype.responsiveHandle = function responsiveHandle(isInit) {
+    var _this3 = this;
+
+    var props = this.props;
+
+    _nornj2.default.each(props.responsiveParam, function (rpp, o) {
+      var fnP = function fnP() {
+        if (rpp.preHandler) {
+          //执行响应前操作
+          rpp.preHandler.call(_this3, isInit);
+        }
+        if (rpp.state) {
+          //设置响应状态值
+          _this3.setState(rpp.state);
+        }
+        if (rpp.handler) {
+          //执行响应操作
+          rpp.handler.call(_this3, isInit);
+        }
+      };
+
+      if (fj.mediaQuery(o.split("|")[0])) {
+        //符合条件时执行响应式处理
+        if (rpp.delay) {
+          //可延迟执行时间
+          fj.lazyDo(function () {
+            fnP();
+          }, rpp.delay);
+        } else {
+          fnP();
+        }
       }
+    }, false, false);
+  };
+
+  Widget.prototype.componentWillUnmount = function componentWillUnmount() {
+    var responsiveResize = this.responsiveResize;
+
+    //移除响应式事件
+    if (responsiveResize) {
+      _utils2.default.off("resize", responsiveResize, win);
     }
-  }, {
-    key: 'show',
-    value: function show() {
-      return this.state.objId;
-    }
-  }]);
+  };
+
+  Widget.prototype.show = function show() {
+    return this.state.objId;
+  };
+
   return Widget;
 }(_react.Component);
 
 Widget.defaultProps = {
-  fjType: 'Widget',
+  fjType: 'widget',
   responsive: false,
   responsiveDelay: 70,
   responsiveOnlyWidth: true,

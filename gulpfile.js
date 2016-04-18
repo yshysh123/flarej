@@ -54,7 +54,7 @@ var b = browserify({
       ['transform-class-properties', { "loose": false }],
       'transform-object-assign',
       'external-helpers',
-      ['transform-es2015-classes', { "loose": false }],
+      ['transform-es2015-classes', { "loose": true }],
       ['transform-es2015-modules-commonjs', { "loose": false }]
   ]
 });

@@ -4,14 +4,14 @@ import tmpl from './template';
 
 class Pagination extends Widget {
   static defaultProps = {
-    fjType: 'Pagination',
-    responsive: false,
+    fjType: 'pagination',
+    responsive: true,
     responsiveParam: {
-      "(max-width: 768px)|Pagination": {
+      '(max-width: 768px)|pagination': {
         state: { objId: 10000 },
         delay: 100
       },
-      "(min-width: 769px)|Pagination": {
+      '(min-width: 769px)|pagination': {
         state: { objId: 20000 },
         delay: 100
       }
@@ -31,7 +31,6 @@ class Pagination extends Widget {
   }
 
   render() {
-    alert(this.props);
     return this.template({ id: this.show() });
   }
 }

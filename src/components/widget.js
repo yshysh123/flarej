@@ -5,13 +5,13 @@ let win = window;
 
 class Widget extends Component {
   static defaultProps = {
-    fjType: 'Widget',
+    fjType: 'widget',
     responsive: false,
     responsiveDelay: 70,
     responsiveOnlyWidth: true,
     responsiveParam: {  //响应式配置
       /*
-      '(max-width: 768px)|Widget': {  //格式同css媒体查询相同,附加fjType是为了解决mixin时对象名相同
+      '(max-width: 768px)|widget': {  //格式同css媒体查询相同,附加fjType是为了解决mixin时对象名相同
         state: { width: 320 },
         preHandler: function(isInit) {
           ...
@@ -36,7 +36,7 @@ class Widget extends Component {
   }
 
   init() {
-    //this.bindResponsiveEvts();
+    this.bindResponsiveEvts();
   }
 
   //绑定响应式事件
