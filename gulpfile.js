@@ -49,13 +49,18 @@ var b = browserify({
   }
 })
 .transform(babelify, {  //Transform es6 to es5.
-  presets: ['es2015', 'stage-0', 'react'],
+  presets: ['es2015', 'stage-1', 'react'],
   plugins: [
+      ['transform-class-properties', { "loose": false }],
       'transform-object-assign',
       'external-helpers',
       ['transform-es2015-classes', { "loose": false }],
       ['transform-es2015-modules-commonjs', { "loose": false }]
   ]
+});
+
+b.on('error', function (e) {
+  console.log(e);
 });
 
 var isBundling = false;
@@ -85,6 +90,7 @@ gulp.task('build-all-js', bundle);
 //Monitor changes of JS files to bundle again
 gulp.task('watch-js', function () {
   b.plugin(watchify);
+
   b.on('update', function (ids) {
     if (isBundling) {
       return;
@@ -93,7 +99,7 @@ gulp.task('watch-js', function () {
     var bundleJs = true;
     ids.every(function (v) {
       var fileName = v.substr(v.lastIndexOf('\\') + 1);
-      if(fileName === 'template.js') {
+      if (fileName === 'template.js') {
         bundleJs = false;
         return false;
       }
@@ -102,7 +108,7 @@ gulp.task('watch-js', function () {
       return true;
     });
 
-    if(bundleJs) {
+    if (bundleJs) {
       gulp.start('build-all-js');
     }
   });

@@ -1,13 +1,15 @@
-﻿import fj from '../core';
-import * as common from './common';
+﻿import * as common from './common';
 import * as browsers from './browsers';
 import * as delayOperate from './delayOperate';
+import * as domEvent from './domEvent';
+let utils = {};
 
 Object.assign(
-  fj,
+  utils,
   common,
   browsers, 
-  delayOperate
+  delayOperate,
+  domEvent
 );
 
-export default fj;
+export default utils;

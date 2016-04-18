@@ -399,14 +399,17 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = babelHelpers.interopRequireDefault(_reactDom);
 
-require('./utils/utils');
+var _utils = require('./utils/utils');
+
+var _utils2 = babelHelpers.interopRequireDefault(_utils);
 
 var _component = require('./components/pagination/component');
 
 var _component2 = babelHelpers.interopRequireDefault(_component);
 
 var widgets = { Pagination: _component2.default };
-babelHelpers.extends(_core2.default, widgets);
+
+babelHelpers.extends(_core2.default, _utils2.default, widgets);
 
 _nornj2.default.registerTagNamespace('fj');
 _nornj2.default.registerComponent(widgets);
@@ -416,7 +419,7 @@ global.FlareJ = global.fj = _core2.default;
 
 exports.default = _core2.default;
 
-},{"./components/pagination/component":2,"./core":5,"./utils/utils":9,"nornj":"nornj","react":"react","react-dom":"react-dom"}],2:[function(require,module,exports){
+},{"./components/pagination/component":2,"./core":5,"./utils/utils":10,"nornj":"nornj","react":"react","react-dom":"react-dom"}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -433,16 +436,19 @@ var _template = require('./template');
 
 var _template2 = babelHelpers.interopRequireDefault(_template);
 
-var template = (0, _nornj.compileComponent)(_template2.default);
-
 var Pagination = function (_Widget) {
   babelHelpers.inherits(Pagination, _Widget);
 
   function Pagination(props) {
     babelHelpers.classCallCheck(this, Pagination);
 
-    console.log(props);
-    return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Pagination).call(this, props));
+    var _this = babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Pagination).call(this, props, {}));
+
+    _this.template = (0, _nornj.compileComponent)(_template2.default);
+
+
+    _this.init();
+    return _this;
   }
 
   babelHelpers.createClass(Pagination, [{
@@ -453,12 +459,27 @@ var Pagination = function (_Widget) {
   }, {
     key: 'render',
     value: function render() {
-      return template({ id: this.show() });
+      alert(this.props);
+      return this.template({ id: this.show() });
     }
   }]);
   return Pagination;
 }(_widget2.default);
 
+Pagination.defaultProps = {
+  fjType: 'Pagination',
+  responsive: false,
+  responsiveParam: {
+    "(max-width: 768px)|Pagination": {
+      state: { objId: 10000 },
+      delay: 100
+    },
+    "(min-width: 769px)|Pagination": {
+      state: { objId: 20000 },
+      delay: 100
+    }
+  }
+};
 exports.default = Pagination;
 
 },{"../widget":4,"./template":3,"nornj":"nornj"}],3:[function(require,module,exports){
@@ -478,28 +499,159 @@ Object.defineProperty(exports, "__esModule", {
 
 var _react = require('react');
 
+var _nornj = require('nornj');
+
+var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
+
+var _utils = require('../utils/utils');
+
+var _utils2 = babelHelpers.interopRequireDefault(_utils);
+
+var win = window;
+
 var Widget = function (_Component) {
   babelHelpers.inherits(Widget, _Component);
 
-  function Widget(props) {
+  function Widget(props, initialState) {
     babelHelpers.classCallCheck(this, Widget);
 
-    console.log(props);
-    return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Widget).call(this));
+    var _this = babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Widget).call(this, props));
+
+    _this.state = {
+      objId: _utils2.default.guid()
+    };
+
+
+    babelHelpers.extends(_this.state, initialState);
+    return _this;
+  } //响应式配置
+  /*
+  '(max-width: 768px)|Widget': {  //格式同css媒体查询相同,附加fjType是为了解决mixin时对象名相同
+    state: { width: 320 },
+    preHandler: function(isInit) {
+      ...
+    },
+    handler: function(isInit) {
+      ...
+    },
+    delay: 100
   }
+  */
+
 
   babelHelpers.createClass(Widget, [{
+    key: 'init',
+    value: function init() {}
+    //this.bindResponsiveEvts();
+
+
+    //绑定响应式事件
+
+  }, {
+    key: 'bindResponsiveEvts',
+    value: function bindResponsiveEvts() {
+      var _this2 = this;
+
+      var props = this.props;
+      if (!props.responsive) {
+        return;
+      }
+
+      var fn = this.responsiveResize = function () {
+        //页面尺寸改变时触发响应式处理
+        _utils2.default.lazyDo(function () {
+          var isRh = true;
+          if (props.responsiveOnlyWidth) {
+            //只有在页面宽度改变时执行响应式处理
+            var w = _utils2.default.pageWidth();
+            if (w !== _this2.globalWidth) {
+              //页面宽度和上一次不同
+              _this2.globalWidth = w;
+              isRh = true;
+            } else {
+              isRh = false;
+            }
+          }
+
+          if (isRh) {
+            //响应式处理
+            _this2.responsiveHandle();
+          }
+        }, props.responsiveDelay, 'ld_' + props.fjType + '_responsive', _this2);
+      };
+
+      _utils2.default.on('resize', fn, win);
+
+      fn(true); //初始化时执行一次响应式处理
+    }
+
+    //响应式处理
+
+  }, {
+    key: 'responsiveHandle',
+    value: function responsiveHandle(isInit) {
+      var _this3 = this;
+
+      var props = this.props;
+
+      _nornj2.default.each(props.responsiveParam, function (rpp, o) {
+        var fnP = function fnP() {
+          if (rpp.preHandler) {
+            //执行响应前操作
+            rpp.preHandler.call(_this3, isInit);
+          }
+          if (rpp.state) {
+            //设置响应状态值
+            _this3.setState(rpp.state);
+          }
+          if (rpp.handler) {
+            //执行响应操作
+            rpp.handler.call(_this3, isInit);
+          }
+        };
+
+        if (fj.mediaQuery(o.split("|")[0])) {
+          //符合条件时执行响应式处理
+          if (rpp.delay) {
+            //可延迟执行时间
+            fj.lazyDo(function () {
+              fnP();
+            }, rpp.delay);
+          } else {
+            fnP();
+          }
+        }
+      }, false, false);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      var responsiveResize = this.responsiveResize;
+
+      //移除响应式事件
+      if (responsiveResize) {
+        _utils2.default.off("resize", responsiveResize, win);
+      }
+    }
+  }, {
     key: 'show',
     value: function show() {
-      return '1';
+      return this.state.objId;
     }
   }]);
   return Widget;
 }(_react.Component);
 
+Widget.defaultProps = {
+  fjType: 'Widget',
+  responsive: false,
+  responsiveDelay: 70,
+  responsiveOnlyWidth: true,
+  responsiveParam: {}
+};
 exports.default = Widget;
 
-},{"react":"react"}],5:[function(require,module,exports){
+},{"../utils/utils":10,"nornj":"nornj","react":"react"}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -604,17 +756,60 @@ var isMobile = exports.isMobile = isAndroid || isIos || isWindowsPhone;
 var isWebkit = exports.isWebkit = isChrome || isSafari || isAndroid || isIos;
 
 },{}],7:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.pageHeight = exports.pageWidth = exports.mediaQuery = exports.guid = undefined;
+
+var _core = require('../core');
+
+var _core2 = babelHelpers.interopRequireDefault(_core);
+
+var win = window,
+    doc = document;
+
 //Get global unique id
 var guid = exports.guid = function guid() {
   return new Date().getTime() + Math.random().toFixed(6).substr(2);
 };
 
-},{}],8:[function(require,module,exports){
+//Media query
+var mediaQuery = exports.mediaQuery = function mediaQuery(media) {
+  var ret = false;
+
+  if (win.matchMedia) {
+    //If the browser support matchMedia
+    ret = win.matchMedia(media).matches;
+  } else {
+    //For browsers that support matchMedium api such as IE 9 and webkit. Reference by https://github.com/paulirish/matchMedia.js/blob/master/matchMedia.js
+    var styleMedia = win.styleMedia || win.media;
+    if (styleMedia) {
+      ret = styleMedia.matchMedium(media || 'all');
+    }
+  }
+
+  return ret;
+};
+
+//Get current width of page
+var pageWidth = exports.pageWidth = function pageWidth() {
+  return win.innerWidth != null ? win.innerWidth : doc.documentElement && doc.documentElement.clientWidth != null ? doc.documentElement.clientWidth : doc.body != null ? doc.body.clientWidth : null;
+};
+
+//Save initial width of page
+_core2.default.globalWidth = pageWidth();
+
+//Get current height of page
+var pageHeight = exports.pageHeight = function pageHeight() {
+  return win.innerHeight != null ? win.innerHeight : doc.documentElement && doc.documentElement.clientHeight != null ? doc.documentElement.clientHeight : doc.body != null ? doc.body.clientHeight : null;
+};
+
+//Save initial height of page
+_core2.default.globalHeight = pageHeight();
+
+},{"../core":5}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -681,15 +876,33 @@ var pollDo = exports.pollDo = function pollDo(fn, timeOut, doName, obj) {
 };
 
 },{}],9:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var doc = document;
+
+//Add dom event
+var on = exports.on = function on(name, fn, elem) {
+  var useCapture = arguments.length <= 3 || arguments[3] === undefined ? false : arguments[3];
+
+  (elem || doc).addEventListener(name, fn, useCapture);
+};
+
+//Remove dom event
+var off = exports.off = function off(name, fn, elem) {
+  var useCapture = arguments.length <= 3 || arguments[3] === undefined ? false : arguments[3];
+
+  (elem || doc).removeEventListener(name, fn, useCapture);
+};
+
+},{}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _core = require('../core');
-
-var _core2 = babelHelpers.interopRequireDefault(_core);
 
 var _common = require('./common');
 
@@ -703,10 +916,15 @@ var _delayOperate = require('./delayOperate');
 
 var delayOperate = babelHelpers.interopRequireWildcard(_delayOperate);
 
+var _domEvent = require('./domEvent');
 
-babelHelpers.extends(_core2.default, common, browsers, delayOperate);
+var domEvent = babelHelpers.interopRequireWildcard(_domEvent);
 
-exports.default = _core2.default;
+var utils = {};
 
-},{"../core":5,"./browsers":6,"./common":7,"./delayOperate":8}]},{},[1]);
+babelHelpers.extends(utils, common, browsers, delayOperate, domEvent);
+
+exports.default = utils;
+
+},{"./browsers":6,"./common":7,"./delayOperate":8,"./domEvent":9}]},{},[1]);
 (1); });
