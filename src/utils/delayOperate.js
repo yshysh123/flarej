@@ -1,7 +1,6 @@
 ﻿//Lazy to do something
 export const lazyDo = (fn, timeOut, doName, obj) => {
-  let dn = doName != null,
-    sto = null;
+  let sto = null;
 
   if (!obj) {
     obj = window;
@@ -11,7 +10,7 @@ export const lazyDo = (fn, timeOut, doName, obj) => {
   }
 
   //If before the implementation of the operation has not exceeded the time,then make it cancel.
-  if (dn && obj[doName]) {
+  if (doName && obj[doName]) {
     clearTimeout(obj[doName]);
   }
 
@@ -20,7 +19,7 @@ export const lazyDo = (fn, timeOut, doName, obj) => {
     fn.call(obj);
   }, timeOut);
 
-  if (dn) {
+  if (doName) {
     obj[doName] = sto;
   }
 
@@ -29,8 +28,7 @@ export const lazyDo = (fn, timeOut, doName, obj) => {
 
 //Poll to do something
 export const pollDo = (fn, timeOut, doName, obj) => {
-  var dn = doName != null,
-    siv = null;
+  var siv = null;
 
   if (!obj) {
     obj = window;
@@ -40,7 +38,7 @@ export const pollDo = (fn, timeOut, doName, obj) => {
   }
 
   //If the previous poll operation is exist,then make it cancel.
-  if (dn && obj[doName]) {
+  if (doName && obj[doName]) {
     clearInterval(obj[doName]);
   }
 
@@ -51,7 +49,7 @@ export const pollDo = (fn, timeOut, doName, obj) => {
     }
   }, timeOut);
 
-  if (dn) {
+  if (doName) {
     obj[doName] = siv;
   }
 

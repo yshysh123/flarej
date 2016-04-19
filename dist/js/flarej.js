@@ -377,6 +377,340 @@
   };
 })(typeof global === "undefined" ? self : global);
 (function(g, f) { var r = (typeof require === 'function' ? require : function(name) { return {"nornj":nj,"react":React,"react-dom":ReactDOM}[name]; }); if (typeof exports === 'object' && typeof module !== 'undefined') { module.exports = f(r) } else if (typeof define === 'function' && define.amd) { define(["nornj","react","react-dom"], f.bind(g,r)) } else { g.FlareJ = f(r) } })(this, function(require,define, module,exports) { return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+// shim for using process in browser
+
+var process = module.exports = {};
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = setTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    clearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        setTimeout(drainQueue, 0);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+},{}],2:[function(require,module,exports){
+module.exports = require('react/lib/update');
+},{"react/lib/update":3}],3:[function(require,module,exports){
+(function (process){
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule update
+ */
+
+/* global hasOwnProperty:true */
+
+'use strict';
+
+var _assign = require('object-assign');
+
+var keyOf = require('fbjs/lib/keyOf');
+var invariant = require('fbjs/lib/invariant');
+var hasOwnProperty = {}.hasOwnProperty;
+
+function shallowCopy(x) {
+  if (Array.isArray(x)) {
+    return x.concat();
+  } else if (x && typeof x === 'object') {
+    return _assign(new x.constructor(), x);
+  } else {
+    return x;
+  }
+}
+
+var COMMAND_PUSH = keyOf({ $push: null });
+var COMMAND_UNSHIFT = keyOf({ $unshift: null });
+var COMMAND_SPLICE = keyOf({ $splice: null });
+var COMMAND_SET = keyOf({ $set: null });
+var COMMAND_MERGE = keyOf({ $merge: null });
+var COMMAND_APPLY = keyOf({ $apply: null });
+
+var ALL_COMMANDS_LIST = [COMMAND_PUSH, COMMAND_UNSHIFT, COMMAND_SPLICE, COMMAND_SET, COMMAND_MERGE, COMMAND_APPLY];
+
+var ALL_COMMANDS_SET = {};
+
+ALL_COMMANDS_LIST.forEach(function (command) {
+  ALL_COMMANDS_SET[command] = true;
+});
+
+function invariantArrayCase(value, spec, command) {
+  !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected target of %s to be an array; got %s.', command, value) : invariant(false) : void 0;
+  var specValue = spec[command];
+  !Array.isArray(specValue) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array; got %s. ' + 'Did you forget to wrap your parameter in an array?', command, specValue) : invariant(false) : void 0;
+}
+
+function update(value, spec) {
+  !(typeof spec === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): You provided a key path to update() that did not contain one ' + 'of %s. Did you forget to include {%s: ...}?', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : invariant(false) : void 0;
+
+  if (hasOwnProperty.call(spec, COMMAND_SET)) {
+    !(Object.keys(spec).length === 1) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Cannot have more than one key in an object with %s', COMMAND_SET) : invariant(false) : void 0;
+
+    return spec[COMMAND_SET];
+  }
+
+  var nextValue = shallowCopy(value);
+
+  if (hasOwnProperty.call(spec, COMMAND_MERGE)) {
+    var mergeObj = spec[COMMAND_MERGE];
+    !(mergeObj && typeof mergeObj === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a spec of type \'object\'; got %s', COMMAND_MERGE, mergeObj) : invariant(false) : void 0;
+    !(nextValue && typeof nextValue === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a target of type \'object\'; got %s', COMMAND_MERGE, nextValue) : invariant(false) : void 0;
+    _assign(nextValue, spec[COMMAND_MERGE]);
+  }
+
+  if (hasOwnProperty.call(spec, COMMAND_PUSH)) {
+    invariantArrayCase(value, spec, COMMAND_PUSH);
+    spec[COMMAND_PUSH].forEach(function (item) {
+      nextValue.push(item);
+    });
+  }
+
+  if (hasOwnProperty.call(spec, COMMAND_UNSHIFT)) {
+    invariantArrayCase(value, spec, COMMAND_UNSHIFT);
+    spec[COMMAND_UNSHIFT].forEach(function (item) {
+      nextValue.unshift(item);
+    });
+  }
+
+  if (hasOwnProperty.call(spec, COMMAND_SPLICE)) {
+    !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected %s target to be an array; got %s', COMMAND_SPLICE, value) : invariant(false) : void 0;
+    !Array.isArray(spec[COMMAND_SPLICE]) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. ' + 'Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : invariant(false) : void 0;
+    spec[COMMAND_SPLICE].forEach(function (args) {
+      !Array.isArray(args) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. ' + 'Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : invariant(false) : void 0;
+      nextValue.splice.apply(nextValue, args);
+    });
+  }
+
+  if (hasOwnProperty.call(spec, COMMAND_APPLY)) {
+    !(typeof spec[COMMAND_APPLY] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be a function; got %s.', COMMAND_APPLY, spec[COMMAND_APPLY]) : invariant(false) : void 0;
+    nextValue = spec[COMMAND_APPLY](nextValue);
+  }
+
+  for (var k in spec) {
+    if (!(ALL_COMMANDS_SET.hasOwnProperty(k) && ALL_COMMANDS_SET[k])) {
+      nextValue[k] = update(value[k], spec[k]);
+    }
+  }
+
+  return nextValue;
+}
+
+module.exports = update;
+}).call(this,require('_process'))
+},{"_process":1,"fbjs/lib/invariant":4,"fbjs/lib/keyOf":5,"object-assign":6}],4:[function(require,module,exports){
+(function (process){
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+'use strict';
+
+/**
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */
+
+function invariant(condition, format, a, b, c, d, e, f) {
+  if (process.env.NODE_ENV !== 'production') {
+    if (format === undefined) {
+      throw new Error('invariant requires an error message argument');
+    }
+  }
+
+  if (!condition) {
+    var error;
+    if (format === undefined) {
+      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+    } else {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      error = new Error(format.replace(/%s/g, function () {
+        return args[argIndex++];
+      }));
+      error.name = 'Invariant Violation';
+    }
+
+    error.framesToPop = 1; // we don't care about invariant's own frame
+    throw error;
+  }
+}
+
+module.exports = invariant;
+}).call(this,require('_process'))
+},{"_process":1}],5:[function(require,module,exports){
+"use strict";
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+/**
+ * Allows extraction of a minified key. Let's the build system minify keys
+ * without losing the ability to dynamically use key strings as values
+ * themselves. Pass in an object with a single key/val pair and it will return
+ * you the string key of that single record. Suppose you want to grab the
+ * value for a key 'className' inside of an object. Key/val minification may
+ * have aliased that key to be 'xa12'. keyOf({className: null}) will return
+ * 'xa12' in that case. Resolve keys you want to use once at startup time, then
+ * reuse those resolutions.
+ */
+var keyOf = function (oneKeyObj) {
+  var key;
+  for (key in oneKeyObj) {
+    if (!oneKeyObj.hasOwnProperty(key)) {
+      continue;
+    }
+    return key;
+  }
+  return null;
+};
+
+module.exports = keyOf;
+},{}],6:[function(require,module,exports){
+/* eslint-disable no-unused-vars */
+'use strict';
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (Object.getOwnPropertySymbols) {
+			symbols = Object.getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+},{}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -419,7 +753,7 @@ global.FlareJ = global.fj = _core2.default;
 
 exports.default = _core2.default;
 
-},{"./components/pagination/component":2,"./core":5,"./utils/utils":10,"nornj":"nornj","react":"react","react-dom":"react-dom"}],2:[function(require,module,exports){
+},{"./components/pagination/component":8,"./core":11,"./utils/utils":16,"nornj":"nornj","react":"react","react-dom":"react-dom"}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -456,6 +790,7 @@ var Pagination = function (_Widget) {
   };
 
   Pagination.prototype.render = function render() {
+    console.log(Date.now());
     return this.template({ id: this.show() });
   };
 
@@ -465,8 +800,14 @@ var Pagination = function (_Widget) {
 Pagination.defaultProps = {
   fjType: 'pagination',
   responsive: true,
+  responsiveDelay: 70,
+  responsiveOnlyWidth: true,
   responsiveParam: {
     '(max-width: 768px)|pagination': {
+      //preHandler: (isInit, newState) => {
+      //  newState.objId = 5000;
+      //  return newState;
+      //},
       state: { objId: 10000 },
       delay: 100
     },
@@ -478,7 +819,7 @@ Pagination.defaultProps = {
 };
 exports.default = Pagination;
 
-},{"../widget":4,"./template":3,"nornj":"nornj"}],3:[function(require,module,exports){
+},{"../widget":10,"./template":9,"nornj":"nornj"}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -486,7 +827,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = { "type": "nj_root", "content": [{ "type": "div", "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "id" }, "escape": true }], "strs": ["test", ""], "isAll": false }] }] }] };
 
-},{}],4:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -495,9 +836,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _react = require('react');
 
-var _nornj = require('nornj');
+var _reactAddonsUpdate = require('react-addons-update');
 
-var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
+var _reactAddonsUpdate2 = babelHelpers.interopRequireDefault(_reactAddonsUpdate);
+
+var _nornj = require('nornj');
 
 var _utils = require('../utils/utils');
 
@@ -520,19 +863,9 @@ var Widget = function (_Component) {
 
     babelHelpers.extends(_this.state, initialState);
     return _this;
-  } //响应式配置
-  /*
-  '(max-width: 768px)|widget': {  //格式同css媒体查询相同,附加fjType是为了解决mixin时对象名相同
-    state: { width: 320 },
-    preHandler: function(isInit) {
-      ...
-    },
-    handler: function(isInit) {
-      ...
-    },
-    delay: 100
   }
-  */
+
+  //Initialize
 
 
   Widget.prototype.init = function init() {
@@ -550,15 +883,17 @@ var Widget = function (_Component) {
       return;
     }
 
+    //页面尺寸改变时触发响应式处理
     var fn = this.responsiveResize = function () {
-      //页面尺寸改变时触发响应式处理
       _utils2.default.lazyDo(function () {
         var isRh = true;
+
+        //只有在页面宽度改变时执行响应式处理
         if (props.responsiveOnlyWidth) {
-          //只有在页面宽度改变时执行响应式处理
           var w = _utils2.default.pageWidth();
+
+          //页面宽度和上一次不同
           if (w !== _this2.globalWidth) {
-            //页面宽度和上一次不同
             _this2.globalWidth = w;
             isRh = true;
           } else {
@@ -570,12 +905,13 @@ var Widget = function (_Component) {
           //响应式处理
           _this2.responsiveHandle();
         }
-      }, props.responsiveDelay, 'ld_' + props.fjType + '_responsive', _this2);
+      }, props.responsiveDelay, 'ld_' + props.fjType + '_responsive');
     };
 
     _utils2.default.on('resize', fn, win);
 
-    fn(true); //初始化时执行一次响应式处理
+    //初始化时执行一次响应式处理
+    this.responsiveHandle(true);
   };
 
   //响应式处理
@@ -585,35 +921,66 @@ var Widget = function (_Component) {
     var _this3 = this;
 
     var props = this.props;
+    var newState = this.state,
+        handlers = [];
 
-    _nornj2.default.each(props.responsiveParam, function (rpp, o) {
-      var fnP = function fnP() {
-        if (rpp.preHandler) {
-          //执行响应前操作
-          rpp.preHandler.call(_this3, isInit);
-        }
+    //处理响应参数
+    (0, _nornj.each)(props.responsiveParam, function (rpp, o) {
+      var media = o.split("|")[0];
+      if (_utils2.default.mediaQuery(media)) {
+        //符合条件时执行响应式处理
         if (rpp.state) {
           //设置响应状态值
-          _this3.setState(rpp.state);
+          newState = (0, _reactAddonsUpdate2.default)(newState, { $merge: rpp.state });
         }
-        if (rpp.handler) {
-          //执行响应操作
-          rpp.handler.call(_this3, isInit);
-        }
-      };
 
-      if (fj.mediaQuery(o.split("|")[0])) {
-        //符合条件时执行响应式处理
-        if (rpp.delay) {
-          //可延迟执行时间
-          fj.lazyDo(function () {
-            fnP();
-          }, rpp.delay);
-        } else {
-          fnP();
+        if (rpp.preHandler) {
+          //响应前操作
+          var ret = rpp.preHandler.call(_this3, isInit, (0, _reactAddonsUpdate2.default)(newState, { $merge: {} }));
+          if (ret) {
+            newState = ret;
+          }
+        }
+
+        if (rpp.handler) {
+          //响应后操作
+          handlers[handlers.length] = {
+            handler: rpp.handler,
+            delay: rpp.delay
+          };
         }
       }
     }, false, false);
+
+    //执行响应后操作
+    var runHandlers = function runHandlers() {
+      (0, _nornj.each)(handlers, function (h) {
+        var fnH = function fnH() {
+          h.handler.call(_this3, isInit);
+        };
+
+        if (h.delay) {
+          //可延迟执行时间
+          _utils2.default.lazyDo(function () {
+            fnH();
+          }, h.delay);
+        } else {
+          fnH();
+        }
+      }, false, true);
+    };
+
+    //重置state
+    if (isInit) {
+      //在初始化时需要重新设置state
+      this.state = newState;
+      runHandlers();
+    } else {
+      //非初始化时执行setState
+      this.setState(newState, function () {
+        return runHandlers();
+      });
+    }
   };
 
   Widget.prototype.componentWillUnmount = function componentWillUnmount() {
@@ -632,16 +999,9 @@ var Widget = function (_Component) {
   return Widget;
 }(_react.Component);
 
-Widget.defaultProps = {
-  fjType: 'widget',
-  responsive: false,
-  responsiveDelay: 70,
-  responsiveOnlyWidth: true,
-  responsiveParam: {}
-};
 exports.default = Widget;
 
-},{"../utils/utils":10,"nornj":"nornj","react":"react"}],5:[function(require,module,exports){
+},{"../utils/utils":16,"nornj":"nornj","react":"react","react-addons-update":2}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -661,7 +1021,7 @@ fj.setConfig = function (config) {
 
 exports.default = fj;
 
-},{}],6:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -745,7 +1105,7 @@ var isMobile = exports.isMobile = isAndroid || isIos || isWindowsPhone;
 //Webkit and blink core browser
 var isWebkit = exports.isWebkit = isChrome || isSafari || isAndroid || isIos;
 
-},{}],7:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -799,7 +1159,7 @@ var pageHeight = exports.pageHeight = function pageHeight() {
 //Save initial height of page
 _core2.default.globalHeight = pageHeight();
 
-},{"../core":5}],8:[function(require,module,exports){
+},{"../core":11}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -807,8 +1167,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 //Lazy to do something
 var lazyDo = exports.lazyDo = function lazyDo(fn, timeOut, doName, obj) {
-  var dn = doName != null,
-      sto = null;
+  var sto = null;
 
   if (!obj) {
     obj = window;
@@ -818,7 +1177,7 @@ var lazyDo = exports.lazyDo = function lazyDo(fn, timeOut, doName, obj) {
   }
 
   //If before the implementation of the operation has not exceeded the time,then make it cancel.
-  if (dn && obj[doName]) {
+  if (doName && obj[doName]) {
     clearTimeout(obj[doName]);
   }
 
@@ -827,7 +1186,7 @@ var lazyDo = exports.lazyDo = function lazyDo(fn, timeOut, doName, obj) {
     fn.call(obj);
   }, timeOut);
 
-  if (dn) {
+  if (doName) {
     obj[doName] = sto;
   }
 
@@ -836,8 +1195,7 @@ var lazyDo = exports.lazyDo = function lazyDo(fn, timeOut, doName, obj) {
 
 //Poll to do something
 var pollDo = exports.pollDo = function pollDo(fn, timeOut, doName, obj) {
-  var dn = doName != null,
-      siv = null;
+  var siv = null;
 
   if (!obj) {
     obj = window;
@@ -847,7 +1205,7 @@ var pollDo = exports.pollDo = function pollDo(fn, timeOut, doName, obj) {
   }
 
   //If the previous poll operation is exist,then make it cancel.
-  if (dn && obj[doName]) {
+  if (doName && obj[doName]) {
     clearInterval(obj[doName]);
   }
 
@@ -858,14 +1216,14 @@ var pollDo = exports.pollDo = function pollDo(fn, timeOut, doName, obj) {
     }
   }, timeOut);
 
-  if (dn) {
+  if (doName) {
     obj[doName] = siv;
   }
 
   return siv;
 };
 
-},{}],9:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -887,7 +1245,7 @@ var off = exports.off = function off(name, fn, elem) {
   (elem || doc).removeEventListener(name, fn, useCapture);
 };
 
-},{}],10:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -916,5 +1274,5 @@ babelHelpers.extends(utils, common, browsers, delayOperate, domEvent);
 
 exports.default = utils;
 
-},{"./browsers":6,"./common":7,"./delayOperate":8,"./domEvent":9}]},{},[1]);
-(1); });
+},{"./browsers":12,"./common":13,"./delayOperate":14,"./domEvent":15}]},{},[7]);
+(7); });

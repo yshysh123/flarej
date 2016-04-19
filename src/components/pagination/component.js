@@ -6,8 +6,14 @@ class Pagination extends Widget {
   static defaultProps = {
     fjType: 'pagination',
     responsive: true,
+    responsiveDelay: 70,
+    responsiveOnlyWidth: true,
     responsiveParam: {
       '(max-width: 768px)|pagination': {
+        //preHandler: (isInit, newState) => {
+        //  newState.objId = 5000;
+        //  return newState;
+        //},
         state: { objId: 10000 },
         delay: 100
       },
@@ -31,6 +37,7 @@ class Pagination extends Widget {
   }
 
   render() {
+    console.log(Date.now());
     return this.template({ id: this.show() });
   }
 }

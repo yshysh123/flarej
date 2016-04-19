@@ -14,7 +14,22 @@
     console.log(fj.guid());
   </script>
   <div>
-    <fj-Pagination class="fj-component"></fj-Pagination>
+    <fj-Pagination class="fj-component" responsive-param="{rp}"></fj-Pagination>
   </div>
+  <script>
+    nj.initTagData = {
+      rp: {
+        '(max-width: 768px)': {
+          state: { objId: 11000 },
+          handler: function (isInit) {
+            //alert(isInit);
+          }
+        },
+        '(min-width: 769px)': {
+          state: { objId: 21000 }
+        }
+      }
+    };
+  </script>
 </body>
 </html>
