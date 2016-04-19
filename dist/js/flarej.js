@@ -725,14 +725,6 @@ var _nornj = require('nornj');
 
 var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
 
-var _react = require('react');
-
-var _react2 = babelHelpers.interopRequireDefault(_react);
-
-var _reactDom = require('react-dom');
-
-var _reactDom2 = babelHelpers.interopRequireDefault(_reactDom);
-
 var _utils = require('./utils/utils');
 
 var _utils2 = babelHelpers.interopRequireDefault(_utils);
@@ -753,7 +745,7 @@ global.FlareJ = global.fj = _core2.default;
 
 exports.default = _core2.default;
 
-},{"./components/pagination/component":8,"./core":11,"./utils/utils":16,"nornj":"nornj","react":"react","react-dom":"react-dom"}],8:[function(require,module,exports){
+},{"./components/pagination/component":8,"./core":11,"./utils/utils":16,"nornj":"nornj"}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -799,11 +791,11 @@ var Pagination = function (_Widget) {
 
 Pagination.defaultProps = {
   fjType: 'pagination',
-  responsive: true,
+  responsive: false,
   responsiveDelay: 70,
   responsiveOnlyWidth: true,
   responsiveParam: {
-    '(max-width: 768px)|pagination': {
+    '(max-width: 768px)|default': {
       //preHandler: (isInit, newState) => {
       //  newState.objId = 5000;
       //  return newState;
@@ -811,7 +803,7 @@ Pagination.defaultProps = {
       state: { objId: 10000 },
       delay: 100
     },
-    '(min-width: 769px)|pagination': {
+    '(min-width: 769px)|default': {
       state: { objId: 20000 },
       delay: 100
     }
@@ -825,7 +817,7 @@ exports.default = Pagination;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = { "type": "nj_root", "content": [{ "type": "div", "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "id" }, "escape": true }], "strs": ["test", ""], "isAll": false }] }] }] };
+exports.default = { "type": "nj_root", "content": [{ "type": "div", "params": { "style": { "props": null, "strs": ["color:blue;"], "isAll": false } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "id" }, "escape": true }], "strs": ["test", ""], "isAll": false }] }] }] };
 
 },{}],10:[function(require,module,exports){
 'use strict';

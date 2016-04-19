@@ -5,11 +5,11 @@ import tmpl from './template';
 class Pagination extends Widget {
   static defaultProps = {
     fjType: 'pagination',
-    responsive: true,
+    responsive: false,
     responsiveDelay: 70,
     responsiveOnlyWidth: true,
     responsiveParam: {
-      '(max-width: 768px)|pagination': {
+      '(max-width: 768px)|default': {
         //preHandler: (isInit, newState) => {
         //  newState.objId = 5000;
         //  return newState;
@@ -17,7 +17,7 @@ class Pagination extends Widget {
         state: { objId: 10000 },
         delay: 100
       },
-      '(min-width: 769px)|pagination': {
+      '(min-width: 769px)|default': {
         state: { objId: 20000 },
         delay: 100
       }

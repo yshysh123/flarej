@@ -109,7 +109,8 @@ gulp.task('watch-js', function () {
     });
 
     if (bundleJs) {
-      gulp.start('build-all-js');
+      bundle();
+      //gulp.start('build-all-js');
     }
   });
 

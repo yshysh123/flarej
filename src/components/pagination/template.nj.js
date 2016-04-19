@@ -3,5 +3,5 @@
 let nj = require('nornj');
 
 module.exports = nj`
-<div>test{id}</div>
+<div style="color:blue;">test{id}</div>
 `;
