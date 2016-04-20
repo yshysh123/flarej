@@ -17,6 +17,7 @@
   postcss = require('gulp-postcss'),
   autoprefixer = require('autoprefixer'),
   argv = require('yargs').argv,
+  glob = require('glob'),
   precompiler = require('nornj/precompiler');
 
 function getJsLibName() {
@@ -32,6 +33,15 @@ function getCssLibName() {
   var libName = 'flarej.css';
   if (argv.min) {
     libName = 'flarej.min.css';
+  }
+
+  return libName;
+}
+
+function getThemeLibName(themeName) {
+  var libName = 'flarej.theme.' + themeName + '.css';
+  if (argv.min) {
+    libName = 'flarej.theme.' + themeName + '.min.css';
   }
 
   return libName;
@@ -77,11 +87,11 @@ function bundle() {
     .pipe(buffer())
     .pipe(gulp.dest('./dist/js').on('end', function () {
       gulp.src(['./vendor/babelHelpers.js', './dist/js/' + jsLibName])
-      .pipe(concat(jsLibName))
-      .pipe(gulpif(argv.min, uglify()))
-      .pipe(gulp.dest('./dist/js').on('end', function () {
-        isBundling = false;
-      }));
+        .pipe(concat(jsLibName))
+        .pipe(gulpif(argv.min, uglify()))
+        .pipe(gulp.dest('./dist/js').on('end', function () {
+          isBundling = false;
+        }));
     }));
 }
 
@@ -117,23 +127,66 @@ gulp.task('watch-js', function () {
   return bundle();
 });
 
+var isBuildingCss = false,
+  isBuildingTheme = false;
+
 gulp.task('build-css', function () {
+  isBuildingCss = true;
+  var cssLibName = getCssLibName();
+
   return gulp.src('./src/styles/base.less')
     .pipe(less())
-    .pipe(rename(getCssLibName()))
-    .pipe(gulp.dest('./dist/css'));
+    .pipe(rename(cssLibName))
+    .pipe(gulp.dest('./dist/css').on('end', function () {
+      gulp.src(['./vendor/normalize.css', './dist/css/' + cssLibName])
+        .pipe(concat(cssLibName))
+        .pipe(gulpif(argv.min, cssnano()))
+        .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
+        .pipe(gulp.dest('./dist/css').on('end', function () {
+          isBuildingCss = false;
+        }));
+    }));
 });
 
-gulp.task('concat-css', function () {
-  var cssLibName = getCssLibName();
-  return gulp.src(['./vendor/normalize.css', './dist/css/' + cssLibName])
-    .pipe(concat(cssLibName))
-    .pipe(gulpif(argv.min, cssnano()))
-    .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
-    .pipe(gulp.dest('./dist/css'));
+//Build theme css
+gulp.task('build-theme', function () {
+  glob('./src/styles/theme/**/base.less', {}, function (err, files) {
+    files.forEach(function (file) {
+      isBuildingTheme = true;
+      var filePath = file.substring(0, file.lastIndexOf("/")),
+        themeName = filePath.substr(filePath.lastIndexOf("/") + 1),
+        themeLibName = getThemeLibName(themeName);
+
+      gulp.src(file)
+        .pipe(less())
+        .pipe(rename(themeLibName))
+        .pipe(gulpif(argv.min, cssnano()))
+        .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
+        .pipe(gulp.dest('./dist/css/theme').on('end', function () {
+          isBuildingTheme = false;
+        }));
+    });
+  });
 });
 
-gulp.task('build-all-css', sequence('build-css', 'concat-css'));
+gulp.task('build-all-css', ['build-css', 'build-theme']);
+
+//Monitor changes of LESS files
+gulp.task("watch-css", function () {
+  if (isBuildingCss) {
+    return;
+  }
+
+  gulp.watch('./src/styles/**/*.less', ['build-css']);
+});
+
+gulp.task("watch-theme", function () {
+  if (isBuildingTheme) {
+    return;
+  }
+
+  gulp.watch('./src/styles/theme/**/*.less', ['build-theme']);
+});
 
 //Copy the third party libraries
 gulp.task('build-lib-css', function () {

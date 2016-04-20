@@ -782,7 +782,6 @@ var Pagination = function (_Widget) {
   };
 
   Pagination.prototype.render = function render() {
-    console.log(Date.now());
     return this.template({ id: this.show() });
   };
 
@@ -790,7 +789,7 @@ var Pagination = function (_Widget) {
 }(_widget2.default);
 
 Pagination.defaultProps = {
-  fjType: 'pagination',
+  fjType: 'pagn',
   responsive: false,
   responsiveDelay: 70,
   responsiveOnlyWidth: true,
@@ -817,7 +816,7 @@ exports.default = Pagination;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = { "type": "nj_root", "content": [{ "type": "div", "params": { "style": { "props": null, "strs": ["color:blue;"], "isAll": false } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "id" }, "escape": true }], "strs": ["test", ""], "isAll": false }] }] }] };
+exports.default = { "type": "nj_root", "content": [{ "type": "div", "params": { "class": { "props": null, "strs": ["fj-pagn"], "isAll": false } }, "content": [{ "type": "ul", "params": { "class": { "props": null, "strs": ["fj-pagn-body"], "isAll": false } }, "content": [{ "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-info"], "isAll": false } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "id" }, "escape": true }], "strs": ["共", "页"], "isAll": false }] }] }, { "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-btn-refresh"], "isAll": false } }, "content": [{ "type": "i", "params": { "class": { "props": null, "strs": ["fa fa-refresh"], "isAll": false } } }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }] }] };
 
 },{}],10:[function(require,module,exports){
 'use strict';

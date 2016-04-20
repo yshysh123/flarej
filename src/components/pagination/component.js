@@ -4,7 +4,7 @@ import tmpl from './template';
 
 class Pagination extends Widget {
   static defaultProps = {
-    fjType: 'pagination',
+    fjType: 'pagn',
     responsive: false,
     responsiveDelay: 70,
     responsiveOnlyWidth: true,
@@ -37,7 +37,6 @@ class Pagination extends Widget {
   }
 
   render() {
-    console.log(Date.now());
     return this.template({ id: this.show() });
   }
 }
