@@ -73,14 +73,20 @@ b.on('error', function (e) {
   console.log(e);
 });
 
-var isBundling = false;
+var isBundling = false,
+  isPrecompileTmpl = true;
 
 function bundle() {
   isBundling = true;
   var jsLibName = getJsLibName();
 
   //Precompile nornj templates
-  precompiler({ source: __dirname + '/src/components/**/*.nj.js', esVersion: 'es6' });
+  if (isPrecompileTmpl) {
+    precompiler({
+      source: __dirname + '/src/components/**/*.nj.js',
+      devMode: !argv.p
+    });
+  }
 
   return b.bundle()
     .pipe(source(jsLibName))
@@ -106,22 +112,13 @@ gulp.task('watch-js', function () {
       return;
     }
 
-    var bundleJs = true;
-    ids.every(function (v) {
-      var fileName = v.substr(v.lastIndexOf('\\') + 1);
-      if (fileName === 'template.js') {
-        bundleJs = false;
-        return false;
-      }
-
+    ids.forEach(function (v) {
       console.log('bundle changed file:' + v);
-      return true;
     });
 
-    if (bundleJs) {
-      bundle();
-      //gulp.start('build-all-js');
-    }
+    isPrecompileTmpl = false;
+    bundle();
+    //gulp.start('build-all-js');
   });
 
   return bundle();

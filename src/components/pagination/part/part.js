@@ -1,1 +1,0 @@
-export default {"type":"nj_root","content":[{"type":"div","content":[{"type":"nj_plaintext","content":[{"props":[{"prop":{"name":"id"},"escape":true}],"strs":["测试1","测试799999"],"isAll":false}]}]}]}
