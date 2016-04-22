@@ -18,6 +18,8 @@
   autoprefixer = require('autoprefixer'),
   argv = require('yargs').argv,
   glob = require('glob'),
+  browserSync = require('browser-sync').create(),
+  reload = browserSync.reload,
   precompiler = require('nornj/precompiler');
 
 function getJsLibName() {
@@ -74,7 +76,8 @@ b.on('error', function (e) {
 });
 
 var isBundling = false,
-  isPrecompileTmpl = true;
+  isPrecompileTmpl = true,
+  isHmr = false;
 
 function bundle() {
   isBundling = true;
@@ -97,7 +100,8 @@ function bundle() {
         .pipe(gulpif(argv.min, uglify()))
         .pipe(gulp.dest('./dist/js').on('end', function () {
           isBundling = false;
-        }));
+        }))
+        .pipe(gulpif(isHmr, reload({stream: true})));
     }));
 }
 
@@ -122,6 +126,16 @@ gulp.task('watch-js', function () {
   });
 
   return bundle();
+});
+
+gulp.task('hmr', function () {
+  browserSync.init({
+    ghostMode: false,
+    server: "./"
+  });
+
+  isHmr = true;
+  gulp.start('watch-js');
 });
 
 var isBuildingCss = false,

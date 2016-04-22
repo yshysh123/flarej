@@ -34,6 +34,7 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-1": "^6.5.0",
     "babelify": "^7.2.0",
+    "browser-sync": "^2.12.3",
     "browserify": "^13.0.0",
     "dependify": "^0.0.1",
     "estraverse": "^4.2.0",

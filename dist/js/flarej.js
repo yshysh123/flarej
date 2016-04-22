@@ -745,7 +745,7 @@ global.FlareJ = global.fj = _core2.default;
 
 exports.default = _core2.default;
 
-},{"./components/pagination/component":8,"./core":11,"./utils/utils":16,"nornj":"nornj"}],8:[function(require,module,exports){
+},{"./components/pagination/component":8,"./core":12,"./utils/utils":17,"nornj":"nornj"}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -810,15 +810,36 @@ Pagination.defaultProps = {
 };
 exports.default = Pagination;
 
-},{"../widget":10,"./template":9,"nornj":"nornj"}],9:[function(require,module,exports){
-"use strict";
+},{"../widget":11,"./template":9,"nornj":"nornj"}],9:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = { "type": "nj_root", "content": [{ "type": "div", "params": { "class": { "props": null, "strs": ["fj-pagn"], "isAll": false } }, "content": [{ "type": "ul", "params": { "class": { "props": null, "strs": ["fj-pagn-body"], "isAll": false } }, "content": [{ "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-info"], "isAll": false } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "id" }, "escape": true }], "strs": ["共", "页"], "isAll": false }] }] }, { "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-btn-refresh"], "isAll": false } }, "content": [{ "type": "i", "params": { "class": { "props": null, "strs": ["fa fa-refresh"], "isAll": false } } }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }] }] };
+exports.default = undefined;
 
-},{}],10:[function(require,module,exports){
+var _templateNj = require('./template.nj.js');
+
+var _templateNj2 = babelHelpers.interopRequireDefault(_templateNj);
+
+exports.default = _templateNj2.default;
+
+},{"./template.nj.js":10}],10:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    <li class=fj-pagn-info>\n      共{id}页\n    </li>\n    <li class=fj-pagn-btn-refresh>\n      <i class="fa fa-refresh"></i>\n    </li>\n  </ul>\n</div>\n'], ['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    <li class=fj-pagn-info>\n      共{id}页\n    </li>\n    <li class=fj-pagn-btn-refresh>\n      <i class="fa fa-refresh"></i>\n    </li>\n  </ul>\n</div>\n']);
+
+var _nornj = require('nornj');
+
+var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
+
+exports.default = (0, _nornj2.default)(_templateObject);
+
+},{"nornj":"nornj"}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -992,7 +1013,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":16,"nornj":"nornj","react":"react","react-addons-update":2}],11:[function(require,module,exports){
+},{"../utils/utils":17,"nornj":"nornj","react":"react","react-addons-update":2}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1012,7 +1033,7 @@ fj.setConfig = function (config) {
 
 exports.default = fj;
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1096,7 +1117,7 @@ var isMobile = exports.isMobile = isAndroid || isIos || isWindowsPhone;
 //Webkit and blink core browser
 var isWebkit = exports.isWebkit = isChrome || isSafari || isAndroid || isIos;
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1150,7 +1171,7 @@ var pageHeight = exports.pageHeight = function pageHeight() {
 //Save initial height of page
 _core2.default.globalHeight = pageHeight();
 
-},{"../core":11}],14:[function(require,module,exports){
+},{"../core":12}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1214,7 +1235,7 @@ var pollDo = exports.pollDo = function pollDo(fn, timeOut, doName, obj) {
   return siv;
 };
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1236,7 +1257,7 @@ var off = exports.off = function off(name, fn, elem) {
   (elem || doc).removeEventListener(name, fn, useCapture);
 };
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1265,5 +1286,5 @@ babelHelpers.extends(utils, common, browsers, delayOperate, domEvent);
 
 exports.default = utils;
 
-},{"./browsers":12,"./common":13,"./delayOperate":14,"./domEvent":15}]},{},[7]);
+},{"./browsers":13,"./common":14,"./delayOperate":15,"./domEvent":16}]},{},[7]);
 (7); });
