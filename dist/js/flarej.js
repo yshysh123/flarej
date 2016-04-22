@@ -470,8 +470,49 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],2:[function(require,module,exports){
+/* eslint-disable no-unused-vars */
+'use strict';
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (Object.getOwnPropertySymbols) {
+			symbols = Object.getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+},{}],3:[function(require,module,exports){
 module.exports = require('react/lib/update');
-},{"react/lib/update":3}],3:[function(require,module,exports){
+},{"react/lib/update":4}],4:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -582,7 +623,7 @@ function update(value, spec) {
 
 module.exports = update;
 }).call(this,require('_process'))
-},{"_process":1,"fbjs/lib/invariant":4,"fbjs/lib/keyOf":5,"object-assign":6}],4:[function(require,module,exports){
+},{"_process":1,"fbjs/lib/invariant":5,"fbjs/lib/keyOf":6,"object-assign":2}],5:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -634,7 +675,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":1}],5:[function(require,module,exports){
+},{"_process":1}],6:[function(require,module,exports){
 "use strict";
 
 /**
@@ -669,47 +710,6 @@ var keyOf = function (oneKeyObj) {
 };
 
 module.exports = keyOf;
-},{}],6:[function(require,module,exports){
-/* eslint-disable no-unused-vars */
-'use strict';
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-module.exports = Object.assign || function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (Object.getOwnPropertySymbols) {
-			symbols = Object.getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
 },{}],7:[function(require,module,exports){
 'use strict';
 
@@ -816,7 +816,7 @@ exports.default = Pagination;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = { "type": "nj_root", "content": [{ "type": "div", "params": { "class": { "props": null, "strs": ["fj-pagn"], "isAll": false } }, "content": [{ "type": "ul", "params": { "class": { "props": null, "strs": ["fj-pagn-body"], "isAll": false } }, "content": [{ "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-info"], "isAll": false } }, "content": [{ "type": "div", "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "id" }, "escape": true }], "strs": ["测试1", "测试799999"], "isAll": false }] }] }] }, { "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-info"], "isAll": false } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "id" }, "escape": true }], "strs": ["共", "页88888"], "isAll": false }] }] }, { "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-btn-refresh"], "isAll": false } }, "content": [{ "type": "i", "params": { "class": { "props": null, "strs": ["fa fa-refresh"], "isAll": false } } }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }] }] };
+exports.default = { "type": "nj_root", "content": [{ "type": "div", "params": { "class": { "props": null, "strs": ["fj-pagn"], "isAll": false } }, "content": [{ "type": "ul", "params": { "class": { "props": null, "strs": ["fj-pagn-body"], "isAll": false } }, "content": [{ "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-info"], "isAll": false } }, "content": [{ "type": "div", "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "id" }, "escape": true }], "strs": ["测试1", "测试7999yyyyy12"], "isAll": false }] }] }] }, { "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-info"], "isAll": false } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "id" }, "escape": true }], "strs": ["共", "页88888712"], "isAll": false }] }] }, { "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-btn-refresh"], "isAll": false } }, "content": [{ "type": "i", "params": { "class": { "props": null, "strs": ["fa fa-refresh"], "isAll": false } } }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }] }] };
 
 },{}],10:[function(require,module,exports){
 'use strict';
@@ -992,7 +992,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":16,"nornj":"nornj","react":"react","react-addons-update":2}],11:[function(require,module,exports){
+},{"../utils/utils":16,"nornj":"nornj","react":"react","react-addons-update":3}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

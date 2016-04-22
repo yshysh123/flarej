@@ -4,6 +4,6 @@ let nj = require('nornj');
 
 module.exports = nj`
 <div>
-  测试1{id}测试799999
+  测试1{id}测试7999yyyyy12
 </div>
 `;

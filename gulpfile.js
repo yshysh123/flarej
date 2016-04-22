@@ -80,7 +80,7 @@ function bundle() {
   var jsLibName = getJsLibName();
 
   //Precompile nornj templates
-  precompiler({ source: __dirname + '/src/components/**/*.nj.js', esVersion: 'es6' });
+  precompiler({ source: [__dirname + '/src/components/**/*.nj.js', __dirname + '/src/components/**/*.nj1.js'], esVersion: 'es6' });
 
   return b.bundle()
     .pipe(source(jsLibName))
