@@ -1,6 +1,7 @@
 ﻿import { compileComponent } from 'nornj';
 import Widget from '../widget';
 import tmpl from './template';
+import './expression';
 
 class Pagination extends Widget {
   static defaultProps = {

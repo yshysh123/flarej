@@ -3,6 +3,7 @@
 export default nj`
 <div class=fj-pagn>
   <ul class=fj-pagn-body>
+    <$PageCount {id} />
     <li class=fj-pagn-info>
       共{id}页
     </li>
