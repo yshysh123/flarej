@@ -2,7 +2,7 @@
   position: relative;
   clear: both;
   height: 25px;
-  line-height: 30px;
+  line-height: 27px;
   font-size: 0.8rem;
   font-family: @fontFamily;
 }
@@ -10,13 +10,51 @@
 .fj-pagn-body {
   position: relative;
   white-space: nowrap;
-  overflow: hidden;
+  overflow: visible;
   text-align: right;
 
   > li {
     .fj-inline-block;
     vertical-align: middle;
   }
+}
+
+.fj-pagn-pagesize {
+  width: 48px;
+  height: 23px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.fj-pagn-txt {
+  height: 25px;
+  line-height: 25px;
+  white-space: nowrap;
+}
+
+.fj-pagn-curpage {
+  width: 45px;
+  height: 23px;
+  line-height: 23px;
+  padding: 0;
+  border-width: 1px;
+  border-style: solid;
+  text-align: right;
+  margin-left: 2px;
+  margin-right: 2px;
+  .fj-inline-block;
+}
+
+.fj-pagn-btn-refresh {
+  width: 26px;
+  height: 27px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.fj-pagn-btn-refresh.fj-fixsize {
+  font-size: 0.875rem;
 }
 
 .pnj-body.fj-mobile {
@@ -70,36 +108,10 @@
   text-align: center;
 }
 
-.pnj_pageSize {
-  width: 48px;
-  height: 23px;
-  border: 1px solid #e1e1e1;
-  _font-size: 9px;
-}
-
 .pnj-btn-go {
   width: 45px;
   margin: -2px 2px 0 2px;
   font-size: 13px;
   *padding-bottom: 0;
   *margin-top: -8px;
-}
-
-.pnj_curPage {
-  width: 45px;
-  height: 23px;
-  line-height: 23px;
-  padding: 0;
-  border-width: 1px;
-  border-style: solid;
-  text-align: right;
-  .fj-inline-block;
-}
-
-.fj-pagn-btn-refresh {
-  width: 26px;
-  height: 27px;
-  cursor: pointer;
-  text-align: center;
-  font-size: 0.875rem;
 }

@@ -444,8 +444,52 @@ ul {
   max-width: 100%;
   height: auto;
 }
+.fj-form-elem {
+  width: 100%;
+  height: 26px;
+  padding: 2px 5px 2px 2px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 1px #eeeeee;
+     -moz-box-shadow: inset 0 1px 1px #eeeeee;
+          box-shadow: inset 0 1px 1px #eeeeee;
+  -webkit-transition: border-color ease-in-out 0.1s, -webkit-box-shadow ease-in-out 0.1s;
+  transition: border-color ease-in-out 0.1s, -webkit-box-shadow ease-in-out 0.1s;
+  -moz-transition: border-color ease-in-out 0.1s, box-shadow ease-in-out 0.1s, -moz-box-shadow ease-in-out 0.1s;
+  -o-transition: border-color ease-in-out 0.1s, box-shadow ease-in-out 0.1s;
+  transition: border-color ease-in-out 0.1s, box-shadow ease-in-out 0.1s;
+  transition: border-color ease-in-out 0.1s, box-shadow ease-in-out 0.1s, -webkit-box-shadow ease-in-out 0.1s, -moz-box-shadow ease-in-out 0.1s;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.fj-form-elem:focus {
+  border-color: #c1c1c1;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px #eeeeee, 0 0 8px #c1c1c1;
+     -moz-box-shadow: inset 0 1px 1px #eeeeee, 0 0 8px #c1c1c1;
+          box-shadow: inset 0 1px 1px #eeeeee, 0 0 8px #c1c1c1;
+}
+.fj-form-elem[disabled] {
+  pointer-events: none;
+  cursor: not-allowed;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+  background-color: #f0f0f0;
+}
 /* import all modules */
 /* Global variables */
+/* Classes of no value
+.fj-fixsize: Fix icon size unless chrome browser.
+*/
 .fj-border-box {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -458,19 +502,52 @@ ul {
   position: relative;
   clear: both;
   height: 25px;
-  line-height: 30px;
+  line-height: 27px;
   font-size: 0.8rem;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .fj-pagn-body {
   position: relative;
   white-space: nowrap;
-  overflow: hidden;
+  overflow: visible;
   text-align: right;
 }
 .fj-pagn-body > li {
   display: inline-block;
   vertical-align: middle;
+}
+.fj-pagn-pagesize {
+  width: 48px;
+  height: 23px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+.fj-pagn-txt {
+  height: 25px;
+  line-height: 25px;
+  white-space: nowrap;
+}
+.fj-pagn-curpage {
+  width: 45px;
+  height: 23px;
+  line-height: 23px;
+  padding: 0;
+  border-width: 1px;
+  border-style: solid;
+  text-align: right;
+  margin-left: 2px;
+  margin-right: 2px;
+  display: inline-block;
+}
+.fj-pagn-btn-refresh {
+  width: 26px;
+  height: 27px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1rem;
+}
+.fj-pagn-btn-refresh.fj-fixsize {
+  font-size: 0.875rem;
 }
 .pnj-body.fj-mobile {
   overflow-x: auto;
@@ -515,33 +592,10 @@ ul {
   margin: 0 2px;
   text-align: center;
 }
-.pnj_pageSize {
-  width: 48px;
-  height: 23px;
-  border: 1px solid #e1e1e1;
-  _font-size: 9px;
-}
 .pnj-btn-go {
   width: 45px;
   margin: -2px 2px 0 2px;
   font-size: 13px;
   *padding-bottom: 0;
   *margin-top: -8px;
-}
-.pnj_curPage {
-  width: 45px;
-  height: 23px;
-  line-height: 23px;
-  padding: 0;
-  border-width: 1px;
-  border-style: solid;
-  text-align: right;
-  display: inline-block;
-}
-.fj-pagn-btn-refresh {
-  width: 26px;
-  height: 27px;
-  cursor: pointer;
-  text-align: center;
-  font-size: 0.875rem;
 }

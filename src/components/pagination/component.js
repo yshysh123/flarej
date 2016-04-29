@@ -1,7 +1,6 @@
 ﻿import { compileComponent } from 'nornj';
 import Widget from '../widget';
 import tmpl from './template';
-import './expression';
 
 class Pagination extends Widget {
   static defaultProps = {
@@ -38,7 +37,12 @@ class Pagination extends Widget {
   }
 
   render() {
-    return this.template({ id: this.show() });
+    return this.template({
+      pageCount: 10,
+      dataCount: 100,
+      curPage: 1,
+      pageSize: [15, 30, 50]
+    });
   }
 }
 

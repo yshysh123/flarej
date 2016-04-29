@@ -470,49 +470,8 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],2:[function(require,module,exports){
-/* eslint-disable no-unused-vars */
-'use strict';
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-module.exports = Object.assign || function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (Object.getOwnPropertySymbols) {
-			symbols = Object.getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
-},{}],3:[function(require,module,exports){
 module.exports = require('react/lib/update');
-},{"react/lib/update":4}],4:[function(require,module,exports){
+},{"react/lib/update":3}],3:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -623,7 +582,7 @@ function update(value, spec) {
 
 module.exports = update;
 }).call(this,require('_process'))
-},{"_process":1,"fbjs/lib/invariant":5,"fbjs/lib/keyOf":6,"object-assign":2}],5:[function(require,module,exports){
+},{"_process":1,"fbjs/lib/invariant":4,"fbjs/lib/keyOf":5,"object-assign":6}],4:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -675,7 +634,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":1}],6:[function(require,module,exports){
+},{"_process":1}],5:[function(require,module,exports){
 "use strict";
 
 /**
@@ -710,6 +669,47 @@ var keyOf = function (oneKeyObj) {
 };
 
 module.exports = keyOf;
+},{}],6:[function(require,module,exports){
+/* eslint-disable no-unused-vars */
+'use strict';
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (Object.getOwnPropertySymbols) {
+			symbols = Object.getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
 },{}],7:[function(require,module,exports){
 'use strict';
 
@@ -745,7 +745,18 @@ global.FlareJ = global.fj = _core2.default;
 
 exports.default = _core2.default;
 
-},{"./components/pagination/component":8,"./core":13,"./utils/utils":18,"nornj":"nornj"}],8:[function(require,module,exports){
+},{"./components/pagination/component":9,"./core":13,"./utils/utils":18,"nornj":"nornj"}],8:[function(require,module,exports){
+'use strict';
+
+var _nornj = require('nornj');
+
+(0, _nornj.registerFilter)({
+  fixIconSize: function fixIconSize(val) {
+    return val + (!fj.isWebkit ? ' fj-fixsize' : '');
+  }
+});
+
+},{"nornj":"nornj"}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -761,8 +772,6 @@ var _widget2 = babelHelpers.interopRequireDefault(_widget);
 var _template = require('./template');
 
 var _template2 = babelHelpers.interopRequireDefault(_template);
-
-require('./expression');
 
 var Pagination = function (_Widget) {
   babelHelpers.inherits(Pagination, _Widget);
@@ -784,7 +793,12 @@ var Pagination = function (_Widget) {
   };
 
   Pagination.prototype.render = function render() {
-    return this.template({ id: this.show() });
+    return this.template({
+      pageCount: 10,
+      dataCount: 100,
+      curPage: 1,
+      pageSize: [15, 30, 50]
+    });
   };
 
   return Pagination;
@@ -812,22 +826,7 @@ Pagination.defaultProps = {
 };
 exports.default = Pagination;
 
-},{"../widget":12,"./expression":9,"./template":10,"nornj":"nornj"}],9:[function(require,module,exports){
-'use strict';
-
-var _nornj = require('nornj');
-
-(0, _nornj.registerExpr)('PageCount', function (id) {
-  return [1, 2, 3, 4, 5].map(function (num) {
-    return React.createElement(
-      'li',
-      { className: 'fj-pagn-info' },
-      '第' + (id + num) + '页'
-    );
-  });
-});
-
-},{"nornj":"nornj"}],10:[function(require,module,exports){
+},{"../widget":12,"./template":10,"nornj":"nornj"}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -848,7 +847,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    <$PageCount {id} />\n    <li class=fj-pagn-info>\n      共{id}页\n    </li>\n    <li class=fj-pagn-btn-refresh>\n      <i class="fa fa-refresh"></i>\n    </li>\n  </ul>\n</div>\n'], ['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    <$PageCount {id} />\n    <li class=fj-pagn-info>\n      共{id}页\n    </li>\n    <li class=fj-pagn-btn-refresh>\n      <i class="fa fa-refresh"></i>\n    </li>\n  </ul>\n</div>\n']);
+var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    <li class=fj-pagn-info>\n      共{pageCount}页\n    </li>\n    <li class=fj-pagn-info>\n      共{dataCount}条数据\n    </li>\n    <li class=fj-pagn-info>\n      每页\n      <select class="fj-form-elem fj-pagn-pagesize">\n        <$each {pageSize}>\n          <option key=page{#} value={.}>{.}</option>\n        </$each>\n      </select>条\n    </li>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             defaultValue={curPage}\n             class="fj-form-elem fj-pagn-curpage"\n             autocomplete=off\n      />页\n    </li>\n    <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n      <i class="fa fa-refresh"></i>\n    </li>\n  </ul>\n</div>\n'], ['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    <li class=fj-pagn-info>\n      共{pageCount}页\n    </li>\n    <li class=fj-pagn-info>\n      共{dataCount}条数据\n    </li>\n    <li class=fj-pagn-info>\n      每页\n      <select class="fj-form-elem fj-pagn-pagesize">\n        <$each {pageSize}>\n          <option key=page{#} value={.}>{.}</option>\n        </$each>\n      </select>条\n    </li>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             defaultValue={curPage}\n             class="fj-form-elem fj-pagn-curpage"\n             autocomplete=off\n      />页\n    </li>\n    <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n      <i class="fa fa-refresh"></i>\n    </li>\n  </ul>\n</div>\n']);
 
 var _nornj = require('nornj');
 
@@ -874,6 +873,8 @@ var _nornj = require('nornj');
 var _utils = require('../utils/utils');
 
 var _utils2 = babelHelpers.interopRequireDefault(_utils);
+
+require('./filters');
 
 var win = window;
 
@@ -1030,7 +1031,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":18,"nornj":"nornj","react":"react","react-addons-update":3}],13:[function(require,module,exports){
+},{"../utils/utils":18,"./filters":8,"nornj":"nornj","react":"react","react-addons-update":2}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
