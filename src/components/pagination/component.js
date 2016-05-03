@@ -30,7 +30,7 @@ class Pagination extends Widget {
     this.init();
   }
 
-  template = compileComponent(tmpl);
+  template = compileComponent(tmpl, 'pagination');
 
   show() {
     return super.show();
@@ -38,10 +38,13 @@ class Pagination extends Widget {
 
   render() {
     return this.template({
-      pageCount: 10,
+      pageCount: this.props.pageCount,
       dataCount: 100,
       curPage: 1,
-      pageSize: [15, 30, 50]
+      pageSize: [15, 30, 50],
+      click: () => {
+        
+      }
     });
   }
 }

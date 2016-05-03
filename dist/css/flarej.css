@@ -498,6 +498,58 @@ ul {
 .fj-inline-block {
   display: inline-block;
 }
+.fj-btn {
+  display: inline-block;
+  padding: 4px 8px;
+  margin-bottom: 0;
+  font-size: 13px;
+  font-weight: normal;
+  color: #333;
+  line-height: 14px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+.fj-btn:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.fj-btn:hover,
+.fj-btn:focus {
+  text-decoration: none;
+}
+.fj-btn.selected {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  -moz-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+       box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.fj-btn.disabled,
+.fj-btn[disabled] {
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+       box-shadow: none;
+  opacity: 0.65;
+}
+.fj-btn-hover {
+  background-color: #9bd1f6 !important;
+}
 .fj-pagn {
   position: relative;
   clear: both;
@@ -515,6 +567,15 @@ ul {
 .fj-pagn-body > li {
   display: inline-block;
   vertical-align: middle;
+}
+.fj-pagn-btn {
+  width: 40px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  cursor: pointer;
+  border-width: 1px;
+  border-style: solid;
 }
 .fj-pagn-pagesize {
   width: 48px;
@@ -539,6 +600,11 @@ ul {
   margin-right: 2px;
   display: inline-block;
 }
+.fj-pagn-btn-go {
+  width: 45px;
+  margin: -2px 2px 0 2px;
+  font-size: 0.8125rem;
+}
 .fj-pagn-btn-refresh {
   width: 26px;
   height: 27px;
@@ -557,17 +623,6 @@ ul {
   height: 25px;
   line-height: 25px;
   margin: 0 3px;
-}
-.pnj_btn {
-  width: 40px;
-  height: 25px;
-  line-height: 25px;
-  text-align: center;
-  cursor: pointer;
-  border: 1px solid #e1e1e1;
-}
-.pnj_btn:hover {
-  background-color: #def2ff;
 }
 .pnj_txt {
   height: 25px;
@@ -591,11 +646,4 @@ ul {
   cursor: pointer;
   margin: 0 2px;
   text-align: center;
-}
-.pnj-btn-go {
-  width: 45px;
-  margin: -2px 2px 0 2px;
-  font-size: 13px;
-  *padding-bottom: 0;
-  *margin-top: -8px;
 }

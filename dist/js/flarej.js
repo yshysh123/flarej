@@ -725,6 +725,8 @@ var _nornj = require('nornj');
 
 var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
 
+require('./njConfig');
+
 var _utils = require('./utils/utils');
 
 var _utils2 = babelHelpers.interopRequireDefault(_utils);
@@ -736,8 +738,6 @@ var _component2 = babelHelpers.interopRequireDefault(_component);
 var widgets = { Pagination: _component2.default };
 
 babelHelpers.extends(_core2.default, _utils2.default, widgets);
-
-_nornj2.default.registerTagNamespace('fj');
 _nornj2.default.registerComponent(widgets);
 
 var global = typeof self !== 'undefined' ? self : undefined;
@@ -745,7 +745,7 @@ global.FlareJ = global.fj = _core2.default;
 
 exports.default = _core2.default;
 
-},{"./components/pagination/component":9,"./core":13,"./utils/utils":18,"nornj":"nornj"}],8:[function(require,module,exports){
+},{"./components/pagination/component":9,"./core":13,"./njConfig":14,"./utils/utils":19,"nornj":"nornj"}],8:[function(require,module,exports){
 'use strict';
 
 var _nornj = require('nornj');
@@ -781,7 +781,7 @@ var Pagination = function (_Widget) {
 
     var _this = babelHelpers.possibleConstructorReturn(this, _Widget.call(this, props, {}));
 
-    _this.template = (0, _nornj.compileComponent)(_template2.default);
+    _this.template = (0, _nornj.compileComponent)(_template2.default, 'pagination');
 
 
     _this.init();
@@ -794,10 +794,11 @@ var Pagination = function (_Widget) {
 
   Pagination.prototype.render = function render() {
     return this.template({
-      pageCount: 10,
+      pageCount: this.props.pageCount,
       dataCount: 100,
       curPage: 1,
-      pageSize: [15, 30, 50]
+      pageSize: [15, 30, 50],
+      click: function click() {}
     });
   };
 
@@ -847,13 +848,16 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    <li class=fj-pagn-info>\n      共{pageCount}页\n    </li>\n    <li class=fj-pagn-info>\n      共{dataCount}条数据\n    </li>\n    <li class=fj-pagn-info>\n      每页\n      <select class="fj-form-elem fj-pagn-pagesize">\n        <$each {pageSize}>\n          <option key=page{#} value={.}>{.}</option>\n        </$each>\n      </select>条\n    </li>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             defaultValue={curPage}\n             class="fj-form-elem fj-pagn-curpage"\n             autocomplete=off\n      />页\n    </li>\n    <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n      <i class="fa fa-refresh"></i>\n    </li>\n  </ul>\n</div>\n'], ['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    <li class=fj-pagn-info>\n      共{pageCount}页\n    </li>\n    <li class=fj-pagn-info>\n      共{dataCount}条数据\n    </li>\n    <li class=fj-pagn-info>\n      每页\n      <select class="fj-form-elem fj-pagn-pagesize">\n        <$each {pageSize}>\n          <option key=page{#} value={.}>{.}</option>\n        </$each>\n      </select>条\n    </li>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             defaultValue={curPage}\n             class="fj-form-elem fj-pagn-curpage"\n             autocomplete=off\n      />页\n    </li>\n    <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n      <i class="fa fa-refresh"></i>\n    </li>\n  </ul>\n</div>\n']);
+var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<li class=fj-pagn-btn title=首页>\n  首页\n</li>\n<li class=fj-pagn-btn title=上一页>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li class=fj-pagn-btn title=下一页>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li class=fj-pagn-btn title=末页>\n  末页\n</li>\n'], ['\n<li class=fj-pagn-btn title=首页>\n  首页\n</li>\n<li class=fj-pagn-btn title=上一页>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li class=fj-pagn-btn title=下一页>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li class=fj-pagn-btn title=末页>\n  末页\n</li>\n']),
+    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <li class=fj-pagn-info>\n      共{pageCount}页\n    </li>\n    <li class=fj-pagn-info>\n      共{dataCount}条数据\n    </li>\n    <li class=fj-pagn-info>\n      每页\n      <select class="fj-form-elem fj-pagn-pagesize">\n        <#each {pageSize}>\n          <option key=page{#} value={.}>{.}</option>\n        </#each>\n      </select>条\n    </li>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             defaultValue={curPage}\n             class="fj-form-elem fj-pagn-curpage"\n             autocomplete=off\n      />页\n      <button class="fj-btn fj-pagn-btn-go" type=button onClick={click}>确定</button>\n    </li>\n    <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n      <i class="fa fa-refresh"></i>\n    </li>\n  </ul>\n</div>\n'], ['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <li class=fj-pagn-info>\n      共{pageCount}页\n    </li>\n    <li class=fj-pagn-info>\n      共{dataCount}条数据\n    </li>\n    <li class=fj-pagn-info>\n      每页\n      <select class="fj-form-elem fj-pagn-pagesize">\n        <#each {pageSize}>\n          <option key=page{#} value={.}>{.}</option>\n        </#each>\n      </select>条\n    </li>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             defaultValue={curPage}\n             class="fj-form-elem fj-pagn-curpage"\n             autocomplete=off\n      />页\n      <button class="fj-btn fj-pagn-btn-go" type=button onClick={click}>确定</button>\n    </li>\n    <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n      <i class="fa fa-refresh"></i>\n    </li>\n  </ul>\n</div>\n']);
 
 var _nornj = require('nornj');
 
 var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
 
-exports.default = (0, _nornj2.default)(_templateObject);
+var pageBtns = (0, _nornj2.default)(_templateObject);
+
+exports.default = (0, _nornj2.default)(_templateObject2, pageBtns);
 
 },{"nornj":"nornj"}],12:[function(require,module,exports){
 'use strict';
@@ -1031,7 +1035,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":18,"./filters":8,"nornj":"nornj","react":"react","react-addons-update":2}],13:[function(require,module,exports){
+},{"../utils/utils":19,"./filters":8,"nornj":"nornj","react":"react","react-addons-update":2}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1052,6 +1056,14 @@ fj.setConfig = function (config) {
 exports.default = fj;
 
 },{}],14:[function(require,module,exports){
+'use strict';
+
+var _nornj = require('nornj');
+
+(0, _nornj.registerTagNamespace)('fj');
+(0, _nornj.setTmplRule)(null, null, '#');
+
+},{"nornj":"nornj"}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1135,7 +1147,7 @@ var isMobile = exports.isMobile = isAndroid || isIos || isWindowsPhone;
 //Webkit and blink core browser
 var isWebkit = exports.isWebkit = isChrome || isSafari || isAndroid || isIos;
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1189,7 +1201,7 @@ var pageHeight = exports.pageHeight = function pageHeight() {
 //Save initial height of page
 _core2.default.globalHeight = pageHeight();
 
-},{"../core":13}],16:[function(require,module,exports){
+},{"../core":13}],17:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1253,7 +1265,7 @@ var pollDo = exports.pollDo = function pollDo(fn, timeOut, doName, obj) {
   return siv;
 };
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1275,7 +1287,7 @@ var off = exports.off = function off(name, fn, elem) {
   (elem || doc).removeEventListener(name, fn, useCapture);
 };
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1304,5 +1316,5 @@ babelHelpers.extends(utils, common, browsers, delayOperate, domEvent);
 
 exports.default = utils;
 
-},{"./browsers":14,"./common":15,"./delayOperate":16,"./domEvent":17}]},{},[7]);
+},{"./browsers":15,"./common":16,"./delayOperate":17,"./domEvent":18}]},{},[7]);
 (7); });
