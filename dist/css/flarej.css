@@ -530,14 +530,14 @@ ul {
 .fj-btn:focus {
   text-decoration: none;
 }
-.fj-btn.selected {
+.fj-btn.fj-selected {
   background-image: none;
   outline: 0;
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   -moz-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
        box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
-.fj-btn.disabled,
+.fj-btn.fj-disabled,
 .fj-btn[disabled] {
   pointer-events: none;
   cursor: not-allowed;
@@ -605,6 +605,19 @@ ul {
   margin: -2px 2px 0 2px;
   font-size: 0.8125rem;
 }
+.fj-pagn-pages {
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0 2px;
+  line-height: 25x;
+  white-space: nowrap;
+}
+.fj-pagn-pages div {
+  display: inline-block;
+  cursor: pointer;
+  margin: 0 2px;
+  text-align: center;
+}
 .fj-pagn-btn-refresh {
   width: 26px;
   height: 27px;
@@ -635,15 +648,4 @@ ul {
   line-height: 25px;
   *line-height: 20px;
   margin: 0 3px;
-}
-.pnj_pages {
-  margin: 0 2px;
-  line-height: 25x;
-  white-space: nowrap;
-}
-.pnj_pages div {
-  display: inline-block;
-  cursor: pointer;
-  margin: 0 2px;
-  text-align: center;
 }

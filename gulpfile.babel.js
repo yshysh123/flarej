@@ -87,6 +87,7 @@ function bundle() {
   if (isPrecompileTmpl) {
     precompiler({
       source: __dirname + '/src/components/**/*.nj.js',
+      exprRule: '#',
       devMode: !argv.p
     });
   }

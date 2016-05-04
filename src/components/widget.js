@@ -14,6 +14,7 @@ class Widget extends Component {
     super(props);
 
     Object.assign(this.state, initialState);
+    this.init();
   }
 
   //Initialize
@@ -124,10 +125,6 @@ class Widget extends Component {
     if (responsiveResize) {
       utils.off("resize", responsiveResize, win);
     }
-  }
-
-  show() {
-    return this.state.objId;
   }
 }
 

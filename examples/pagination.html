@@ -45,12 +45,15 @@
             </tr>
           </tbody>
         </table>
-        <fj-#each refer="{list}">
-          <fj-Pagination page-count="{../pageCount}"
-                         responsive="true"
-                         responsive-param="{../rp}">
-          </fj-Pagination>
-        </fj-#each>
+        <!--<fj-#each refer="{list}">-->
+        <fj-Pagination page-size="{pageSize}"
+                       page-count="{pageCount}"
+                       responsive="true"
+                       responsive-param="{rp}"
+                       show-data-count="true"
+                       show-refresh="true">
+        </fj-Pagination>
+        <!--</fj-#each>-->
       </fj-#tmpl>
     </fj-Container>
   </div>
@@ -60,13 +63,17 @@
   <script src="../dist/js/flarej.js"></script>
   <script>
     nj.registerComponent('Container', React.createClass({
-      getInitialState: function() {
+      getInitialState: function () {
         return {
           pageCount: 10
         };
       },
+      //template: nj.compileComponent('<div onClick={click}>{tmpl}</div>'),
       render: function () {
         return nj.renderTmplExpr(this.props.tmpls[0], {
+        //return this.template({
+          //tmpl: this.props.tmpls[0],
+          pageSize: [5, 20, 50],
           pageCount: this.state.pageCount,
           rp: {
             '(max-width: 768px)': {
@@ -79,7 +86,7 @@
               state: { objId: 21000 }
             }
           },
-          list: [0, 1, 2],
+          //list: [0, 1, 2],
           click: function () {
             this.setState({ pageCount: Date.now() });
           }.bind(this)
