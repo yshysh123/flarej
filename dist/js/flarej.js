@@ -794,6 +794,7 @@ var Pagination = function (_Widget) {
 
   Pagination.prototype.render = function render() {
     return this.template({
+      id: this.show(),
       pageCount: this.props.pageCount,
       dataCount: 100,
       curPage: 1,
@@ -807,7 +808,7 @@ var Pagination = function (_Widget) {
 
 Pagination.defaultProps = {
   fjType: 'pagn',
-  responsive: false,
+  responsive: true,
   responsiveDelay: 70,
   responsiveOnlyWidth: true,
   responsiveParam: {
@@ -849,7 +850,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<li class=fj-pagn-btn title=首页>\n  首页\n</li>\n<li class=fj-pagn-btn title=上一页>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li class=fj-pagn-btn title=下一页>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li class=fj-pagn-btn title=末页>\n  末页\n</li>\n'], ['\n<li class=fj-pagn-btn title=首页>\n  首页\n</li>\n<li class=fj-pagn-btn title=上一页>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li class=fj-pagn-btn title=下一页>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li class=fj-pagn-btn title=末页>\n  末页\n</li>\n']),
-    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <li class=fj-pagn-info>\n      共{pageCount}页\n    </li>\n    <li class=fj-pagn-info>\n      共{dataCount}条数据\n    </li>\n    <li class=fj-pagn-info>\n      每页\n      <select class="fj-form-elem fj-pagn-pagesize">\n        <#each {pageSize}>\n          <option key=page{#} value={.}>{.}</option>\n        </#each>\n      </select>条\n    </li>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             defaultValue={curPage}\n             class="fj-form-elem fj-pagn-curpage"\n             autocomplete=off\n      />页\n      <button class="fj-btn fj-pagn-btn-go" type=button onClick={click}>确定</button>\n    </li>\n    <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n      <i class="fa fa-refresh"></i>\n    </li>\n  </ul>\n</div>\n'], ['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <li class=fj-pagn-info>\n      共{pageCount}页\n    </li>\n    <li class=fj-pagn-info>\n      共{dataCount}条数据\n    </li>\n    <li class=fj-pagn-info>\n      每页\n      <select class="fj-form-elem fj-pagn-pagesize">\n        <#each {pageSize}>\n          <option key=page{#} value={.}>{.}</option>\n        </#each>\n      </select>条\n    </li>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             defaultValue={curPage}\n             class="fj-form-elem fj-pagn-curpage"\n             autocomplete=off\n      />页\n      <button class="fj-btn fj-pagn-btn-go" type=button onClick={click}>确定</button>\n    </li>\n    <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n      <i class="fa fa-refresh"></i>\n    </li>\n  </ul>\n</div>\n']);
+    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <li class=fj-pagn-info>\n      共{pageCount}{id}页\n    </li>\n    <li class=fj-pagn-info>\n      共{dataCount}条数据\n    </li>\n    <li class=fj-pagn-info>\n      每页\n      <select class="fj-form-elem fj-pagn-pagesize">\n        <#each {pageSize}>\n          <option key=page{#} value={.}>{.}</option>\n        </#each>\n      </select>条\n    </li>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             defaultValue={curPage}\n             class="fj-form-elem fj-pagn-curpage"\n             autocomplete=off\n      />页\n      <button class="fj-btn fj-pagn-btn-go" type=button onClick={click}>确定</button>\n    </li>\n    <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n      <i class="fa fa-refresh"></i>\n    </li>\n  </ul>\n</div>\n'], ['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <li class=fj-pagn-info>\n      共{pageCount}{id}页\n    </li>\n    <li class=fj-pagn-info>\n      共{dataCount}条数据\n    </li>\n    <li class=fj-pagn-info>\n      每页\n      <select class="fj-form-elem fj-pagn-pagesize">\n        <#each {pageSize}>\n          <option key=page{#} value={.}>{.}</option>\n        </#each>\n      </select>条\n    </li>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             defaultValue={curPage}\n             class="fj-form-elem fj-pagn-curpage"\n             autocomplete=off\n      />页\n      <button class="fj-btn fj-pagn-btn-go" type=button onClick={click}>确定</button>\n    </li>\n    <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n      <i class="fa fa-refresh"></i>\n    </li>\n  </ul>\n</div>\n']);
 
 var _nornj = require('nornj');
 
@@ -939,7 +940,7 @@ var Widget = function (_Component) {
           //响应式处理
           _this2.responsiveHandle();
         }
-      }, props.responsiveDelay, 'ld_' + props.fjType + '_responsive');
+      }, props.responsiveDelay, 'ld_' + props.fjType + '_responsive', _this2);
     };
 
     _utils2.default.on('resize', fn, win);

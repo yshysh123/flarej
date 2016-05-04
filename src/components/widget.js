@@ -50,7 +50,7 @@ class Widget extends Component {
         if (isRh) {  //响应式处理
           this.responsiveHandle();
         }
-      }, props.responsiveDelay, `ld_${props.fjType}_responsive`);
+      }, props.responsiveDelay, `ld_${props.fjType}_responsive`, this);
     };
 
     utils.on('resize', fn, win);

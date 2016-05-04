@@ -20,7 +20,7 @@ export default nj`
   <ul class=fj-pagn-body>
     ${pageBtns}
     <li class=fj-pagn-info>
-      共{pageCount}页
+      共{pageCount}{id}页
     </li>
     <li class=fj-pagn-info>
       共{dataCount}条数据
