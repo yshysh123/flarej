@@ -470,8 +470,49 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],2:[function(require,module,exports){
+/* eslint-disable no-unused-vars */
+'use strict';
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (Object.getOwnPropertySymbols) {
+			symbols = Object.getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+},{}],3:[function(require,module,exports){
 module.exports = require('react/lib/update');
-},{"react/lib/update":3}],3:[function(require,module,exports){
+},{"react/lib/update":4}],4:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -582,7 +623,7 @@ function update(value, spec) {
 
 module.exports = update;
 }).call(this,require('_process'))
-},{"_process":1,"fbjs/lib/invariant":4,"fbjs/lib/keyOf":5,"object-assign":6}],4:[function(require,module,exports){
+},{"_process":1,"fbjs/lib/invariant":5,"fbjs/lib/keyOf":6,"object-assign":2}],5:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -634,7 +675,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":1}],5:[function(require,module,exports){
+},{"_process":1}],6:[function(require,module,exports){
 "use strict";
 
 /**
@@ -669,47 +710,6 @@ var keyOf = function (oneKeyObj) {
 };
 
 module.exports = keyOf;
-},{}],6:[function(require,module,exports){
-/* eslint-disable no-unused-vars */
-'use strict';
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-module.exports = Object.assign || function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (Object.getOwnPropertySymbols) {
-			symbols = Object.getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
 },{}],7:[function(require,module,exports){
 'use strict';
 
@@ -781,21 +781,21 @@ var Pagination = function (_Widget) {
   function Pagination(props) {
     babelHelpers.classCallCheck(this, Pagination);
     return babelHelpers.possibleConstructorReturn(this, _Widget.call(this, props, {
-      curPage: props.curPage,
-      curPageSize: props.pageSize[0]
+      pageIndex: props.pageIndex,
+      pageSize: props.pageSize
     }));
   }
 
   Pagination.prototype.init = function init() {
     _Widget.prototype.init.call(this);
 
-    this.pageSizeChange = this.pageSizeChange.bind(this);
+    this.pageSizesChange = this.pageSizesChange.bind(this);
     this.goPage = this.goPage.bind(this);
   };
 
   Pagination.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    if (nextProps.curPage !== this.props.curPage) {
-      this.setState({ curPage: nextProps.curPage });
+    if (nextProps.pageIndex !== this.props.pageIndex) {
+      this.setState({ pageIndex: nextProps.pageIndex });
     }
   };
 
@@ -804,22 +804,18 @@ var Pagination = function (_Widget) {
   //  }
   //}
 
-  Pagination.prototype.pageSizeChange = function pageSizeChange(e) {
-    var _state = this.state;
-    var curPage = _state.curPage;
-    var curPageSize = _state.curPageSize;
-
-    this.refresh(curPage, curPageSize);
+  Pagination.prototype.pageSizesChange = function pageSizesChange(e) {
+    this.refresh(this.state.pageIndex, e.target.value);
   };
 
   Pagination.prototype.refresh = function refresh() {
-    var page = arguments.length <= 0 || arguments[0] === undefined ? this.state.curPage : arguments[0];
-    var pageSize = arguments.length <= 1 || arguments[1] === undefined ? this.state.curPageSize : arguments[1];
+    var page = arguments.length <= 0 || arguments[0] === undefined ? this.state.pageIndex : arguments[0];
+    var pageSize = arguments.length <= 1 || arguments[1] === undefined ? this.state.pageSize : arguments[1];
 
     this.refs.pageTxt.value = page;
     this.setState({
-      curPage: page,
-      curPageSize: pageSize
+      pageIndex: page,
+      pageSize: pageSize
     });
   };
 
@@ -831,7 +827,7 @@ var Pagination = function (_Widget) {
     var _this2 = this;
 
     return template(this.state, this.props, {
-      pageSizeChange: this.pageSizeChange,
+      pageSizesChange: this.pageSizesChange,
       goPage: this.goPage,
       refresh: function refresh(e) {
         _this2.refresh();
@@ -844,14 +840,16 @@ var Pagination = function (_Widget) {
 
 Pagination.defaultProps = {
   fjType: 'pagn',
-  pageSize: [15, 30, 50], //每页数据数
+  pageSize: 15, //每页数据数
+  pageSizes: [15, 30, 50], //可选择的每页数据数
   pageCount: 0, //总页数
-  curPage: 1, //当前页码
-  dataCount: 0, //数据总数
+  pageIndex: 1, //当前页码,从1开始
+  count: 0, //数据总数
   totalTxt: "条数据",
   btnGoName: "确定", //跳转按钮上的字
   noCount: false, //为true则在无法获取数据总数时使用
-  showDataCount: true, //是否显示数据总数
+  setPageSize: false, //是否可以设置每页数据数
+  showCount: true, //是否显示数据总数
   showPageSize: true, //是否显示每页数据数
   showPageCount: true, //是否显示总页数
   showRefresh: true,
@@ -898,7 +896,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<li key=first class=fj-pagn-btn title=首页>\n  首页\n</li>\n<li key=previous class=fj-pagn-btn title=上一页>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<#if {hasPages}>\n  <li>\n    <ul class=fj-pagn-pages>\n    </ul>\n  </li>\n</#if>\n<li key=next class=fj-pagn-btn title=下一页>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn title=末页>\n  末页\n</li>\n'], ['\n<li key=first class=fj-pagn-btn title=首页>\n  首页\n</li>\n<li key=previous class=fj-pagn-btn title=上一页>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<#if {hasPages}>\n  <li>\n    <ul class=fj-pagn-pages>\n    </ul>\n  </li>\n</#if>\n<li key=next class=fj-pagn-btn title=下一页>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn title=末页>\n  末页\n</li>\n']),
-    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <#if {showPageCount}>\n      <li class=fj-pagn-info>\n        共{pageCount}页\n      </li>\n    </#if>\n    <#if {showDataCount}>\n      <li class=fj-pagn-info>\n        共{dataCount totalTxt}\n      </li>\n    </#if>\n    <#if {showPageSize}>\n      <li class=fj-pagn-info>\n        每页\n        <select class="fj-form-elem fj-pagn-pagesize" onChange={pageSizeChange}>\n          <#each {pageSize}>\n            <option key=page{#} value={.}>{.}</option>\n          </#each>\n        </select>条\n      </li>\n    </#if>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             ref=pageTxt\n             defaultValue={curPage}\n             class="fj-form-elem fj-pagn-curpage"\n             autocomplete=off\n      />页\n      <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n        {btnGoName}\n      </button>\n    </li>\n    <#if {showRefresh}>\n      <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n        <i class="fa fa-refresh" onClick={refresh}></i>\n      </li>\n    </#if>\n  </ul>\n</div>\n'], ['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <#if {showPageCount}>\n      <li class=fj-pagn-info>\n        共{pageCount}页\n      </li>\n    </#if>\n    <#if {showDataCount}>\n      <li class=fj-pagn-info>\n        共{dataCount totalTxt}\n      </li>\n    </#if>\n    <#if {showPageSize}>\n      <li class=fj-pagn-info>\n        每页\n        <select class="fj-form-elem fj-pagn-pagesize" onChange={pageSizeChange}>\n          <#each {pageSize}>\n            <option key=page{#} value={.}>{.}</option>\n          </#each>\n        </select>条\n      </li>\n    </#if>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             ref=pageTxt\n             defaultValue={curPage}\n             class="fj-form-elem fj-pagn-curpage"\n             autocomplete=off\n      />页\n      <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n        {btnGoName}\n      </button>\n    </li>\n    <#if {showRefresh}>\n      <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n        <i class="fa fa-refresh" onClick={refresh}></i>\n      </li>\n    </#if>\n  </ul>\n</div>\n']);
+    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <#if {showPageCount}>\n      <li class=fj-pagn-info>\n        共{pageCount}页\n      </li>\n    </#if>\n    <#if {showCount}>\n      <li class=fj-pagn-info>\n        共{count totalTxt}\n      </li>\n    </#if>\n    <#if {showPageSize}>\n      <li class=fj-pagn-info>\n        每页\n        <#if {setPageSize}>\n          <select class="fj-form-elem fj-pagn-pagesize" onChange={pageSizesChange}>\n            <#each {pageSizes}>\n              <option key=page{#} value={.}>{.}</option>\n            </#each>\n          </select>\n        <#else />\n          {pageSize}\n        </#if>\n        条\n      </li>\n    </#if>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             ref=pageTxt\n             defaultValue={pageIndex}\n             class="fj-form-elem fj-pagn-pageindex"\n             autocomplete=off\n      />页\n      <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n        {btnGoName}\n      </button>\n    </li>\n    <#if {showRefresh}>\n      <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n        <i class="fa fa-refresh" onClick={refresh}></i>\n      </li>\n    </#if>\n  </ul>\n</div>\n'], ['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <#if {showPageCount}>\n      <li class=fj-pagn-info>\n        共{pageCount}页\n      </li>\n    </#if>\n    <#if {showCount}>\n      <li class=fj-pagn-info>\n        共{count totalTxt}\n      </li>\n    </#if>\n    <#if {showPageSize}>\n      <li class=fj-pagn-info>\n        每页\n        <#if {setPageSize}>\n          <select class="fj-form-elem fj-pagn-pagesize" onChange={pageSizesChange}>\n            <#each {pageSizes}>\n              <option key=page{#} value={.}>{.}</option>\n            </#each>\n          </select>\n        <#else />\n          {pageSize}\n        </#if>\n        条\n      </li>\n    </#if>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             ref=pageTxt\n             defaultValue={pageIndex}\n             class="fj-form-elem fj-pagn-pageindex"\n             autocomplete=off\n      />页\n      <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n        {btnGoName}\n      </button>\n    </li>\n    <#if {showRefresh}>\n      <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n        <i class="fa fa-refresh" onClick={refresh}></i>\n      </li>\n    </#if>\n  </ul>\n</div>\n']);
 
 var _nornj = require('nornj');
 
@@ -1081,7 +1079,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":19,"./filters":8,"nornj":"nornj","react":"react","react-addons-update":2}],13:[function(require,module,exports){
+},{"../utils/utils":19,"./filters":8,"nornj":"nornj","react":"react","react-addons-update":3}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

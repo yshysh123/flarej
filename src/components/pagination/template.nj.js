@@ -30,27 +30,32 @@ export default nj`
         共{pageCount}页
       </li>
     </#if>
-    <#if {showDataCount}>
+    <#if {showCount}>
       <li class=fj-pagn-info>
-        共{dataCount totalTxt}
+        共{count totalTxt}
       </li>
     </#if>
     <#if {showPageSize}>
       <li class=fj-pagn-info>
         每页
-        <select class="fj-form-elem fj-pagn-pagesize" onChange={pageSizeChange}>
-          <#each {pageSize}>
-            <option key=page{#} value={.}>{.}</option>
-          </#each>
-        </select>条
+        <#if {setPageSize}>
+          <select class="fj-form-elem fj-pagn-pagesize" onChange={pageSizesChange}>
+            <#each {pageSizes}>
+              <option key=page{#} value={.}>{.}</option>
+            </#each>
+          </select>
+        <#else />
+          {pageSize}
+        </#if>
+        条
       </li>
     </#if>
     <li class=fj-pagn-txt>
       到
       <input type=text
              ref=pageTxt
-             defaultValue={curPage}
-             class="fj-form-elem fj-pagn-curpage"
+             defaultValue={pageIndex}
+             class="fj-form-elem fj-pagn-pageindex"
              autocomplete=off
       />页
       <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>

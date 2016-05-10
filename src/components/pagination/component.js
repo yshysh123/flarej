@@ -6,14 +6,16 @@ const template = compileComponent(tmpl, 'pagination');
 class Pagination extends Widget {
   static defaultProps = {
     fjType: 'pagn',
-    pageSize: [15, 30, 50],                 //每页数据数
+    pageSize: 15,                           //每页数据数
+    pageSizes: [15, 30, 50],                //可选择的每页数据数
     pageCount: 0,                           //总页数
-    curPage: 1,                             //当前页码
-    dataCount: 0,                           //数据总数
+    pageIndex: 1,                           //当前页码,从1开始
+    count: 0,                               //数据总数
     totalTxt: "条数据",
     btnGoName: "确定",                      //跳转按钮上的字
     noCount: false,                         //为true则在无法获取数据总数时使用
-    showDataCount: true,                    //是否显示数据总数
+    setPageSize: false,                     //是否可以设置每页数据数
+    showCount: true,                        //是否显示数据总数
     showPageSize: true,                     //是否显示每页数据数
     showPageCount: true,                    //是否显示总页数
     showRefresh: true,
@@ -39,21 +41,21 @@ class Pagination extends Widget {
   
   constructor(props) {
     super(props, {
-      curPage: props.curPage,
-      curPageSize: props.pageSize[0]
+      pageIndex: props.pageIndex,
+      pageSize: props.pageSize
     });
   }
 
   init() {
     super.init();
 
-    this.pageSizeChange = this.pageSizeChange.bind(this);
+    this.pageSizesChange = this.pageSizesChange.bind(this);
     this.goPage = this.goPage.bind(this);
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.curPage !== this.props.curPage) {
-      this.setState({ curPage: nextProps.curPage });
+    if (nextProps.pageIndex !== this.props.pageIndex) {
+      this.setState({ pageIndex: nextProps.pageIndex });
     }
   }
 
@@ -62,16 +64,15 @@ class Pagination extends Widget {
   //  }
   //}
 
-  pageSizeChange(e) {
-    let { curPage, curPageSize } = this.state;
-    this.refresh(curPage, curPageSize);
+  pageSizesChange(e) {
+    this.refresh(this.state.pageIndex, e.target.value);
   }
 
-  refresh(page = this.state.curPage, pageSize = this.state.curPageSize) {
+  refresh(page = this.state.pageIndex, pageSize = this.state.pageSize) {
     this.refs.pageTxt.value = page;
     this.setState({
-      curPage: page,
-      curPageSize: pageSize
+      pageIndex: page,
+      pageSize: pageSize
     });
   }
 
@@ -81,7 +82,7 @@ class Pagination extends Widget {
 
   render() {
     return template(this.state, this.props, {
-      pageSizeChange: this.pageSizeChange,
+      pageSizesChange: this.pageSizesChange,
       goPage: this.goPage,
       refresh: (e) => {
         this.refresh();
