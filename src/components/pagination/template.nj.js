@@ -1,10 +1,10 @@
 ﻿import nj from 'nornj';
 
 const pageBtns = nj`
-<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={self:bind(refresh, 1)}>
+<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>
   首页
 </li>
-<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页>
+<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>
   <i class="fa fa-chevron-left"></i>
 </li>
 <#if {hasPages}>
@@ -16,10 +16,10 @@ const pageBtns = nj`
     </ul>
   </li>
 </#if>
-<li key=next class=fj-pagn-btn{nextDisabled} title=下一页>
+<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>
   <i class="fa fa-chevron-right"></i>
 </li>
-<li key=last class=fj-pagn-btn{lastDisabled} title=末页>
+<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>
   末页
 </li>
 `;
@@ -67,7 +67,7 @@ export default nj`
     </li>
     <#if {showRefresh}>
       <li class="{'fj-pagn-btn-refresh':fixIconSize}">
-        <i class="fa fa-refresh" onClick={refresh} title=刷新></i>
+        <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>
       </li>
     </#if>
   </ul>

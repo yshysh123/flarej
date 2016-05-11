@@ -1,7 +1,6 @@
 ﻿import { compileComponent } from 'nornj';
 import Widget from '../widget';
 import tmpl from './template';
-import './filters';
 const template = compileComponent(tmpl, 'pagination');
 
 class Pagination extends Widget {
@@ -52,6 +51,7 @@ class Pagination extends Widget {
 
     this.pageSizesChange = this.pageSizesChange.bind(this);
     this.goPage = this.goPage.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
 
   componentWillReceiveProps (nextProps) {
@@ -95,12 +95,9 @@ class Pagination extends Widget {
     let disabled = ' fj-disabled',
       state = this.state,
       extra = {
-        self: this,
         pageSizesChange: this.pageSizesChange,
         goPage: this.goPage,
-        refresh: (e) => {
-          this.refresh();
-        },
+        refresh: this.refresh,
         firstDisabled: '',
         prevDisabled: '',
         nextDisabled: '',
