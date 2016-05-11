@@ -1,22 +1,25 @@
 ﻿import nj from 'nornj';
 
 const pageBtns = nj`
-<li key=first class=fj-pagn-btn title=首页>
+<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={self:bind(refresh, 1)}>
   首页
 </li>
-<li key=previous class=fj-pagn-btn title=上一页>
+<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页>
   <i class="fa fa-chevron-left"></i>
 </li>
 <#if {hasPages}>
   <li>
     <ul class=fj-pagn-pages>
+      <li class=fj-pagn-pageno>1</li>
+      <li class=fj-pagn-pageno-c>2</li>
+      <li class=fj-pagn-pageno>3</li>
     </ul>
   </li>
 </#if>
-<li key=next class=fj-pagn-btn title=下一页>
+<li key=next class=fj-pagn-btn{nextDisabled} title=下一页>
   <i class="fa fa-chevron-right"></i>
 </li>
-<li key=last class=fj-pagn-btn title=末页>
+<li key=last class=fj-pagn-btn{lastDisabled} title=末页>
   末页
 </li>
 `;

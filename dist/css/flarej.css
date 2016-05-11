@@ -582,6 +582,8 @@ ul {
   height: 23px;
   margin-left: 2px;
   margin-right: 2px;
+  border-width: 1px;
+  border-style: solid;
 }
 .fj-pagn-txt {
   height: 25px;
@@ -612,11 +614,21 @@ ul {
   line-height: 25x;
   white-space: nowrap;
 }
-.fj-pagn-pages div {
+.fj-pagn-pages li {
   display: inline-block;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
   cursor: pointer;
-  margin: 0 2px;
+  margin-top: 2px;
+  margin-left: 2px;
+  margin-right: 2px;
   text-align: center;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  border-width: 1px;
+  border-style: solid;
 }
 .fj-pagn-btn-refresh {
   width: 26px;

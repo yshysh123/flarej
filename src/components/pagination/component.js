@@ -1,6 +1,7 @@
 ﻿import { compileComponent } from 'nornj';
 import Widget from '../widget';
 import tmpl from './template';
+import './filters';
 const template = compileComponent(tmpl, 'pagination');
 
 class Pagination extends Widget {
@@ -91,13 +92,38 @@ class Pagination extends Widget {
   }
 
   render() {
-    return template(this.state, this.props, {
-      pageSizesChange: this.pageSizesChange,
-      goPage: this.goPage,
-      refresh: (e) => {
-        this.refresh();
-      }
-    });
+    let disabled = ' fj-disabled',
+      state = this.state,
+      extra = {
+        self: this,
+        pageSizesChange: this.pageSizesChange,
+        goPage: this.goPage,
+        refresh: (e) => {
+          this.refresh();
+        },
+        firstDisabled: '',
+        prevDisabled: '',
+        nextDisabled: '',
+        lastDisabled: ''
+      };
+
+    //计算按钮展示逻辑
+    if (state.pageCount <= 1) {  //只有一页
+      extra.firstDisabled = disabled;
+      extra.prevDisabled = disabled;
+      extra.nextDisabled = disabled;
+      extra.lastDisabled = disabled;
+    }
+    else if (state.pageIndex == 1) {  //首页
+      extra.firstDisabled = disabled;
+      extra.prevDisabled = disabled;
+    }
+    else if (state.pageIndex == state.pageCount) {  //尾页
+      extra.nextDisabled = disabled;
+      extra.lastDisabled = disabled;
+    }
+
+    return template(state, this.props, extra);
   }
 }
 
