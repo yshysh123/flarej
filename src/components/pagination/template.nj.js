@@ -39,7 +39,7 @@ export default nj`
       <li class=fj-pagn-info>
         每页
         <#if {setPageSize}>
-          <select class="fj-form-elem fj-pagn-pagesize" onChange={pageSizesChange}>
+          <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizesChange}>
             <#each {pageSizes}>
               <option key=page{#} value={.}>{.}</option>
             </#each>
@@ -64,7 +64,7 @@ export default nj`
     </li>
     <#if {showRefresh}>
       <li class="{'fj-pagn-btn-refresh':fixIconSize}">
-        <i class="fa fa-refresh" onClick={refresh}></i>
+        <i class="fa fa-refresh" onClick={refresh} title=刷新></i>
       </li>
     </#if>
   </ul>

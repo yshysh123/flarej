@@ -8,11 +8,10 @@ class Pagination extends Widget {
     fjType: 'pagn',
     pageSize: 15,                           //每页数据数
     pageSizes: [15, 30, 50],                //可选择的每页数据数
-    pageCount: 0,                           //总页数
     pageIndex: 1,                           //当前页码,从1开始
     count: 0,                               //数据总数
     totalTxt: "条数据",
-    btnGoName: "确定",                      //跳转按钮上的字
+    btnGoName: "跳转",                      //跳转按钮上的字
     noCount: false,                         //为true则在无法获取数据总数时使用
     setPageSize: false,                     //是否可以设置每页数据数
     showCount: true,                        //是否显示数据总数
@@ -47,6 +46,7 @@ class Pagination extends Widget {
   }
 
   init() {
+    this.state.pageCount = this.getPageCount()  //总页数
     super.init();
 
     this.pageSizesChange = this.pageSizesChange.bind(this);
@@ -64,18 +64,28 @@ class Pagination extends Widget {
   //  }
   //}
 
+  getPageCount(pageSize = this.state.pageSize) {
+    let { count } = this.props;
+
+    return parseInt(count % pageSize > 0 ? count / pageSize + 1 : count / pageSize, 10);
+  }
+
+  //切换每页数据数
   pageSizesChange(e) {
     this.refresh(this.state.pageIndex, e.target.value);
   }
 
+  //刷新分页
   refresh(page = this.state.pageIndex, pageSize = this.state.pageSize) {
     this.refs.pageTxt.value = page;
     this.setState({
       pageIndex: page,
-      pageSize: pageSize
+      pageSize: pageSize,
+      pageCount: this.getPageCount(pageSize)
     });
   }
 
+  //跳转页数
   goPage(e) {
     this.refresh(this.refs.pageTxt.value);
   }

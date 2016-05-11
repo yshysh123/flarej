@@ -47,9 +47,8 @@
         </table>
         <!--<fj-#each refer="{list}">-->
         <fj-Pagination set-page-size="true"
-                       page-size="5"
+                       page-size="{pageSize}"
                        page-sizes="{pageSizes}"
-                       page-count="{pageCount}"
                        count="100"
                        responsive="true"
                        responsive-param="{rp}"
@@ -68,7 +67,7 @@
     nj.registerComponent('Container', React.createClass({
       getInitialState: function () {
         return {
-          pageCount: 10
+          pageSize: 5
         };
       },
       //template: nj.compileComponent('<div onClick={click}>{tmpl}</div>'),
@@ -76,8 +75,8 @@
         return nj.renderTmplExpr(this.props.tmpls[0], {
         //return this.template({
           //tmpl: this.props.tmpls[0],
-          pageSizes: [5, 20, 50],
-          pageCount: this.state.pageCount,
+          pageSizes: [20, 5, 50],
+          pageSize: this.state.pageSize,
           rp: {
             '(max-width: 768px)': {
               state: { objId: 11000 },
