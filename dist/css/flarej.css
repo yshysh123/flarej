@@ -624,9 +624,12 @@ ul {
   margin-left: 2px;
   margin-right: 2px;
   text-align: center;
-  width: 25px;
   height: 25px;
   line-height: 25px;
+}
+.fj-pagn-pageno,
+.fj-pagn-pageno-c {
+  width: 25px;
   border-width: 1px;
   border-style: solid;
 }

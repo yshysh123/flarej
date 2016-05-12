@@ -15,36 +15,26 @@
   <div>
     <fj-Container class="fj-component">
       <fj-#tmpl>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </table>
+        <fj-table class="table">
+          <fj-thead>
+            <fj-tr>
+              <fj-th>#</fj-th>
+              <fj-th>First Name</fj-th>
+              <fj-th>Last Name</fj-th>
+              <fj-th>Username</fj-th>
+            </fj-tr>
+          </fj-thead>
+          <fj-tbody>
+            <fj-#each refer="{data}">
+              <fj-tr>
+                <fj-th scope="row">{no}</fj-th>
+                <fj-td>{firstName}</fj-td>
+                <fj-td>{lastName}</fj-td>
+                <fj-td>{username}</fj-td>
+              </fj-tr>
+            </fj-#each>
+          </fj-tbody>
+        </fj-table>
         <!--<fj-#each refer="{list}">-->
         <fj-Pagination set-page-size="true"
                        page-size="{pageSize}"
@@ -53,7 +43,8 @@
                        responsive="true"
                        responsive-param="{rp}"
                        show-data-count="true"
-                       show-refresh="true">
+                       show-refresh="true"
+                       on-change="{pagnChange}">
         </fj-Pagination>
         <!--</fj-#each>-->
       </fj-#tmpl>
@@ -63,18 +54,42 @@
   <script src="../node_modules/react-dom/dist/react-dom.js"></script>
   <script src="../node_modules/nornj/dist/nornj.js"></script>
   <script src="../dist/js/flarej.js"></script>
+  <script src="../vendor/lodash.min.js"></script>
   <script>
+    var datas = _.times(100, function (i) {
+      var no = i + 1;
+
+      return {
+        no: no,
+        firstName: 'Mark' + no,
+        lastName: 'Thornton' + no,
+        username: '@twitter' + no
+      }
+    });
+
     nj.registerComponent('Container', React.createClass({
       getInitialState: function () {
         return {
           pageSize: 5
         };
       },
+      pagnChange: function (pageIndex, pageSize) {
+        var start = (pageIndex - 1) * pageSize;
+        var end = pageIndex * pageSize;
+        var data = datas.filter(function(obj, i) {
+          if(i >= start && i < end) {
+            return true;
+          }
+        });
+
+        this.setState({ data: data });
+      },
       //template: nj.compileComponent('<div onClick={click}>{tmpl}</div>'),
       render: function () {
         return nj.renderTmplExpr(this.props.tmpls[0], {
-        //return this.template({
+          //return this.template({
           //tmpl: this.props.tmpls[0],
+          data: this.state.data,
           pageSizes: [20, 5, 50],
           pageSize: this.state.pageSize,
           rp: {
@@ -89,6 +104,7 @@
             }
           },
           //list: [0, 1, 2],
+          pagnChange: this.pagnChange,
           click: function () {
             this.setState({ pageCount: Date.now() });
           }.bind(this)

@@ -60,6 +60,10 @@ class Pagination extends Widget {
     }
   }
 
+  componentWillMount () {
+    this.refresh();
+  }
+
   //shouldComponentUpdate (nextProps, nextState) {
   //  if(nextState.) {
   //  }
@@ -73,22 +77,30 @@ class Pagination extends Widget {
 
   //切换每页数据数
   pageSizesChange(e) {
-    this.refresh(this.state.pageIndex, e.target.value);
+    this.refresh(this.state.pageIndex, parseInt(e.target.value));
   }
 
   //刷新分页
-  refresh(page = this.state.pageIndex, pageSize = this.state.pageSize) {
-    this.refs.pageTxt.value = page;
+  refresh(pageIndex = this.state.pageIndex, pageSize = this.state.pageSize) {
+    let props = this.props;
+    if(this.refs.pageTxt) {
+      this.refs.pageTxt.value = pageIndex;
+    }
+
     this.setState({
-      pageIndex: page,
+      pageIndex: pageIndex,
       pageSize: pageSize,
       pageCount: this.getPageCount(pageSize)
     });
+
+    if(props.onChange) {
+      props.onChange.call(this, pageIndex, pageSize);
+    }
   }
 
   //跳转页数
   goPage(e) {
-    this.refresh(this.refs.pageTxt.value);
+    this.refresh(parseInt(this.refs.pageTxt.value, 10));
   }
 
   render() {
