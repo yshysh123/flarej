@@ -470,49 +470,8 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],2:[function(require,module,exports){
-/* eslint-disable no-unused-vars */
-'use strict';
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-module.exports = Object.assign || function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (Object.getOwnPropertySymbols) {
-			symbols = Object.getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
-},{}],3:[function(require,module,exports){
 module.exports = require('react/lib/update');
-},{"react/lib/update":4}],4:[function(require,module,exports){
+},{"react/lib/update":3}],3:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -623,7 +582,7 @@ function update(value, spec) {
 
 module.exports = update;
 }).call(this,require('_process'))
-},{"_process":1,"fbjs/lib/invariant":5,"fbjs/lib/keyOf":6,"object-assign":2}],5:[function(require,module,exports){
+},{"_process":1,"fbjs/lib/invariant":4,"fbjs/lib/keyOf":5,"object-assign":6}],4:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -675,7 +634,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":1}],6:[function(require,module,exports){
+},{"_process":1}],5:[function(require,module,exports){
 "use strict";
 
 /**
@@ -710,6 +669,47 @@ var keyOf = function (oneKeyObj) {
 };
 
 module.exports = keyOf;
+},{}],6:[function(require,module,exports){
+/* eslint-disable no-unused-vars */
+'use strict';
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (Object.getOwnPropertySymbols) {
+			symbols = Object.getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
 },{}],7:[function(require,module,exports){
 'use strict';
 
@@ -750,7 +750,7 @@ exports.default = _core2.default;
 
 var _nornj = require('nornj');
 
-require('./pagination/templateHelper');
+require('./pagination/template.helper');
 
 (0, _nornj.registerFilter)({
   fixIconSize: function fixIconSize(val) {
@@ -778,7 +778,7 @@ require('./pagination/templateHelper');
   }
 });
 
-},{"./pagination/templateHelper":12,"nornj":"nornj"}],9:[function(require,module,exports){
+},{"./pagination/template.helper":10,"nornj":"nornj"}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -936,7 +936,61 @@ Pagination.defaultProps = {
 };
 exports.default = Pagination;
 
-},{"../widget":13,"./template":10,"nornj":"nornj"}],10:[function(require,module,exports){
+},{"../widget":13,"./template":11,"nornj":"nornj"}],10:[function(require,module,exports){
+'use strict';
+
+var _nornj = require('nornj');
+
+(0, _nornj.registerFilter)({
+  clickBtn: function clickBtn(fn, type) {
+    var _this = this;
+
+    switch (type) {
+      case 'first':
+        return function () {
+          var pageIndex = _this.data[0].pageIndex;
+
+          if (pageIndex != 1) {
+            fn(1);
+          }
+        };
+      case 'prev':
+        return function () {
+          var pageIndex = _this.data[0].pageIndex;
+
+          if (pageIndex > 1) {
+            fn(pageIndex - 1);
+          }
+        };
+      case 'next':
+        return function () {
+          var _data$ = _this.data[0];
+          var pageIndex = _data$.pageIndex;
+          var pageCount = _data$.pageCount;
+
+          if (pageIndex < pageCount) {
+            fn(pageIndex + 1);
+          }
+        };
+      case 'last':
+        return function () {
+          var _data$2 = _this.data[0];
+          var pageIndex = _data$2.pageIndex;
+          var pageCount = _data$2.pageCount;
+
+          if (pageIndex != pageCount) {
+            fn(pageCount);
+          }
+        };
+      default:
+        return function () {
+          return fn();
+        };
+    }
+  }
+});
+
+},{"nornj":"nornj"}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -950,7 +1004,7 @@ var _templateNj2 = babelHelpers.interopRequireDefault(_templateNj);
 
 exports.default = _templateNj2.default;
 
-},{"./template.nj.js":11}],11:[function(require,module,exports){
+},{"./template.nj.js":12}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -967,40 +1021,6 @@ var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
 var pageBtns = (0, _nornj2.default)(_templateObject);
 
 exports.default = (0, _nornj2.default)(_templateObject2, pageBtns);
-
-},{"nornj":"nornj"}],12:[function(require,module,exports){
-'use strict';
-
-var _nornj = require('nornj');
-
-(0, _nornj.registerFilter)({
-  clickBtn: function clickBtn(fn, type) {
-    var _this = this;
-
-    switch (type) {
-      case 'first':
-        return function () {
-          return fn(1);
-        };
-      case 'prev':
-        return function () {
-          return fn(parseInt(_this.data[0].pageIndex, 10) - 1);
-        };
-      case 'next':
-        return function () {
-          return fn(parseInt(_this.data[0].pageIndex, 10) + 1);
-        };
-      case 'last':
-        return function () {
-          return fn(_this.data[0].pageCount);
-        };
-      default:
-        return function () {
-          return fn();
-        };
-    }
-  }
-});
 
 },{"nornj":"nornj"}],13:[function(require,module,exports){
 'use strict';
@@ -1175,7 +1195,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":20,"./njHelpers":8,"nornj":"nornj","react":"react","react-addons-update":3}],14:[function(require,module,exports){
+},{"../utils/utils":20,"./njHelpers":8,"nornj":"nornj","react":"react","react-addons-update":2}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
