@@ -750,7 +750,7 @@ exports.default = _core2.default;
 
 var _nornj = require('nornj');
 
-require('./pagination/filter');
+require('./pagination/templateHelper');
 
 (0, _nornj.registerFilter)({
   fixIconSize: function fixIconSize(val) {
@@ -778,7 +778,7 @@ require('./pagination/filter');
   }
 });
 
-},{"./pagination/filter":10,"nornj":"nornj"}],9:[function(require,module,exports){
+},{"./pagination/templateHelper":12,"nornj":"nornj"}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -936,29 +936,7 @@ Pagination.defaultProps = {
 };
 exports.default = Pagination;
 
-},{"../widget":13,"./template":11,"nornj":"nornj"}],10:[function(require,module,exports){
-'use strict';
-
-var _nornj = require('nornj');
-
-(0, _nornj.registerFilter)({
-  clickBtn: function clickBtn(fn, type) {
-    switch (type) {
-      case 'first':
-        return fn.bind(null, 1, undefined);
-      case 'prev':
-        return fn.bind(null, parseInt(this.data[0].pageIndex, 10) - 1, undefined);
-      case 'next':
-        return fn.bind(null, parseInt(this.data[0].pageIndex, 10) + 1, undefined);
-      case 'last':
-        return fn.bind(null, this.data[0].pageCount, undefined);
-      default:
-        return fn.bind(null, undefined, undefined);
-    }
-  }
-});
-
-},{"nornj":"nornj"}],11:[function(require,module,exports){
+},{"../widget":13,"./template":10,"nornj":"nornj"}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -972,7 +950,7 @@ var _templateNj2 = babelHelpers.interopRequireDefault(_templateNj);
 
 exports.default = _templateNj2.default;
 
-},{"./template.nj.js":12}],12:[function(require,module,exports){
+},{"./template.nj.js":11}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -989,6 +967,40 @@ var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
 var pageBtns = (0, _nornj2.default)(_templateObject);
 
 exports.default = (0, _nornj2.default)(_templateObject2, pageBtns);
+
+},{"nornj":"nornj"}],12:[function(require,module,exports){
+'use strict';
+
+var _nornj = require('nornj');
+
+(0, _nornj.registerFilter)({
+  clickBtn: function clickBtn(fn, type) {
+    var _this = this;
+
+    switch (type) {
+      case 'first':
+        return function () {
+          return fn(1);
+        };
+      case 'prev':
+        return function () {
+          return fn(parseInt(_this.data[0].pageIndex, 10) - 1);
+        };
+      case 'next':
+        return function () {
+          return fn(parseInt(_this.data[0].pageIndex, 10) + 1);
+        };
+      case 'last':
+        return function () {
+          return fn(_this.data[0].pageCount);
+        };
+      default:
+        return function () {
+          return fn();
+        };
+    }
+  }
+});
 
 },{"nornj":"nornj"}],13:[function(require,module,exports){
 'use strict';
@@ -1009,7 +1021,7 @@ var _utils = require('../utils/utils');
 
 var _utils2 = babelHelpers.interopRequireDefault(_utils);
 
-require('./filters');
+require('./njHelpers');
 
 var win = window;
 
@@ -1163,7 +1175,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":20,"./filters":8,"nornj":"nornj","react":"react","react-addons-update":3}],14:[function(require,module,exports){
+},{"../utils/utils":20,"./njHelpers":8,"nornj":"nornj","react":"react","react-addons-update":3}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

@@ -2,7 +2,7 @@
 import update from 'react-addons-update';
 import { each } from 'nornj';
 import utils from '../utils/utils';
-import './filters';
+import './njHelpers';
 let win = window;
 
 class Widget extends Component {

@@ -1,5 +1,5 @@
 ﻿import { registerFilter } from 'nornj';
-import './pagination/filter';
+import './pagination/templateHelper';
 
 registerFilter({
   fixIconSize: (val) => {
