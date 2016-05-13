@@ -67,28 +67,29 @@ class Widget extends Component {
       handlers = [];
 
     //处理响应参数
-    each(this.state.responsiveParam, (rpp, o) => {
-      const media = o.split("|")[0];
-      if (utils.mediaQuery(media)) {  //符合条件时执行响应式处理
-        if (rpp.state) {  //设置响应状态值
-          newState = update(newState, { $merge: rpp.state });
-        }
-
-        if (rpp.preHandler) {  //响应前操作
-          let ret = rpp.preHandler.call(this, isInit, update(newState, { $merge: {} }));
-          if(ret) {
-            newState = ret;
+    [props.defaultResponsiveParam, props.responsiveParam].forEach((responsiveParam) => {
+      each(responsiveParam, (rpp, media) => {
+        if (utils.mediaQuery(media)) {  //符合条件时执行响应式处理
+          if (rpp.state) {  //设置响应状态值
+            newState = update(newState, { $merge: rpp.state });
+          }
+      
+          if (rpp.preHandler) {  //响应前操作
+            let ret = rpp.preHandler.call(this, isInit, update(newState, { $merge: {} }));
+            if(ret) {
+              newState = ret;
+            }
+          }
+      
+          if (rpp.handler) {  //响应后操作
+            handlers[handlers.length] = {
+              handler: rpp.handler,
+              delay: rpp.delay
+            };
           }
         }
-
-        if (rpp.handler) {  //响应后操作
-          handlers[handlers.length] = {
-            handler: rpp.handler,
-            delay: rpp.delay
-          };
-        }
-      }
-    }, false, false);
+      }, false, false);
+    });
 
     //执行响应后操作
     const runHandlers = () => {

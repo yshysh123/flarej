@@ -22,46 +22,40 @@ class Pagination extends Widget {
     hasBtnGo: true,
     responsive: false,
     responsiveDelay: 70,
-    responsiveOnlyWidth: true
+    responsiveOnlyWidth: true,
+    defaultResponsiveParam: {               //默认响应式参数
+      '(max-width: 480px)': {
+        state: {
+          showCount: false,
+          showPageSize: false,
+          hasPages: false,
+          hasBtnGo: false
+        }
+      },
+      '(min-width: 481px) and (max-width: 768px)': {
+        state: {
+          showCount: false,
+          showPageSize: false,
+          hasPages: true,
+          hasBtnGo: true
+        }
+      },
+      '(min-width: 769px)': {
+        state: {
+          showCount: true,
+          showPageSize: true,
+          hasPages: true,
+          hasBtnGo: true
+        }
+      }
+    }
   };
   
   constructor(props) {
-    let initialState = {
+    super(props, {
       pageIndex: props.pageIndex,
       pageSize: props.pageSize
-    };
-
-    //初始化响应式参数
-    if(props.responsive) {
-      initialState.responsiveParam = Object.assign({
-        '(max-width: 480px)|default': {
-          state: {
-            showCount: false,
-            showPageSize: false,
-            hasPages: false,
-            hasBtnGo: false
-          }
-        },
-        '(min-width: 481px) and (max-width: 768px)|default': {
-          state: {
-            showCount: false,
-            showPageSize: false,
-            hasPages: true,
-            hasBtnGo: true
-          }
-        },
-        '(min-width: 769px)|default': {
-          state: {
-            showCount: true,
-            showPageSize: true,
-            hasPages: true,
-            hasBtnGo: true
-          }
-        }
-      }, props.responsiveParam);
-    }
-
-    super(props, initialState);
+    });
   }
 
   init() {
@@ -69,6 +63,7 @@ class Pagination extends Widget {
     super.init();
 
     this.pageSizesChange = this.pageSizesChange.bind(this);
+    this.pageIndexBlur = this.pageIndexBlur.bind(this);
     this.goPage = this.goPage.bind(this);
     this.refresh = this.refresh.bind(this);
   }
@@ -93,6 +88,13 @@ class Pagination extends Widget {
   //切换每页数据数
   pageSizesChange(e) {
     this.refresh(this.state.pageIndex, parseInt(e.target.value));
+  }
+
+  //页数文本框失去焦点
+  pageIndexBlur(e) {
+    if(!fj.RegExp.num.test(e.target.value.trim())) {
+      e.target.value = 1;
+    }
   }
 
   //刷新分页
@@ -133,6 +135,7 @@ class Pagination extends Widget {
       state = this.state,
       extra = {
         pageSizesChange: this.pageSizesChange,
+        pageIndexBlur: this.pageIndexBlur,
         goPage: this.goPage,
         refresh: this.refresh,
         firstDisabled: '',

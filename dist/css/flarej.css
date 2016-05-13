@@ -644,24 +644,8 @@ ul {
 .fj-pagn-btn-refresh.fj-fixsize {
   font-size: 0.875rem;
 }
-.pnj-body.fj-mobile {
-  overflow-x: auto;
-  overflow-y: hidden;
-}
 .fj-pagn-info {
   height: 25px;
   line-height: 25px;
-  margin: 0 3px;
-}
-.pnj_txt {
-  height: 25px;
-  line-height: 25px;
-  white-space: nowrap;
-}
-.pnj_txt_div {
-  display: inline-block;
-  height: 25px;
-  line-height: 25px;
-  *line-height: 20px;
   margin: 0 3px;
 }
