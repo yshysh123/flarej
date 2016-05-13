@@ -67,7 +67,7 @@ class Widget extends Component {
       handlers = [];
 
     //处理响应参数
-    each(props.responsiveParam, (rpp, o) => {
+    each(this.state.responsiveParam, (rpp, o) => {
       const media = o.split("|")[0];
       if (utils.mediaQuery(media)) {  //符合条件时执行响应式处理
         if (rpp.state) {  //设置响应状态值

@@ -76,8 +76,8 @@
       pagnChange: function (pageIndex, pageSize) {
         var start = (pageIndex - 1) * pageSize;
         var end = pageIndex * pageSize;
-        var data = datas.filter(function(obj, i) {
-          if(i >= start && i < end) {
+        var data = datas.filter(function (obj, i) {
+          if (i >= start && i < end) {
             return true;
           }
         });
@@ -94,13 +94,25 @@
           pageSize: this.state.pageSize,
           rp: {
             '(max-width: 768px)': {
-              state: { objId: 11000 },
+              //preHandler: (isInit, newState) => {
+              //  newState.objId = 5000;
+              //  return newState;
+              //},
+              state: {
+                objId: 10000,
+                //showCount: false
+              },
               handler: function (isInit) {
                 //alert(isInit);
-              }
+              },
+              delay: 100
             },
             '(min-width: 769px)': {
-              state: { objId: 21000 }
+              state: {
+                objId: 20000,
+                //hasBtnGo: false
+                //showCount: true
+              }
             }
           },
           //list: [0, 1, 2],

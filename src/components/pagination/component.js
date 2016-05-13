@@ -19,30 +19,49 @@ class Pagination extends Widget {
     showPageCount: true,                    //是否显示总页数
     showRefresh: true,
     hasPages: true,                         //是否显示页数链接
-    responsive: true,
+    hasBtnGo: true,
+    responsive: false,
     responsiveDelay: 70,
-    responsiveOnlyWidth: true,
-    responsiveParam: {
-      '(max-width: 768px)|default': {
-        //preHandler: (isInit, newState) => {
-        //  newState.objId = 5000;
-        //  return newState;
-        //},
-        state: { objId: 10000 },
-        delay: 100
-      },
-      '(min-width: 769px)|default': {
-        state: { objId: 20000 },
-        delay: 100
-      }
-    }
+    responsiveOnlyWidth: true
   };
   
   constructor(props) {
-    super(props, {
+    let initialState = {
       pageIndex: props.pageIndex,
       pageSize: props.pageSize
-    });
+    };
+
+    //初始化响应式参数
+    if(props.responsive) {
+      initialState.responsiveParam = Object.assign({
+        '(max-width: 480px)|default': {
+          state: {
+            showCount: false,
+            showPageSize: false,
+            hasPages: false,
+            hasBtnGo: false
+          }
+        },
+        '(min-width: 481px) and (max-width: 768px)|default': {
+          state: {
+            showCount: false,
+            showPageSize: false,
+            hasPages: true,
+            hasBtnGo: true
+          }
+        },
+        '(min-width: 769px)|default': {
+          state: {
+            showCount: true,
+            showPageSize: true,
+            hasPages: true,
+            hasBtnGo: true
+          }
+        }
+      }, props.responsiveParam);
+    }
+
+    super(props, initialState);
   }
 
   init() {
@@ -61,13 +80,9 @@ class Pagination extends Widget {
   }
 
   componentWillMount () {
+    //初始化时默认执行刷新
     this.refresh();
   }
-
-  //shouldComponentUpdate (nextProps, nextState) {
-  //  if(nextState.) {
-  //  }
-  //}
 
   getPageCount(pageSize = this.state.pageSize) {
     let { count } = this.props;
@@ -82,15 +97,25 @@ class Pagination extends Widget {
 
   //刷新分页
   refresh(pageIndex = this.state.pageIndex, pageSize = this.state.pageSize) {
-    let props = this.props;
+    let props = this.props,
+      pageCount = this.getPageCount(pageSize);
+
     if(this.refs.pageTxt) {
       this.refs.pageTxt.value = pageIndex;
+    }
+
+    //如果当前页大于总页数,则设置总页数为当前页
+    if(pageIndex > pageCount) {
+      pageIndex = pageCount;
+    }
+    else if(pageIndex < 1) {
+      pageIndex = 1;
     }
 
     this.setState({
       pageIndex: pageIndex,
       pageSize: pageSize,
-      pageCount: this.getPageCount(pageSize)
+      pageCount: pageCount
     });
 
     if(props.onChange) {
@@ -116,7 +141,7 @@ class Pagination extends Widget {
         lastDisabled: ''
       };
 
-    //计算按钮展示逻辑
+    //翻页按钮展示逻辑
     if (state.pageCount <= 1) {  //只有一页
       extra.firstDisabled = disabled;
       extra.prevDisabled = disabled;

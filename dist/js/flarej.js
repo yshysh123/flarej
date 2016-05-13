@@ -830,10 +830,43 @@ var Pagination = function (_Widget) {
 
   function Pagination(props) {
     babelHelpers.classCallCheck(this, Pagination);
-    return babelHelpers.possibleConstructorReturn(this, _Widget.call(this, props, {
+
+    var initialState = {
       pageIndex: props.pageIndex,
       pageSize: props.pageSize
-    }));
+    };
+
+    //初始化响应式参数
+    if (props.responsive) {
+      initialState.responsiveParam = babelHelpers.extends({
+        '(max-width: 480px)|default': {
+          state: {
+            showCount: false,
+            showPageSize: false,
+            hasPages: false,
+            hasBtnGo: false
+          }
+        },
+        '(min-width: 481px) and (max-width: 768px)|default': {
+          state: {
+            showCount: false,
+            showPageSize: false,
+            hasPages: true,
+            hasBtnGo: true
+          }
+        },
+        '(min-width: 769px)|default': {
+          state: {
+            showCount: true,
+            showPageSize: true,
+            hasPages: true,
+            hasBtnGo: true
+          }
+        }
+      }, props.responsiveParam);
+    }
+
+    return babelHelpers.possibleConstructorReturn(this, _Widget.call(this, props, initialState));
   }
 
   Pagination.prototype.init = function init() {
@@ -852,13 +885,9 @@ var Pagination = function (_Widget) {
   };
 
   Pagination.prototype.componentWillMount = function componentWillMount() {
+    //初始化时默认执行刷新
     this.refresh();
   };
-
-  //shouldComponentUpdate (nextProps, nextState) {
-  //  if(nextState.) {
-  //  }
-  //}
 
   Pagination.prototype.getPageCount = function getPageCount() {
     var pageSize = arguments.length <= 0 || arguments[0] === undefined ? this.state.pageSize : arguments[0];
@@ -882,15 +911,24 @@ var Pagination = function (_Widget) {
     var pageIndex = arguments.length <= 0 || arguments[0] === undefined ? this.state.pageIndex : arguments[0];
     var pageSize = arguments.length <= 1 || arguments[1] === undefined ? this.state.pageSize : arguments[1];
 
-    var props = this.props;
+    var props = this.props,
+        pageCount = this.getPageCount(pageSize);
+
     if (this.refs.pageTxt) {
       this.refs.pageTxt.value = pageIndex;
+    }
+
+    //如果当前页大于总页数,则设置总页数为当前页
+    if (pageIndex > pageCount) {
+      pageIndex = pageCount;
+    } else if (pageIndex < 1) {
+      pageIndex = 1;
     }
 
     this.setState({
       pageIndex: pageIndex,
       pageSize: pageSize,
-      pageCount: this.getPageCount(pageSize)
+      pageCount: pageCount
     });
 
     if (props.onChange) {
@@ -918,7 +956,7 @@ var Pagination = function (_Widget) {
       lastDisabled: ''
     };
 
-    //计算按钮展示逻辑
+    //翻页按钮展示逻辑
     if (state.pageCount <= 1) {
       //只有一页
       extra.firstDisabled = disabled;
@@ -956,23 +994,10 @@ Pagination.defaultProps = {
   showPageCount: true, //是否显示总页数
   showRefresh: true,
   hasPages: true, //是否显示页数链接
-  responsive: true,
+  hasBtnGo: true,
+  responsive: false,
   responsiveDelay: 70,
-  responsiveOnlyWidth: true,
-  responsiveParam: {
-    '(max-width: 768px)|default': {
-      //preHandler: (isInit, newState) => {
-      //  newState.objId = 5000;
-      //  return newState;
-      //},
-      state: { objId: 10000 },
-      delay: 100
-    },
-    '(min-width: 769px)|default': {
-      state: { objId: 20000 },
-      delay: 100
-    }
-  }
+  responsiveOnlyWidth: true
 };
 exports.default = Pagination;
 
@@ -985,46 +1010,41 @@ var _nornj = require('nornj');
   clickBtn: function clickBtn(fn, type) {
     var _this = this;
 
+    var _data$ = this.data[0];
+    var pageIndex = _data$.pageIndex;
+    var pageCount = _data$.pageCount;
+
+
     switch (type) {
       case 'first':
         return function () {
-          var pageIndex = _this.data[0].pageIndex;
-
           if (pageIndex != 1) {
             fn(1);
           }
         };
       case 'prev':
         return function () {
-          var pageIndex = _this.data[0].pageIndex;
-
           if (pageIndex > 1) {
             fn(pageIndex - 1);
           }
         };
       case 'next':
         return function () {
-          var _data$ = _this.data[0];
-          var pageIndex = _data$.pageIndex;
-          var pageCount = _data$.pageCount;
-
           if (pageIndex < pageCount) {
             fn(pageIndex + 1);
           }
         };
       case 'last':
         return function () {
-          var _data$2 = _this.data[0];
-          var pageIndex = _data$2.pageIndex;
-          var pageCount = _data$2.pageCount;
-
           if (pageIndex != pageCount) {
             fn(pageCount);
           }
         };
       case 'index':
         return function () {
-          return fn(_this.index);
+          if (_this.index != pageIndex) {
+            fn(_this.index);
+          }
         };
       default:
         return function () {
@@ -1040,13 +1060,13 @@ var _nornj = require('nornj');
 
     switch (type) {
       case '1':
-        //当前页码 <=  4,左侧显示所有 +  当前页码  +  右侧2个页码 + ... + 尾页
+        //当前页码<=4:左侧显示所有+当前页码+右侧2个页码+...+尾页
         return no <= 4;
       case '2':
-        //当前页码 > 4 且<= 页面总数(n) - 3,首页  + ... + 左侧2个页码  + 当前页码  + 右侧2个页码  + ...  +  尾页
+        //当前页码>4,且<=页面总数(n)-3:首页+...+左侧2个页码+ 当前页码+右侧2个页码+...+尾页
         return no > 4 && no <= pageCount - 3;
       case '3':
-        //当前页码 > 页面总数(n) - 3,首页 + ... +  左侧2个页面 +  当前页码  +  右侧显示所有
+        //当前页码>页面总数(n)- 3:首页+...+左侧2个页面+当前页码+右侧显示所有
         return no > pageCount - 3;
     }
   }
@@ -1076,8 +1096,8 @@ Object.defineProperty(exports, "__esModule", {
 var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<#for {\'1\' pageIndex:add(2)}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li onClick={refresh:clickBtn(next)}>...</li>\n<li class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n'], ['\n<#for {\'1\' pageIndex:add(2)}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li onClick={refresh:clickBtn(next)}>...</li>\n<li class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n']),
     _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageIndex:add(2)}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li onClick={refresh:clickBtn(next)}>...</li>\n<li class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n'], ['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageIndex:add(2)}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li onClick={refresh:clickBtn(next)}>...</li>\n<li class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n']),
     _templateObject3 = babelHelpers.taggedTemplateLiteral(['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n'], ['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n']),
-    _templateObject4 = babelHelpers.taggedTemplateLiteral(['\n<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>\n  首页\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<#if {hasPages}>\n  <li>\n    <ul class=fj-pagn-pages>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    </ul>\n  </li>\n</#if>\n<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>\n  末页\n</li>\n'], ['\n<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>\n  首页\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<#if {hasPages}>\n  <li>\n    <ul class=fj-pagn-pages>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    </ul>\n  </li>\n</#if>\n<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>\n  末页\n</li>\n']),
-    _templateObject5 = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <#if {showPageCount}>\n      <li class=fj-pagn-info>\n        共{pageCount}页\n      </li>\n    </#if>\n    <#if {showCount}>\n      <li class=fj-pagn-info>\n        共{count totalTxt}\n      </li>\n    </#if>\n    <#if {showPageSize}>\n      <li class=fj-pagn-info>\n        每页\n        <#if {setPageSize}>\n          <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizesChange}>\n            <#each {pageSizes}>\n              <option key=page{#} value={.}>{.}</option>\n            </#each>\n          </select>\n        <#else />\n          {pageSize}\n        </#if>\n        条\n      </li>\n    </#if>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             ref=pageTxt\n             defaultValue={pageIndex}\n             class="fj-form-elem fj-pagn-pageindex"\n             autocomplete=off\n      />页\n      <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n        {btnGoName}\n      </button>\n    </li>\n    <#if {showRefresh}>\n      <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n        <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n      </li>\n    </#if>\n  </ul>\n</div>\n'], ['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <#if {showPageCount}>\n      <li class=fj-pagn-info>\n        共{pageCount}页\n      </li>\n    </#if>\n    <#if {showCount}>\n      <li class=fj-pagn-info>\n        共{count totalTxt}\n      </li>\n    </#if>\n    <#if {showPageSize}>\n      <li class=fj-pagn-info>\n        每页\n        <#if {setPageSize}>\n          <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizesChange}>\n            <#each {pageSizes}>\n              <option key=page{#} value={.}>{.}</option>\n            </#each>\n          </select>\n        <#else />\n          {pageSize}\n        </#if>\n        条\n      </li>\n    </#if>\n    <li class=fj-pagn-txt>\n      到\n      <input type=text\n             ref=pageTxt\n             defaultValue={pageIndex}\n             class="fj-form-elem fj-pagn-pageindex"\n             autocomplete=off\n      />页\n      <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n        {btnGoName}\n      </button>\n    </li>\n    <#if {showRefresh}>\n      <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n        <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n      </li>\n    </#if>\n  </ul>\n</div>\n']);
+    _templateObject4 = babelHelpers.taggedTemplateLiteral(['\n<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>\n  首页\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=第{pageIndex}页>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>\n  末页\n</li>\n'], ['\n<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>\n  首页\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=第{pageIndex}页>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>\n  末页\n</li>\n']),
+    _templateObject5 = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <#if {showPageCount}>\n      <li class=fj-pagn-info>\n        共{pageCount}页\n      </li>\n    </#if>\n    <#if {showCount}>\n      <li class=fj-pagn-info>\n        共{count totalTxt}\n      </li>\n    </#if>\n    <#if {showPageSize}>\n      <li class=fj-pagn-info>\n        每页\n        <#if {setPageSize}>\n          <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizesChange}>\n            <#each {pageSizes}>\n              <option key=page{#} value={.}>{.}</option>\n            </#each>\n          </select>\n        <#else />\n          {pageSize}\n        </#if>\n        条\n      </li>\n    </#if>\n    <#if {hasBtnGo}>\n      <li class=fj-pagn-txt>\n        到\n        <input type=text\n               ref=pageTxt\n               defaultValue={pageIndex}\n               class="fj-form-elem fj-pagn-pageindex"\n               autocomplete=off\n        />页\n        <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n          {btnGoName}\n        </button>\n      </li>\n    </#if>\n    <#if {showRefresh}>\n      <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n        <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n      </li>\n    </#if>\n  </ul>\n</div>\n'], ['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <#if {showPageCount}>\n      <li class=fj-pagn-info>\n        共{pageCount}页\n      </li>\n    </#if>\n    <#if {showCount}>\n      <li class=fj-pagn-info>\n        共{count totalTxt}\n      </li>\n    </#if>\n    <#if {showPageSize}>\n      <li class=fj-pagn-info>\n        每页\n        <#if {setPageSize}>\n          <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizesChange}>\n            <#each {pageSizes}>\n              <option key=page{#} value={.}>{.}</option>\n            </#each>\n          </select>\n        <#else />\n          {pageSize}\n        </#if>\n        条\n      </li>\n    </#if>\n    <#if {hasBtnGo}>\n      <li class=fj-pagn-txt>\n        到\n        <input type=text\n               ref=pageTxt\n               defaultValue={pageIndex}\n               class="fj-form-elem fj-pagn-pageindex"\n               autocomplete=off\n        />页\n        <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n          {btnGoName}\n        </button>\n      </li>\n    </#if>\n    <#if {showRefresh}>\n      <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n        <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n      </li>\n    </#if>\n  </ul>\n</div>\n']);
 
 var _nornj = require('nornj');
 
@@ -1194,7 +1214,7 @@ var Widget = function (_Component) {
         handlers = [];
 
     //处理响应参数
-    (0, _nornj.each)(props.responsiveParam, function (rpp, o) {
+    (0, _nornj.each)(this.state.responsiveParam, function (rpp, o) {
       var media = o.split("|")[0];
       if (_utils2.default.mediaQuery(media)) {
         //符合条件时执行响应式处理

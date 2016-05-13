@@ -33,9 +33,9 @@ const pageBtns = nj`
 <li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>
   <i class="fa fa-chevron-left"></i>
 </li>
-<#if {hasPages}>
-  <li>
-    <ul class=fj-pagn-pages>
+<li>
+  <ul class=fj-pagn-pages>
+    <#if {hasPages}>
       <#if {pageCount:lt(10)}>
         <#for {'1' pageCount}>
           <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>
@@ -53,9 +53,11 @@ const pageBtns = nj`
           </#if>
         </#if>
       </#if>
-    </ul>
-  </li>
-</#if>
+    <#else />
+      <li class=fj-pagn-pageno-c title=第{pageIndex}页>{pageIndex}</li>
+    </#if>
+  </ul>
+</li>
 <li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>
   <i class="fa fa-chevron-right"></i>
 </li>
@@ -93,18 +95,20 @@ export default nj`
         条
       </li>
     </#if>
-    <li class=fj-pagn-txt>
-      到
-      <input type=text
-             ref=pageTxt
-             defaultValue={pageIndex}
-             class="fj-form-elem fj-pagn-pageindex"
-             autocomplete=off
-      />页
-      <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>
-        {btnGoName}
-      </button>
-    </li>
+    <#if {hasBtnGo}>
+      <li class=fj-pagn-txt>
+        到
+        <input type=text
+               ref=pageTxt
+               defaultValue={pageIndex}
+               class="fj-form-elem fj-pagn-pageindex"
+               autocomplete=off
+        />页
+        <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>
+          {btnGoName}
+        </button>
+      </li>
+    </#if>
     <#if {showRefresh}>
       <li class="{'fj-pagn-btn-refresh':fixIconSize}">
         <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>
