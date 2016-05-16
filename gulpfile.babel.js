@@ -7,6 +7,7 @@
   babelify = require('babelify'),
   uglify = require('gulp-uglify'),
   jasmine = require('gulp-jasmine'),
+  template = require('gulp-template'),
   rename = require('gulp-rename'),
   concat = require('gulp-concat'),
   sequence = require('gulp-sequence'),
@@ -21,6 +22,8 @@
   browserSync = require('browser-sync').create(),
   reload = browserSync.reload,
   precompiler = require('nornj/precompiler');
+
+var libNameSpace = 'fj';
 
 function getJsLibName() {
   var libName = 'flarej.js';
@@ -147,6 +150,9 @@ gulp.task('build-css', function () {
   var cssLibName = getCssLibName();
 
   return gulp.src('./src/styles/base.less')
+    .pipe(template({
+      ns: libNameSpace
+    }))
     .pipe(less())
     .pipe(rename(cssLibName))
     .pipe(gulp.dest('./dist/css').on('end', function () {
@@ -170,6 +176,9 @@ gulp.task('build-theme', function () {
         themeLibName = getThemeLibName(themeName);
 
       gulp.src(file)
+        .pipe(template({
+          ns: libNameSpace
+        }))
         .pipe(less())
         .pipe(rename(themeLibName))
         .pipe(gulpif(argv.min, cssnano()))

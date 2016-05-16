@@ -429,6 +429,18 @@ textarea {
   -webkit-appearance: none;
 }
 
+/* Global variables */
+/* Classes of no value
+.fj-fixsize: Fix icon size unless chrome browser.
+*/
+.fj-util-border-box {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.fj-util-inline-block {
+  display: inline-block;
+}
 /* Clear default tap background color */
 a,
 button,
@@ -486,18 +498,6 @@ ul {
   background-color: #f0f0f0;
 }
 /* import all modules */
-/* Global variables */
-/* Classes of no value
-.fj-fixsize: Fix icon size unless chrome browser.
-*/
-.fj-border-box {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
-.fj-inline-block {
-  display: inline-block;
-}
 .fj-btn {
   display: inline-block;
   padding: 4px 8px;
@@ -511,9 +511,9 @@ ul {
   vertical-align: middle;
   cursor: pointer;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   background-image: none;
   border: 1px solid #ccc;
   background-color: #fff;
@@ -534,8 +534,8 @@ ul {
   background-image: none;
   outline: 0;
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  -moz-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-       box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+     -moz-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 .fj-btn.fj-disabled,
 .fj-btn[disabled] {
@@ -543,8 +543,8 @@ ul {
   cursor: not-allowed;
   filter: alpha(opacity=65);
   -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-       box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
   opacity: 0.65;
 }
 .fj-btn-hover {

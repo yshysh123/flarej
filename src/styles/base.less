@@ -1,4 +1,29 @@
-﻿/* Clear default tap background color */
+﻿/* Global variables */
+@ns: ~"<%=ns%>-";
+@ie9plus: ~"\0";
+@fontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+/* Classes of no value
+.fj-fixsize: Fix icon size unless chrome browser.
+*/
+
+.fj-util-border-box {
+  box-sizing: border-box;
+}
+
+.fj-util-inline-block {
+  display: inline-block;
+}
+
+.fj-util-transform-rotate (@deg: -45deg) {
+    transform: rotate(@deg);
+}
+
+.fj-util-border-radius (@radius: 2px) {
+    border-radius: @radius;
+}
+
+/* Clear default tap background color */
 a,
 button,
 input,
@@ -11,12 +36,12 @@ ul {
   list-style: none;
 }
 
-.fj-img-fill {
+.@{ns}img-fill {
   max-width: 100%;
   height: auto;
 }
 
-.fj-form-elem {
+.@{ns}form-elem {
   width: 100%;
   height: 26px;
   padding: 2px 5px 2px 2px;
@@ -32,13 +57,13 @@ ul {
   box-sizing: border-box;
 }
 
-.fj-form-elem:focus {
+.@{ns}form-elem:focus {
   border-color: #c1c1c1;
   outline: 0;
   box-shadow: inset 0 1px 1px #eeeeee, 0 0 8px #c1c1c1;
 }
 
-.fj-form-elem[disabled] {
+.@{ns}form-elem[disabled] {
   pointer-events: none;
   cursor: not-allowed;
   box-shadow: none;
@@ -46,6 +71,5 @@ ul {
 }
 
 /* import all modules */
-@import "common";
 @import "button";
 @import "pagination";
