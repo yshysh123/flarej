@@ -13,28 +13,28 @@
 </head>
 <body>
   <div>
-    <fj-Container class="fj-component">
-      <fj-#tmpl>
-        <fj-table class="table">
-          <fj-thead>
-            <fj-tr>
-              <fj-th>#</fj-th>
-              <fj-th>First Name</fj-th>
-              <fj-th>Last Name</fj-th>
-              <fj-th>Username</fj-th>
-            </fj-tr>
-          </fj-thead>
-          <fj-tbody>
-            <fj-#each refer="{data}">
-              <fj-tr>
-                <fj-th scope="row">{no}</fj-th>
-                <fj-td>{firstName}</fj-td>
-                <fj-td>{lastName}</fj-td>
-                <fj-td>{username}</fj-td>
-              </fj-tr>
-            </fj-#each>
-          </fj-tbody>
-        </fj-table>
+    <nj-Container class="nj-component">
+      <nj-#tmpl>
+        <nj-table class="table">
+          <nj-thead>
+            <nj-tr>
+              <nj-th>#</nj-th>
+              <nj-th>First Name</nj-th>
+              <nj-th>Last Name</nj-th>
+              <nj-th>Username</nj-th>
+            </nj-tr>
+          </nj-thead>
+          <nj-tbody>
+            <nj-#each refer="{data}">
+              <nj-tr>
+                <nj-th scope="row">{no}</nj-th>
+                <nj-td>{firstName}</nj-td>
+                <nj-td>{lastName}</nj-td>
+                <nj-td>{username}</nj-td>
+              </nj-tr>
+            </nj-#each>
+          </nj-tbody>
+        </nj-table>
         <!--<fj-#each refer="{list}">-->
         <fj-Pagination set-page-size="true"
                        page-size="{pageSize}"
@@ -47,8 +47,8 @@
                        on-change="{pagnChange}">
         </fj-Pagination>
         <!--</fj-#each>-->
-      </fj-#tmpl>
-    </fj-Container>
+      </nj-#tmpl>
+    </nj-Container>
   </div>
   <script src="../node_modules/react/dist/react.js"></script>
   <script src="../node_modules/react-dom/dist/react-dom.js"></script>
