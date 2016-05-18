@@ -53,7 +53,8 @@ function getThemeLibName(themeName) {
 }
 
 var b = browserify({
-  entries: './src/base.js'
+  entries: './src/base.js',
+  //standalone: 'FlareJ'
 })
 .plugin(dependify, {  //Build UMD standalone bundle and support dependencies.
   name: 'FlareJ',
