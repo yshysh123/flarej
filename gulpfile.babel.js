@@ -15,6 +15,7 @@
   less = require('gulp-less'),
   cssnano = require('gulp-cssnano'),
   eslint = require('gulp-eslint'),
+  notify = require('gulp-notify'),
   postcss = require('gulp-postcss'),
   autoprefixer = require('autoprefixer'),
   argv = require('yargs').argv,
@@ -97,6 +98,18 @@ function bundle() {
   }
 
   return b.bundle()
+    .on('error', function() {
+      let args = Array.prototype.slice.call(arguments);
+    
+      //Send error to notification center with gulp-notify
+      notify.onError({
+        title: "Compile Error",
+        message: "<%= error.message %>"
+      }).apply(this, args);
+    
+      //Keep gulp from hanging on this task
+      this.emit('end');
+    })
     .pipe(source(jsLibName))
     .pipe(buffer())
     .pipe(gulp.dest('./dist/js').on('end', function () {
@@ -126,8 +139,8 @@ gulp.task('watch-js', function () {
     });
 
     isPrecompileTmpl = false;
-    bundle();
-    //gulp.start('build-all-js');
+    //bundle();
+    gulp.start('build-all-js');
   });
 
   return bundle();

@@ -470,49 +470,8 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],2:[function(require,module,exports){
-/* eslint-disable no-unused-vars */
-'use strict';
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-module.exports = Object.assign || function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (Object.getOwnPropertySymbols) {
-			symbols = Object.getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
-},{}],3:[function(require,module,exports){
 module.exports = require('react/lib/update');
-},{"react/lib/update":4}],4:[function(require,module,exports){
+},{"react/lib/update":3}],3:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -623,7 +582,7 @@ function update(value, spec) {
 
 module.exports = update;
 }).call(this,require('_process'))
-},{"_process":1,"fbjs/lib/invariant":5,"fbjs/lib/keyOf":6,"object-assign":2}],5:[function(require,module,exports){
+},{"_process":1,"fbjs/lib/invariant":4,"fbjs/lib/keyOf":5,"object-assign":6}],4:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -675,7 +634,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":1}],6:[function(require,module,exports){
+},{"_process":1}],5:[function(require,module,exports){
 "use strict";
 
 /**
@@ -710,6 +669,47 @@ var keyOf = function (oneKeyObj) {
 };
 
 module.exports = keyOf;
+},{}],6:[function(require,module,exports){
+/* eslint-disable no-unused-vars */
+'use strict';
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (Object.getOwnPropertySymbols) {
+			symbols = Object.getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
 },{}],7:[function(require,module,exports){
 'use strict';
 
@@ -741,7 +741,7 @@ global.FlareJ = global.fj = _core2.default;
 
 module.exports = _core2.default;
 
-},{"./components/pagination/component":9,"./core":14,"./njConfig":15,"./utils/utils":21,"nornj":"nornj"}],8:[function(require,module,exports){
+},{"./components/pagination/component":9,"./core":13,"./njConfig":14,"./utils/utils":20,"nornj":"nornj"}],8:[function(require,module,exports){
 'use strict';
 
 var _nornj = require('nornj');
@@ -1001,7 +1001,7 @@ Pagination.defaultProps = {
 };
 exports.default = Pagination;
 
-},{"../widget":13,"./template":11,"nornj":"nornj"}],10:[function(require,module,exports){
+},{"../widget":12,"./template":11,"nornj":"nornj"}],10:[function(require,module,exports){
 'use strict';
 
 var _nornj = require('nornj');
@@ -1073,47 +1073,14 @@ var _nornj = require('nornj');
 });
 
 },{"nornj":"nornj"}],11:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = undefined;
+exports.default = { "type": "nj_root", "content": [{ "type": "div", "params": { "class": { "props": null, "strs": ["fj-pagn"], "isAll": false } }, "content": [{ "type": "ul", "params": { "class": { "props": null, "strs": ["fj-pagn-body"], "isAll": false } }, "content": [{ "type": "li", "params": { "key": { "props": null, "strs": ["first"], "isAll": false }, "class": { "props": [{ "prop": { "name": "firstDisabled" }, "escape": true }], "strs": ["fj-pagn-btn", ""], "isAll": false }, "title": { "props": null, "strs": ["首页"], "isAll": false }, "onClick": { "props": [{ "prop": { "filters": [{ "params": ["first"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": null, "strs": ["首页"], "isAll": false }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }, { "type": "li", "params": { "key": { "props": null, "strs": ["prev"], "isAll": false }, "class": { "props": [{ "prop": { "name": "prevDisabled" }, "escape": true }], "strs": ["fj-pagn-btn", ""], "isAll": false }, "title": { "props": null, "strs": ["上一页"], "isAll": false }, "onClick": { "props": [{ "prop": { "filters": [{ "params": ["prev"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "i", "params": { "class": { "props": null, "strs": ["fa fa-chevron-left"], "isAll": false } } }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }, { "type": "li", "content": [{ "type": "ul", "params": { "class": { "props": null, "strs": ["fj-pagn-pages"], "isAll": false } }, "content": [{ "type": "nj_expr", "expr": "if", "refer": { "props": [{ "prop": { "name": "hasPages" }, "escape": true }], "strs": ["", ""], "isAll": true }, "content": [{ "type": "nj_expr", "expr": "if", "refer": { "props": [{ "prop": { "filters": [{ "params": ["10"], "name": "lt" }], "name": "pageCount" }, "escape": true }], "strs": ["", ""], "isAll": true }, "content": [{ "type": "nj_expr", "expr": "for", "refer": { "props": [{ "prop": { "name": "1", "isStr": true }, "escape": true }, { "prop": { "name": "pageCount" }, "escape": true }], "strs": ["", "", ""], "isAll": false }, "content": [{ "type": "li", "params": { "class": { "props": [{ "prop": { "filters": [{ "name": "iscurrentpage" }], "name": "#" }, "escape": true }], "strs": ["fj-pagn-pageno", ""], "isAll": false }, "title": { "props": [{ "prop": { "name": "#" }, "escape": true }], "strs": ["第", "页"], "isAll": false }, "onClick": { "props": [{ "prop": { "filters": [{ "params": ["index"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "#" }, "escape": true }], "strs": ["", ""], "isAll": true }] }] }] }], "hasElse": true, "contentElse": [{ "type": "nj_expr", "expr": "if", "refer": { "props": [{ "prop": { "filters": [{ "params": ["1"], "name": "showpartpage" }], "name": "pageIndex" }, "escape": true }], "strs": ["", ""], "isAll": true }, "content": [{ "type": "nj_expr", "expr": "for", "refer": { "props": [{ "prop": { "name": "1", "isStr": true }, "escape": true }, { "prop": { "filters": [{ "params": ["2"], "name": "add" }], "name": "pageIndex" }, "escape": true }], "strs": ["", "", ""], "isAll": false }, "content": [{ "type": "li", "params": { "class": { "props": [{ "prop": { "filters": [{ "name": "iscurrentpage" }], "name": "#" }, "escape": true }], "strs": ["fj-pagn-pageno", ""], "isAll": false }, "title": { "props": [{ "prop": { "name": "#" }, "escape": true }], "strs": ["第", "页"], "isAll": false }, "onClick": { "props": [{ "prop": { "filters": [{ "params": ["index"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "#" }, "escape": true }], "strs": ["", ""], "isAll": true }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }, { "type": "li", "params": { "onClick": { "props": [{ "prop": { "filters": [{ "params": ["next"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": null, "strs": ["..."], "isAll": false }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }, { "type": "li", "params": { "class": { "props": [{ "prop": { "filters": [{ "name": "iscurrentpage" }], "name": "pageCount" }, "escape": true }], "strs": ["fj-pagn-pageno", ""], "isAll": false }, "title": { "props": [{ "prop": { "name": "pageCount" }, "escape": true }], "strs": ["第", "页"], "isAll": false }, "onClick": { "props": [{ "prop": { "filters": [{ "params": ["last"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "pageCount" }, "escape": true }], "strs": ["", ""], "isAll": true }] }] }], "hasElse": true, "contentElse": [{ "type": "nj_expr", "expr": "if", "refer": { "props": [{ "prop": { "filters": [{ "params": ["2"], "name": "showpartpage" }], "name": "pageIndex" }, "escape": true }], "strs": ["", ""], "isAll": true }, "content": [{ "type": "li", "params": { "class": { "props": [{ "prop": { "filters": [{ "name": "iscurrentpage" }], "name": "1", "isStr": true }, "escape": true }], "strs": ["fj-pagn-pageno", ""], "isAll": false }, "title": { "props": null, "strs": ["第1页"], "isAll": false }, "onClick": { "props": [{ "prop": { "filters": [{ "params": ["first"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": null, "strs": ["1"], "isAll": false }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }, { "type": "li", "params": { "onClick": { "props": [{ "prop": { "filters": [{ "params": ["prev"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": null, "strs": ["..."], "isAll": false }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }, { "type": "nj_expr", "expr": "for", "refer": { "props": [{ "prop": { "filters": [{ "params": ["-2"], "name": "add" }], "name": "pageIndex" }, "escape": true }, { "prop": { "filters": [{ "params": ["2"], "name": "add" }], "name": "pageIndex" }, "escape": true }], "strs": ["", "", ""], "isAll": false }, "content": [{ "type": "li", "params": { "class": { "props": [{ "prop": { "filters": [{ "name": "iscurrentpage" }], "name": "#" }, "escape": true }], "strs": ["fj-pagn-pageno", ""], "isAll": false }, "title": { "props": [{ "prop": { "name": "#" }, "escape": true }], "strs": ["第", "页"], "isAll": false }, "onClick": { "props": [{ "prop": { "filters": [{ "params": ["index"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "#" }, "escape": true }], "strs": ["", ""], "isAll": true }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }, { "type": "li", "params": { "onClick": { "props": [{ "prop": { "filters": [{ "params": ["next"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": null, "strs": ["..."], "isAll": false }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }, { "type": "li", "params": { "class": { "props": [{ "prop": { "filters": [{ "name": "iscurrentpage" }], "name": "pageCount" }, "escape": true }], "strs": ["fj-pagn-pageno", ""], "isAll": false }, "title": { "props": [{ "prop": { "name": "pageCount" }, "escape": true }], "strs": ["第", "页"], "isAll": false }, "onClick": { "props": [{ "prop": { "filters": [{ "params": ["last"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "pageCount" }, "escape": true }], "strs": ["", ""], "isAll": true }] }] }], "hasElse": true, "contentElse": [{ "type": "nj_expr", "expr": "if", "refer": { "props": [{ "prop": { "filters": [{ "params": ["3"], "name": "showpartpage" }], "name": "pageIndex" }, "escape": true }], "strs": ["", ""], "isAll": true }, "content": [{ "type": "li", "params": { "class": { "props": [{ "prop": { "filters": [{ "name": "iscurrentpage" }], "name": "1", "isStr": true }, "escape": true }], "strs": ["fj-pagn-pageno", ""], "isAll": false }, "title": { "props": null, "strs": ["第1页"], "isAll": false }, "onClick": { "props": [{ "prop": { "filters": [{ "params": ["first"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": null, "strs": ["1"], "isAll": false }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }, { "type": "li", "params": { "onClick": { "props": [{ "prop": { "filters": [{ "params": ["prev"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": null, "strs": ["..."], "isAll": false }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }, { "type": "nj_expr", "expr": "for", "refer": { "props": [{ "prop": { "filters": [{ "params": ["-2"], "name": "add" }], "name": "pageIndex" }, "escape": true }, { "prop": { "name": "pageCount" }, "escape": true }], "strs": ["", "", ""], "isAll": false }, "content": [{ "type": "li", "params": { "class": { "props": [{ "prop": { "filters": [{ "name": "iscurrentpage" }], "name": "#" }, "escape": true }], "strs": ["fj-pagn-pageno", ""], "isAll": false }, "title": { "props": [{ "prop": { "name": "#" }, "escape": true }], "strs": ["第", "页"], "isAll": false }, "onClick": { "props": [{ "prop": { "filters": [{ "params": ["index"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "#" }, "escape": true }], "strs": ["", ""], "isAll": true }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }] }] }] }] }] }], "hasElse": true, "contentElse": [{ "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-pageno-c"], "isAll": false }, "title": { "props": [{ "prop": { "name": "pageIndex" }, "escape": true }], "strs": ["第", "页"], "isAll": false } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "pageIndex" }, "escape": true }], "strs": ["", ""], "isAll": true }] }] }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }, { "type": "li", "params": { "key": { "props": null, "strs": ["next"], "isAll": false }, "class": { "props": [{ "prop": { "name": "nextDisabled" }, "escape": true }], "strs": ["fj-pagn-btn", ""], "isAll": false }, "title": { "props": null, "strs": ["下一页"], "isAll": false }, "onClick": { "props": [{ "prop": { "filters": [{ "params": ["next"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "i", "params": { "class": { "props": null, "strs": ["fa fa-chevron-right"], "isAll": false } } }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }, { "type": "li", "params": { "key": { "props": null, "strs": ["last"], "isAll": false }, "class": { "props": [{ "prop": { "name": "lastDisabled" }, "escape": true }], "strs": ["fj-pagn-btn", ""], "isAll": false }, "title": { "props": null, "strs": ["末页"], "isAll": false }, "onClick": { "props": [{ "prop": { "filters": [{ "params": ["last"], "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": null, "strs": ["末页"], "isAll": false }] }] }, { "type": "nj_expr", "expr": "if", "refer": { "props": [{ "prop": { "name": "showPageCount" }, "escape": true }], "strs": ["", ""], "isAll": true }, "content": [{ "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-info"], "isAll": false } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "pageCount" }, "escape": true }], "strs": ["共", "页"], "isAll": false }] }] }] }, { "type": "nj_expr", "expr": "if", "refer": { "props": [{ "prop": { "name": "showCount" }, "escape": true }], "strs": ["", ""], "isAll": true }, "content": [{ "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-info"], "isAll": false } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "count" }, "escape": true }, { "prop": { "name": "totalTxt" }, "escape": true }], "strs": ["共", "", ""], "isAll": false }] }] }] }, { "type": "nj_expr", "expr": "if", "refer": { "props": [{ "prop": { "name": "showPageSize" }, "escape": true }], "strs": ["", ""], "isAll": true }, "content": [{ "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-info"], "isAll": false } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": null, "strs": ["每页"], "isAll": false }] }, { "type": "nj_expr", "expr": "if", "refer": { "props": [{ "prop": { "name": "setPageSize" }, "escape": true }], "strs": ["", ""], "isAll": true }, "content": [{ "type": "select", "params": { "class": { "props": null, "strs": ["fj-form-elem fj-pagn-pagesize"], "isAll": false }, "value": { "props": [{ "prop": { "name": "pageSize" }, "escape": true }], "strs": ["", ""], "isAll": true }, "onChange": { "props": [{ "prop": { "name": "pageSizesChange" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_expr", "expr": "each", "refer": { "props": [{ "prop": { "name": "pageSizes" }, "escape": true }], "strs": ["", ""], "isAll": true }, "content": [{ "type": "option", "params": { "key": { "props": [{ "prop": { "name": "#" }, "escape": true }], "strs": ["page", ""], "isAll": false }, "value": { "props": [{ "prop": { "name": "." }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "." }, "escape": true }], "strs": ["", ""], "isAll": true }] }] }] }] }], "hasElse": true, "contentElse": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "pageSize" }, "escape": true }], "strs": ["", ""], "isAll": true }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": ["条"], "isAll": false }] }] }] }, { "type": "nj_expr", "expr": "if", "refer": { "props": [{ "prop": { "name": "hasBtnGo" }, "escape": true }], "strs": ["", ""], "isAll": true }, "content": [{ "type": "li", "params": { "class": { "props": null, "strs": ["fj-pagn-txt"], "isAll": false } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": null, "strs": ["到"], "isAll": false }] }, { "selfCloseTag": true, "type": "input", "params": { "type": { "props": null, "strs": ["text"], "isAll": false }, "ref": { "props": null, "strs": ["pageTxt"], "isAll": false }, "defaultValue": { "props": [{ "prop": { "name": "pageIndex" }, "escape": true }], "strs": ["", ""], "isAll": true }, "class": { "props": null, "strs": ["fj-form-elem fj-pagn-pageindex"], "isAll": false }, "autocomplete": { "props": null, "strs": ["off"], "isAll": false }, "onBlur": { "props": [{ "prop": { "name": "pageIndexBlur" }, "escape": true }], "strs": ["", ""], "isAll": true } } }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": ["页\n        "], "isAll": false }] }, { "type": "button", "params": { "class": { "props": null, "strs": ["fj-btn fj-pagn-btn-go"], "isAll": false }, "type": { "props": null, "strs": ["button"], "isAll": false }, "onClick": { "props": [{ "prop": { "name": "goPage" }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "nj_plaintext", "content": [{ "props": [{ "prop": { "name": "btnGoName" }, "escape": true }], "strs": ["", ""], "isAll": true }] }] }] }] }, { "type": "nj_expr", "expr": "if", "refer": { "props": [{ "prop": { "name": "showRefresh" }, "escape": true }], "strs": ["", ""], "isAll": true }, "content": [{ "type": "li", "params": { "class": { "props": [{ "prop": { "filters": [{ "name": "fixiconsize" }], "name": "fj-pagn-btn-refresh", "isStr": true }, "escape": true }], "strs": ["", ""], "isAll": true } }, "content": [{ "type": "i", "params": { "class": { "props": null, "strs": ["fa fa-refresh"], "isAll": false }, "title": { "props": null, "strs": ["刷新"], "isAll": false }, "onClick": { "props": [{ "prop": { "filters": [{ "name": "clickbtn" }], "name": "refresh" }, "escape": true }], "strs": ["", ""], "isAll": true } } }] }] }] }, { "type": "nj_plaintext", "content": [{ "props": null, "strs": [""], "isAll": false }] }] }] };
 
-var _templateNj = require('./template.nj.js');
-
-var _templateNj2 = babelHelpers.interopRequireDefault(_templateNj);
-
-exports.default = _templateNj2.default;
-
-},{"./template.nj.js":12}],12:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<#for {\'1\' pageIndex:add(2)}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li onClick={refresh:clickBtn(next)}>...</li>\n<li class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n'], ['\n<#for {\'1\' pageIndex:add(2)}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li onClick={refresh:clickBtn(next)}>...</li>\n<li class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n']),
-    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageIndex:add(2)}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li onClick={refresh:clickBtn(next)}>...</li>\n<li class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n'], ['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageIndex:add(2)}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li onClick={refresh:clickBtn(next)}>...</li>\n<li class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n']),
-    _templateObject3 = babelHelpers.taggedTemplateLiteral(['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n'], ['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n']),
-    _templateObject4 = babelHelpers.taggedTemplateLiteral(['\n<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>\n  首页\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=第{pageIndex}页>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>\n  末页\n</li>\n'], ['\n<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>\n  首页\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=第{pageIndex}页>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>\n  末页\n</li>\n']),
-    _templateObject5 = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <#if {showPageCount}>\n      <li class=fj-pagn-info>\n        共{pageCount}页\n      </li>\n    </#if>\n    <#if {showCount}>\n      <li class=fj-pagn-info>\n        共{count totalTxt}\n      </li>\n    </#if>\n    <#if {showPageSize}>\n      <li class=fj-pagn-info>\n        每页\n        <#if {setPageSize}>\n          <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizesChange}>\n            <#each {pageSizes}>\n              <option key=page{#} value={.}>{.}</option>\n            </#each>\n          </select>\n        <#else />\n          {pageSize}\n        </#if>\n        条\n      </li>\n    </#if>\n    <#if {hasBtnGo}>\n      <li class=fj-pagn-txt>\n        到\n        <input type=text\n               ref=pageTxt\n               defaultValue={pageIndex}\n               class="fj-form-elem fj-pagn-pageindex"\n               autocomplete=off\n               onBlur={pageIndexBlur}\n        />页\n        <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n          {btnGoName}\n        </button>\n      </li>\n    </#if>\n    <#if {showRefresh}>\n      <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n        <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n      </li>\n    </#if>\n  </ul>\n</div>\n'], ['\n<div class=fj-pagn>\n  <ul class=fj-pagn-body>\n    ', '\n    <#if {showPageCount}>\n      <li class=fj-pagn-info>\n        共{pageCount}页\n      </li>\n    </#if>\n    <#if {showCount}>\n      <li class=fj-pagn-info>\n        共{count totalTxt}\n      </li>\n    </#if>\n    <#if {showPageSize}>\n      <li class=fj-pagn-info>\n        每页\n        <#if {setPageSize}>\n          <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizesChange}>\n            <#each {pageSizes}>\n              <option key=page{#} value={.}>{.}</option>\n            </#each>\n          </select>\n        <#else />\n          {pageSize}\n        </#if>\n        条\n      </li>\n    </#if>\n    <#if {hasBtnGo}>\n      <li class=fj-pagn-txt>\n        到\n        <input type=text\n               ref=pageTxt\n               defaultValue={pageIndex}\n               class="fj-form-elem fj-pagn-pageindex"\n               autocomplete=off\n               onBlur={pageIndexBlur}\n        />页\n        <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n          {btnGoName}\n        </button>\n      </li>\n    </#if>\n    <#if {showRefresh}>\n      <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n        <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n      </li>\n    </#if>\n  </ul>\n</div>\n']);
-
-var _nornj = require('nornj');
-
-var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
-
-var partPage1 = (0, _nornj2.default)(_templateObject);
-
-var partPage2 = (0, _nornj2.default)(_templateObject2);
-
-var partPage3 = (0, _nornj2.default)(_templateObject3);
-
-var pageBtns = (0, _nornj2.default)(_templateObject4, partPage1, partPage2, partPage3);
-
-exports.default = (0, _nornj2.default)(_templateObject5, pageBtns);
-
-},{"nornj":"nornj"}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1287,7 +1254,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":21,"./njHelpers":8,"nornj":"nornj","react":"react","react-addons-update":3}],14:[function(require,module,exports){
+},{"../utils/utils":20,"./njHelpers":8,"nornj":"nornj","react":"react","react-addons-update":2}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1307,7 +1274,7 @@ fj.setConfig = function (config) {
 
 exports.default = fj;
 
-},{}],15:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 var _nornj = require('nornj');
@@ -1315,7 +1282,7 @@ var _nornj = require('nornj');
 (0, _nornj.registerTagNamespace)('fj');
 (0, _nornj.setTmplRule)(null, null, '#');
 
-},{"nornj":"nornj"}],16:[function(require,module,exports){
+},{"nornj":"nornj"}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1399,7 +1366,7 @@ var isMobile = exports.isMobile = isAndroid || isIos || isWindowsPhone;
 //Webkit and blink core browser
 var isWebkit = exports.isWebkit = isChrome || isSafari || isAndroid || isIos;
 
-},{}],17:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1453,7 +1420,7 @@ var pageHeight = exports.pageHeight = function pageHeight() {
 //Save initial height of page
 _core2.default.globalHeight = pageHeight();
 
-},{"../core":14}],18:[function(require,module,exports){
+},{"../core":13}],17:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1517,7 +1484,7 @@ var pollDo = exports.pollDo = function pollDo(fn, timeOut, doName, obj) {
   return siv;
 };
 
-},{}],19:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1539,7 +1506,7 @@ var off = exports.off = function off(name, fn, elem) {
   (elem || doc).removeEventListener(name, fn, useCapture);
 };
 
-},{}],20:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1575,7 +1542,7 @@ exports.default = {
   }
 };
 
-},{}],21:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1608,5 +1575,5 @@ babelHelpers.extends(utils, common, browsers, delayOperate, domEvent, _regexp2.d
 
 exports.default = utils;
 
-},{"./browsers":16,"./common":17,"./delayOperate":18,"./domEvent":19,"./regexp":20}]},{},[7]);
+},{"./browsers":15,"./common":16,"./delayOperate":17,"./domEvent":18,"./regexp":19}]},{},[7]);
 return _m(7); });

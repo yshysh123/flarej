@@ -1,6 +1,6 @@
 {
   "name": "flarej",
-  "version": "0.1.1-rc3",
+  "version": "0.1.1-rc4",
   "description": "A responsive ui component library",
   "main": "src/base.js",
   "files": [
@@ -48,6 +48,7 @@
     "gulp-if": "^2.0.0",
     "gulp-jasmine": "^2.2.1",
     "gulp-less": "^3.0.5",
+    "gulp-notify": "^2.2.0",
     "gulp-postcss": "^6.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sequence": "^0.4.4",
