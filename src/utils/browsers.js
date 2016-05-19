@@ -17,7 +17,7 @@ _browser.safari = /webkit/i.test(_ua) && !_browser.chrome;
 _browser.mozilla = /mozilla/i.test(_ua) && !/(compatible|webkit)/.test(_ua) && !_browser.chrome;
 
 //IE
-export const isIE = _browser.ie;
+export const isIE = _browser.ie || !!window.ActiveXObject || "ActiveXObject" in window;
 
 //IE9
 export const isIE9 = isIE && _browser.version == 9.0 && (!_docMode || _docMode == 9) || _docMode == 9;
