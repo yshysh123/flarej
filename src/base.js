@@ -8,7 +8,4 @@ const widgets = { Pagination };
 Object.assign(fj, utils, widgets);
 nj.registerComponent(widgets);
 
-let global = typeof self !== 'undefined' ? self : this;
-global.FlareJ = global.fj = fj;
-
-module.exports = fj;
+export default fj;
