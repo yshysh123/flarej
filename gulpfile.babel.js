@@ -2,7 +2,7 @@
   browserify = require('browserify'),
   source = require('vinyl-source-stream'),
   buffer = require('vinyl-buffer'),
-  dependify = require('dependify'),
+  standalonify = require('standalonify'),
   watchify = require('watchify'),
   babelify = require('babelify'),
   uglify = require('gulp-uglify'),
@@ -54,11 +54,11 @@ function getThemeLibName(themeName) {
 }
 
 var b = browserify({
-  entries: './src/global.js',
+  entries: './src/base.js',
   //standalone: 'FlareJ'
 })
-.plugin(dependify, {  //Build UMD standalone bundle and support dependencies.
-  name: 'FlareJ',
+.plugin(standalonify, {  //Build UMD standalone bundle and support dependencies.
+  name: [libNameSpace, 'FlareJ'],
   deps: {
     'nornj': 'nj',
     'react': 'React',

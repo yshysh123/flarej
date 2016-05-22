@@ -1,5 +1,6 @@
 ﻿import { compileComponent } from 'nornj';
 import Widget from '../widget';
+import utils from '../../utils/utils';
 import tmpl from './template';
 const template = compileComponent(tmpl, 'pagination');
 
@@ -92,7 +93,7 @@ class Pagination extends Widget {
 
   //页数文本框失去焦点
   pageIndexBlur(e) {
-    if(!fj.RegExp.num.test(e.target.value.trim())) {
+    if(!utils.RegExp.num.test(e.target.value.trim())) {
       e.target.value = 1;
     }
   }
@@ -102,16 +103,16 @@ class Pagination extends Widget {
     let props = this.props,
       pageCount = this.getPageCount(pageSize);
 
-    if(this.refs.pageTxt) {
-      this.refs.pageTxt.value = pageIndex;
-    }
-
     //如果当前页大于总页数,则设置总页数为当前页
     if(pageIndex > pageCount) {
       pageIndex = pageCount;
     }
     else if(pageIndex < 1) {
       pageIndex = 1;
+    }
+
+    if(this.refs.pageTxt) {
+      this.refs.pageTxt.value = pageIndex;
     }
 
     this.setState({

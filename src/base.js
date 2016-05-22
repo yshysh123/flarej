@@ -8,4 +8,4 @@ const widgets = { Pagination };
 Object.assign(fj, utils, widgets);
 nj.registerComponent(widgets);
 
-export default fj;
+module.exports = fj;

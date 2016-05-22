@@ -1,9 +1,10 @@
 ﻿import nj, { registerFilter, registerExpr } from 'nornj';
+import utils from '../utils/utils';
 import './pagination/template.helper';
 
 registerFilter({
   fixIconSize: (val) => {
-    return val + (!fj.isWebkit ? ' fj-fixsize' : '');
+    return val + (!utils.isWebkit ? ' fj-fixsize' : '');
   },
   lt: (val1, val2, noEqual) => {
     let ret;
