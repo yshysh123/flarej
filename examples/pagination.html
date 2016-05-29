@@ -15,38 +15,43 @@
   <div>
     <Container class="nj-component">
       <nj-#tmpl>
-        <nj-table class="table">
-          <nj-thead>
-            <nj-tr>
-              <nj-th>#</nj-th>
-              <nj-th>First Name</nj-th>
-              <nj-th>Last Name</nj-th>
-              <nj-th>Username</nj-th>
-            </nj-tr>
-          </nj-thead>
-          <nj-tbody>
-            <nj-#each refer="{data}">
-              <nj-tr>
-                <nj-th scope="row">{no}</nj-th>
-                <nj-td>{firstName}</nj-td>
-                <nj-td>{lastName}</nj-td>
-                <nj-td>{username}</nj-td>
-              </nj-tr>
-            </nj-#each>
-          </nj-tbody>
-        </nj-table>
-        <!--<fj-#each refer="{list}">-->
-        <fj-Pagination set-page-size="true"
-                       page-size="{pageSize}"
-                       page-sizes="{pageSizes}"
-                       count="100"
-                       responsive="true"
-                       responsive-param="{rp}"
-                       show-data-count="true"
-                       show-refresh="true"
-                       on-change="{pagnChange}">
-        </fj-Pagination>
-        <!--</fj-#each>-->
+        <DataGrid>
+          <nj-#tmpl>
+            <nj-table class="table">
+              <nj-thead>
+                <nj-tr>
+                  <nj-th>#</nj-th>
+                  <nj-th>First Name</nj-th>
+                  <nj-th>Last Name</nj-th>
+                  <nj-th>Username</nj-th>
+                </nj-tr>
+              </nj-thead>
+              <nj-tbody>
+                <nj-#each refer="{data}">
+                  <nj-tr>
+                    <nj-th scope="row">{no}</nj-th>
+                    <nj-td>{firstName}</nj-td>
+                    <nj-td>{lastName}</nj-td>
+                    <nj-td>{username}</nj-td>
+                  </nj-tr>
+                </nj-#each>
+              </nj-tbody>
+            </nj-table>
+            <!--<fj-#each refer="{list}">-->
+            <fj-Pagination set-page-size="true"
+                           page-size="{pageSize}"
+                           page-sizes="{pageSizes}"
+                           count="100"
+                           responsive="true"
+                           responsive-param="{rp}"
+                           show-data-count="true"
+                           show-refresh="true"
+                           on-change="{pagnChange}">
+            </fj-Pagination>
+            <!--</fj-#each>-->
+          </nj-#tmpl>
+        </DataGrid>
+        <!--<Text></Text>-->
       </nj-#tmpl>
     </Container>
   </div>
@@ -67,7 +72,25 @@
       }
     });
 
-    nj.registerComponent('Container', React.createClass({
+    nj.registerComponent('Text', React.createClass({
+      getInitialState: function () {
+        return {
+          value: 1
+        };
+      },
+      change: function (e) {
+        this.setState({ value: e.target.value });
+      },
+      render: function () {
+        //console.log('Text_' + Date.now());
+        return nj.compileComponent('<input type="text" value="{value}" onChange="{change}" />', 'Text')({
+          change: this.change,
+          value: this.state.value
+        });
+      }
+    }));
+
+    nj.registerComponent('DataGrid', React.createClass({
       getInitialState: function () {
         return {
           pageSize: 5
@@ -84,11 +107,9 @@
 
         this.setState({ data: data });
       },
-      //template: nj.compileComponent('<div onClick={click}>{tmpl}</div>'),
       render: function () {
+        //console.log('DataGrid_' + Date.now());
         return nj.renderTmplExpr(this.props.tmpls[0], {
-          //return this.template({
-          //tmpl: this.props.tmpls[0],
           data: this.state.data,
           pageSizes: [20, 5, 50],
           pageSize: this.state.pageSize,
@@ -116,7 +137,17 @@
             }
           },
           //list: [0, 1, 2],
-          pagnChange: this.pagnChange,
+          pagnChange: this.pagnChange
+        });
+      }
+    }));
+
+    nj.registerComponent('Container', React.createClass({
+      //template: nj.compileComponent('<div onClick={click}>{tmpl}</div>'),
+      render: function () {
+        return nj.renderTmplExpr(this.props.tmpls[0], {
+          //return this.template({
+          //tmpl: this.props.tmpls[0],
           click: function () {
             this.setState({ pageCount: Date.now() });
           }.bind(this)
