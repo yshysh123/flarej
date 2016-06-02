@@ -8,6 +8,9 @@ registerFilter({
   },
   lt: (val1, val2, noEqual) => {
     let ret;
+    val1 = parseFloat(val1);
+    val2 = parseFloat(val2);
+
     if (noEqual) {
       ret = val1 < val2;
     }
@@ -19,6 +22,9 @@ registerFilter({
   },
   gt: (val1, val2, noEqual) => {
     let ret;
+    val1 = parseFloat(val1);
+    val2 = parseFloat(val2);
+
     if (noEqual) {
       ret = val1 > val2;
     }
@@ -50,5 +56,6 @@ registerExpr({
     }
 
     return ret;
-  }
+  },
+  EmptyElem: () => <div className="fj-empty-elem"></div>
 });

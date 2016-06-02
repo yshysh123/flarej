@@ -21,6 +21,7 @@ class Pagination extends Widget {
     showRefresh: true,
     hasPages: true,                         //是否显示页数链接
     hasBtnGo: true,
+    emptyText: '没有数据',
     responsive: false,
     responsiveDelay: 70,
     responsiveOnlyWidth: true,
@@ -54,8 +55,8 @@ class Pagination extends Widget {
   
   constructor(props) {
     super(props, {
-      pageIndex: props.pageIndex,
-      pageSize: props.pageSize
+      pageIndex: parseInt(props.pageIndex, 10),
+      pageSize: parseInt(props.pageSize, 10)
     });
   }
 
@@ -65,13 +66,33 @@ class Pagination extends Widget {
 
     this.pageSizesChange = this.pageSizesChange.bind(this);
     this.pageIndexBlur = this.pageIndexBlur.bind(this);
+    this.setGoPage = this.setGoPage.bind(this);
     this.goPage = this.goPage.bind(this);
     this.refresh = this.refresh.bind(this);
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.pageIndex !== this.props.pageIndex) {
-      this.setState({ pageIndex: nextProps.pageIndex });
+    let { pageIndex, count } = this.props;
+    pageIndex = parseInt(pageIndex, 10);
+    count = parseInt(count, 10);
+
+    let newState = {},
+      isSetState = false;
+    let indexN = parseInt(nextProps.pageIndex, 10),
+      countN = parseInt(nextProps.count, 10);
+
+    if (indexN !== pageIndex) {
+      isSetState = true;
+      newState.pageIndex = indexN;
+      this.setGoPage(indexN);
+    }
+    if (countN !== count) {
+      isSetState = true;
+      newState.pageCount = this.getPageCount(this.state.pageSize, countN);
+    }
+
+    if(isSetState) {
+      this.setState(newState);
     }
   }
 
@@ -80,9 +101,7 @@ class Pagination extends Widget {
     this.refresh();
   }
 
-  getPageCount(pageSize = this.state.pageSize) {
-    let { count } = this.props;
-
+  getPageCount(pageSize = this.state.pageSize, count = this.props.count) {
     return parseInt(count % pageSize > 0 ? count / pageSize + 1 : count / pageSize, 10);
   }
 
@@ -98,6 +117,13 @@ class Pagination extends Widget {
     }
   }
 
+  //设置跳转页码
+  setGoPage(pageIndex) {
+    if(this.refs.pageTxt) {
+      this.refs.pageTxt.value = pageIndex;
+    }
+  }
+
   //刷新分页
   refresh(pageIndex = this.state.pageIndex, pageSize = this.state.pageSize) {
     let props = this.props,
@@ -107,14 +133,11 @@ class Pagination extends Widget {
     if(pageIndex > pageCount) {
       pageIndex = pageCount;
     }
-    else if(pageIndex < 1) {
+    if(pageIndex < 1) {
       pageIndex = 1;
     }
 
-    if(this.refs.pageTxt) {
-      this.refs.pageTxt.value = pageIndex;
-    }
-
+    this.setGoPage(pageIndex);
     this.setState({
       pageIndex: pageIndex,
       pageSize: pageSize,
