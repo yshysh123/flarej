@@ -738,7 +738,7 @@ _nornj2.default.registerComponent(widgets);
 
 module.exports = _core2.default;
 
-},{"./components/pagination/component":9,"./core":14,"./njConfig":15,"./utils/utils":21,"nornj":"nornj"}],8:[function(require,module,exports){
+},{"./components/pagination/component":9,"./core":14,"./njConfig":15,"./utils/utils":22,"nornj":"nornj"}],8:[function(require,module,exports){
 'use strict';
 
 var _nornj = require('nornj');
@@ -812,7 +812,7 @@ require('./pagination/template.helper');
   }
 });
 
-},{"../utils/utils":21,"./pagination/template.helper":10,"nornj":"nornj"}],9:[function(require,module,exports){
+},{"../utils/utils":22,"./pagination/template.helper":10,"nornj":"nornj"}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1045,7 +1045,7 @@ Pagination.defaultProps = {
 };
 exports.default = Pagination;
 
-},{"../../utils/utils":21,"../widget":13,"./template":11,"nornj":"nornj"}],10:[function(require,module,exports){
+},{"../../utils/utils":22,"../widget":13,"./template":11,"nornj":"nornj"}],10:[function(require,module,exports){
 'use strict';
 
 var _nornj = require('nornj');
@@ -1331,22 +1331,23 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":21,"./njHelpers":8,"nornj":"nornj","react":"react","react-addons-update":2}],14:[function(require,module,exports){
+},{"../utils/utils":22,"./njHelpers":8,"nornj":"nornj","react":"react","react-addons-update":2}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 var fj = {
-    rootPath: '../../flarej/',
-    initTheme: 'concise',
-    ver: null,
-    themeStoreName: 'fj_theme'
-};
+  rootPath: '../../flarej/',
+  initTheme: 'concise',
+  ver: null,
+  themeStoreName: 'fj_theme',
+  GB2312Pinyin: {} };
 
 //Set globel configs
+//Chinese pinyin fonts
 fj.setConfig = function (config) {
-    return babelHelpers.extends(fj, config);
+  return babelHelpers.extends(fj, config);
 };
 
 exports.default = fj;
@@ -1625,6 +1626,165 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _core = require('../core');
+
+var _core2 = babelHelpers.interopRequireDefault(_core);
+
+var _regexp = require('./regexp');
+
+var _regexp2 = babelHelpers.interopRequireDefault(_regexp);
+
+var RegExp = _regexp2.default.RegExp;
+
+//取字符串的第一个字符
+
+var getFirstChar = function getFirstChar(s) {
+  if (s == '') {
+    return '';
+  }
+
+  return (s + '').substr(0, 1);
+};
+
+//取得汉字的拼音
+var getGB2312Pinyin = function getGB2312Pinyin(str, sp) {
+  var i = void 0,
+      l = void 0,
+      t = void 0,
+      p = void 0,
+      ret = '';
+  if (sp == null) {
+    sp = '';
+  }
+
+  var _fj$GB2312Pinyin = _core2.default.GB2312Pinyin;
+  var fonts = _fj$GB2312Pinyin.fonts;
+  var pinyin = _fj$GB2312Pinyin.pinyin;
+
+  for (i = 0, l = str.length; i < l; i++) {
+    if (str.charCodeAt(i) >= 0x4e00) {
+      p = fonts.indexOf(str.charAt(i));
+      if (p > -1 && p < 3755) {
+        for (t = pinyin.length - 1; t > 0; t = t - 2) {
+          if (pinyin[t] <= p) {
+            break;
+          }
+        }
+        if (t > 0) {
+          ret += pinyin[t - 1] + sp;
+        }
+      }
+    }
+  }
+
+  return ret.substr(0, ret.length - sp.length);
+};
+
+//简单值比较算法
+var compare = function compare(x, y) {
+  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
+  var spC = arguments[3];
+  var spC2 = arguments[4];
+  var spV = arguments[5];
+
+  spV = spV != null ? spV : -1;
+  if (spC && !spC2) {
+    //如有禁止排序标记则拍在最低位置
+    return -1;
+  } else if (!spC && spC2) {
+    return 1;
+  } else if (spC && spC2) {
+    return 0;
+  }
+  if (x > y) {
+    return !isAsc ? -1 : 1;
+  } else if (x < y) {
+    return !isAsc ? 1 : -1;
+  } else {
+    return 0;
+  }
+};
+
+//数字比较算法
+var compareNumber = function compareNumber(x, y) {
+  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
+  var spC = arguments[3];
+  var spC2 = arguments[4];
+  var spV = arguments[5];
+
+  var r = /[^d|.|-]/g;
+  x = (x + '').replace(r, '');
+  y = (y + '').replace(r, '');
+  return compare(x * 1, y * 1, isAsc, spC, spC2, spV);
+};
+
+////日期比较算法
+//const compareDate = (x, y, isAsc = true, spC, spC2, spV) => {
+//  var d = '1900-01-01';
+//  var x = FJ.Date.parse(x == '' ? d : x);
+//  var y = FJ.Date.parse(y == '' ? d : y);
+//  var z = x - y;
+
+//  spV = spV != null ? spV : -1;
+//  if (spC && !spC2) {  //如有禁止排序标记则拍在最低位置
+//    return -1;
+//  }
+//  else if (!spC && spC2) {
+//    return 1;
+//  }
+//  else if (spC && spC2) {
+//    return 0;
+//  }
+//  return !isAsc ? z * (-1) : z;
+//};
+
+//英文字符串比较算法
+var compareStringEN = function compareStringEN(x, y) {
+  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
+  var spC = arguments[3];
+  var spC2 = arguments[4];
+  var spV = arguments[5];
+
+  x = getFirstChar(x);
+  y = getFirstChar(y);
+  return compare(x, y, isAsc, spC, spC2, spV);
+};
+
+//中文字符串比较算法
+var compareStringCH = function compareStringCH(x, y) {
+  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
+  var spC = arguments[3];
+  var spC2 = arguments[4];
+  var spV = arguments[5];
+
+  if (_core2.default.GB2312Pinyin.fonts) {
+    //如果第一个字符非中文的则不获取拼音直接用第一个字符比较
+    x = x == '' ? '' : RegExp.chFirst.test(x) ? getGB2312Pinyin(getFirstChar(x)) : getFirstChar(x);
+    y = y == '' ? '' : RegExp.chFirst.test(y) ? getGB2312Pinyin(getFirstChar(y)) : getFirstChar(y);
+    return compare(x, y, isAsc, spC, spC2, spV);
+  } else {
+    return compareStringEN(x, y, isAsc, spC, spC2, spV);
+  }
+};
+
+exports.default = {
+  Sort: {
+    getFirstChar: getFirstChar,
+    getGB2312Pinyin: getGB2312Pinyin,
+    compare: compare,
+    compareNumber: compareNumber,
+    compareStringEN: compareStringEN,
+    compareStringCH: compareStringCH
+  }
+};
+
+},{"../core":14,"./regexp":20}],22:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _common = require('./common');
 
 var common = babelHelpers.interopRequireWildcard(_common);
@@ -1645,11 +1805,15 @@ var _regexp = require('./regexp');
 
 var _regexp2 = babelHelpers.interopRequireDefault(_regexp);
 
+var _sort = require('./sort');
+
+var _sort2 = babelHelpers.interopRequireDefault(_sort);
+
 var utils = {};
 
-babelHelpers.extends(utils, common, browsers, delayOperate, domEvent, _regexp2.default);
+babelHelpers.extends(utils, common, browsers, delayOperate, domEvent, _regexp2.default, _sort2.default);
 
 exports.default = utils;
 
-},{"./browsers":16,"./common":17,"./delayOperate":18,"./domEvent":19,"./regexp":20}]},{},[7]);
+},{"./browsers":16,"./common":17,"./delayOperate":18,"./domEvent":19,"./regexp":20,"./sort":21}]},{},[7]);
 var _r = _m(7);_g.fj = _g.FlareJ = _r;return _r;})})(typeof window!=='undefined' ? window : (typeof global!=='undefined' ? global : (typeof self!=='undefined' ? self : this)));

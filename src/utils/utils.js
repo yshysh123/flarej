@@ -3,6 +3,7 @@ import * as browsers from './browsers';
 import * as delayOperate from './delayOperate';
 import * as domEvent from './domEvent';
 import regExp from './regexp';
+import sort from './sort';
 let utils = {};
 
 Object.assign(
@@ -11,7 +12,8 @@ Object.assign(
   browsers, 
   delayOperate,
   domEvent,
-  regExp
+  regExp,
+  sort
 );
 
 export default utils;
