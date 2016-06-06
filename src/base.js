@@ -2,7 +2,7 @@
 import nj from 'nornj';
 import './njConfig';
 import utils from './utils/utils';
-import Pagination from './components/pagination/component';
+import Pagination from './components/pagination/pagination.comp';
 const widgets = { 'fj-Pagination': Pagination };
 
 Object.assign(fj, utils, widgets);

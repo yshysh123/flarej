@@ -1,7 +1,7 @@
 ﻿import { compileComponent } from 'nornj';
 import Widget from '../widget';
 import utils from '../../utils/utils';
-import tmpl from './template';
+import tmpl from './pagination.tmpl';
 const template = compileComponent(tmpl, 'pagination');
 
 class Pagination extends Widget {

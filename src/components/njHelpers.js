@@ -1,6 +1,6 @@
 ﻿import nj, { registerFilter, registerExpr } from 'nornj';
 import utils from '../utils/utils';
-import './pagination/template.helper';
+import './pagination/pagination.tmplHelper';
 
 registerFilter({
   fixIconSize: (val) => {
