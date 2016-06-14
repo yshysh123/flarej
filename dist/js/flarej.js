@@ -738,7 +738,7 @@ _nornj2.default.registerComponent(widgets);
 
 module.exports = _core2.default;
 
-},{"./components/pagination/pagination.comp":9,"./core":14,"./njConfig":15,"./utils/utils":22,"nornj":"nornj"}],8:[function(require,module,exports){
+},{"./components/pagination/pagination.comp":9,"./core":14,"./njConfig":15,"./utils/utils":23,"nornj":"nornj"}],8:[function(require,module,exports){
 'use strict';
 
 var _nornj = require('nornj');
@@ -812,7 +812,7 @@ require('./pagination/pagination.tmplHelper');
   }
 });
 
-},{"../utils/utils":22,"./pagination/pagination.tmplHelper":12,"nornj":"nornj"}],9:[function(require,module,exports){
+},{"../utils/utils":23,"./pagination/pagination.tmplHelper":12,"nornj":"nornj"}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1045,7 +1045,7 @@ Pagination.defaultProps = {
 };
 exports.default = Pagination;
 
-},{"../../utils/utils":22,"../widget":13,"./pagination.tmpl":10,"nornj":"nornj"}],10:[function(require,module,exports){
+},{"../../utils/utils":23,"../widget":13,"./pagination.tmpl":10,"nornj":"nornj"}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1331,7 +1331,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":22,"./njHelpers":8,"nornj":"nornj","react":"react","react-addons-update":2}],14:[function(require,module,exports){
+},{"../utils/utils":23,"./njHelpers":8,"nornj":"nornj","react":"react","react-addons-update":2}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1589,6 +1589,80 @@ var off = exports.off = function off(name, fn, elem) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+//千分位转换
+var outputMoney = function outputMoney(number, bit) {
+  var numO = number; //保存原先值
+
+  try {
+    if (bit == null) {
+      bit = 2;
+    }
+
+    if (isNaN(number) || number == "") {
+      return "0";
+    }
+    number = number.toFixed(bit);
+    if (number < 0) {
+      return '-' + FJ.Math.outputDollars(Math.floor(Math.abs(number) - 0) + '') + FJ.Math.outputCents(Math.abs(number) - 0, bit);
+    } else {
+      return FJ.Math.outputDollars(Math.floor(number - 0) + '') + FJ.Math.outputCents(number - 0, bit);
+    }
+  } catch (e) {
+    //出现异常时返回原先值
+    return numO;
+  }
+};
+
+var outputDollars = function outputDollars(number) {
+  if (number.length <= 3) {
+    return number == '' ? '0' : number;
+  } else {
+    var mod = number.length % 3;
+    var output = mod == 0 ? '' : number.substring(0, mod);
+    for (i = 0; i < Math.floor(number.length / 3); i++) {
+      if (mod == 0 && i == 0) output += number.substring(mod + 3 * i, mod + 3 * i + 3);else output += ',' + number.substring(mod + 3 * i, mod + 3 * i + 3);
+    }
+    return output;
+  }
+};
+
+var outputCents = function outputCents(amount, bit) {
+  if (bit != null) {
+    amount = amount.toFixed(bit);
+  } else {
+    bit = 2;
+  }
+
+  if (bit > 0) {
+    amount = (amount + "").match(/\.\d*$/g); //截取小数点及小数部分
+    //amount = (amount + "").replace(/0+?$/g, "");  //去除小数点后多余的0
+  } else {
+      amount = "";
+    }
+
+  return amount;
+};
+
+//在1位数字前补零
+var addZero = function addZero(n) {
+  return ("00" + n).substr(("00" + n).length - 2);
+};
+
+exports.default = {
+  Math: {
+    outputMoney: outputMoney,
+    outputDollars: outputDollars,
+    outputCents: outputCents,
+    addZero: addZero
+  }
+};
+
+},{}],21:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.default = {
   RegExp: { //常用正则表达式
     num: /^\+?[1-9][0-9]*$/, //大于0的整数
@@ -1619,7 +1693,7 @@ exports.default = {
   }
 };
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1778,7 +1852,7 @@ exports.default = {
   }
 };
 
-},{"../core":14,"./regexp":20}],22:[function(require,module,exports){
+},{"../core":14,"./regexp":21}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1809,11 +1883,15 @@ var _sort = require('./sort');
 
 var _sort2 = babelHelpers.interopRequireDefault(_sort);
 
+var _math = require('./math');
+
+var _math2 = babelHelpers.interopRequireDefault(_math);
+
 var utils = {};
 
-babelHelpers.extends(utils, common, browsers, delayOperate, domEvent, _regexp2.default, _sort2.default);
+babelHelpers.extends(utils, common, browsers, delayOperate, domEvent, _regexp2.default, _sort2.default, _math2.default);
 
 exports.default = utils;
 
-},{"./browsers":16,"./common":17,"./delayOperate":18,"./domEvent":19,"./regexp":20,"./sort":21}]},{},[7]);
+},{"./browsers":16,"./common":17,"./delayOperate":18,"./domEvent":19,"./math":20,"./regexp":21,"./sort":22}]},{},[7]);
 var _r = _m(7);_g.fj = _g.FlareJ = _r;return _r;})})(typeof window!=='undefined' ? window : (typeof global!=='undefined' ? global : (typeof self!=='undefined' ? self : this)));

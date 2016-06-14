@@ -4,6 +4,7 @@ import * as delayOperate from './delayOperate';
 import * as domEvent from './domEvent';
 import regExp from './regexp';
 import sort from './sort';
+import math from './math';
 let utils = {};
 
 Object.assign(
@@ -13,7 +14,8 @@ Object.assign(
   delayOperate,
   domEvent,
   regExp,
-  sort
+  sort,
+  math
 );
 
 export default utils;
