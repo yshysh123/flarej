@@ -28,7 +28,7 @@ var libNameSpace = 'fj';
 
 function getJsLibName() {
   var libName = 'flarej.js';
-  if (argv.min) {
+  if (argv.p) {
     libName = 'flarej.min.js';
   }
 
@@ -37,7 +37,7 @@ function getJsLibName() {
 
 function getCssLibName() {
   var libName = 'flarej.css';
-  if (argv.min) {
+  if (argv.p) {
     libName = 'flarej.min.css';
   }
 
@@ -46,7 +46,7 @@ function getCssLibName() {
 
 function getThemeLibName(themeName) {
   var libName = 'flarej.theme.' + themeName + '.css';
-  if (argv.min) {
+  if (argv.p) {
     libName = 'flarej.theme.' + themeName + '.min.css';
   }
 
@@ -115,7 +115,7 @@ function bundle() {
     .pipe(gulp.dest('./dist/js').on('end', function () {
       gulp.src(['./vendor/babelHelpers.js', './dist/js/' + jsLibName])
         .pipe(concat(jsLibName))
-        .pipe(gulpif(argv.min, uglify()))
+        .pipe(gulpif(argv.p, uglify()))
         .pipe(gulp.dest('./dist/js').on('end', function () {
           isBundling = false;
         }))
@@ -172,7 +172,7 @@ gulp.task('build-css', function () {
     .pipe(gulp.dest('./dist/css').on('end', function () {
       gulp.src(['./vendor/normalize.css', './dist/css/' + cssLibName])
         .pipe(concat(cssLibName))
-        .pipe(gulpif(argv.min, cssnano()))
+        .pipe(gulpif(argv.p, cssnano()))
         .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
         .pipe(gulp.dest('./dist/css').on('end', function () {
           isBuildingCss = false;
@@ -195,7 +195,7 @@ gulp.task('build-theme', function () {
         }))
         .pipe(less())
         .pipe(rename(themeLibName))
-        .pipe(gulpif(argv.min, cssnano()))
+        .pipe(gulpif(argv.p, cssnano()))
         .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
         .pipe(gulp.dest('./dist/css/theme').on('end', function () {
           isBuildingTheme = false;

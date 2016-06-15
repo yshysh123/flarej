@@ -1,6 +1,6 @@
 ﻿import fj from '../core';
-import regExp from './regexp';
-const { RegExp } = regExp;
+import { RegExp } from './regexp';
+import { Date } from './date';
 
 //取字符串的第一个字符
 const getFirstChar = (s) => {
@@ -69,25 +69,25 @@ const compareNumber = (x, y, isAsc = true, spC, spC2, spV) => {
   return compare(x * 1, y * 1, isAsc, spC, spC2, spV);
 };
 
-////日期比较算法
-//const compareDate = (x, y, isAsc = true, spC, spC2, spV) => {
-//  var d = '1900-01-01';
-//  var x = FJ.Date.parse(x == '' ? d : x);
-//  var y = FJ.Date.parse(y == '' ? d : y);
-//  var z = x - y;
+//日期比较算法
+const compareDate = (x, y, isAsc = true, spC, spC2, spV) => {
+  let d = '1900-01-01';
+  x = Date.parse(x == '' ? d : x);
+  y = Date.parse(y == '' ? d : y);
+  let z = x - y;
 
-//  spV = spV != null ? spV : -1;
-//  if (spC && !spC2) {  //如有禁止排序标记则拍在最低位置
-//    return -1;
-//  }
-//  else if (!spC && spC2) {
-//    return 1;
-//  }
-//  else if (spC && spC2) {
-//    return 0;
-//  }
-//  return !isAsc ? z * (-1) : z;
-//};
+  spV = spV != null ? spV : -1;
+  if (spC && !spC2) {  //如有禁止排序标记则拍在最低位置
+    return -1;
+  }
+  else if (!spC && spC2) {
+    return 1;
+  }
+  else if (spC && spC2) {
+    return 0;
+  }
+  return !isAsc ? z * (-1) : z;
+};
 
 //英文字符串比较算法
 const compareStringEN = (x, y, isAsc = true, spC, spC2, spV) => {
@@ -108,13 +108,16 @@ const compareStringCH = (x, y, isAsc = true, spC, spC2, spV) => {
   }
 };
 
-export default {
-  Sort: {
-    getFirstChar,
-    getGB2312Pinyin,
-    compare,
-    compareNumber,
-    compareStringEN,
-    compareStringCH
-  }
+const Sort = {
+  getFirstChar,
+  getGB2312Pinyin,
+  compare,
+  compareNumber,
+  compareDate,
+  compareStringEN,
+  compareStringCH
+};
+
+export {
+  Sort
 };

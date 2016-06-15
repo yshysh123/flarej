@@ -470,8 +470,49 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],2:[function(require,module,exports){
+/* eslint-disable no-unused-vars */
+'use strict';
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (Object.getOwnPropertySymbols) {
+			symbols = Object.getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+},{}],3:[function(require,module,exports){
 module.exports = require('react/lib/update');
-},{"react/lib/update":3}],3:[function(require,module,exports){
+},{"react/lib/update":4}],4:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -582,7 +623,7 @@ function update(value, spec) {
 
 module.exports = update;
 }).call(this,require('_process'))
-},{"_process":1,"fbjs/lib/invariant":4,"fbjs/lib/keyOf":5,"object-assign":6}],4:[function(require,module,exports){
+},{"_process":1,"fbjs/lib/invariant":5,"fbjs/lib/keyOf":6,"object-assign":2}],5:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -634,7 +675,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":1}],5:[function(require,module,exports){
+},{"_process":1}],6:[function(require,module,exports){
 "use strict";
 
 /**
@@ -669,47 +710,6 @@ var keyOf = function (oneKeyObj) {
 };
 
 module.exports = keyOf;
-},{}],6:[function(require,module,exports){
-/* eslint-disable no-unused-vars */
-'use strict';
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-module.exports = Object.assign || function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (Object.getOwnPropertySymbols) {
-			symbols = Object.getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
 },{}],7:[function(require,module,exports){
 'use strict';
 
@@ -738,7 +738,7 @@ _nornj2.default.registerComponent(widgets);
 
 module.exports = _core2.default;
 
-},{"./components/pagination/pagination.comp":9,"./core":14,"./njConfig":15,"./utils/utils":23,"nornj":"nornj"}],8:[function(require,module,exports){
+},{"./components/pagination/pagination.comp":9,"./core":14,"./njConfig":15,"./utils/utils":24,"nornj":"nornj"}],8:[function(require,module,exports){
 'use strict';
 
 var _nornj = require('nornj');
@@ -812,7 +812,7 @@ require('./pagination/pagination.tmplHelper');
   }
 });
 
-},{"../utils/utils":23,"./pagination/pagination.tmplHelper":12,"nornj":"nornj"}],9:[function(require,module,exports){
+},{"../utils/utils":24,"./pagination/pagination.tmplHelper":12,"nornj":"nornj"}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1045,7 +1045,7 @@ Pagination.defaultProps = {
 };
 exports.default = Pagination;
 
-},{"../../utils/utils":23,"../widget":13,"./pagination.tmpl":10,"nornj":"nornj"}],10:[function(require,module,exports){
+},{"../../utils/utils":24,"../widget":13,"./pagination.tmpl":10,"nornj":"nornj"}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1331,7 +1331,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":23,"./njHelpers":8,"nornj":"nornj","react":"react","react-addons-update":2}],14:[function(require,module,exports){
+},{"../utils/utils":24,"./njHelpers":8,"nornj":"nornj","react":"react","react-addons-update":3}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1498,6 +1498,137 @@ var pageHeight = exports.pageHeight = function pageHeight() {
 _core2.default.globalHeight = pageHeight();
 
 },{"../core":14}],18:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Date = undefined;
+
+var _math = require('./math');
+
+//日期转换
+var parse = function parse(s) {
+  var t = s.replace(/-/g, '/').replace(/T/g, ' ');
+  var iDot = t.indexOf('.');
+  if (iDot != -1) {
+    t = t.substr(0, iDot);
+  }
+
+  return new Date(t);
+};
+
+//日期比较
+var dateDiff = function dateDiff(sDate1, sDate2, returnType, useAbs) {
+  var aDate = void 0,
+      aDate1 = void 0,
+      aDate2 = void 0,
+      oDate1 = void 0,
+      oDate2 = void 0,
+      days = void 0,
+      iDays = void 0;
+
+  if ((typeof sDate1 === 'undefined' ? 'undefined' : babelHelpers.typeof(sDate1)) != 'object') {
+    if (sDate1.indexOf(' ') != -1) {
+      aDate = sDate1.split(' ');
+      aDate1 = aDate[0].split('-');
+      aDate2 = aDate[1].split(':');
+      oDate1 = new Date(aDate1[0], aDate1[1] - 1, aDate1[2], aDate2[0], aDate2[1], aDate2[2]);
+    } else {
+      aDate1 = sDate1.split('-');
+      oDate1 = new Date(aDate1[0], aDate1[1] - 1, aDate1[2]);
+    }
+  } else {
+    oDate1 = sDate1;
+  }
+
+  if ((typeof sDate2 === 'undefined' ? 'undefined' : babelHelpers.typeof(sDate2)) != 'object') {
+    if (sDate2.indexOf(' ') != -1) {
+      aDate = sDate2.split(' ');
+      aDate1 = aDate[0].split('-');
+      aDate2 = aDate[1].split(':');
+      oDate2 = new Date(aDate1[0], aDate1[1] - 1, aDate1[2], aDate2[0], aDate2[1], aDate2[2]);
+    } else {
+      aDate1 = sDate2.split('-');
+      oDate2 = new Date(aDate1[0], aDate1[1] - 1, aDate1[2]);
+    }
+  } else {
+    oDate2 = sDate2;
+  }
+
+  days = oDate1 - oDate2; //计算日期差值
+  if (useAbs) {
+    //取绝对值
+    days = _math.Math.abs(days);
+  }
+
+  //把相差的毫秒数转换为日期数值
+  switch (returnType) {
+    case 'h':
+      //小时
+      iDays = parseInt(days / 1000 / 60 / 60, 10);
+      break;
+    case 'm':
+      //分钟
+      iDays = parseInt(days / 1000 / 60, 10);
+      break;
+    case 's':
+      //秒
+      iDays = parseInt(days / 1000, 10);
+      break;
+    case 'ms':
+      //毫秒
+      iDays = days;
+      break;
+    default:
+      //天
+      iDays = parseInt(days / 1000 / 60 / 60 / 24, 10);
+      break;
+  }
+
+  return iDays;
+};
+
+//日期格式化
+var toFormatString = function toFormatString(date, fs, noAddZero) {
+  if (fs.length == 1) {
+    return date.getFullYear() + fs + (date.getMonth() + 1) + fs + date.getDate();
+  }
+  fs = fs.replace('yyyy', date.getFullYear());
+  fs = fs.replace('mm', noAddZero ? date.getMonth() + 1 : _math.Math.addZero(date.getMonth() + 1));
+  fs = fs.replace('dd', noAddZero ? date.getDate() : _math.Math.addZero(date.getDate()));
+  fs = fs.replace('hh', noAddZero ? date.getHours() : _math.Math.addZero(date.getHours()));
+  fs = fs.replace('MM', noAddZero ? date.getMinutes() : _math.Math.addZero(date.getMinutes()));
+  fs = fs.replace('ss', noAddZero ? date.getSeconds() : _math.Math.addZero(date.getSeconds()));
+  return fs;
+};
+
+//获取某些天后的日期
+var GetDateStr = function GetDateStr(addDays, addDays2, joinTxt, fs) {
+  var dd = new Date(),
+      d1 = void 0,
+      d2 = '';
+  dd.setDate(dd.getDate() + addDays);
+  d1 = toFormatString(dd, fs != null ? fs : 'yyyy-mm-dd');
+  if (addDays2 != null) {
+    //第二个日期
+    var dd2 = new Date();
+    dd2.setDate(dd2.getDate() + addDays2);
+    d2 = toFormatString(dd2, fs != null ? fs : 'yyyy-mm-dd');
+  }
+  return d1 + (joinTxt != null ? joinTxt : '') + d2;
+};
+
+var Date = {
+  parse: parse,
+  dateDiff: dateDiff,
+  toFormatString: toFormatString,
+  GetDateStr: GetDateStr
+};
+
+exports.Date = Date;
+
+},{"./math":21}],19:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1561,7 +1692,7 @@ var pollDo = exports.pollDo = function pollDo(fn, timeOut, doName, obj) {
   return siv;
 };
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1583,29 +1714,27 @@ var off = exports.off = function off(name, fn, elem) {
   (elem || doc).removeEventListener(name, fn, useCapture);
 };
 
-},{}],20:[function(require,module,exports){
-"use strict";
+},{}],21:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 //千分位转换
-var outputMoney = function outputMoney(number, bit) {
+var outputMoney = function outputMoney(number) {
+  var bit = arguments.length <= 1 || arguments[1] === undefined ? 2 : arguments[1];
+
   var numO = number; //保存原先值
+  if (isNaN(number) || number == '') {
+    return '0';
+  }
 
+  number = number.toFixed(bit);
   try {
-    if (bit == null) {
-      bit = 2;
-    }
-
-    if (isNaN(number) || number == "") {
-      return "0";
-    }
-    number = number.toFixed(bit);
     if (number < 0) {
-      return '-' + FJ.Math.outputDollars(Math.floor(Math.abs(number) - 0) + '') + FJ.Math.outputCents(Math.abs(number) - 0, bit);
+      return '-' + outputDollars(Math.floor(Math.abs(number) - 0) + '') + outputCents(Math.abs(number) - 0, bit);
     } else {
-      return FJ.Math.outputDollars(Math.floor(number - 0) + '') + FJ.Math.outputCents(number - 0, bit);
+      return outputDollars(Math.floor(number - 0) + '') + outputCents(number - 0, bit);
     }
   } catch (e) {
     //出现异常时返回原先值
@@ -1619,9 +1748,14 @@ var outputDollars = function outputDollars(number) {
   } else {
     var mod = number.length % 3;
     var output = mod == 0 ? '' : number.substring(0, mod);
-    for (i = 0; i < Math.floor(number.length / 3); i++) {
-      if (mod == 0 && i == 0) output += number.substring(mod + 3 * i, mod + 3 * i + 3);else output += ',' + number.substring(mod + 3 * i, mod + 3 * i + 3);
+    for (var i = 0, l = Math.floor(number.length / 3); i < l; i++) {
+      if (mod == 0 && i == 0) {
+        output += number.substring(mod + 3 * i, mod + 3 * i + 3);
+      } else {
+        output += ',' + number.substring(mod + 3 * i, mod + 3 * i + 3);
+      }
     }
+
     return output;
   }
 };
@@ -1634,10 +1768,10 @@ var outputCents = function outputCents(amount, bit) {
   }
 
   if (bit > 0) {
-    amount = (amount + "").match(/\.\d*$/g); //截取小数点及小数部分
-    //amount = (amount + "").replace(/0+?$/g, "");  //去除小数点后多余的0
+    amount = (amount + '').match(/\.\d*$/g); //截取小数点及小数部分
+    //amount = (amount + '').replace(/0+?$/g, '');  //去除小数点后多余的0
   } else {
-      amount = "";
+      amount = '';
     }
 
   return amount;
@@ -1645,60 +1779,61 @@ var outputCents = function outputCents(amount, bit) {
 
 //在1位数字前补零
 var addZero = function addZero(n) {
-  return ("00" + n).substr(("00" + n).length - 2);
+  return ('00' + n).substr(('00' + n).length - 2);
 };
 
-exports.default = {
-  Math: {
-    outputMoney: outputMoney,
-    outputDollars: outputDollars,
-    outputCents: outputCents,
-    addZero: addZero
-  }
+var Math = {
+  outputMoney: outputMoney,
+  outputDollars: outputDollars,
+  outputCents: outputCents,
+  addZero: addZero
 };
 
-},{}],21:[function(require,module,exports){
+exports.Math = Math;
+
+},{}],22:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = {
-  RegExp: { //常用正则表达式
-    num: /^\+?[1-9][0-9]*$/, //大于0的整数
-    numZ: /^\+?[0-9][0-9]*$/, //正整数(包含0)
-    numZ2: /^-?[0-9][0-9]*$/, //整数(包含0、负数)
-    numF: /^-?([0-9][0-9]*)(\.\d{1,2})?$/, //数字(包含负数、0,最多两位小数)
-    numF2: /^([0-9][0-9]*)(\.\d{1,2})?$/, //数字(不含负数,最多两位小数)
-    numD: /^-?([0-9][0-9]*)(\.\d{1,10})?$/, //数字(包含负数、0,最多10位小数)
-    numD2: /^(([0-9]+[\.]?[0-9]+)|[1-9])$/, //数字(不含负数和0,无限位小数)
-    numD3: /^(([0-9]+[\.]?[0-9]+)|[0-9])$/, //数字(不含负数,无限位小数)
-    num0_100: /^(?:0|[1-9][0-9]?|100)$/, //0-100内整数
-    num0_1: /^[01]$|^0\.\d{1,2}$|^1\.0{1,2}$/, //0-1之间小数(最多两位),包含0、1
-    post: /^\d{6}$/, //邮编
-    phone: /^(((\()?\d{2,4}(\))?[-(\s)*]){0,2})?(\d{7,8})$/, //固定电话(区号部分为2-4位数字,外面可以加括号,后面可以加斜杠或空格,可重复1-2次;电话号码部分为7-8位)
-    mobile: /^[1][3,5,8][0-9]{9}$/, //手机号
-    email: /^[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@(([0-9a-zA-Z])+([-\w]*[0-9a-zA-Z])*\.)+[a-zA-Z]{2,9}$/, //Email(@前面不能以点为结尾)
-    date: /^\d{4}-\d{2}-\d{2}$/, //日期是否yyyy-MM-dd格式
-    time: /^\d{2}:\d{2}:\d{2}$/, //时间是否hh:mm:ss格式
-    datetime: /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/, //日期时间是否yyyy-MM-dd hh:mm:ss格式
-    datetimeO: /^\d{4}-\d{2}-\d{2}( \d{2}:\d{2}:\d{2})?$/, //是否date或datetime格式
-    pass: /^[0-9a-zA-Z]{6,16}$/, //密码格式是否由字母和数字组成,长度为6-16位
-    user: /^[a-zA-Z][a-zA-Z0-9_\u4E00-\u9FA5]{3,15}$/, //用户名格式是否由字母、数字、中文和下划线组成,以字母开头,长度为4-16位
-    ip: /^((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)(\.((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)){3}(:(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}))?$/, //IP格式为xxx.xxx.xxx.xxx或xxx.xxx.xxx.xxx:端口号,xxx的值必须是0-255,端口号的值必须是1-65535
-    cardId: /^(\d{18,18}|\d{15,15}|\d{17,17}x)$/i, //身份证
-    enFirst: /^[a-zA-Z][\s\S]*$/, //英文开头
-    chFirst: /^[\u4E00-\u9FA5][\s\S]*$/, //中文开头
-    percent: /^\+?(([1-9]\d?)|(100)|(0))\%$/ //百分数(0%-100%)
-  }
+var RegExp = { //常用正则表达式
+  num: /^\+?[1-9][0-9]*$/, //大于0的整数
+  numZ: /^\+?[0-9][0-9]*$/, //正整数(包含0)
+  numZ2: /^-?[0-9][0-9]*$/, //整数(包含0、负数)
+  numF: /^-?([0-9][0-9]*)(\.\d{1,2})?$/, //数字(包含负数、0,最多两位小数)
+  numF2: /^([0-9][0-9]*)(\.\d{1,2})?$/, //数字(不含负数,最多两位小数)
+  numD: /^-?([0-9][0-9]*)(\.\d{1,10})?$/, //数字(包含负数、0,最多10位小数)
+  numD2: /^(([0-9]+[\.]?[0-9]+)|[1-9])$/, //数字(不含负数和0,无限位小数)
+  numD3: /^(([0-9]+[\.]?[0-9]+)|[0-9])$/, //数字(不含负数,无限位小数)
+  num0_100: /^(?:0|[1-9][0-9]?|100)$/, //0-100内整数
+  num0_1: /^[01]$|^0\.\d{1,2}$|^1\.0{1,2}$/, //0-1之间小数(最多两位),包含0、1
+  post: /^\d{6}$/, //邮编
+  phone: /^(((\()?\d{2,4}(\))?[-(\s)*]){0,2})?(\d{7,8})$/, //固定电话(区号部分为2-4位数字,外面可以加括号,后面可以加斜杠或空格,可重复1-2次;电话号码部分为7-8位)
+  mobile: /^[1][3,5,8][0-9]{9}$/, //手机号
+  email: /^[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@(([0-9a-zA-Z])+([-\w]*[0-9a-zA-Z])*\.)+[a-zA-Z]{2,9}$/, //Email(@前面不能以点为结尾)
+  date: /^\d{4}-\d{2}-\d{2}$/, //日期是否yyyy-MM-dd格式
+  time: /^\d{2}:\d{2}:\d{2}$/, //时间是否hh:mm:ss格式
+  datetime: /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/, //日期时间是否yyyy-MM-dd hh:mm:ss格式
+  datetimeO: /^\d{4}-\d{2}-\d{2}( \d{2}:\d{2}:\d{2})?$/, //是否date或datetime格式
+  pass: /^[0-9a-zA-Z]{6,16}$/, //密码格式是否由字母和数字组成,长度为6-16位
+  user: /^[a-zA-Z][a-zA-Z0-9_\u4E00-\u9FA5]{3,15}$/, //用户名格式是否由字母、数字、中文和下划线组成,以字母开头,长度为4-16位
+  ip: /^((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)(\.((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)){3}(:(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}))?$/, //IP格式为xxx.xxx.xxx.xxx或xxx.xxx.xxx.xxx:端口号,xxx的值必须是0-255,端口号的值必须是1-65535
+  cardId: /^(\d{18,18}|\d{15,15}|\d{17,17}x)$/i, //身份证
+  enFirst: /^[a-zA-Z][\s\S]*$/, //英文开头
+  chFirst: /^[\u4E00-\u9FA5][\s\S]*$/, //中文开头
+  percent: /^\+?(([1-9]\d?)|(100)|(0))\%$/ //百分数(0%-100%)
 };
 
-},{}],22:[function(require,module,exports){
+exports.RegExp = RegExp;
+
+},{}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.Sort = undefined;
 
 var _core = require('../core');
 
@@ -1706,12 +1841,9 @@ var _core2 = babelHelpers.interopRequireDefault(_core);
 
 var _regexp = require('./regexp');
 
-var _regexp2 = babelHelpers.interopRequireDefault(_regexp);
-
-var RegExp = _regexp2.default.RegExp;
+var _date = require('./date');
 
 //取字符串的第一个字符
-
 var getFirstChar = function getFirstChar(s) {
   if (s == '') {
     return '';
@@ -1792,25 +1924,29 @@ var compareNumber = function compareNumber(x, y) {
   return compare(x * 1, y * 1, isAsc, spC, spC2, spV);
 };
 
-////日期比较算法
-//const compareDate = (x, y, isAsc = true, spC, spC2, spV) => {
-//  var d = '1900-01-01';
-//  var x = FJ.Date.parse(x == '' ? d : x);
-//  var y = FJ.Date.parse(y == '' ? d : y);
-//  var z = x - y;
+//日期比较算法
+var compareDate = function compareDate(x, y) {
+  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
+  var spC = arguments[3];
+  var spC2 = arguments[4];
+  var spV = arguments[5];
 
-//  spV = spV != null ? spV : -1;
-//  if (spC && !spC2) {  //如有禁止排序标记则拍在最低位置
-//    return -1;
-//  }
-//  else if (!spC && spC2) {
-//    return 1;
-//  }
-//  else if (spC && spC2) {
-//    return 0;
-//  }
-//  return !isAsc ? z * (-1) : z;
-//};
+  var d = '1900-01-01';
+  x = _date.Date.parse(x == '' ? d : x);
+  y = _date.Date.parse(y == '' ? d : y);
+  var z = x - y;
+
+  spV = spV != null ? spV : -1;
+  if (spC && !spC2) {
+    //如有禁止排序标记则拍在最低位置
+    return -1;
+  } else if (!spC && spC2) {
+    return 1;
+  } else if (spC && spC2) {
+    return 0;
+  }
+  return !isAsc ? z * -1 : z;
+};
 
 //英文字符串比较算法
 var compareStringEN = function compareStringEN(x, y) {
@@ -1833,26 +1969,27 @@ var compareStringCH = function compareStringCH(x, y) {
 
   if (_core2.default.GB2312Pinyin.fonts) {
     //如果第一个字符非中文的则不获取拼音直接用第一个字符比较
-    x = x == '' ? '' : RegExp.chFirst.test(x) ? getGB2312Pinyin(getFirstChar(x)) : getFirstChar(x);
-    y = y == '' ? '' : RegExp.chFirst.test(y) ? getGB2312Pinyin(getFirstChar(y)) : getFirstChar(y);
+    x = x == '' ? '' : _regexp.RegExp.chFirst.test(x) ? getGB2312Pinyin(getFirstChar(x)) : getFirstChar(x);
+    y = y == '' ? '' : _regexp.RegExp.chFirst.test(y) ? getGB2312Pinyin(getFirstChar(y)) : getFirstChar(y);
     return compare(x, y, isAsc, spC, spC2, spV);
   } else {
     return compareStringEN(x, y, isAsc, spC, spC2, spV);
   }
 };
 
-exports.default = {
-  Sort: {
-    getFirstChar: getFirstChar,
-    getGB2312Pinyin: getGB2312Pinyin,
-    compare: compare,
-    compareNumber: compareNumber,
-    compareStringEN: compareStringEN,
-    compareStringCH: compareStringCH
-  }
+var Sort = {
+  getFirstChar: getFirstChar,
+  getGB2312Pinyin: getGB2312Pinyin,
+  compare: compare,
+  compareNumber: compareNumber,
+  compareDate: compareDate,
+  compareStringEN: compareStringEN,
+  compareStringCH: compareStringCH
 };
 
-},{"../core":14,"./regexp":21}],23:[function(require,module,exports){
+exports.Sort = Sort;
+
+},{"../core":14,"./date":18,"./regexp":22}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1877,21 +2014,25 @@ var domEvent = babelHelpers.interopRequireWildcard(_domEvent);
 
 var _regexp = require('./regexp');
 
-var _regexp2 = babelHelpers.interopRequireDefault(_regexp);
+var regExp = babelHelpers.interopRequireWildcard(_regexp);
 
 var _sort = require('./sort');
 
-var _sort2 = babelHelpers.interopRequireDefault(_sort);
+var sort = babelHelpers.interopRequireWildcard(_sort);
 
 var _math = require('./math');
 
-var _math2 = babelHelpers.interopRequireDefault(_math);
+var math = babelHelpers.interopRequireWildcard(_math);
+
+var _date = require('./date');
+
+var date = babelHelpers.interopRequireWildcard(_date);
 
 var utils = {};
 
-babelHelpers.extends(utils, common, browsers, delayOperate, domEvent, _regexp2.default, _sort2.default, _math2.default);
+babelHelpers.extends(utils, common, browsers, delayOperate, domEvent, regExp, sort, math, date);
 
 exports.default = utils;
 
-},{"./browsers":16,"./common":17,"./delayOperate":18,"./domEvent":19,"./math":20,"./regexp":21,"./sort":22}]},{},[7]);
+},{"./browsers":16,"./common":17,"./date":18,"./delayOperate":19,"./domEvent":20,"./math":21,"./regexp":22,"./sort":23}]},{},[7]);
 var _r = _m(7);_g.fj = _g.FlareJ = _r;return _r;})})(typeof window!=='undefined' ? window : (typeof global!=='undefined' ? global : (typeof self!=='undefined' ? self : this)));
