@@ -63,13 +63,9 @@ const addZero = (n) => {
   return (('00' + n).substr(('00' + n).length - 2));
 };
 
-const Math = {
+export {
   outputMoney,
   outputDollars,
   outputCents,
   addZero
-};
-
-export {
-  Math
 };

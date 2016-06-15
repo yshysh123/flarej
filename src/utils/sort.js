@@ -1,6 +1,6 @@
 ﻿import fj from '../core';
-import { RegExp } from './regexp';
-import { Date } from './date';
+import * as regExp from './regexp';
+import * as date from './date';
 
 //取字符串的第一个字符
 const getFirstChar = (s) => {
@@ -72,8 +72,8 @@ const compareNumber = (x, y, isAsc = true, spC, spC2, spV) => {
 //日期比较算法
 const compareDate = (x, y, isAsc = true, spC, spC2, spV) => {
   let d = '1900-01-01';
-  x = Date.parse(x == '' ? d : x);
-  y = Date.parse(y == '' ? d : y);
+  x = date.parse(x == '' ? d : x);
+  y = date.parse(y == '' ? d : y);
   let z = x - y;
 
   spV = spV != null ? spV : -1;
@@ -99,8 +99,8 @@ const compareStringEN = (x, y, isAsc = true, spC, spC2, spV) => {
 //中文字符串比较算法
 const compareStringCH = (x, y, isAsc = true, spC, spC2, spV) => {
   if (fj.GB2312Pinyin.fonts) {  //如果第一个字符非中文的则不获取拼音直接用第一个字符比较
-    x = x == '' ? '' : RegExp.chFirst.test(x) ? getGB2312Pinyin(getFirstChar(x)) : getFirstChar(x);
-    y = y == '' ? '' : RegExp.chFirst.test(y) ? getGB2312Pinyin(getFirstChar(y)) : getFirstChar(y);
+    x = x == '' ? '' : regExp.chFirst.test(x) ? getGB2312Pinyin(getFirstChar(x)) : getFirstChar(x);
+    y = y == '' ? '' : regExp.chFirst.test(y) ? getGB2312Pinyin(getFirstChar(y)) : getFirstChar(y);
     return compare(x, y, isAsc, spC, spC2, spV);
   }
   else {
@@ -108,7 +108,7 @@ const compareStringCH = (x, y, isAsc = true, spC, spC2, spV) => {
   }
 };
 
-const Sort = {
+export {
   getFirstChar,
   getGB2312Pinyin,
   compare,
@@ -116,8 +116,4 @@ const Sort = {
   compareDate,
   compareStringEN,
   compareStringCH
-};
-
-export {
-  Sort
 };

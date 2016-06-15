@@ -14,10 +14,10 @@ Object.assign(
   browsers, 
   delayOperate,
   domEvent,
-  regExp,
-  sort,
-  math,
-  date
+  { RegExp: regExp },
+  { Sort: sort },
+  { Math: math },
+  { Date: date }
 );
 
 export default utils;

@@ -1503,9 +1503,12 @@ _core2.default.globalHeight = pageHeight();
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Date = undefined;
+exports.GetDateStr = exports.toFormatString = exports.dateDiff = exports.parse = undefined;
 
 var _math = require('./math');
+
+var math = babelHelpers.interopRequireWildcard(_math);
+
 
 //日期转换
 var parse = function parse(s) {
@@ -1559,7 +1562,7 @@ var dateDiff = function dateDiff(sDate1, sDate2, returnType, useAbs) {
   days = oDate1 - oDate2; //计算日期差值
   if (useAbs) {
     //取绝对值
-    days = _math.Math.abs(days);
+    days = Math.abs(days);
   }
 
   //把相差的毫秒数转换为日期数值
@@ -1595,11 +1598,11 @@ var toFormatString = function toFormatString(date, fs, noAddZero) {
     return date.getFullYear() + fs + (date.getMonth() + 1) + fs + date.getDate();
   }
   fs = fs.replace('yyyy', date.getFullYear());
-  fs = fs.replace('mm', noAddZero ? date.getMonth() + 1 : _math.Math.addZero(date.getMonth() + 1));
-  fs = fs.replace('dd', noAddZero ? date.getDate() : _math.Math.addZero(date.getDate()));
-  fs = fs.replace('hh', noAddZero ? date.getHours() : _math.Math.addZero(date.getHours()));
-  fs = fs.replace('MM', noAddZero ? date.getMinutes() : _math.Math.addZero(date.getMinutes()));
-  fs = fs.replace('ss', noAddZero ? date.getSeconds() : _math.Math.addZero(date.getSeconds()));
+  fs = fs.replace('mm', noAddZero ? date.getMonth() + 1 : math.addZero(date.getMonth() + 1));
+  fs = fs.replace('dd', noAddZero ? date.getDate() : math.addZero(date.getDate()));
+  fs = fs.replace('hh', noAddZero ? date.getHours() : math.addZero(date.getHours()));
+  fs = fs.replace('MM', noAddZero ? date.getMinutes() : math.addZero(date.getMinutes()));
+  fs = fs.replace('ss', noAddZero ? date.getSeconds() : math.addZero(date.getSeconds()));
   return fs;
 };
 
@@ -1619,14 +1622,10 @@ var GetDateStr = function GetDateStr(addDays, addDays2, joinTxt, fs) {
   return d1 + (joinTxt != null ? joinTxt : '') + d2;
 };
 
-var Date = {
-  parse: parse,
-  dateDiff: dateDiff,
-  toFormatString: toFormatString,
-  GetDateStr: GetDateStr
-};
-
-exports.Date = Date;
+exports.parse = parse;
+exports.dateDiff = dateDiff;
+exports.toFormatString = toFormatString;
+exports.GetDateStr = GetDateStr;
 
 },{"./math":21}],19:[function(require,module,exports){
 "use strict";
@@ -1782,14 +1781,10 @@ var addZero = function addZero(n) {
   return ('00' + n).substr(('00' + n).length - 2);
 };
 
-var Math = {
-  outputMoney: outputMoney,
-  outputDollars: outputDollars,
-  outputCents: outputCents,
-  addZero: addZero
-};
-
-exports.Math = Math;
+exports.outputMoney = outputMoney;
+exports.outputDollars = outputDollars;
+exports.outputCents = outputCents;
+exports.addZero = addZero;
 
 },{}],22:[function(require,module,exports){
 "use strict";
@@ -1797,35 +1792,57 @@ exports.Math = Math;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var RegExp = { //常用正则表达式
-  num: /^\+?[1-9][0-9]*$/, //大于0的整数
-  numZ: /^\+?[0-9][0-9]*$/, //正整数(包含0)
-  numZ2: /^-?[0-9][0-9]*$/, //整数(包含0、负数)
-  numF: /^-?([0-9][0-9]*)(\.\d{1,2})?$/, //数字(包含负数、0,最多两位小数)
-  numF2: /^([0-9][0-9]*)(\.\d{1,2})?$/, //数字(不含负数,最多两位小数)
-  numD: /^-?([0-9][0-9]*)(\.\d{1,10})?$/, //数字(包含负数、0,最多10位小数)
-  numD2: /^(([0-9]+[\.]?[0-9]+)|[1-9])$/, //数字(不含负数和0,无限位小数)
-  numD3: /^(([0-9]+[\.]?[0-9]+)|[0-9])$/, //数字(不含负数,无限位小数)
-  num0_100: /^(?:0|[1-9][0-9]?|100)$/, //0-100内整数
-  num0_1: /^[01]$|^0\.\d{1,2}$|^1\.0{1,2}$/, //0-1之间小数(最多两位),包含0、1
-  post: /^\d{6}$/, //邮编
-  phone: /^(((\()?\d{2,4}(\))?[-(\s)*]){0,2})?(\d{7,8})$/, //固定电话(区号部分为2-4位数字,外面可以加括号,后面可以加斜杠或空格,可重复1-2次;电话号码部分为7-8位)
-  mobile: /^[1][3,5,8][0-9]{9}$/, //手机号
-  email: /^[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@(([0-9a-zA-Z])+([-\w]*[0-9a-zA-Z])*\.)+[a-zA-Z]{2,9}$/, //Email(@前面不能以点为结尾)
-  date: /^\d{4}-\d{2}-\d{2}$/, //日期是否yyyy-MM-dd格式
-  time: /^\d{2}:\d{2}:\d{2}$/, //时间是否hh:mm:ss格式
-  datetime: /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/, //日期时间是否yyyy-MM-dd hh:mm:ss格式
-  datetimeO: /^\d{4}-\d{2}-\d{2}( \d{2}:\d{2}:\d{2})?$/, //是否date或datetime格式
-  pass: /^[0-9a-zA-Z]{6,16}$/, //密码格式是否由字母和数字组成,长度为6-16位
-  user: /^[a-zA-Z][a-zA-Z0-9_\u4E00-\u9FA5]{3,15}$/, //用户名格式是否由字母、数字、中文和下划线组成,以字母开头,长度为4-16位
-  ip: /^((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)(\.((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)){3}(:(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}))?$/, //IP格式为xxx.xxx.xxx.xxx或xxx.xxx.xxx.xxx:端口号,xxx的值必须是0-255,端口号的值必须是1-65535
-  cardId: /^(\d{18,18}|\d{15,15}|\d{17,17}x)$/i, //身份证
-  enFirst: /^[a-zA-Z][\s\S]*$/, //英文开头
-  chFirst: /^[\u4E00-\u9FA5][\s\S]*$/, //中文开头
-  percent: /^\+?(([1-9]\d?)|(100)|(0))\%$/ //百分数(0%-100%)
-};
+var num = /^\+?[1-9][0-9]*$/; //大于0的整数
+var numZ = /^\+?[0-9][0-9]*$/; //正整数(包含0)
+var numZ2 = /^-?[0-9][0-9]*$/; //整数(包含0、负数)
+var numF = /^-?([0-9][0-9]*)(\.\d{1,2})?$/; //数字(包含负数、0,最多两位小数)
+var numF2 = /^([0-9][0-9]*)(\.\d{1,2})?$/; //数字(不含负数,最多两位小数)
+var numD = /^-?([0-9][0-9]*)(\.\d{1,10})?$/; //数字(包含负数、0,最多10位小数)
+var numD2 = /^(([0-9]+[\.]?[0-9]+)|[1-9])$/; //数字(不含负数和0,无限位小数)
+var numD3 = /^(([0-9]+[\.]?[0-9]+)|[0-9])$/; //数字(不含负数,无限位小数)
+var num0_100 = /^(?:0|[1-9][0-9]?|100)$/; //0-100内整数
+var num0_1 = /^[01]$|^0\.\d{1,2}$|^1\.0{1,2}$/; //0-1之间小数(最多两位),包含0、1
+var post = /^\d{6}$/; //邮编
+var phone = /^(((\()?\d{2,4}(\))?[-(\s)*]){0,2})?(\d{7,8})$/; //固定电话(区号部分为2-4位数字,外面可以加括号,后面可以加斜杠或空格,可重复1-2次;电话号码部分为7-8位)
+var mobile = /^[1][3,5,8][0-9]{9}$/; //手机号
+var email = /^[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@(([0-9a-zA-Z])+([-\w]*[0-9a-zA-Z])*\.)+[a-zA-Z]{2,9}$/; //Email(@前面不能以点为结尾)
+var date = /^\d{4}-\d{2}-\d{2}$/; //日期是否yyyy-MM-dd格式
+var time = /^\d{2}:\d{2}:\d{2}$/; //时间是否hh:mm:ss格式
+var datetime = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/; //日期时间是否yyyy-MM-dd hh:mm:ss格式
+var datetimeO = /^\d{4}-\d{2}-\d{2}( \d{2}:\d{2}:\d{2})?$/; //是否date或datetime格式
+var pass = /^[0-9a-zA-Z]{6,16}$/; //密码格式是否由字母和数字组成,长度为6-16位
+var user = /^[a-zA-Z][a-zA-Z0-9_\u4E00-\u9FA5]{3,15}$/; //用户名格式是否由字母、数字、中文和下划线组成,以字母开头,长度为4-16位
+var ip = /^((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)(\.((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)){3}(:(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}))?$/; //IP格式为xxx.xxx.xxx.xxx或xxx.xxx.xxx.xxx:端口号,xxx的值必须是0-255,端口号的值必须是1-65535
+var cardId = /^(\d{18,18}|\d{15,15}|\d{17,17}x)$/i; //身份证
+var enFirst = /^[a-zA-Z][\s\S]*$/; //英文开头
+var chFirst = /^[\u4E00-\u9FA5][\s\S]*$/; //中文开头
+var percent = /^\+?(([1-9]\d?)|(100)|(0))\%$/; //百分数(0%-100%)
 
-exports.RegExp = RegExp;
+exports.num = num;
+exports.numZ = numZ;
+exports.numZ2 = numZ2;
+exports.numF = numF;
+exports.numF2 = numF2;
+exports.numD = numD;
+exports.numD2 = numD2;
+exports.numD3 = numD3;
+exports.num0_100 = num0_100;
+exports.num0_1 = num0_1;
+exports.post = post;
+exports.phone = phone;
+exports.mobile = mobile;
+exports.email = email;
+exports.date = date;
+exports.time = time;
+exports.datetime = datetime;
+exports.datetimeO = datetimeO;
+exports.pass = pass;
+exports.user = user;
+exports.ip = ip;
+exports.cardId = cardId;
+exports.enFirst = enFirst;
+exports.chFirst = chFirst;
+exports.percent = percent;
 
 },{}],23:[function(require,module,exports){
 'use strict';
@@ -1833,7 +1850,7 @@ exports.RegExp = RegExp;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Sort = undefined;
+exports.compareStringCH = exports.compareStringEN = exports.compareDate = exports.compareNumber = exports.compare = exports.getGB2312Pinyin = exports.getFirstChar = undefined;
 
 var _core = require('../core');
 
@@ -1841,7 +1858,12 @@ var _core2 = babelHelpers.interopRequireDefault(_core);
 
 var _regexp = require('./regexp');
 
+var regExp = babelHelpers.interopRequireWildcard(_regexp);
+
 var _date = require('./date');
+
+var date = babelHelpers.interopRequireWildcard(_date);
+
 
 //取字符串的第一个字符
 var getFirstChar = function getFirstChar(s) {
@@ -1932,8 +1954,8 @@ var compareDate = function compareDate(x, y) {
   var spV = arguments[5];
 
   var d = '1900-01-01';
-  x = _date.Date.parse(x == '' ? d : x);
-  y = _date.Date.parse(y == '' ? d : y);
+  x = date.parse(x == '' ? d : x);
+  y = date.parse(y == '' ? d : y);
   var z = x - y;
 
   spV = spV != null ? spV : -1;
@@ -1969,25 +1991,21 @@ var compareStringCH = function compareStringCH(x, y) {
 
   if (_core2.default.GB2312Pinyin.fonts) {
     //如果第一个字符非中文的则不获取拼音直接用第一个字符比较
-    x = x == '' ? '' : _regexp.RegExp.chFirst.test(x) ? getGB2312Pinyin(getFirstChar(x)) : getFirstChar(x);
-    y = y == '' ? '' : _regexp.RegExp.chFirst.test(y) ? getGB2312Pinyin(getFirstChar(y)) : getFirstChar(y);
+    x = x == '' ? '' : regExp.chFirst.test(x) ? getGB2312Pinyin(getFirstChar(x)) : getFirstChar(x);
+    y = y == '' ? '' : regExp.chFirst.test(y) ? getGB2312Pinyin(getFirstChar(y)) : getFirstChar(y);
     return compare(x, y, isAsc, spC, spC2, spV);
   } else {
     return compareStringEN(x, y, isAsc, spC, spC2, spV);
   }
 };
 
-var Sort = {
-  getFirstChar: getFirstChar,
-  getGB2312Pinyin: getGB2312Pinyin,
-  compare: compare,
-  compareNumber: compareNumber,
-  compareDate: compareDate,
-  compareStringEN: compareStringEN,
-  compareStringCH: compareStringCH
-};
-
-exports.Sort = Sort;
+exports.getFirstChar = getFirstChar;
+exports.getGB2312Pinyin = getGB2312Pinyin;
+exports.compare = compare;
+exports.compareNumber = compareNumber;
+exports.compareDate = compareDate;
+exports.compareStringEN = compareStringEN;
+exports.compareStringCH = compareStringCH;
 
 },{"../core":14,"./date":18,"./regexp":22}],24:[function(require,module,exports){
 'use strict';
@@ -2030,7 +2048,7 @@ var date = babelHelpers.interopRequireWildcard(_date);
 
 var utils = {};
 
-babelHelpers.extends(utils, common, browsers, delayOperate, domEvent, regExp, sort, math, date);
+babelHelpers.extends(utils, common, browsers, delayOperate, domEvent, { RegExp: regExp }, { Sort: sort }, { Math: math }, { Date: date });
 
 exports.default = utils;
 

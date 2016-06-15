@@ -1,4 +1,4 @@
-﻿import { Math } from './math';
+﻿import * as math from './math';
 
 //日期转换
 const parse = (s) => {
@@ -80,11 +80,11 @@ const toFormatString = (date, fs, noAddZero) => {
     return date.getFullYear() + fs + (date.getMonth() + 1) + fs + date.getDate();
   }
   fs = fs.replace('yyyy', date.getFullYear());
-  fs = fs.replace('mm', noAddZero ? (date.getMonth() + 1) : Math.addZero(date.getMonth() + 1));
-  fs = fs.replace('dd', noAddZero ? date.getDate() : Math.addZero(date.getDate()));
-  fs = fs.replace('hh', noAddZero ? date.getHours() : Math.addZero(date.getHours()));
-  fs = fs.replace('MM', noAddZero ? date.getMinutes() : Math.addZero(date.getMinutes()));
-  fs = fs.replace('ss', noAddZero ? date.getSeconds() : Math.addZero(date.getSeconds()));
+  fs = fs.replace('mm', noAddZero ? (date.getMonth() + 1) : math.addZero(date.getMonth() + 1));
+  fs = fs.replace('dd', noAddZero ? date.getDate() : math.addZero(date.getDate()));
+  fs = fs.replace('hh', noAddZero ? date.getHours() : math.addZero(date.getHours()));
+  fs = fs.replace('MM', noAddZero ? date.getMinutes() : math.addZero(date.getMinutes()));
+  fs = fs.replace('ss', noAddZero ? date.getSeconds() : math.addZero(date.getSeconds()));
   return fs;
 };
 
@@ -101,13 +101,9 @@ const GetDateStr = (addDays, addDays2, joinTxt, fs) => {
   return d1 + (joinTxt != null ? joinTxt : '') + d2;
 };
 
-const Date = {
+export {
   parse,
   dateDiff,
   toFormatString,
   GetDateStr
-};
-
-export {
-  Date
 };
