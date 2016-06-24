@@ -470,45 +470,54 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],2:[function(require,module,exports){
-/* eslint-disable no-unused-vars */
-'use strict';
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+/*!
+  Copyright (c) 2016 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
 
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
+(function () {
+	'use strict';
 
-	return Object(val);
-}
+	var hasOwn = {}.hasOwnProperty;
 
-module.exports = Object.assign || function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
+	function classNames () {
+		var classes = [];
 
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
 
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
+			var argType = typeof arg;
 
-		if (Object.getOwnPropertySymbols) {
-			symbols = Object.getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg)) {
+				classes.push(classNames.apply(null, arg));
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
 				}
 			}
 		}
+
+		return classes.join(' ');
 	}
 
-	return to;
-};
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	} else if (typeof define === 'function' && typeof define.amd === 'object' && define.amd) {
+		// register as 'classnames', consistent with npm package name
+		define('classnames', [], function () {
+			return classNames;
+		});
+	} else {
+		window.classNames = classNames;
+	}
+}());
 
 },{}],3:[function(require,module,exports){
 module.exports = require('react/lib/update');
@@ -623,7 +632,7 @@ function update(value, spec) {
 
 module.exports = update;
 }).call(this,require('_process'))
-},{"_process":1,"fbjs/lib/invariant":5,"fbjs/lib/keyOf":6,"object-assign":2}],5:[function(require,module,exports){
+},{"_process":1,"fbjs/lib/invariant":5,"fbjs/lib/keyOf":6,"object-assign":7}],5:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -711,6 +720,47 @@ var keyOf = function (oneKeyObj) {
 
 module.exports = keyOf;
 },{}],7:[function(require,module,exports){
+/* eslint-disable no-unused-vars */
+'use strict';
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (Object.getOwnPropertySymbols) {
+			symbols = Object.getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+},{}],8:[function(require,module,exports){
 'use strict';
 
 var _core = require('./core');
@@ -731,14 +781,116 @@ var _pagination = require('./components/pagination/pagination.comp');
 
 var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
-var widgets = { 'fj-Pagination': _pagination2.default };
+var _gridLayout = require('./components/gridLayout/gridLayout.comp');
+
+var widgets = {
+  'fj-Pagination': _pagination2.default,
+  'fj-Row': _gridLayout.Row
+};
 
 babelHelpers.extends(_core2.default, _utils2.default, widgets);
 _nornj2.default.registerComponent(widgets);
 
 module.exports = _core2.default;
 
-},{"./components/pagination/pagination.comp":9,"./core":14,"./njConfig":15,"./utils/utils":24,"nornj":"nornj"}],8:[function(require,module,exports){
+},{"./components/gridLayout/gridLayout.comp":9,"./components/pagination/pagination.comp":13,"./core":18,"./njConfig":19,"./utils/utils":28,"nornj":"nornj"}],9:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Row = undefined;
+
+var _react = require('react');
+
+var _nornj = require('nornj');
+
+var _classnames = require('classnames');
+
+var _classnames2 = babelHelpers.interopRequireDefault(_classnames);
+
+var _utils = require('../../utils/utils');
+
+var _utils2 = babelHelpers.interopRequireDefault(_utils);
+
+var _gridLayout = require('./gridLayout.tmpl');
+
+var _gridLayout2 = babelHelpers.interopRequireDefault(_gridLayout);
+
+var row = _gridLayout2.default.row;
+
+var templateRow = (0, _nornj.compileComponent)(row, 'row');
+
+var Row = function (_Component) {
+  babelHelpers.inherits(Row, _Component);
+
+  function Row() {
+    babelHelpers.classCallCheck(this, Row);
+    return babelHelpers.possibleConstructorReturn(this, _Component.apply(this, arguments));
+  }
+
+  Row.prototype.render = function render() {
+    var _utils$splitObject = _utils2.default.splitObject(this.props, ['className', 'children']);
+
+    var _utils$splitObject2 = babelHelpers.slicedToArray(_utils$splitObject, 2);
+
+    var _utils$splitObject2$ = _utils$splitObject2[0];
+    var className = _utils$splitObject2$.className;
+    var children = _utils$splitObject2$.children;
+    var others = _utils$splitObject2[1];
+
+
+    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
+      'fj-row': true
+    }, className, className));
+
+    return templateRow({
+      props: others,
+      classes: classes,
+      children: children
+    });
+  };
+
+  return Row;
+}(_react.Component);
+
+Row.defaultProps = {
+  fjType: 'row'
+};
+exports.Row = Row;
+
+},{"../../utils/utils":28,"./gridLayout.tmpl":10,"classnames":2,"nornj":"nornj","react":"react"}],10:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _gridLayoutTmplNj = require('./gridLayout.tmpl.nj.js');
+
+var _gridLayoutTmplNj2 = babelHelpers.interopRequireDefault(_gridLayoutTmplNj);
+
+exports.default = _gridLayoutTmplNj2.default;
+
+},{"./gridLayout.tmpl.nj.js":11}],11:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<div>\n  <#params>\n    <#spreadParam {props}/>\n    <#param {\'className\'}>{classes}</#param>\n  </#params>\n  {children}\n</div>\n'], ['\n<div>\n  <#params>\n    <#spreadParam {props}/>\n    <#param {\'className\'}>{classes}</#param>\n  </#params>\n  {children}\n</div>\n']);
+
+var _nornj = require('nornj');
+
+var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
+
+var row = (0, _nornj2.default)(_templateObject);
+
+exports.default = { row: row };
+
+},{"nornj":"nornj"}],12:[function(require,module,exports){
 'use strict';
 
 var _nornj = require('nornj');
@@ -812,7 +964,7 @@ require('./pagination/pagination.tmplHelper');
   }
 });
 
-},{"../utils/utils":24,"./pagination/pagination.tmplHelper":12,"nornj":"nornj"}],9:[function(require,module,exports){
+},{"../utils/utils":28,"./pagination/pagination.tmplHelper":16,"nornj":"nornj"}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1045,7 +1197,7 @@ Pagination.defaultProps = {
 };
 exports.default = Pagination;
 
-},{"../../utils/utils":24,"../widget":13,"./pagination.tmpl":10,"nornj":"nornj"}],10:[function(require,module,exports){
+},{"../../utils/utils":28,"../widget":17,"./pagination.tmpl":14,"nornj":"nornj"}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1059,7 +1211,7 @@ var _paginationTmplNj2 = babelHelpers.interopRequireDefault(_paginationTmplNj);
 
 exports.default = _paginationTmplNj2.default;
 
-},{"./pagination.tmpl.nj.js":11}],11:[function(require,module,exports){
+},{"./pagination.tmpl.nj.js":15}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1086,7 +1238,7 @@ var pageBtns = (0, _nornj2.default)(_templateObject4, partPage1, partPage2, part
 
 exports.default = (0, _nornj2.default)(_templateObject5, pageBtns);
 
-},{"nornj":"nornj"}],12:[function(require,module,exports){
+},{"nornj":"nornj"}],16:[function(require,module,exports){
 'use strict';
 
 var _nornj = require('nornj');
@@ -1157,7 +1309,7 @@ var _nornj = require('nornj');
   }
 });
 
-},{"nornj":"nornj"}],13:[function(require,module,exports){
+},{"nornj":"nornj"}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1331,7 +1483,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":24,"./njHelpers":8,"nornj":"nornj","react":"react","react-addons-update":3}],14:[function(require,module,exports){
+},{"../utils/utils":28,"./njHelpers":12,"nornj":"nornj","react":"react","react-addons-update":3}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1352,14 +1504,14 @@ fj.setConfig = function (config) {
 
 exports.default = fj;
 
-},{}],15:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 var _nornj = require('nornj');
 
 (0, _nornj.setTmplRule)(null, null, '#');
 
-},{"nornj":"nornj"}],16:[function(require,module,exports){
+},{"nornj":"nornj"}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1443,13 +1595,13 @@ var isMobile = exports.isMobile = isAndroid || isIos || isWindowsPhone;
 //Webkit and blink core browser
 var isWebkit = exports.isWebkit = isChrome || isSafari || isAndroid || isIos;
 
-},{}],17:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.pageHeight = exports.pageWidth = exports.mediaQuery = exports.guid = undefined;
+exports.splitObject = exports.pageHeight = exports.pageWidth = exports.mediaQuery = exports.guid = undefined;
 
 var _core = require('../core');
 
@@ -1497,7 +1649,20 @@ var pageHeight = exports.pageHeight = function pageHeight() {
 //Save initial height of page
 _core2.default.globalHeight = pageHeight();
 
-},{"../core":14}],18:[function(require,module,exports){
+var splitObject = exports.splitObject = function splitObject(obj, parts) {
+  var left = {};
+  var right = {};
+  Object.keys(obj).forEach(function (k) {
+    if (parts.indexOf(k) !== -1) {
+      left[k] = obj[k];
+    } else {
+      right[k] = obj[k];
+    }
+  });
+  return [left, right];
+};
+
+},{"../core":18}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1627,7 +1792,7 @@ exports.dateDiff = dateDiff;
 exports.toFormatString = toFormatString;
 exports.GetDateStr = GetDateStr;
 
-},{"./math":21}],19:[function(require,module,exports){
+},{"./math":25}],23:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1691,7 +1856,7 @@ var pollDo = exports.pollDo = function pollDo(fn, timeOut, doName, obj) {
   return siv;
 };
 
-},{}],20:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1713,7 +1878,7 @@ var off = exports.off = function off(name, fn, elem) {
   (elem || doc).removeEventListener(name, fn, useCapture);
 };
 
-},{}],21:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1786,7 +1951,7 @@ exports.outputDollars = outputDollars;
 exports.outputCents = outputCents;
 exports.addZero = addZero;
 
-},{}],22:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1844,7 +2009,7 @@ exports.enFirst = enFirst;
 exports.chFirst = chFirst;
 exports.percent = percent;
 
-},{}],23:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2007,7 +2172,7 @@ exports.compareDate = compareDate;
 exports.compareStringEN = compareStringEN;
 exports.compareStringCH = compareStringCH;
 
-},{"../core":14,"./date":18,"./regexp":22}],24:[function(require,module,exports){
+},{"../core":18,"./date":22,"./regexp":26}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2052,5 +2217,5 @@ babelHelpers.extends(utils, common, browsers, delayOperate, domEvent, { RegExp: 
 
 exports.default = utils;
 
-},{"./browsers":16,"./common":17,"./date":18,"./delayOperate":19,"./domEvent":20,"./math":21,"./regexp":22,"./sort":23}]},{},[7]);
-var _r = _m(7);_g.fj = _g.FlareJ = _r;return _r;})})(typeof window!=='undefined' ? window : (typeof global!=='undefined' ? global : (typeof self!=='undefined' ? self : this)));
+},{"./browsers":20,"./common":21,"./date":22,"./delayOperate":23,"./domEvent":24,"./math":25,"./regexp":26,"./sort":27}]},{},[8]);
+var _r = _m(8);_g.fj = _g.FlareJ = _r;return _r;})})(typeof window!=='undefined' ? window : (typeof global!=='undefined' ? global : (typeof self!=='undefined' ? self : this)));

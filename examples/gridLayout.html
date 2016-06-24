@@ -12,6 +12,7 @@
       height: 100px;
       background-color: blue;
     }
+
     .h200 {
       height: 200px;
       background-color: green;
@@ -19,16 +20,22 @@
   </style>
 </head>
 <body>
-  <div class="fj-row">
-    <div class="fj-col3 fj-col-ms3 h100">1</div>
-    <div class="fj-col3 fj-col-ms3 h200">2</div>
-    <div class="fj-col3 fj-col-ms3 h100">3</div>
-    <div class="fj-col3 fj-col-ms3 h100">4</div>
-    <div class="fj-clearfix-ms"></div>
-    <div class="fj-col3 fj-col-ms3 h100">1</div>
-    <div class="fj-col3 fj-col-ms3 h100">2</div>
-    <div class="fj-col3 fj-col-ms3 h100">3</div>
-    <div class="fj-col3 fj-col-ms3 h100">4</div>
-  </div>
+  <section>
+    <fj-Row class="nj-component" style="color:yellow;">
+      <div class="fj-col3 fj-col-ms3 h100">1</div>
+      <div class="fj-col3 fj-col-ms3 h200">2</div>
+      <div class="fj-col3 fj-col-ms3 h100">3</div>
+      <div class="fj-col3 fj-col-ms3 h100">4</div>
+      <div class="fj-clearfix-ms"></div>
+      <div class="fj-col3 fj-col-ms3 h100">1</div>
+      <div class="fj-col3 fj-col-ms3 h100">2</div>
+      <div class="fj-col3 fj-col-ms3 h100">3</div>
+      <div class="fj-col3 fj-col-ms3 h100">4</div>
+    </fj-Row>
+  </section>
+  <script src="../node_modules/react/dist/react.js"></script>
+  <script src="../node_modules/react-dom/dist/react-dom.js"></script>
+  <script src="../node_modules/nornj/dist/nornj.js"></script>
+  <script src="../dist/js/flarej.js"></script>
 </body>
 </html>
