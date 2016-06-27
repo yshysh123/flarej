@@ -2,7 +2,6 @@
 import Widget from '../widget';
 import utils from '../../utils/utils';
 import tmpl from './pagination.tmpl';
-const template = compileComponent(tmpl, 'pagination');
 
 class Pagination extends Widget {
   static defaultProps = {
@@ -52,6 +51,8 @@ class Pagination extends Widget {
       }
     }
   };
+
+  template = compileComponent(tmpl, 'pagination');
   
   constructor(props) {
     super(props, {
@@ -184,7 +185,7 @@ class Pagination extends Widget {
       extra.lastDisabled = disabled;
     }
 
-    return template(state, this.props, extra);
+    return this.template(state, this.props, extra);
   }
 }
 

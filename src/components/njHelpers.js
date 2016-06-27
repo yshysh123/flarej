@@ -36,6 +36,16 @@ registerFilter({
   },
   add: (val1, val2) => {
     return val1 + parseInt(val2, 10);
+  },
+  int: (val) => {
+    return parseInt(val, 10);
+  },
+  bool: (val) => {
+    if(val === 'false') {
+      return false;
+    }
+
+    return Boolean(val);
   }
 });
 

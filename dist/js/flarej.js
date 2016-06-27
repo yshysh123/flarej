@@ -520,8 +520,49 @@ process.umask = function() { return 0; };
 }());
 
 },{}],3:[function(require,module,exports){
+/* eslint-disable no-unused-vars */
+'use strict';
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (Object.getOwnPropertySymbols) {
+			symbols = Object.getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+},{}],4:[function(require,module,exports){
 module.exports = require('react/lib/update');
-},{"react/lib/update":4}],4:[function(require,module,exports){
+},{"react/lib/update":5}],5:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -632,7 +673,7 @@ function update(value, spec) {
 
 module.exports = update;
 }).call(this,require('_process'))
-},{"_process":1,"fbjs/lib/invariant":5,"fbjs/lib/keyOf":6,"object-assign":7}],5:[function(require,module,exports){
+},{"_process":1,"fbjs/lib/invariant":6,"fbjs/lib/keyOf":7,"object-assign":3}],6:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -684,7 +725,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":1}],6:[function(require,module,exports){
+},{"_process":1}],7:[function(require,module,exports){
 "use strict";
 
 /**
@@ -719,47 +760,6 @@ var keyOf = function (oneKeyObj) {
 };
 
 module.exports = keyOf;
-},{}],7:[function(require,module,exports){
-/* eslint-disable no-unused-vars */
-'use strict';
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-module.exports = Object.assign || function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (Object.getOwnPropertySymbols) {
-			symbols = Object.getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
 },{}],8:[function(require,module,exports){
 'use strict';
 
@@ -785,7 +785,9 @@ var _gridLayout = require('./components/gridLayout/gridLayout.comp');
 
 var widgets = {
   'fj-Pagination': _pagination2.default,
-  'fj-Row': _gridLayout.Row
+  'fj-Row': _gridLayout.Row,
+  'fj-RowLeft': _gridLayout.RowLeft,
+  'fj-RowRight': _gridLayout.RowRight
 };
 
 babelHelpers.extends(_core2.default, _utils2.default, widgets);
@@ -799,7 +801,7 @@ module.exports = _core2.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Row = undefined;
+exports.RowRight = exports.RowLeft = exports.Row = undefined;
 
 var _react = require('react');
 
@@ -817,9 +819,7 @@ var _gridLayout = require('./gridLayout.tmpl');
 
 var _gridLayout2 = babelHelpers.interopRequireDefault(_gridLayout);
 
-var row = _gridLayout2.default.row;
-
-var templateRow = (0, _nornj.compileComponent)(row, 'row');
+var templateRow = (0, _nornj.compileComponent)(_gridLayout2.default.row, 'row');
 
 var Row = function (_Component) {
   babelHelpers.inherits(Row, _Component);
@@ -830,12 +830,15 @@ var Row = function (_Component) {
   }
 
   Row.prototype.render = function render() {
-    var _utils$splitObject = _utils2.default.splitObject(this.props, ['className', 'children']);
+    var _utils$splitObject = _utils2.default.splitObject(this.props, ['className', 'style', 'left', 'right', 'children']);
 
     var _utils$splitObject2 = babelHelpers.slicedToArray(_utils$splitObject, 2);
 
     var _utils$splitObject2$ = _utils$splitObject2[0];
     var className = _utils$splitObject2$.className;
+    var style = _utils$splitObject2$.style;
+    var left = _utils$splitObject2$.left;
+    var right = _utils$splitObject2$.right;
     var children = _utils$splitObject2$.children;
     var others = _utils$splitObject2[1];
 
@@ -844,9 +847,21 @@ var Row = function (_Component) {
       'fj-row': true
     }, className, className));
 
+    var styles = {};
+    if (style) {
+      babelHelpers.extends(styles, style);
+    }
+    if (left) {
+      styles.marginLeft = parseInt(left, 10);
+    }
+    if (right) {
+      styles.marginRight = parseInt(right, 10);
+    }
+
     return templateRow({
       props: others,
       classes: classes,
+      styles: styles,
       children: children
     });
   };
@@ -857,7 +872,83 @@ var Row = function (_Component) {
 Row.defaultProps = {
   fjType: 'row'
 };
+
+
+function _createRender(context, compClass) {
+  return function () {
+    var _classNames2;
+
+    var _utils$splitObject3 = _utils2.default.splitObject(this.props, ['className', 'style', 'width', 'children']);
+
+    var _utils$splitObject4 = babelHelpers.slicedToArray(_utils$splitObject3, 2);
+
+    var _utils$splitObject4$ = _utils$splitObject4[0];
+    var className = _utils$splitObject4$.className;
+    var style = _utils$splitObject4$.style;
+    var width = _utils$splitObject4$.width;
+    var children = _utils$splitObject4$.children;
+    var others = _utils$splitObject4[1];
+
+
+    var classes = (0, _classnames2.default)((_classNames2 = {}, babelHelpers.defineProperty(_classNames2, compClass, true), babelHelpers.defineProperty(_classNames2, className, className), _classNames2));
+
+    var styles = {};
+    if (style) {
+      babelHelpers.extends(styles, style);
+    }
+    if (width) {
+      styles.width = parseInt(width, 10);
+    }
+
+    return templateRow({
+      props: others,
+      classes: classes,
+      styles: styles,
+      children: children
+    });
+  }.bind(context);
+}
+
+var RowLeft = function (_Component2) {
+  babelHelpers.inherits(RowLeft, _Component2);
+
+  function RowLeft(props) {
+    babelHelpers.classCallCheck(this, RowLeft);
+
+    var _this2 = babelHelpers.possibleConstructorReturn(this, _Component2.call(this, props));
+
+    _this2.render = _createRender(_this2, 'fj-row-left');
+    return _this2;
+  }
+
+  return RowLeft;
+}(_react.Component);
+
+RowLeft.defaultProps = {
+  fjType: 'rowLeft'
+};
+
+var RowRight = function (_Component3) {
+  babelHelpers.inherits(RowRight, _Component3);
+
+  function RowRight(props) {
+    babelHelpers.classCallCheck(this, RowRight);
+
+    var _this3 = babelHelpers.possibleConstructorReturn(this, _Component3.call(this, props));
+
+    _this3.render = _createRender(_this3, 'fj-row-right');
+    return _this3;
+  }
+
+  return RowRight;
+}(_react.Component);
+
+RowRight.defaultProps = {
+  fjType: 'rowRight'
+};
 exports.Row = Row;
+exports.RowLeft = RowLeft;
+exports.RowRight = RowRight;
 
 },{"../../utils/utils":28,"./gridLayout.tmpl":10,"classnames":2,"nornj":"nornj","react":"react"}],10:[function(require,module,exports){
 'use strict';
@@ -880,7 +971,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<div>\n  <#params>\n    <#spreadParam {props}/>\n    <#param {\'className\'}>{classes}</#param>\n  </#params>\n  {children}\n</div>\n'], ['\n<div>\n  <#params>\n    <#spreadParam {props}/>\n    <#param {\'className\'}>{classes}</#param>\n  </#params>\n  {children}\n</div>\n']);
+var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<div class={classes} style={styles}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n  {children}\n</div>\n'], ['\n<div class={classes} style={styles}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n  {children}\n</div>\n']);
 
 var _nornj = require('nornj');
 
@@ -935,6 +1026,16 @@ require('./pagination/pagination.tmplHelper');
   },
   add: function add(val1, val2) {
     return val1 + parseInt(val2, 10);
+  },
+  int: function int(val) {
+    return parseInt(val, 10);
+  },
+  bool: function bool(val) {
+    if (val === 'false') {
+      return false;
+    }
+
+    return Boolean(val);
   }
 });
 
@@ -985,17 +1086,19 @@ var _pagination = require('./pagination.tmpl');
 
 var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
-var template = (0, _nornj.compileComponent)(_pagination2.default, 'pagination');
-
 var Pagination = function (_Widget) {
   babelHelpers.inherits(Pagination, _Widget);
 
   function Pagination(props) {
     babelHelpers.classCallCheck(this, Pagination);
-    return babelHelpers.possibleConstructorReturn(this, _Widget.call(this, props, {
+
+    var _this = babelHelpers.possibleConstructorReturn(this, _Widget.call(this, props, {
       pageIndex: parseInt(props.pageIndex, 10),
       pageSize: parseInt(props.pageSize, 10)
     }));
+
+    _this.template = (0, _nornj.compileComponent)(_pagination2.default, 'pagination');
+    return _this;
   }
 
   Pagination.prototype.init = function init() {
@@ -1142,7 +1245,7 @@ var Pagination = function (_Widget) {
       extra.lastDisabled = disabled;
     }
 
-    return template(state, this.props, extra);
+    return this.template(state, this.props, extra);
   };
 
   return Pagination;
@@ -1483,7 +1586,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":28,"./njHelpers":12,"nornj":"nornj","react":"react","react-addons-update":3}],18:[function(require,module,exports){
+},{"../utils/utils":28,"./njHelpers":12,"nornj":"nornj","react":"react","react-addons-update":4}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

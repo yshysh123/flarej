@@ -21,17 +21,25 @@
 </head>
 <body>
   <section>
-    <fj-Row class="nj-component" style="color:yellow;">
-      <div class="fj-col3 fj-col-ms3 h100">1</div>
-      <div class="fj-col3 fj-col-ms3 h200">2</div>
-      <div class="fj-col3 fj-col-ms3 h100">3</div>
-      <div class="fj-col3 fj-col-ms3 h100">4</div>
-      <div class="fj-clearfix-ms"></div>
-      <div class="fj-col3 fj-col-ms3 h100">1</div>
-      <div class="fj-col3 fj-col-ms3 h100">2</div>
-      <div class="fj-col3 fj-col-ms3 h100">3</div>
-      <div class="fj-col3 fj-col-ms3 h100">4</div>
-    </fj-Row>
+    <div class="nj-component">
+      <fj-RowLeft width="100" style="height:200px;background-color:purple;">
+        100
+      </fj-RowLeft>
+      <fj-Row left="100" right="100" style="color:yellow;">
+        <div class="fj-col3 fj-col-ms3 h100">1</div>
+        <div class="fj-col3 fj-col-ms3 h200">2</div>
+        <div class="fj-col3 fj-col-ms3 h100">3</div>
+        <div class="fj-col3 fj-col-ms3 h100">4</div>
+        <div class="fj-clearfix-ms"></div>
+        <div class="fj-col3 fj-col-ms3 h100">1</div>
+        <div class="fj-col3 fj-col-ms3 h100">2</div>
+        <div class="fj-col3 fj-col-ms3 h100">3</div>
+        <div class="fj-col3 fj-col-ms3 h100">4</div>
+      </fj-Row>
+      <fj-RowRight width="100" style="height:200px;background-color:purple;">
+        100
+      </fj-RowRight>
+    </div>
   </section>
   <script src="../node_modules/react/dist/react.js"></script>
   <script src="../node_modules/react-dom/dist/react-dom.js"></script>

@@ -1,10 +1,9 @@
 ﻿import nj from 'nornj';
 
 const row = nj`
-<div>
+<div class={classes} style={styles}>
   <#params>
     <#spreadParam {props}/>
-    <#param {'className'}>{classes}</#param>
   </#params>
   {children}
 </div>
