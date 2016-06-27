@@ -520,49 +520,8 @@ process.umask = function() { return 0; };
 }());
 
 },{}],3:[function(require,module,exports){
-/* eslint-disable no-unused-vars */
-'use strict';
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-module.exports = Object.assign || function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (Object.getOwnPropertySymbols) {
-			symbols = Object.getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
-},{}],4:[function(require,module,exports){
 module.exports = require('react/lib/update');
-},{"react/lib/update":5}],5:[function(require,module,exports){
+},{"react/lib/update":4}],4:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -673,7 +632,7 @@ function update(value, spec) {
 
 module.exports = update;
 }).call(this,require('_process'))
-},{"_process":1,"fbjs/lib/invariant":6,"fbjs/lib/keyOf":7,"object-assign":3}],6:[function(require,module,exports){
+},{"_process":1,"fbjs/lib/invariant":5,"fbjs/lib/keyOf":6,"object-assign":7}],5:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -725,7 +684,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":1}],7:[function(require,module,exports){
+},{"_process":1}],6:[function(require,module,exports){
 "use strict";
 
 /**
@@ -760,6 +719,47 @@ var keyOf = function (oneKeyObj) {
 };
 
 module.exports = keyOf;
+},{}],7:[function(require,module,exports){
+/* eslint-disable no-unused-vars */
+'use strict';
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (Object.getOwnPropertySymbols) {
+			symbols = Object.getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
 },{}],8:[function(require,module,exports){
 'use strict';
 
@@ -787,7 +787,9 @@ var widgets = {
   'fj-Pagination': _pagination2.default,
   'fj-Row': _gridLayout.Row,
   'fj-RowLeft': _gridLayout.RowLeft,
-  'fj-RowRight': _gridLayout.RowRight
+  'fj-RowRight': _gridLayout.RowRight,
+  'fj-Col': _gridLayout.Col,
+  'fj-ClearFix': _gridLayout.ClearFix
 };
 
 babelHelpers.extends(_core2.default, _utils2.default, widgets);
@@ -801,7 +803,7 @@ module.exports = _core2.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.RowRight = exports.RowLeft = exports.Row = undefined;
+exports.ClearFix = exports.Col = exports.RowRight = exports.RowLeft = exports.Row = undefined;
 
 var _react = require('react');
 
@@ -820,6 +822,10 @@ var _gridLayout = require('./gridLayout.tmpl');
 var _gridLayout2 = babelHelpers.interopRequireDefault(_gridLayout);
 
 var templateRow = (0, _nornj.compileComponent)(_gridLayout2.default.row, 'row');
+var templateCol = (0, _nornj.compileComponent)(_gridLayout2.default.col, 'col');
+var templateClearFix = (0, _nornj.compileComponent)(_gridLayout2.default.clearFix, 'clearFix');
+
+//Grid row
 
 var Row = function (_Component) {
   babelHelpers.inherits(Row, _Component);
@@ -874,7 +880,7 @@ Row.defaultProps = {
 };
 
 
-function _createRender(context, compClass) {
+function _createRowRender(context, compClass) {
   return function () {
     var _classNames2;
 
@@ -909,6 +915,8 @@ function _createRender(context, compClass) {
   }.bind(context);
 }
 
+//Grid row left container
+
 var RowLeft = function (_Component2) {
   babelHelpers.inherits(RowLeft, _Component2);
 
@@ -917,12 +925,15 @@ var RowLeft = function (_Component2) {
 
     var _this2 = babelHelpers.possibleConstructorReturn(this, _Component2.call(this, props));
 
-    _this2.render = _createRender(_this2, 'fj-row-left');
+    _this2.render = _createRowRender(_this2, 'fj-row-left');
     return _this2;
   }
 
   return RowLeft;
 }(_react.Component);
+
+//Grid row right container
+
 
 RowLeft.defaultProps = {
   fjType: 'rowLeft'
@@ -936,19 +947,130 @@ var RowRight = function (_Component3) {
 
     var _this3 = babelHelpers.possibleConstructorReturn(this, _Component3.call(this, props));
 
-    _this3.render = _createRender(_this3, 'fj-row-right');
+    _this3.render = _createRowRender(_this3, 'fj-row-right');
     return _this3;
   }
 
   return RowRight;
 }(_react.Component);
 
+//Grid col
+
+
 RowRight.defaultProps = {
   fjType: 'rowRight'
+};
+
+var Col = function (_Component4) {
+  babelHelpers.inherits(Col, _Component4);
+
+  function Col() {
+    babelHelpers.classCallCheck(this, Col);
+    return babelHelpers.possibleConstructorReturn(this, _Component4.apply(this, arguments));
+  }
+
+  Col.prototype.render = function render() {
+    var _classNames3;
+
+    var _utils$splitObject5 = _utils2.default.splitObject(this.props, ['className', 'l', 'm', 's', 'ms', 'right', 'left', 'shift', 'rightM', 'leftM', 'shiftM', 'rightS', 'leftS', 'shiftS', 'rightMs', 'leftMs', 'shiftMs', 'children']);
+
+    var _utils$splitObject6 = babelHelpers.slicedToArray(_utils$splitObject5, 2);
+
+    var _utils$splitObject6$ = _utils$splitObject6[0];
+    var className = _utils$splitObject6$.className;
+    var l = _utils$splitObject6$.l;
+    var m = _utils$splitObject6$.m;
+    var s = _utils$splitObject6$.s;
+    var ms = _utils$splitObject6$.ms;
+    var right = _utils$splitObject6$.right;
+    var left = _utils$splitObject6$.left;
+    var shift = _utils$splitObject6$.shift;
+    var rightM = _utils$splitObject6$.rightM;
+    var leftM = _utils$splitObject6$.leftM;
+    var shiftM = _utils$splitObject6$.shiftM;
+    var rightS = _utils$splitObject6$.rightS;
+    var leftS = _utils$splitObject6$.leftS;
+    var shiftS = _utils$splitObject6$.shiftS;
+    var rightMs = _utils$splitObject6$.rightMs;
+    var leftMs = _utils$splitObject6$.leftMs;
+    var shiftMs = _utils$splitObject6$.shiftMs;
+    var children = _utils$splitObject6$.children;
+    var others = _utils$splitObject6[1];
+
+
+    var classes = (0, _classnames2.default)((_classNames3 = {}, babelHelpers.defineProperty(_classNames3, 'fj-col' + l, l != null), babelHelpers.defineProperty(_classNames3, 'fj-col-m' + m, m != null), babelHelpers.defineProperty(_classNames3, 'fj-col-s' + s, s != null), babelHelpers.defineProperty(_classNames3, 'fj-col-ms' + ms, ms != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right' + right, right != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left' + left, left != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift' + shift, shift != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-m' + rightM, rightM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-m' + leftM, leftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-m' + shiftM, shiftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-s' + rightS, rightS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-s' + leftS, leftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-s' + shiftS, shiftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-ms' + rightMs, rightMs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-ms' + leftMs, leftMs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-ms' + shiftMs, shiftMs != null), babelHelpers.defineProperty(_classNames3, className, className), _classNames3));
+
+    return templateCol({
+      props: others,
+      classes: classes,
+      children: children
+    });
+  };
+
+  return Col;
+}(_react.Component);
+
+//Clear the float style
+
+
+Col.defaultProps = {
+  fjType: 'Col'
+};
+
+var ClearFix = function (_Component5) {
+  babelHelpers.inherits(ClearFix, _Component5);
+
+  function ClearFix() {
+    babelHelpers.classCallCheck(this, ClearFix);
+    return babelHelpers.possibleConstructorReturn(this, _Component5.apply(this, arguments));
+  }
+
+  ClearFix.prototype.render = function render() {
+    var _classNames4;
+
+    var _utils$splitObject7 = _utils2.default.splitObject(this.props, ['className', 'm', 's', 'ms']);
+
+    var _utils$splitObject8 = babelHelpers.slicedToArray(_utils$splitObject7, 2);
+
+    var _utils$splitObject8$ = _utils$splitObject8[0];
+    var className = _utils$splitObject8$.className;
+    var m = _utils$splitObject8$.m;
+    var s = _utils$splitObject8$.s;
+    var ms = _utils$splitObject8$.ms;
+    var others = _utils$splitObject8[1];
+
+    //Set size
+
+    var size = '';
+    if (m) {
+      size = '-m';
+    }
+    if (s) {
+      size = '-s';
+    }
+    if (ms) {
+      size = '-ms';
+    }
+
+    var classes = (0, _classnames2.default)((_classNames4 = {}, babelHelpers.defineProperty(_classNames4, 'fj-clearfix' + size, true), babelHelpers.defineProperty(_classNames4, className, className), _classNames4));
+
+    return templateClearFix({
+      props: others,
+      classes: classes
+    });
+  };
+
+  return ClearFix;
+}(_react.Component);
+
+ClearFix.defaultProps = {
+  fjType: 'ClearFix'
 };
 exports.Row = Row;
 exports.RowLeft = RowLeft;
 exports.RowRight = RowRight;
+exports.Col = Col;
+exports.ClearFix = ClearFix;
 
 },{"../../utils/utils":28,"./gridLayout.tmpl":10,"classnames":2,"nornj":"nornj","react":"react"}],10:[function(require,module,exports){
 'use strict';
@@ -971,7 +1093,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<div class={classes} style={styles}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n  {children}\n</div>\n'], ['\n<div class={classes} style={styles}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n  {children}\n</div>\n']);
+var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<div class={classes} style={styles}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n  {children}\n</div>\n'], ['\n<div class={classes} style={styles}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n  {children}\n</div>\n']),
+    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<div class={classes}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n  {children}\n</div>\n'], ['\n<div class={classes}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n  {children}\n</div>\n']),
+    _templateObject3 = babelHelpers.taggedTemplateLiteral(['\n<div class={classes}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n</div>\n'], ['\n<div class={classes}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n</div>\n']);
 
 var _nornj = require('nornj');
 
@@ -979,7 +1103,15 @@ var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
 
 var row = (0, _nornj2.default)(_templateObject);
 
-exports.default = { row: row };
+var col = (0, _nornj2.default)(_templateObject2);
+
+var clearFix = (0, _nornj2.default)(_templateObject3);
+
+exports.default = {
+  row: row,
+  col: col,
+  clearFix: clearFix
+};
 
 },{"nornj":"nornj"}],12:[function(require,module,exports){
 'use strict';
@@ -1586,7 +1718,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":28,"./njHelpers":12,"nornj":"nornj","react":"react","react-addons-update":4}],18:[function(require,module,exports){
+},{"../utils/utils":28,"./njHelpers":12,"nornj":"nornj","react":"react","react-addons-update":3}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

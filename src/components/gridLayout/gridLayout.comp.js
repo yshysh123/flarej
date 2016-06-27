@@ -4,7 +4,10 @@ import classNames from 'classnames';
 import utils from '../../utils/utils';
 import tmpl from './gridLayout.tmpl';
 const templateRow = compileComponent(tmpl.row, 'row');
+const templateCol = compileComponent(tmpl.col, 'col');
+const templateClearFix = compileComponent(tmpl.clearFix, 'clearFix');
 
+//Grid row
 class Row extends Component {
   static defaultProps = {
     fjType: 'row'
@@ -44,7 +47,7 @@ class Row extends Component {
   }
 }
 
-function _createRender(context, compClass) {
+function _createRowRender(context, compClass) {
   return function() {
     const [{
       className,
@@ -75,6 +78,7 @@ function _createRender(context, compClass) {
   }.bind(context);
 }
 
+//Grid row left container
 class RowLeft extends Component {
   static defaultProps = {
     fjType: 'rowLeft'
@@ -83,10 +87,11 @@ class RowLeft extends Component {
   constructor(props) {
     super(props);
 
-    this.render = _createRender(this, 'fj-row-left');
+    this.render = _createRowRender(this, 'fj-row-left');
   }
 }
 
+//Grid row right container
 class RowRight extends Component {
   static defaultProps = {
     fjType: 'rowRight'
@@ -95,12 +100,127 @@ class RowRight extends Component {
   constructor(props) {
     super(props);
 
-    this.render = _createRender(this, 'fj-row-right');
+    this.render = _createRowRender(this, 'fj-row-right');
+  }
+}
+
+//Grid col
+class Col extends Component {
+  static defaultProps = {
+    fjType: 'Col'
+  }
+
+  render() {
+    const [{
+      className,
+      l,
+      m,
+      s,
+      ms,
+      right,
+      left,
+      shift,
+      rightM,
+      leftM,
+      shiftM,
+      rightS,
+      leftS,
+      shiftS,
+      rightMs,
+      leftMs,
+      shiftMs,
+      children
+    }, others] = utils.splitObject(this.props, [
+      'className',
+      'l',
+      'm',
+      's',
+      'ms',
+      'right',
+      'left',
+      'shift',
+      'rightM',
+      'leftM',
+      'shiftM',
+      'rightS',
+      'leftS',
+      'shiftS',
+      'rightMs',
+      'leftMs',
+      'shiftMs',
+      'children'
+    ]);
+
+    const classes = classNames({
+      ['fj-col' + l]: l != null,
+      ['fj-col-m' + m]: m != null,
+      ['fj-col-s' + s]: s != null,
+      ['fj-col-ms' + ms]: ms != null,
+      ['fj-col-right' + right]: right != null,
+      ['fj-col-left' + left]: left != null,
+      ['fj-col-shift' + shift]: shift != null,
+      ['fj-col-right-m' + rightM]: rightM != null,
+      ['fj-col-left-m' + leftM]: leftM != null,
+      ['fj-col-shift-m' + shiftM]: shiftM != null,
+      ['fj-col-right-s' + rightS]: rightS != null,
+      ['fj-col-left-s' + leftS]: leftS != null,
+      ['fj-col-shift-s' + shiftS]: shiftS != null,
+      ['fj-col-right-ms' + rightMs]: rightMs != null,
+      ['fj-col-left-ms' + leftMs]: leftMs != null,
+      ['fj-col-shift-ms' + shiftMs]: shiftMs != null,
+      [className]: className
+    });
+
+    return templateCol({
+      props: others,
+      classes,
+      children
+    });
+  }
+}
+
+//Clear the float style
+class ClearFix extends Component {
+  static defaultProps = {
+    fjType: 'ClearFix'
+  }
+
+  render() {
+    const [{
+      className,
+      m,
+      s,
+      ms
+    }, others] = utils.splitObject(this.props, ['className', 'm', 's', 'ms']);
+
+    //Set size
+    let size = '';
+    if(m) {
+      size = '-m';
+    }
+    if(s) {
+      size = '-s';
+    }
+    if(ms) {
+      size = '-ms';
+    }
+
+    const classes = classNames({
+      ['fj-clearfix' + size]: true,
+      [className]: className
+    });
+
+    return templateClearFix({
+      props: others,
+      classes
+    });
   }
 }
 
 export {
   Row,
   RowLeft,
-  RowRight
+  RowRight,
+  Col,
+  ClearFix
 };

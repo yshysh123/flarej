@@ -9,4 +9,25 @@ const row = nj`
 </div>
 `;
 
-export default { row }
+const col = nj`
+<div class={classes}>
+  <#params>
+    <#spreadParam {props}/>
+  </#params>
+  {children}
+</div>
+`;
+
+const clearFix = nj`
+<div class={classes}>
+  <#params>
+    <#spreadParam {props}/>
+  </#params>
+</div>
+`;
+
+export default {
+  row,
+  col,
+  clearFix
+};

@@ -1,6 +1,6 @@
 {
   "name": "flarej",
-  "version": "0.1.1-rc.1",
+  "version": "0.1.2-rc.1",
   "description": "A responsive ui component library",
   "main": "src/base.js",
   "files": [
@@ -56,7 +56,7 @@
     "gulp-template": "^4.0.0",
     "gulp-uglify": "^1.5.1",
     "jsdom": "^8.1.0",
-    "nornj": "0.3.4-rc.4",
+    "nornj": "0.3.4-rc.5",
     "react": "^15.0.1",
     "react-addons-update": "^15.0.1",
     "react-dom": "^15.0.1",
