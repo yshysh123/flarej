@@ -1028,31 +1028,20 @@ var ClearFix = function (_Component5) {
   ClearFix.prototype.render = function render() {
     var _classNames4;
 
-    var _utils$splitObject7 = _utils2.default.splitObject(this.props, ['className', 'm', 's', 'ms']);
+    var _utils$splitObject7 = _utils2.default.splitObject(this.props, ['className', 'l', 'm', 's', 'ms']);
 
     var _utils$splitObject8 = babelHelpers.slicedToArray(_utils$splitObject7, 2);
 
     var _utils$splitObject8$ = _utils$splitObject8[0];
     var className = _utils$splitObject8$.className;
+    var l = _utils$splitObject8$.l;
     var m = _utils$splitObject8$.m;
     var s = _utils$splitObject8$.s;
     var ms = _utils$splitObject8$.ms;
     var others = _utils$splitObject8[1];
 
-    //Set size
 
-    var size = '';
-    if (m) {
-      size = '-m';
-    }
-    if (s) {
-      size = '-s';
-    }
-    if (ms) {
-      size = '-ms';
-    }
-
-    var classes = (0, _classnames2.default)((_classNames4 = {}, babelHelpers.defineProperty(_classNames4, 'fj-clearfix' + size, true), babelHelpers.defineProperty(_classNames4, className, className), _classNames4));
+    var classes = (0, _classnames2.default)((_classNames4 = {}, babelHelpers.defineProperty(_classNames4, 'fj-clearfix', l != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-m', m != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-s', s != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-ms', ms != null), babelHelpers.defineProperty(_classNames4, className, className), _classNames4));
 
     return templateClearFix({
       props: others,

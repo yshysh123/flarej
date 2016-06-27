@@ -188,25 +188,17 @@ class ClearFix extends Component {
   render() {
     const [{
       className,
+      l,
       m,
       s,
       ms
-    }, others] = utils.splitObject(this.props, ['className', 'm', 's', 'ms']);
-
-    //Set size
-    let size = '';
-    if(m) {
-      size = '-m';
-    }
-    if(s) {
-      size = '-s';
-    }
-    if(ms) {
-      size = '-ms';
-    }
+    }, others] = utils.splitObject(this.props, ['className', 'l', 'm', 's', 'ms']);
 
     const classes = classNames({
-      ['fj-clearfix' + size]: true,
+      ['fj-clearfix']: l != null,
+      ['fj-clearfix-m']: m != null,
+      ['fj-clearfix-s']: s != null,
+      ['fj-clearfix-ms']: ms != null,
       [className]: className
     });
 
