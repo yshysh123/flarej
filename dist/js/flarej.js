@@ -1118,69 +1118,10 @@ require('./pagination/pagination.tmplHelper');
 (0, _nornj.registerFilter)({
   fixIconSize: function fixIconSize(val) {
     return val + (!_utils2.default.isWebkit ? ' fj-fixsize' : '');
-  },
-  lt: function lt(val1, val2, noEqual) {
-    var ret = void 0;
-    val1 = parseFloat(val1);
-    val2 = parseFloat(val2);
-
-    if (noEqual) {
-      ret = val1 < val2;
-    } else {
-      ret = val1 <= val2;
-    }
-
-    return ret;
-  },
-  gt: function gt(val1, val2, noEqual) {
-    var ret = void 0;
-    val1 = parseFloat(val1);
-    val2 = parseFloat(val2);
-
-    if (noEqual) {
-      ret = val1 > val2;
-    } else {
-      ret = val1 >= val2;
-    }
-
-    return ret;
-  },
-  add: function add(val1, val2) {
-    return val1 + parseInt(val2, 10);
-  },
-  int: function int(val) {
-    return parseInt(val, 10);
-  },
-  bool: function bool(val) {
-    if (val === 'false') {
-      return false;
-    }
-
-    return Boolean(val);
   }
 });
 
 (0, _nornj.registerExpr)({
-  'for': function _for() {
-    var start = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
-    var end = arguments[1];
-
-    var ret = [];
-    start = parseInt(start, 10);
-    end = parseInt(end, 10);
-
-    for (; start <= end; start++) {
-      var retI = this.result({
-        loop: true,
-        item: this.data[0],
-        index: start
-      });
-
-      ret = _nornj2.default.listPush(ret, retI, true);
-    }
-
-    return ret;
-  },
   EmptyElem: function EmptyElem() {
     return React.createElement('div', { className: 'fj-empty-elem' });
   }

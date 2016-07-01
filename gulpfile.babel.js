@@ -1,33 +1,34 @@
-﻿var gulp = require('gulp'),
-  browserify = require('browserify'),
-  source = require('vinyl-source-stream'),
-  buffer = require('vinyl-buffer'),
-  standalonify = require('standalonify'),
-  watchify = require('watchify'),
-  babelify = require('babelify'),
-  uglify = require('gulp-uglify'),
-  jasmine = require('gulp-jasmine'),
-  template = require('gulp-template'),
-  rename = require('gulp-rename'),
-  concat = require('gulp-concat'),
-  sequence = require('gulp-sequence'),
-  gulpif = require('gulp-if'),
-  less = require('gulp-less'),
-  cssnano = require('gulp-cssnano'),
-  eslint = require('gulp-eslint'),
-  notify = require('gulp-notify'),
-  postcss = require('gulp-postcss'),
-  autoprefixer = require('autoprefixer'),
-  argv = require('yargs').argv,
-  glob = require('glob'),
-  browserSync = require('browser-sync').create(),
-  reload = browserSync.reload,
-  precompiler = require('nornj/precompiler');
+﻿import gulp from 'gulp';
+import babel from 'gulp-babel';
+import browserify from 'browserify';
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
+import standalonify from 'standalonify';
+import watchify from 'watchify';
+import babelify from 'babelify';
+import uglify from 'gulp-uglify';
+import jasmine from 'gulp-jasmine';
+import template from 'gulp-template';
+import rename from 'gulp-rename';
+import concat from 'gulp-concat';
+import sequence from 'gulp-sequence';
+import gulpif from 'gulp-if';
+import less from 'gulp-less';
+import cssnano from 'gulp-cssnano';
+import eslint from 'gulp-eslint';
+import notify from 'gulp-notify';
+import postcss from 'gulp-postcss';
+import autoprefixer from 'autoprefixer';
+import { argv } from 'yargs';
+import glob from 'glob';
+import { create } from 'browser-sync';
+const reload = create().reload;
+import precompiler from 'nornj/precompiler';
 
-var libNameSpace = 'fj';
+let libNameSpace = 'fj';
 
 function getJsLibName() {
-  var libName = 'flarej.js';
+  let libName = 'flarej.js';
   if (argv.p) {
     libName = 'flarej.min.js';
   }
@@ -36,7 +37,7 @@ function getJsLibName() {
 }
 
 function getCssLibName() {
-  var libName = 'flarej.css';
+  let libName = 'flarej.css';
   if (argv.p) {
     libName = 'flarej.min.css';
   }
@@ -45,7 +46,7 @@ function getCssLibName() {
 }
 
 function getThemeLibName(themeName) {
-  var libName = 'flarej.theme.' + themeName + '.css';
+  let libName = 'flarej.theme.' + themeName + '.css';
   if (argv.p) {
     libName = 'flarej.theme.' + themeName + '.min.css';
   }
@@ -53,7 +54,15 @@ function getThemeLibName(themeName) {
   return libName;
 }
 
-var b = browserify({
+function precompileNj(isDev) {
+  precompiler({
+    source: __dirname + '/src/components/**/*.nj.js',
+    exprRule: '#',
+    devMode: isDev
+  });
+}
+
+let b = browserify({
   entries: './src/base.js',
   //standalone: 'FlareJ'
 })
@@ -66,35 +75,24 @@ var b = browserify({
   }
 })
 .transform(babelify, {  //Transform es6 to es5.
-  presets: ['es2015', 'stage-1', 'react'],
-  plugins: [
-      ['transform-class-properties', { "loose": false }],
-      'transform-object-assign',
-      'external-helpers',
-      ['transform-es2015-classes', { "loose": true }],
-      ['transform-es2015-modules-commonjs', { "loose": false }]
-  ]
+  plugins: ['external-helpers']
 });
 
 b.on('error', function (e) {
   console.log(e);
 });
 
-var isBundling = false,
+let isBundling = false,
   isPrecompileTmpl = true,
   isHmr = false;
 
 function bundle() {
   isBundling = true;
-  var jsLibName = getJsLibName();
+  let jsLibName = getJsLibName();
 
   //Precompile nornj templates
   if (isPrecompileTmpl) {
-    precompiler({
-      source: __dirname + '/src/components/**/*.nj.js',
-      exprRule: '#',
-      devMode: !argv.p
-    });
+    precompileNj(!argv.p);
   }
 
   return b.bundle()
@@ -156,12 +154,12 @@ gulp.task('hmr', function () {
   gulp.start('watch-js');
 });
 
-var isBuildingCss = false,
+let isBuildingCss = false,
   isBuildingTheme = false;
 
 gulp.task('build-css', function () {
   isBuildingCss = true;
-  var cssLibName = getCssLibName();
+  let cssLibName = getCssLibName();
 
   return gulp.src('./src/styles/base.less')
     .pipe(template({
@@ -185,7 +183,7 @@ gulp.task('build-theme', function () {
   glob('./src/styles/theme/**/base.less', {}, function (err, files) {
     files.forEach(function (file) {
       isBuildingTheme = true;
-      var filePath = file.substring(0, file.lastIndexOf("/")),
+      let filePath = file.substring(0, file.lastIndexOf("/")),
         themeName = filePath.substr(filePath.lastIndexOf("/") + 1),
         themeLibName = getThemeLibName(themeName);
 
@@ -236,6 +234,15 @@ gulp.task('build-lib-font', function () {
 
 gulp.task('build-all-lib', ['build-lib-css', 'build-lib-font']);
 gulp.task('build', ['build-all-js', 'build-all-css', 'build-all-lib']);
+
+//Convert es6 code to es5 from src to lib
+gulp.task("lib", function () {
+  precompileNj(false);
+
+  return gulp.src(['./src/**/*.js', '!./src/components/**/*.nj.js'])
+    .pipe(babel())
+    .pipe(gulp.dest('./lib'));
+});
 
 //Unit testing
 gulp.task("test", function () {
