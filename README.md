@@ -7,3 +7,15 @@
 目前已完成的组件：
 * Pagination(分页)
 * GridLayout(栅格布局)
+
+### 安装
+
+使用npm安装:
+
+```sh
+npm install --save flarej
+```
+
+### 浏览器支持
+
+所有现代浏览器以及Internet Explorer 9+。
