@@ -1,4 +1,7 @@
-﻿import { compileComponent } from 'nornj';
+﻿import {
+  compileComponent,
+  registerComponent
+} from 'nornj';
 import Widget from '../widget';
 import utils from '../../utils/utils';
 import tmpl from './pagination.tmpl';
@@ -188,5 +191,7 @@ class Pagination extends Widget {
     return this.template(state, this.props, extra);
   }
 }
+
+registerComponent({ 'fj-Pagination': Pagination });
 
 export default Pagination;

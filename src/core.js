@@ -3,7 +3,8 @@
   initTheme: 'concise',
   ver: null,
   themeStoreName: 'fj_theme',
-  GB2312Pinyin: {},  //Chinese pinyin fonts
+  //Chinese pinyin fonts
+  GB2312Pinyin: {},
 };
 
 //Set globel configs

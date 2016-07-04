@@ -1,5 +1,9 @@
 ﻿import { Component } from 'react';
-import { compileComponent } from 'nornj';
+import {
+  compileComponent,
+  registerComponent
+} from 'nornj';
+import '../../njConfig';
 import classNames from 'classnames';
 import utils from '../../utils/utils';
 import tmpl from './gridLayout.tmpl';
@@ -208,6 +212,14 @@ class ClearFix extends Component {
     });
   }
 }
+
+registerComponent({
+  'fj-Row': Row,
+  'fj-RowLeft': RowLeft,
+  'fj-RowRight': RowRight,
+  'fj-Col': Col,
+  'fj-ClearFix': ClearFix
+});
 
 export {
   Row,

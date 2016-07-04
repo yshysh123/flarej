@@ -771,8 +771,6 @@ var _nornj = require('nornj');
 
 var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
 
-require('./njConfig');
-
 var _utils = require('./utils/utils');
 
 var _utils2 = babelHelpers.interopRequireDefault(_utils);
@@ -783,21 +781,18 @@ var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
 var _gridLayout = require('./components/gridLayout/gridLayout.comp');
 
-var widgets = {
-  'fj-Pagination': _pagination2.default,
-  'fj-Row': _gridLayout.Row,
-  'fj-RowLeft': _gridLayout.RowLeft,
-  'fj-RowRight': _gridLayout.RowRight,
-  'fj-Col': _gridLayout.Col,
-  'fj-ClearFix': _gridLayout.ClearFix
-};
-
-babelHelpers.extends(_core2.default, _utils2.default, widgets);
-_nornj2.default.registerComponent(widgets);
+babelHelpers.extends(_core2.default, _utils2.default, {
+  Pagination: _pagination2.default,
+  Row: _gridLayout.Row,
+  RowLeft: _gridLayout.RowLeft,
+  RowRight: _gridLayout.RowRight,
+  Col: _gridLayout.Col,
+  ClearFix: _gridLayout.ClearFix
+});
 
 module.exports = _core2.default;
 
-},{"./components/gridLayout/gridLayout.comp":9,"./components/pagination/pagination.comp":13,"./core":18,"./njConfig":19,"./utils/utils":28,"nornj":"nornj"}],9:[function(require,module,exports){
+},{"./components/gridLayout/gridLayout.comp":9,"./components/pagination/pagination.comp":13,"./core":18,"./utils/utils":28,"nornj":"nornj"}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -808,6 +803,8 @@ exports.ClearFix = exports.Col = exports.RowRight = exports.RowLeft = exports.Ro
 var _react = require('react');
 
 var _nornj = require('nornj');
+
+require('../../njConfig');
 
 var _classnames = require('classnames');
 
@@ -1055,13 +1052,23 @@ var ClearFix = function (_Component5) {
 ClearFix.defaultProps = {
   fjType: 'ClearFix'
 };
+
+
+(0, _nornj.registerComponent)({
+  'fj-Row': Row,
+  'fj-RowLeft': RowLeft,
+  'fj-RowRight': RowRight,
+  'fj-Col': Col,
+  'fj-ClearFix': ClearFix
+});
+
 exports.Row = Row;
 exports.RowLeft = RowLeft;
 exports.RowRight = RowRight;
 exports.Col = Col;
 exports.ClearFix = ClearFix;
 
-},{"../../utils/utils":28,"./gridLayout.tmpl":10,"classnames":2,"nornj":"nornj","react":"react"}],10:[function(require,module,exports){
+},{"../../njConfig":19,"../../utils/utils":28,"./gridLayout.tmpl":10,"classnames":2,"nornj":"nornj","react":"react"}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1360,6 +1367,10 @@ Pagination.defaultProps = {
     }
   }
 };
+
+
+(0, _nornj.registerComponent)({ 'fj-Pagination': Pagination });
+
 exports.default = Pagination;
 
 },{"../../utils/utils":28,"../widget":17,"./pagination.tmpl":14,"nornj":"nornj"}],14:[function(require,module,exports){
@@ -1488,6 +1499,8 @@ var _reactAddonsUpdate = require('react-addons-update');
 var _reactAddonsUpdate2 = babelHelpers.interopRequireDefault(_reactAddonsUpdate);
 
 var _nornj = require('nornj');
+
+require('../njConfig');
 
 var _utils = require('../utils/utils');
 
@@ -1648,7 +1661,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../utils/utils":28,"./njHelpers":12,"nornj":"nornj","react":"react","react-addons-update":3}],18:[function(require,module,exports){
+},{"../njConfig":19,"../utils/utils":28,"./njHelpers":12,"nornj":"nornj","react":"react","react-addons-update":3}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1659,10 +1672,11 @@ var fj = {
   initTheme: 'concise',
   ver: null,
   themeStoreName: 'fj_theme',
-  GB2312Pinyin: {} };
+  //Chinese pinyin fonts
+  GB2312Pinyin: {}
+};
 
 //Set globel configs
-//Chinese pinyin fonts
 fj.setConfig = function (config) {
   return babelHelpers.extends(fj, config);
 };

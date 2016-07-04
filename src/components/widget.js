@@ -1,6 +1,7 @@
 ﻿import { Component } from 'react';
 import update from 'react-addons-update';
 import { each } from 'nornj';
+import '../njConfig';
 import utils from '../utils/utils';
 import './njHelpers';
 let win = window;

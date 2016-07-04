@@ -1,3 +1,3 @@
-﻿import { registerTagNamespace, setTmplRule } from 'nornj';
+﻿import { setTmplRule } from 'nornj';
 
 setTmplRule(null, null, '#');
