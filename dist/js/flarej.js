@@ -1089,9 +1089,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<div class={classes} style={styles}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n  {children}\n</div>\n'], ['\n<div class={classes} style={styles}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n  {children}\n</div>\n']),
-    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<div class={classes}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n  {children}\n</div>\n'], ['\n<div class={classes}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n  {children}\n</div>\n']),
-    _templateObject3 = babelHelpers.taggedTemplateLiteral(['\n<div class={classes}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n</div>\n'], ['\n<div class={classes}>\n  <#params>\n    <#spreadParam {props}/>\n  </#params>\n</div>\n']);
+var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} style={styles}>\n  {children}\n</div>\n'], ['\n<div {...props} class={classes} style={styles}>\n  {children}\n</div>\n']),
+    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes}>\n  {children}\n</div>\n'], ['\n<div {...props} class={classes}>\n  {children}\n</div>\n']),
+    _templateObject3 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} />\n'], ['\n<div {...props} class={classes} />\n']);
 
 var _nornj = require('nornj');
 
