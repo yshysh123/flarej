@@ -103,7 +103,7 @@ export default nj`
                  ref=pageTxt
                  defaultValue={pageIndex}
                  class="fj-form-elem fj-pagn-pageindex"
-                 autocomplete=off
+                 autoComplete=off
                  onBlur={pageIndexBlur}
           />页
           <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>
