@@ -84,7 +84,7 @@ b.on('error', function (e) {
 
 let isBundling = false,
   isPrecompileTmpl = true,
-  isHmr = false;
+  isBrowserSync = false;
 
 function bundle() {
   isBundling = true;
@@ -117,7 +117,7 @@ function bundle() {
         .pipe(gulp.dest('./dist/js').on('end', function () {
           isBundling = false;
         }))
-        .pipe(gulpif(isHmr, reload({stream: true})));
+        .pipe(gulpif(isBrowserSync, reload({stream: true})));
     }));
 }
 
@@ -144,13 +144,13 @@ gulp.task('watch-js', function () {
   return bundle();
 });
 
-gulp.task('hmr', function () {
+gulp.task('browser-sync', function () {
   browserSync.init({
     ghostMode: false,
     server: "./"
   });
 
-  isHmr = true;
+  isBrowserSync = true;
   gulp.start('watch-js');
 });
 

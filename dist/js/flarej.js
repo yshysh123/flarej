@@ -380,40 +380,12 @@
 // shim for using process in browser
 
 var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-(function () {
-  try {
-    cachedSetTimeout = setTimeout;
-  } catch (e) {
-    cachedSetTimeout = function () {
-      throw new Error('setTimeout is not defined');
-    }
-  }
-  try {
-    cachedClearTimeout = clearTimeout;
-  } catch (e) {
-    cachedClearTimeout = function () {
-      throw new Error('clearTimeout is not defined');
-    }
-  }
-} ())
 var queue = [];
 var draining = false;
 var currentQueue;
 var queueIndex = -1;
 
 function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
     draining = false;
     if (currentQueue.length) {
         queue = currentQueue.concat(queue);
@@ -429,7 +401,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = cachedSetTimeout(cleanUpNextTick);
+    var timeout = setTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -446,7 +418,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    cachedClearTimeout(timeout);
+    clearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -458,7 +430,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        cachedSetTimeout(drainQueue, 0);
+        setTimeout(drainQueue, 0);
     }
 };
 
@@ -549,46 +521,7 @@ process.umask = function() { return 0; };
 
 },{}],3:[function(require,module,exports){
 module.exports = require('react/lib/update');
-},{"react/lib/update":5}],4:[function(require,module,exports){
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule reactProdInvariant
- */
-'use strict';
-
-/**
- * WARNING: DO NOT manually require this module.
- * This is a replacement for `invariant(...)` used by the error code system
- * and will _only_ be required by the corresponding babel pass.
- * It always throws.
- */
-
-function reactProdInvariant(code) {
-  var argCount = arguments.length - 1;
-
-  var message = 'Minified React error #' + code + '; visit ' + 'http://facebook.github.io/react/docs/error-decoder.html?invariant=' + code;
-
-  for (var argIdx = 0; argIdx < argCount; argIdx++) {
-    message += '&args[]=' + encodeURIComponent(arguments[argIdx + 1]);
-  }
-
-  message += ' for the full message or use the non-minified dev environment' + ' for full errors and additional helpful warnings.';
-
-  var error = new Error(message);
-  error.name = 'Invariant Violation';
-  error.framesToPop = 1; // we don't care about reactProdInvariant's own frame
-
-  throw error;
-}
-
-module.exports = reactProdInvariant;
-},{}],5:[function(require,module,exports){
+},{"react/lib/update":4}],4:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -605,8 +538,7 @@ module.exports = reactProdInvariant;
 
 'use strict';
 
-var _prodInvariant = require('./reactProdInvariant'),
-    _assign = require('object-assign');
+var _assign = require('object-assign');
 
 var keyOf = require('fbjs/lib/keyOf');
 var invariant = require('fbjs/lib/invariant');
@@ -638,20 +570,16 @@ ALL_COMMANDS_LIST.forEach(function (command) {
 });
 
 function invariantArrayCase(value, spec, command) {
-  !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected target of %s to be an array; got %s.', command, value) : _prodInvariant('1', command, value) : void 0;
+  !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected target of %s to be an array; got %s.', command, value) : invariant(false) : void 0;
   var specValue = spec[command];
-  !Array.isArray(specValue) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array; got %s. Did you forget to wrap your parameter in an array?', command, specValue) : _prodInvariant('2', command, specValue) : void 0;
+  !Array.isArray(specValue) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array; got %s. ' + 'Did you forget to wrap your parameter in an array?', command, specValue) : invariant(false) : void 0;
 }
 
-/**
- * Returns a updated shallow copy of an object without mutating the original.
- * See https://facebook.github.io/react/docs/update.html for details.
- */
 function update(value, spec) {
-  !(typeof spec === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): You provided a key path to update() that did not contain one of %s. Did you forget to include {%s: ...}?', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : _prodInvariant('3', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : void 0;
+  !(typeof spec === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): You provided a key path to update() that did not contain one ' + 'of %s. Did you forget to include {%s: ...}?', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : invariant(false) : void 0;
 
   if (hasOwnProperty.call(spec, COMMAND_SET)) {
-    !(Object.keys(spec).length === 1) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Cannot have more than one key in an object with %s', COMMAND_SET) : _prodInvariant('4', COMMAND_SET) : void 0;
+    !(Object.keys(spec).length === 1) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Cannot have more than one key in an object with %s', COMMAND_SET) : invariant(false) : void 0;
 
     return spec[COMMAND_SET];
   }
@@ -660,8 +588,8 @@ function update(value, spec) {
 
   if (hasOwnProperty.call(spec, COMMAND_MERGE)) {
     var mergeObj = spec[COMMAND_MERGE];
-    !(mergeObj && typeof mergeObj === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a spec of type \'object\'; got %s', COMMAND_MERGE, mergeObj) : _prodInvariant('5', COMMAND_MERGE, mergeObj) : void 0;
-    !(nextValue && typeof nextValue === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a target of type \'object\'; got %s', COMMAND_MERGE, nextValue) : _prodInvariant('6', COMMAND_MERGE, nextValue) : void 0;
+    !(mergeObj && typeof mergeObj === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a spec of type \'object\'; got %s', COMMAND_MERGE, mergeObj) : invariant(false) : void 0;
+    !(nextValue && typeof nextValue === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a target of type \'object\'; got %s', COMMAND_MERGE, nextValue) : invariant(false) : void 0;
     _assign(nextValue, spec[COMMAND_MERGE]);
   }
 
@@ -680,16 +608,16 @@ function update(value, spec) {
   }
 
   if (hasOwnProperty.call(spec, COMMAND_SPLICE)) {
-    !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected %s target to be an array; got %s', COMMAND_SPLICE, value) : _prodInvariant('7', COMMAND_SPLICE, value) : void 0;
-    !Array.isArray(spec[COMMAND_SPLICE]) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : _prodInvariant('8', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : void 0;
+    !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected %s target to be an array; got %s', COMMAND_SPLICE, value) : invariant(false) : void 0;
+    !Array.isArray(spec[COMMAND_SPLICE]) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. ' + 'Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : invariant(false) : void 0;
     spec[COMMAND_SPLICE].forEach(function (args) {
-      !Array.isArray(args) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : _prodInvariant('8', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : void 0;
+      !Array.isArray(args) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. ' + 'Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : invariant(false) : void 0;
       nextValue.splice.apply(nextValue, args);
     });
   }
 
   if (hasOwnProperty.call(spec, COMMAND_APPLY)) {
-    !(typeof spec[COMMAND_APPLY] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be a function; got %s.', COMMAND_APPLY, spec[COMMAND_APPLY]) : _prodInvariant('9', COMMAND_APPLY, spec[COMMAND_APPLY]) : void 0;
+    !(typeof spec[COMMAND_APPLY] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be a function; got %s.', COMMAND_APPLY, spec[COMMAND_APPLY]) : invariant(false) : void 0;
     nextValue = spec[COMMAND_APPLY](nextValue);
   }
 
@@ -704,7 +632,7 @@ function update(value, spec) {
 
 module.exports = update;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":4,"_process":1,"fbjs/lib/invariant":6,"fbjs/lib/keyOf":7,"object-assign":8}],6:[function(require,module,exports){
+},{"_process":1,"fbjs/lib/invariant":5,"fbjs/lib/keyOf":6,"object-assign":7}],5:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -756,7 +684,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":1}],7:[function(require,module,exports){
+},{"_process":1}],6:[function(require,module,exports){
 "use strict";
 
 /**
@@ -779,7 +707,7 @@ module.exports = invariant;
  * 'xa12' in that case. Resolve keys you want to use once at startup time, then
  * reuse those resolutions.
  */
-var keyOf = function keyOf(oneKeyObj) {
+var keyOf = function (oneKeyObj) {
   var key;
   for (key in oneKeyObj) {
     if (!oneKeyObj.hasOwnProperty(key)) {
@@ -791,9 +719,9 @@ var keyOf = function keyOf(oneKeyObj) {
 };
 
 module.exports = keyOf;
-},{}],8:[function(require,module,exports){
-'use strict';
+},{}],7:[function(require,module,exports){
 /* eslint-disable no-unused-vars */
+'use strict';
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
@@ -805,51 +733,7 @@ function toObject(val) {
 	return Object(val);
 }
 
-function shouldUseNative() {
-	try {
-		if (!Object.assign) {
-			return false;
-		}
-
-		// Detect buggy property enumeration order in older V8 versions.
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-		var test1 = new String('abc');  // eslint-disable-line
-		test1[5] = 'de';
-		if (Object.getOwnPropertyNames(test1)[0] === '5') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test2 = {};
-		for (var i = 0; i < 10; i++) {
-			test2['_' + String.fromCharCode(i)] = i;
-		}
-		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-			return test2[n];
-		});
-		if (order2.join('') !== '0123456789') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test3 = {};
-		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-			test3[letter] = letter;
-		});
-		if (Object.keys(Object.assign({}, test3)).join('') !==
-				'abcdefghijklmnopqrst') {
-			return false;
-		}
-
-		return true;
-	} catch (e) {
-		// We don't expect any of the above to throw, but better to be safe.
-		return false;
-	}
-}
-
-module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+module.exports = Object.assign || function (target, source) {
 	var from;
 	var to = toObject(target);
 	var symbols;
@@ -876,7 +760,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 var _core = require('./core');
@@ -908,7 +792,7 @@ babelHelpers.extends(_core2.default, _utils2.default, {
 
 module.exports = _core2.default;
 
-},{"./components/gridLayout/gridLayout.comp":10,"./components/pagination/pagination.comp":14,"./core":19,"./utils/utils":29,"nornj":"nornj"}],10:[function(require,module,exports){
+},{"./components/gridLayout/gridLayout.comp":9,"./components/pagination/pagination.comp":13,"./core":18,"./utils/utils":28,"nornj":"nornj"}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1184,7 +1068,7 @@ exports.RowRight = RowRight;
 exports.Col = Col;
 exports.ClearFix = ClearFix;
 
-},{"../../njConfig":20,"../../utils/utils":29,"./gridLayout.tmpl":11,"classnames":2,"nornj":"nornj","react":"react"}],11:[function(require,module,exports){
+},{"../../njConfig":19,"../../utils/utils":28,"./gridLayout.tmpl":10,"classnames":2,"nornj":"nornj","react":"react"}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1198,7 +1082,7 @@ var _gridLayoutTmplNj2 = babelHelpers.interopRequireDefault(_gridLayoutTmplNj);
 
 exports.default = _gridLayoutTmplNj2.default;
 
-},{"./gridLayout.tmpl.nj.js":12}],12:[function(require,module,exports){
+},{"./gridLayout.tmpl.nj.js":11}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1225,7 +1109,7 @@ exports.default = {
   clearFix: clearFix
 };
 
-},{"nornj":"nornj"}],13:[function(require,module,exports){
+},{"nornj":"nornj"}],12:[function(require,module,exports){
 'use strict';
 
 var _nornj = require('nornj');
@@ -1250,7 +1134,7 @@ require('./pagination/pagination.tmplHelper');
   }
 });
 
-},{"../utils/utils":29,"./pagination/pagination.tmplHelper":17,"nornj":"nornj"}],14:[function(require,module,exports){
+},{"../utils/utils":28,"./pagination/pagination.tmplHelper":16,"nornj":"nornj"}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1489,7 +1373,7 @@ Pagination.defaultProps = {
 
 exports.default = Pagination;
 
-},{"../../utils/utils":29,"../widget":18,"./pagination.tmpl":15,"nornj":"nornj"}],15:[function(require,module,exports){
+},{"../../utils/utils":28,"../widget":17,"./pagination.tmpl":14,"nornj":"nornj"}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1503,7 +1387,7 @@ var _paginationTmplNj2 = babelHelpers.interopRequireDefault(_paginationTmplNj);
 
 exports.default = _paginationTmplNj2.default;
 
-},{"./pagination.tmpl.nj.js":16}],16:[function(require,module,exports){
+},{"./pagination.tmpl.nj.js":15}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1530,7 +1414,7 @@ var pageBtns = (0, _nornj2.default)(_templateObject4, partPage1, partPage2, part
 
 exports.default = (0, _nornj2.default)(_templateObject5, pageBtns);
 
-},{"nornj":"nornj"}],17:[function(require,module,exports){
+},{"nornj":"nornj"}],16:[function(require,module,exports){
 'use strict';
 
 var _nornj = require('nornj');
@@ -1601,7 +1485,7 @@ var _nornj = require('nornj');
   }
 });
 
-},{"nornj":"nornj"}],18:[function(require,module,exports){
+},{"nornj":"nornj"}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1777,7 +1661,7 @@ var Widget = function (_Component) {
 
 exports.default = Widget;
 
-},{"../njConfig":20,"../utils/utils":29,"./njHelpers":13,"nornj":"nornj","react":"react","react-addons-update":3}],19:[function(require,module,exports){
+},{"../njConfig":19,"../utils/utils":28,"./njHelpers":12,"nornj":"nornj","react":"react","react-addons-update":3}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1799,14 +1683,14 @@ fj.setConfig = function (config) {
 
 exports.default = fj;
 
-},{}],20:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 var _nornj = require('nornj');
 
 (0, _nornj.setTmplRule)(null, null, '#');
 
-},{"nornj":"nornj"}],21:[function(require,module,exports){
+},{"nornj":"nornj"}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1890,7 +1774,7 @@ var isMobile = exports.isMobile = isAndroid || isIos || isWindowsPhone;
 //Webkit and blink core browser
 var isWebkit = exports.isWebkit = isChrome || isSafari || isAndroid || isIos;
 
-},{}],22:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1957,7 +1841,7 @@ var splitObject = exports.splitObject = function splitObject(obj, parts) {
   return [left, right];
 };
 
-},{"../core":19}],23:[function(require,module,exports){
+},{"../core":18}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2087,7 +1971,7 @@ exports.dateDiff = dateDiff;
 exports.toFormatString = toFormatString;
 exports.GetDateStr = GetDateStr;
 
-},{"./math":26}],24:[function(require,module,exports){
+},{"./math":25}],23:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2151,7 +2035,7 @@ var pollDo = exports.pollDo = function pollDo(fn, timeOut, doName, obj) {
   return siv;
 };
 
-},{}],25:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2173,7 +2057,7 @@ var off = exports.off = function off(name, fn, elem) {
   (elem || doc).removeEventListener(name, fn, useCapture);
 };
 
-},{}],26:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2230,8 +2114,8 @@ var outputCents = function outputCents(amount, bit) {
     amount = (amount + '').match(/\.\d*$/g); //截取小数点及小数部分
     //amount = (amount + '').replace(/0+?$/g, '');  //去除小数点后多余的0
   } else {
-    amount = '';
-  }
+      amount = '';
+    }
 
   return amount;
 };
@@ -2246,7 +2130,7 @@ exports.outputDollars = outputDollars;
 exports.outputCents = outputCents;
 exports.addZero = addZero;
 
-},{}],27:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2304,7 +2188,7 @@ exports.enFirst = enFirst;
 exports.chFirst = chFirst;
 exports.percent = percent;
 
-},{}],28:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2467,7 +2351,7 @@ exports.compareDate = compareDate;
 exports.compareStringEN = compareStringEN;
 exports.compareStringCH = compareStringCH;
 
-},{"../core":19,"./date":23,"./regexp":27}],29:[function(require,module,exports){
+},{"../core":18,"./date":22,"./regexp":26}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2512,5 +2396,5 @@ babelHelpers.extends(utils, common, browsers, delayOperate, domEvent, { RegExp: 
 
 exports.default = utils;
 
-},{"./browsers":21,"./common":22,"./date":23,"./delayOperate":24,"./domEvent":25,"./math":26,"./regexp":27,"./sort":28}]},{},[9]);
-var _r=_m(9);_g.fj=_g.FlareJ=_r;return _r;})})(typeof window!=='undefined'?window:(typeof global!=='undefined'?global:(typeof self!=='undefined'?self:this)));
+},{"./browsers":20,"./common":21,"./date":22,"./delayOperate":23,"./domEvent":24,"./math":25,"./regexp":26,"./sort":27}]},{},[8]);
+var _r=_m(8);_g.fj=_g.FlareJ=_r;return _r;})})(typeof window!=='undefined'?window:(typeof global!=='undefined'?global:(typeof self!=='undefined'?self:this)));
