@@ -19,4 +19,6 @@ Object.assign(fj, utils, {
   ClearFix
 });
 
-module.exports = fj;
+let global = typeof self !== 'undefined' ? self : this;
+let libName = typeof G_NS !== 'undefined' ? G_NS : 'fj';
+module.exports = global.FlareJ = global[libName] = fj;

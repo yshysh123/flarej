@@ -1,17 +1,13 @@
 ﻿import gulp from 'gulp';
 import babel from 'gulp-babel';
-import browserify from 'browserify';
-import source from 'vinyl-source-stream';
-import buffer from 'vinyl-buffer';
-import standalonify from 'standalonify';
-import watchify from 'watchify';
-import babelify from 'babelify';
+import webpack from 'webpack';
+import webpackStream from 'webpack-stream';
 import uglify from 'gulp-uglify';
 import jasmine from 'gulp-jasmine';
 import template from 'gulp-template';
+import sourcemaps from 'gulp-sourcemaps';
 import rename from 'gulp-rename';
 import concat from 'gulp-concat';
-import sequence from 'gulp-sequence';
 import gulpif from 'gulp-if';
 import less from 'gulp-less';
 import cssnano from 'gulp-cssnano';
@@ -21,8 +17,6 @@ import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 import { argv } from 'yargs';
 import glob from 'glob';
-import { create } from 'browser-sync';
-const reload = create().reload;
 import precompiler from 'nornj/precompiler';
 
 let libNameSpace = 'fj';
@@ -54,6 +48,42 @@ function getThemeLibName(themeName) {
   return libName;
 }
 
+//The packages need to be excluded by webpack
+const webpackExternals = {
+  'nornj': {
+    root: 'nj',
+    commonjs2: 'nornj',
+    commonjs: 'nornj',
+    amd: 'nornj'
+  },
+  'react': {
+    root: 'React',
+    commonjs2: 'react',
+    commonjs: 'react',
+    amd: 'react'
+  },
+  'react-dom': {
+    root: 'ReactDom',
+    commonjs2: 'react-dom',
+    commonjs: 'react-dom',
+    amd: 'react-dom'
+  }
+};
+
+//Handle error
+function handlebuildError() {
+  let args = Array.prototype.slice.call(arguments);
+
+  // Send error to notification center with gulp-notify
+  notify.onError({
+    title: "Compile Error",
+    message: "<%= error.message %>"
+  }).apply(this, args);
+
+  // Keep gulp from hanging on this task
+  this.emit('end');
+}
+
 function precompileNj(isDev) {
   precompiler({
     source: __dirname + '/src/components/**/*.nj.js',
@@ -62,102 +92,55 @@ function precompileNj(isDev) {
   });
 }
 
-let b = browserify({
-  entries: './src/base.js',
-  //standalone: 'FlareJ'
-})
-.plugin(standalonify, {  //Build UMD standalone bundle and support dependencies.
-  name: [libNameSpace, 'FlareJ'],
-  deps: {
-    'nornj': 'nj',
-    'react': 'React',
-    'react-dom': 'ReactDOM'
-  }
-})
-.transform(babelify, {  //Transform es6 to es5.
-  plugins: ['external-helpers']
-});
+gulp.task('build-js', () => {
+  precompileNj(!argv.p);
 
-b.on('error', function (e) {
-  console.log(e);
-});
+  let jsLibName = getJsLibName(),
+    plugins = [new webpack.DefinePlugin({
+      G_NS: JSON.stringify(libNameSpace)
+    })];
 
-let isBundling = false,
-  isPrecompileTmpl = true,
-  isBrowserSync = false;
-
-function bundle() {
-  isBundling = true;
-  let jsLibName = getJsLibName();
-
-  //Precompile nornj templates
-  if (isPrecompileTmpl) {
-    precompileNj(!argv.p);
-  }
-
-  return b.bundle()
-    .on('error', function() {
-      let args = Array.prototype.slice.call(arguments);
-    
-      //Send error to notification center with gulp-notify
-      notify.onError({
-        title: "Compile Error",
-        message: "<%= error.message %>"
-      }).apply(this, args);
-    
-      //Keep gulp from hanging on this task
-      this.emit('end');
-    })
-    .pipe(source(jsLibName))
-    .pipe(buffer())
-    .pipe(gulp.dest('./dist/js').on('end', function () {
-      gulp.src(['./vendor/babelHelpers.js', './dist/js/' + jsLibName])
-        .pipe(concat(jsLibName))
-        .pipe(gulpif(argv.p, uglify()))
-        .pipe(gulp.dest('./dist/js').on('end', function () {
-          isBundling = false;
-        }))
-        .pipe(gulpif(isBrowserSync, reload({stream: true})));
+  if(argv.p) {
+    plugins.push(new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        pure_getters: true,
+        unsafe: true,
+        unsafe_comps: true,
+        screw_ie8: false,
+        warnings: false
+      }
     }));
-}
+  }
 
-gulp.task('build-all-js', bundle);
-
-//Monitor changes of JS files to bundle again
-gulp.task('watch-js', function () {
-  b.plugin(watchify);
-
-  b.on('update', function (ids) {
-    if (isBundling) {
-      return;
-    }
-
-    ids.forEach(function (v) {
-      console.log('bundle changed file:' + v);
-    });
-
-    isPrecompileTmpl = false;
-    //bundle();
-    gulp.start('build-all-js');
-  });
-
-  return bundle();
-});
-
-gulp.task('browser-sync', function () {
-  browserSync.init({
-    ghostMode: false,
-    server: "./"
-  });
-
-  isBrowserSync = true;
-  gulp.start('watch-js');
+  return gulp.src('./src/base.js')
+    .pipe(webpackStream({
+      devtool: argv.p ? 'source-map' : null,
+      watch: argv.w ? true : false,
+      externals: webpackExternals,
+      output: {
+        filename: jsLibName,
+        library: 'FlareJ',
+        libraryTarget: 'umd'
+      },
+      module: {
+        loaders: [
+          { test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/ }
+        ],
+      },
+      plugins
+    }))
+    .on('error', handlebuildError)
+    .pipe(gulp.dest('./dist/js').on('end', () => {
+      gulp.src(['./vendor/babelHelpers.min.js', './dist/js/' + jsLibName])
+        .pipe(concat(jsLibName))
+        .pipe(gulp.dest('./dist/js'));
+    }));
 });
 
 let isBuildingCss = false,
   isBuildingTheme = false;
 
-gulp.task('build-css', function () {
+gulp.task('build-css', () => {
   isBuildingCss = true;
   let cssLibName = getCssLibName();
 
@@ -169,9 +152,11 @@ gulp.task('build-css', function () {
     .pipe(rename(cssLibName))
     .pipe(gulp.dest('./dist/css').on('end', function () {
       gulp.src(['./vendor/normalize.css', './dist/css/' + cssLibName])
+        .pipe(gulpif(argv.p, sourcemaps.init()))
         .pipe(concat(cssLibName))
         .pipe(gulpif(argv.p, cssnano()))
         .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
+        .pipe(gulpif(argv.p, sourcemaps.write('./')))
         .pipe(gulp.dest('./dist/css').on('end', function () {
           isBuildingCss = false;
         }));
@@ -179,15 +164,16 @@ gulp.task('build-css', function () {
 });
 
 //Build theme css
-gulp.task('build-theme', function () {
-  glob('./src/styles/theme/**/base.less', {}, function (err, files) {
-    files.forEach(function (file) {
+gulp.task('build-theme', () => {
+  glob('./src/styles/theme/**/base.less', {}, (err, files) => {
+    files.forEach((file) => {
       isBuildingTheme = true;
       let filePath = file.substring(0, file.lastIndexOf("/")),
         themeName = filePath.substr(filePath.lastIndexOf("/") + 1),
         themeLibName = getThemeLibName(themeName);
 
       gulp.src(file)
+        .pipe(gulpif(argv.p, sourcemaps.init()))
         .pipe(template({
           ns: libNameSpace
         }))
@@ -195,7 +181,8 @@ gulp.task('build-theme', function () {
         .pipe(rename(themeLibName))
         .pipe(gulpif(argv.p, cssnano()))
         .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
-        .pipe(gulp.dest('./dist/css/theme').on('end', function () {
+        .pipe(gulpif(argv.p, sourcemaps.write('./')))
+        .pipe(gulp.dest('./dist/css/theme').on('end', () => {
           isBuildingTheme = false;
         }));
     });
@@ -205,7 +192,7 @@ gulp.task('build-theme', function () {
 gulp.task('build-all-css', ['build-css', 'build-theme']);
 
 //Monitor changes of LESS files
-gulp.task("watch-css", function () {
+gulp.task("watch-css", () => {
   if (isBuildingCss) {
     return;
   }
@@ -213,7 +200,7 @@ gulp.task("watch-css", function () {
   gulp.watch('./src/styles/**/*.less', ['build-css']);
 });
 
-gulp.task("watch-theme", function () {
+gulp.task("watch-theme", () => {
   if (isBuildingTheme) {
     return;
   }
@@ -222,21 +209,21 @@ gulp.task("watch-theme", function () {
 });
 
 //Copy the third party libraries
-gulp.task('build-lib-css', function () {
+gulp.task('build-lib-css', () => {
   return gulp.src('./vendor/font-awesome/css/*.css')
     .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('build-lib-font', function () {
+gulp.task('build-lib-font', () => {
   return gulp.src('./vendor/font-awesome/fonts/*.*')
     .pipe(gulp.dest('./dist/fonts'));
 });
 
 gulp.task('build-all-lib', ['build-lib-css', 'build-lib-font']);
-gulp.task('build', ['build-all-js', 'build-all-css', 'build-all-lib']);
+gulp.task('build', ['build-js', 'build-all-css', 'build-all-lib']);
 
 //Convert es6 code to es5 from src to lib
-gulp.task("lib", function () {
+gulp.task("lib", () => {
   precompileNj(false);
 
   return gulp.src(['./src/**/*.js', '!./src/components/**/*.nj.js'])
@@ -245,13 +232,13 @@ gulp.task("lib", function () {
 });
 
 //Unit testing
-gulp.task("test", function () {
+gulp.task("test", () => {
   return gulp.src(["./test/**/**Spec.js"])
     .pipe(jasmine());
 });
 
 //Run eslint
-gulp.task('eslint', function () {
+gulp.task('eslint', () => {
   return gulp.src(['./src/**/*.js'])
     .pipe(eslint({
       "rules": {

@@ -19,3 +19,7 @@ npm install --save flarej
 ### 浏览器支持
 
 所有现代浏览器以及Internet Explorer 9+。
+
+### License
+
+MIT
