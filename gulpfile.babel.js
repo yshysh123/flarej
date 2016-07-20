@@ -132,7 +132,9 @@ gulp.task('build-js', () => {
     .on('error', handlebuildError)
     .pipe(gulp.dest('./dist/js').on('end', () => {
       gulp.src(['./vendor/babelHelpers.min.js', './dist/js/' + jsLibName])
+        .pipe(gulpif(argv.p, sourcemaps.init({ loadMaps: true })))
         .pipe(concat(jsLibName))
+        .pipe(gulpif(argv.p, sourcemaps.write('./')))
         .pipe(gulp.dest('./dist/js'));
     }));
 });
