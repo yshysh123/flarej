@@ -1,4 +1,5 @@
 ﻿import * as common from './common';
+import * as page from './page';
 import * as browsers from './browsers';
 import * as delayOperate from './delayOperate';
 import * as domEvent from './domEvent';
@@ -11,6 +12,7 @@ let utils = {};
 Object.assign(
   utils,
   common,
+  page,
   browsers, 
   delayOperate,
   domEvent,

@@ -1,4 +1,5 @@
-﻿import nj, { registerFilter, registerExpr } from 'nornj';
+﻿import React from 'react';
+import nj, { registerFilter, registerExpr } from 'nornj';
 import utils from '../utils/utils';
 import './pagination/pagination.tmplHelper';
 
