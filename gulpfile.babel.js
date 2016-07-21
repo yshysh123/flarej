@@ -124,7 +124,11 @@ gulp.task('build-js', () => {
       },
       module: {
         loaders: [
-          { test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/ }
+          { test: /\.js$/, loader: 'babel', exclude: /node_modules/,
+            query: {
+              plugins: ['external-helpers']
+            }
+          }
         ],
       },
       plugins
