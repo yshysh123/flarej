@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
-	var _gridLayout = __webpack_require__(27);
+	var _gridLayout = __webpack_require__(26);
 
 	babelHelpers.extends(_core2.default, _utils2.default, {
 	  Pagination: _pagination2.default,
@@ -891,7 +891,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _utils2 = babelHelpers.interopRequireDefault(_utils);
 
-	var _pagination = __webpack_require__(25);
+	var _pagination = __webpack_require__(24);
 
 	var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
@@ -1110,6 +1110,72 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	(0, _nornj.registerComponent)({ 'fj-Pagination': Pagination });
+
+	(0, _nornj.registerFilter)({
+	  clickBtn: function clickBtn(fn, type) {
+	    var _this2 = this;
+
+	    var _data$ = this.data[0];
+	    var pageIndex = _data$.pageIndex;
+	    var pageCount = _data$.pageCount;
+
+
+	    switch (type) {
+	      case 'first':
+	        return function () {
+	          if (pageIndex != 1) {
+	            fn(1);
+	          }
+	        };
+	      case 'prev':
+	        return function () {
+	          if (pageIndex > 1) {
+	            fn(pageIndex - 1);
+	          }
+	        };
+	      case 'next':
+	        return function () {
+	          if (pageIndex < pageCount) {
+	            fn(pageIndex + 1);
+	          }
+	        };
+	      case 'last':
+	        return function () {
+	          if (pageIndex != pageCount) {
+	            fn(pageCount);
+	          }
+	        };
+	      case 'index':
+	        return function () {
+	          if (_this2.index != pageIndex) {
+	            fn(_this2.index);
+	          }
+	        };
+	      default:
+	        return function () {
+	          return fn();
+	        };
+	    }
+	  },
+	  isCurrentPage: function isCurrentPage(no) {
+	    return parseInt(no, 10) == this.data[0].pageIndex ? '-c' : '';
+	  },
+	  showPartPage: function showPartPage(no, type) {
+	    var pageCount = this.data[0].pageCount;
+
+	    switch (type) {
+	      case '1':
+	        //当前页码<=4:左侧显示所有+当前页码+右侧2个页码+...+尾页
+	        return no <= 4;
+	      case '2':
+	        //当前页码>4,且<=页面总数(n)-3:首页+...+左侧2个页码+ 当前页码+右侧2个页码+...+尾页
+	        return no > 4 && no <= pageCount - 3;
+	      case '3':
+	        //当前页码>页面总数(n)- 3:首页+...+左侧2个页面+当前页码+右侧显示所有
+	        return no > pageCount - 3;
+	    }
+	  }
+	});
 
 	exports.default = Pagination;
 
@@ -1710,8 +1776,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _utils2 = babelHelpers.interopRequireDefault(_utils);
 
-	__webpack_require__(24);
-
 	(0, _nornj.registerFilter)({
 	  fixIconSize: function fixIconSize(val) {
 	    return val + (!_utils2.default.isWebkit ? ' fj-fixsize' : '');
@@ -1730,93 +1794,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _nornj = __webpack_require__(2);
-
-	(0, _nornj.registerFilter)({
-	  clickBtn: function clickBtn(fn, type) {
-	    var _this = this;
-
-	    var _data$ = this.data[0];
-	    var pageIndex = _data$.pageIndex;
-	    var pageCount = _data$.pageCount;
-
-
-	    switch (type) {
-	      case 'first':
-	        return function () {
-	          if (pageIndex != 1) {
-	            fn(1);
-	          }
-	        };
-	      case 'prev':
-	        return function () {
-	          if (pageIndex > 1) {
-	            fn(pageIndex - 1);
-	          }
-	        };
-	      case 'next':
-	        return function () {
-	          if (pageIndex < pageCount) {
-	            fn(pageIndex + 1);
-	          }
-	        };
-	      case 'last':
-	        return function () {
-	          if (pageIndex != pageCount) {
-	            fn(pageCount);
-	          }
-	        };
-	      case 'index':
-	        return function () {
-	          if (_this.index != pageIndex) {
-	            fn(_this.index);
-	          }
-	        };
-	      default:
-	        return function () {
-	          return fn();
-	        };
-	    }
-	  },
-	  isCurrentPage: function isCurrentPage(no) {
-	    return parseInt(no, 10) == this.data[0].pageIndex ? '-c' : '';
-	  },
-	  showPartPage: function showPartPage(no, type) {
-	    var pageCount = this.data[0].pageCount;
-
-	    switch (type) {
-	      case '1':
-	        //当前页码<=4:左侧显示所有+当前页码+右侧2个页码+...+尾页
-	        return no <= 4;
-	      case '2':
-	        //当前页码>4,且<=页面总数(n)-3:首页+...+左侧2个页码+ 当前页码+右侧2个页码+...+尾页
-	        return no > 4 && no <= pageCount - 3;
-	      case '3':
-	        //当前页码>页面总数(n)- 3:首页+...+左侧2个页面+当前页码+右侧显示所有
-	        return no > pageCount - 3;
-	    }
-	  }
-	});
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = undefined;
 
-	var _paginationTmplNj = __webpack_require__(26);
+	var _paginationTmplNj = __webpack_require__(25);
 
 	var _paginationTmplNj2 = babelHelpers.interopRequireDefault(_paginationTmplNj);
 
 	exports.default = _paginationTmplNj2.default;
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1846,7 +1836,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = (0, _nornj2.default)(_templateObject5, pageBtns);
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1862,7 +1852,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(22);
 
-	var _classnames = __webpack_require__(28);
+	var _classnames = __webpack_require__(27);
 
 	var _classnames2 = babelHelpers.interopRequireDefault(_classnames);
 
@@ -1870,7 +1860,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _utils2 = babelHelpers.interopRequireDefault(_utils);
 
-	var _gridLayout = __webpack_require__(29);
+	var _gridLayout = __webpack_require__(28);
 
 	var _gridLayout2 = babelHelpers.interopRequireDefault(_gridLayout);
 
@@ -2125,7 +2115,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.ClearFix = ClearFix;
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -2179,7 +2169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2189,14 +2179,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.default = undefined;
 
-	var _gridLayoutTmplNj = __webpack_require__(30);
+	var _gridLayoutTmplNj = __webpack_require__(29);
 
 	var _gridLayoutTmplNj2 = babelHelpers.interopRequireDefault(_gridLayoutTmplNj);
 
 	exports.default = _gridLayoutTmplNj2.default;
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
