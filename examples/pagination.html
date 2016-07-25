@@ -78,6 +78,12 @@
         };
       },
       componentWillMount: function() {
+        var appTarget = {
+          page: function (request, options) {
+            //console.log(1);
+          }.bind(this)
+        };
+
         var pagesTarget = {
           firstPage: function (request, options) {
             this.resetData(1);
@@ -89,6 +95,8 @@
 
         Aviator.pushStateEnabled = false;
         Aviator.setRoutes({
+          target: appTarget,
+          '/': 'page',
           '/page': {
             target: pagesTarget,
             '/': 'firstPage',
@@ -118,7 +126,13 @@
       },
       pagnChange: function (pageIndex, pageSize) {
         this.resetData(pageIndex, pageSize);
-        Aviator.navigate('/page/' + pageIndex, { silent: true });
+
+        var silent = true;
+        if(!this._routerStarted) {  //第一次加载时需要触发历史事件，之后点击分页按钮时不触发历史事件
+          silent = false;
+          this._routerStarted = false;
+        }
+        Aviator.navigate('/page/' + pageIndex, { silent: silent });
       },
       //template: nj.compileComponent('<div onClick={click}>{tmpl}</div>'),
       render: function () {
