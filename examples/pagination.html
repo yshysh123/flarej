@@ -37,9 +37,10 @@
         </nj-table>
         <!--<nj-#each refer="{list}">-->
         <fj-Pagination set-page-size="true"
+                       page-index="{pageIndex}"
                        page-size="{pageSize}"
                        page-sizes="{pageSizes}"
-                       count="100"
+                       count="{count}"
                        responsive="true"
                        responsive-param="{rp}"
                        show-data-count="true"
@@ -55,9 +56,9 @@
   <script src="../node_modules/nornj/dist/nornj.js"></script>
   <script src="../dist/js/flarej.js"></script>
   <script src="../vendor/lodash.min.js"></script>
-  <script src="../vendor/aviator.js"></script>
+  <script src="../vendor/aviator.min.js"></script>
   <script>
-    var datas = _.times(100, function (i) {
+    var datas = _.times(500, function (i) {
       var no = i + 1;
 
       return {
@@ -71,10 +72,36 @@
     nj.registerComponent('Container', React.createClass({
       getInitialState: function () {
         return {
-          pageSize: 5
+          pageSize: 5,
+          pageIndex: 1,
+          count: datas.length
         };
       },
-      pagnChange: function (pageIndex, pageSize) {
+      componentWillMount: function() {
+        var pagesTarget = {
+          firstPage: function (request, options) {
+            this.resetData(1);
+          }.bind(this),
+          no: function (request, options) {
+            this.resetData(request.params.no);
+          }.bind(this)
+        };
+
+        Aviator.pushStateEnabled = false;
+        Aviator.setRoutes({
+          '/page': {
+            target: pagesTarget,
+            '/': 'firstPage',
+            '/:no': 'no'
+          }
+        });
+
+        Aviator.dispatch();
+      },
+      resetData: function(pageIndex, pageSize) {
+        pageIndex = parseInt(pageIndex, 10);
+        pageSize = pageSize != null ? pageSize : this.state.pageSize;
+
         var start = (pageIndex - 1) * pageSize;
         var end = pageIndex * pageSize;
         var data = datas.filter(function (obj, i) {
@@ -83,7 +110,15 @@
           }
         });
 
-        this.setState({ data: data });
+        this.setState({
+          pageIndex: pageIndex,
+          pageSize: pageSize,
+          data: data
+        });
+      },
+      pagnChange: function (pageIndex, pageSize) {
+        this.resetData(pageIndex, pageSize);
+        Aviator.navigate('/page/' + pageIndex, { silent: true });
       },
       //template: nj.compileComponent('<div onClick={click}>{tmpl}</div>'),
       render: function () {
@@ -93,6 +128,8 @@
           data: this.state.data,
           pageSizes: [20, 5, 50],
           pageSize: this.state.pageSize,
+          pageIndex: this.state.pageIndex,
+          count: this.state.count,
           rp: {
             '(max-width: 768px)': {
               //preHandler: (isInit, newState) => {
