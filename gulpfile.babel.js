@@ -245,7 +245,7 @@ gulp.task("test", () => {
 
 //Run eslint
 gulp.task('eslint', () => {
-  return gulp.src(['./src/**/*.js'])
+  return gulp.src(['./src/**/*.js', '!./src/**/*.tmpl.js'])
     .pipe(eslint({
       "rules": {
         "camelcase": [2, { "properties": "always" }],

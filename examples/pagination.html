@@ -79,8 +79,8 @@
       },
       componentWillMount: function() {
         var appTarget = {
-          page: function (request, options) {
-            //console.log(1);
+          index: function (request, options) {
+            //console.log(request);
           }.bind(this)
         };
 
@@ -96,7 +96,7 @@
         Aviator.pushStateEnabled = false;
         Aviator.setRoutes({
           target: appTarget,
-          '/': 'page',
+          '/': 'index',
           '/page': {
             target: pagesTarget,
             '/': 'firstPage',
