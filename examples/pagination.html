@@ -14,27 +14,27 @@
 <body>
   <div>
     <Container class="nj-component">
-      <nj-#tmpl>
-        <nj-table class="table">
-          <nj-thead>
-            <nj-tr>
-              <nj-th>#</nj-th>
-              <nj-th>First Name</nj-th>
-              <nj-th>Last Name</nj-th>
-              <nj-th>Username</nj-th>
-            </nj-tr>
-          </nj-thead>
-          <nj-tbody>
-            <nj-#each refer="{data}">
-              <nj-tr>
-                <nj-th scope="row">{no}</nj-th>
-                <nj-td>{firstName}</nj-td>
-                <nj-td>{lastName}</nj-td>
-                <nj-td>{username}</nj-td>
-              </nj-tr>
-            </nj-#each>
-          </nj-tbody>
-        </nj-table>
+      <nj:#tmpl>
+        <nj:table class="table">
+          <nj:thead>
+            <nj:tr>
+              <nj:th>#</nj:th>
+              <nj:th>First Name</nj:th>
+              <nj:th>Last Name</nj:th>
+              <nj:th>Username</nj:th>
+            </nj:tr>
+          </nj:thead>
+          <nj:tbody>
+            <nj:#each refer="{data}">
+              <nj:tr>
+                <nj:th scope="row">{no}</nj:th>
+                <nj:td>{firstName}</nj:td>
+                <nj:td>{lastName}</nj:td>
+                <nj:td>{username}</nj:td>
+              </nj:tr>
+            </nj:#each>
+          </nj:tbody>
+        </nj:table>
         <!--<nj-#each refer="{list}">-->
         <fj-Pagination set-page-size="true"
                        page-index="{pageIndex}"
@@ -48,7 +48,7 @@
                        on-change="{pagnChange}">
         </fj-Pagination>
         <!--</nj-#each>-->
-      </nj-#tmpl>
+      </nj:#tmpl>
     </Container>
   </div>
   <script src="../node_modules/react/dist/react.js"></script>
