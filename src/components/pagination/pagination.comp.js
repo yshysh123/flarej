@@ -1,4 +1,5 @@
-﻿import {
+﻿import { Component } from 'react';
+import {
   compileComponent,
   registerComponent,
   registerFilter
@@ -56,7 +57,7 @@ class Pagination extends Widget {
     }
   };
 
-  template = compileComponent(tmpl, 'pagination');
+  template = compileComponent(tmpl.pagination, 'pagination');
   
   constructor(props) {
     super(props, {
@@ -249,5 +250,26 @@ registerFilter({
     }
   }
 });
+
+class PageSize extends Component {
+  static defaultProps = {
+    fjType: 'pagn-pageSize',
+    pageSize: 15,                           //每页数据数
+    pageSizes: [15, 30, 50],                //可选择的每页数据数
+    setPageSize: false,                     //是否可以设置每页数据数
+    hasPages: true,                         //是否显示页数链接
+    hasBtnGo: true,
+    emptyText: '没有数据',
+  }
+
+  template = compileComponent(tmpl.pageSize, 'pageSize');
+  
+  render() {
+    return this.template(this.props);
+  }
+}
+
+registerComponent({ 'fj-PageSize': PageSize });
+Pagination.PageSize = PageSize;
 
 export default Pagination;
