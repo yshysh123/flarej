@@ -263,7 +263,7 @@ class PageSize extends Component {
   static propTypes = {
     pageSize: PropTypes.number,
     pageSizes: PropTypes.array,
-    setPageSize: React.PropTypes.oneOfType([
+    setPageSize: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string
     ]),

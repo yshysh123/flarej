@@ -1240,7 +1240,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	PageSize.propTypes = {
 	  pageSize: _react.PropTypes.number,
 	  pageSizes: _react.PropTypes.array,
-	  setPageSize: React.PropTypes.oneOfType([_react.PropTypes.bool, _react.PropTypes.string]),
+	  setPageSize: _react.PropTypes.oneOfType([_react.PropTypes.bool, _react.PropTypes.string]),
 	  prefix: _react.PropTypes.string,
 	  suffix: _react.PropTypes.string,
 	  onChange: _react.PropTypes.func
