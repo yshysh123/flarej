@@ -66,22 +66,6 @@ const pageBtns = nj`
 </li>
 `;
 
-const pageSize = nj`
-<li class=fj-pagn-info>
-  每页
-  <#if {setPageSize}>
-    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizesChange}>
-      <#each {pageSizes}>
-        <option key=page{#} value={.}>{.}</option>
-      </#each>
-    </select>
-  <#else />
-    {pageSize}
-  </#if>
-  条
-</li>
-`;
-
 const pagination = nj`
 <#if {count:gt(1)}>
   <div class=fj-pagn>
@@ -93,12 +77,10 @@ const pagination = nj`
         </li>
       </#if>
       <#if {showCount}>
-        <li class=fj-pagn-info>
-          共{count totalTxt}
-        </li>
+        <fj-PageCount {count} {totalTxt} />
       </#if>
       <#if {showPageSize}>
-        <fj-PageSize />
+        <fj-PageSize {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />
       </#if>
       <#if {hasBtnGo}>
         <li class=fj-pagn-txt>
@@ -127,7 +109,30 @@ const pagination = nj`
 </#if>
 `;
 
+const pageCount = nj`
+<li class=fj-pagn-info>
+  共{count totalTxt}
+</li>
+`;
+
+const pageSize = nj`
+<li class=fj-pagn-info>
+  {prefix}
+  <#if {setPageSize}>
+    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>
+      <#each {pageSizes}>
+        <option key=page{#} value={.}>{.}</option>
+      </#each>
+    </select>
+  <#else />
+    {pageSize}
+  </#if>
+  {suffix}
+</li>
+`;
+
 export default {
   pagination,
+  pageCount,
   pageSize
 };

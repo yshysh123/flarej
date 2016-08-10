@@ -92,13 +92,25 @@ function precompileNj(isDev) {
   });
 }
 
+function concatBabelHelpers(jsLibName) {
+  gulp.src(['./vendor/babelHelpers.min.js', './dist/js/' + jsLibName])
+    .pipe(gulpif(argv.p, sourcemaps.init({ loadMaps: true })))
+    .pipe(concat(jsLibName))
+    .pipe(gulpif(argv.p, sourcemaps.write('./')))
+    .pipe(gulp.dest('./dist/js'));
+}
+
 gulp.task('build-js', () => {
   precompileNj(!argv.p);
 
   let jsLibName = getJsLibName(),
-    plugins = [new webpack.DefinePlugin({
-      G_NS: JSON.stringify(libNameSpace)
-    })];
+    plugins = [
+      new webpack.DefinePlugin({
+        G_NS: JSON.stringify(libNameSpace)
+      }),
+      new webpack.NoErrorsPlugin()
+    ],
+    lastHash = null;
 
   if(argv.p) {
     plugins.push(new webpack.optimize.UglifyJsPlugin({
@@ -132,14 +144,23 @@ gulp.task('build-js', () => {
         ],
       },
       plugins
+    }, null, function(err, stats) {
+      if(argv.w && stats.hash != lastHash) {
+        lastHash = stats.hash;
+        concatBabelHelpers(jsLibName);
+      }
+
+      console.log(stats.toString({
+        chunks: false,
+        colors: true,
+        //hash: false
+      }));
     }))
     .on('error', handlebuildError)
     .pipe(gulp.dest('./dist/js').on('end', () => {
-      gulp.src(['./vendor/babelHelpers.min.js', './dist/js/' + jsLibName])
-        .pipe(gulpif(argv.p, sourcemaps.init({ loadMaps: true })))
-        .pipe(concat(jsLibName))
-        .pipe(gulpif(argv.p, sourcemaps.write('./')))
-        .pipe(gulp.dest('./dist/js'));
+      if(!argv.w) {
+        concatBabelHelpers(jsLibName);
+      }
     }));
 });
 

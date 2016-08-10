@@ -1,4 +1,4 @@
-﻿import { Component } from 'react';
+﻿import { Component, PropTypes } from 'react';
 import {
   compileComponent,
   registerComponent,
@@ -7,7 +7,9 @@ import {
 import Widget from '../widget';
 import utils from '../../utils/utils';
 import tmpl from './pagination.tmpl';
+const templatePageCount = compileComponent(tmpl.pageCount, 'pageCount');
 
+//分页组件
 class Pagination extends Widget {
   static defaultProps = {
     fjType: 'pagn',
@@ -70,7 +72,7 @@ class Pagination extends Widget {
     this.state.pageCount = this.getPageCount()  //总页数
     super.init();
 
-    this.pageSizesChange = this.pageSizesChange.bind(this);
+    this.pageSizeChange = this.pageSizeChange.bind(this);
     this.pageIndexBlur = this.pageIndexBlur.bind(this);
     this.setGoPage = this.setGoPage.bind(this);
     this.goPage = this.goPage.bind(this);
@@ -112,8 +114,8 @@ class Pagination extends Widget {
   }
 
   //切换每页数据数
-  pageSizesChange(e) {
-    this.refresh(this.state.pageIndex, parseInt(e.target.value));
+  pageSizeChange(pageSize) {
+    this.refresh(this.state.pageIndex, parseInt(pageSize, 10));
   }
 
   //页数文本框失去焦点
@@ -151,7 +153,7 @@ class Pagination extends Widget {
     });
 
     if(props.onChange) {
-      props.onChange.call(this, pageIndex, pageSize);
+      props.onChange(pageIndex, pageSize);
     }
   }
 
@@ -164,7 +166,7 @@ class Pagination extends Widget {
     let disabled = ' fj-disabled',
       state = this.state,
       extra = {
-        pageSizesChange: this.pageSizesChange,
+        pageSizeChange: this.pageSizeChange,
         pageIndexBlur: this.pageIndexBlur,
         goPage: this.goPage,
         refresh: this.refresh,
@@ -251,21 +253,67 @@ registerFilter({
   }
 });
 
+//数据总数组件
+const PageCount = (props) => templatePageCount(props);
+registerComponent({ 'fj-PageCount': PageCount });
+Pagination.PageCount = PageCount;
+
+//每页展示数量组件
 class PageSize extends Component {
+  static propTypes = {
+    pageSize: PropTypes.number,
+    pageSizes: PropTypes.array,
+    setPageSize: React.PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.string
+    ]),
+    prefix: PropTypes.string,
+    suffix: PropTypes.string,
+    onChange: PropTypes.func
+  };
+
   static defaultProps = {
-    fjType: 'pagn-pageSize',
     pageSize: 15,                           //每页数据数
     pageSizes: [15, 30, 50],                //可选择的每页数据数
     setPageSize: false,                     //是否可以设置每页数据数
-    hasPages: true,                         //是否显示页数链接
-    hasBtnGo: true,
-    emptyText: '没有数据',
-  }
+    prefix: '每页',
+    suffix: '条'
+  };
+
+  state = {
+    pageSize: null
+  };
 
   template = compileComponent(tmpl.pageSize, 'pageSize');
   
+  constructor(props) {
+    super(props);
+
+    this.state.pageSize = this.props.pageSize;
+    this.pageSizeChange = this.pageSizeChange.bind(this);
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.setState({
+      pageSize: nextProps.pageSize
+    });
+  }
+
+  pageSizeChange(e) {
+    let props = this.props,
+      pageSize = e.target.value;
+
+    this.setState({
+      pageSize
+    }, () => {
+      if(props.onChange) {
+        props.onChange(pageSize);
+      }
+    });
+  }
+
   render() {
-    return this.template(this.props);
+    return this.template(this.state, this.props, this);
   }
 }
 

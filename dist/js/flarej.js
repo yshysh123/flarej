@@ -8,7 +8,7 @@
 		exports["FlareJ"] = factory(require("nornj"), require("react"));
 	else
 		root["FlareJ"] = factory(root["nj"], root["React"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_15__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_14__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
-	var _gridLayout = __webpack_require__(26);
+	var _gridLayout = __webpack_require__(27);
 
 	babelHelpers.extends(_core2.default, _utils2.default, {
 	  Pagination: _pagination2.default,
@@ -881,9 +881,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
+	var _react = __webpack_require__(14);
+
 	var _nornj = __webpack_require__(2);
 
-	var _widget = __webpack_require__(14);
+	var _widget = __webpack_require__(15);
 
 	var _widget2 = babelHelpers.interopRequireDefault(_widget);
 
@@ -891,9 +893,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _utils2 = babelHelpers.interopRequireDefault(_utils);
 
-	var _pagination = __webpack_require__(24);
+	var _pagination = __webpack_require__(25);
 
 	var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
+
+	var templatePageCount = (0, _nornj.compileComponent)(_pagination2.default.pageCount, 'pageCount');
+
+	//分页组件
 
 	var Pagination = function (_Widget) {
 	  babelHelpers.inherits(Pagination, _Widget);
@@ -906,7 +912,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      pageSize: parseInt(props.pageSize, 10)
 	    }));
 
-	    _this.template = (0, _nornj.compileComponent)(_pagination2.default, 'pagination');
+	    _this.template = (0, _nornj.compileComponent)(_pagination2.default.pagination, 'pagination');
 	    return _this;
 	  }
 
@@ -914,7 +920,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.state.pageCount = this.getPageCount(); //总页数
 	    _Widget.prototype.init.call(this);
 
-	    this.pageSizesChange = this.pageSizesChange.bind(this);
+	    this.pageSizeChange = this.pageSizeChange.bind(this);
 	    this.pageIndexBlur = this.pageIndexBlur.bind(this);
 	    this.setGoPage = this.setGoPage.bind(this);
 	    this.goPage = this.goPage.bind(this);
@@ -964,8 +970,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  //切换每页数据数
 
 
-	  Pagination.prototype.pageSizesChange = function pageSizesChange(e) {
-	    this.refresh(this.state.pageIndex, parseInt(e.target.value));
+	  Pagination.prototype.pageSizeChange = function pageSizeChange(pageSize) {
+	    this.refresh(this.state.pageIndex, parseInt(pageSize, 10));
 	  };
 
 	  //页数文本框失去焦点
@@ -1012,7 +1018,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    });
 
 	    if (props.onChange) {
-	      props.onChange.call(this, pageIndex, pageSize);
+	      props.onChange(pageIndex, pageSize);
 	    }
 	  };
 
@@ -1027,7 +1033,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var disabled = ' fj-disabled',
 	        state = this.state,
 	        extra = {
-	      pageSizesChange: this.pageSizesChange,
+	      pageSizeChange: this.pageSizeChange,
 	      pageIndexBlur: this.pageIndexBlur,
 	      goPage: this.goPage,
 	      refresh: this.refresh,
@@ -1177,10 +1183,90 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 
+	//数据总数组件
+	var PageCount = function PageCount(props) {
+	  return templatePageCount(props);
+	};
+	(0, _nornj.registerComponent)({ 'fj-PageCount': PageCount });
+	Pagination.PageCount = PageCount;
+
+	//每页展示数量组件
+
+	var PageSize = function (_Component) {
+	  babelHelpers.inherits(PageSize, _Component);
+
+	  function PageSize(props) {
+	    babelHelpers.classCallCheck(this, PageSize);
+
+	    var _this3 = babelHelpers.possibleConstructorReturn(this, _Component.call(this, props));
+
+	    _this3.state = {
+	      pageSize: null
+	    };
+	    _this3.template = (0, _nornj.compileComponent)(_pagination2.default.pageSize, 'pageSize');
+
+
+	    _this3.state.pageSize = _this3.props.pageSize;
+	    _this3.pageSizeChange = _this3.pageSizeChange.bind(_this3);
+	    return _this3;
+	  }
+
+	  PageSize.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	    this.setState({
+	      pageSize: nextProps.pageSize
+	    });
+	  };
+
+	  PageSize.prototype.pageSizeChange = function pageSizeChange(e) {
+	    var props = this.props,
+	        pageSize = e.target.value;
+
+	    this.setState({
+	      pageSize: pageSize
+	    }, function () {
+	      if (props.onChange) {
+	        props.onChange(pageSize);
+	      }
+	    });
+	  };
+
+	  PageSize.prototype.render = function render() {
+	    return this.template(this.state, this.props, this);
+	  };
+
+	  return PageSize;
+	}(_react.Component);
+
+	PageSize.propTypes = {
+	  pageSize: _react.PropTypes.number,
+	  pageSizes: _react.PropTypes.array,
+	  setPageSize: React.PropTypes.oneOfType([_react.PropTypes.bool, _react.PropTypes.string]),
+	  prefix: _react.PropTypes.string,
+	  suffix: _react.PropTypes.string,
+	  onChange: _react.PropTypes.func
+	};
+	PageSize.defaultProps = {
+	  pageSize: 15, //每页数据数
+	  pageSizes: [15, 30, 50], //可选择的每页数据数
+	  setPageSize: false, //是否可以设置每页数据数
+	  prefix: '每页',
+	  suffix: '条'
+	};
+
+
+	(0, _nornj.registerComponent)({ 'fj-PageSize': PageSize });
+	Pagination.PageSize = PageSize;
+
 	exports.default = Pagination;
 
 /***/ },
 /* 14 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_14__;
+
+/***/ },
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1189,7 +1275,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _react = __webpack_require__(15);
+	var _react = __webpack_require__(14);
 
 	var _reactAddonsUpdate = __webpack_require__(16);
 
@@ -1197,13 +1283,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _nornj = __webpack_require__(2);
 
-	__webpack_require__(22);
+	__webpack_require__(23);
 
 	var _utils = __webpack_require__(3);
 
 	var _utils2 = babelHelpers.interopRequireDefault(_utils);
 
-	__webpack_require__(23);
+	__webpack_require__(24);
 
 	var win = window;
 
@@ -1359,12 +1445,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Widget;
 
 /***/ },
-/* 15 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_15__;
-
-/***/ },
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1389,10 +1469,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _assign = __webpack_require__(19);
+	var _prodInvariant = __webpack_require__(19),
+	    _assign = __webpack_require__(20);
 
-	var keyOf = __webpack_require__(20);
-	var invariant = __webpack_require__(21);
+	var keyOf = __webpack_require__(21);
+	var invariant = __webpack_require__(22);
 	var hasOwnProperty = {}.hasOwnProperty;
 
 	function shallowCopy(x) {
@@ -1421,16 +1502,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 	function invariantArrayCase(value, spec, command) {
-	  !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected target of %s to be an array; got %s.', command, value) : invariant(false) : void 0;
+	  !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected target of %s to be an array; got %s.', command, value) : _prodInvariant('1', command, value) : void 0;
 	  var specValue = spec[command];
-	  !Array.isArray(specValue) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array; got %s. ' + 'Did you forget to wrap your parameter in an array?', command, specValue) : invariant(false) : void 0;
+	  !Array.isArray(specValue) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array; got %s. Did you forget to wrap your parameter in an array?', command, specValue) : _prodInvariant('2', command, specValue) : void 0;
 	}
 
+	/**
+	 * Returns a updated shallow copy of an object without mutating the original.
+	 * See https://facebook.github.io/react/docs/update.html for details.
+	 */
 	function update(value, spec) {
-	  !(typeof spec === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): You provided a key path to update() that did not contain one ' + 'of %s. Did you forget to include {%s: ...}?', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : invariant(false) : void 0;
+	  !(typeof spec === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): You provided a key path to update() that did not contain one of %s. Did you forget to include {%s: ...}?', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : _prodInvariant('3', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : void 0;
 
 	  if (hasOwnProperty.call(spec, COMMAND_SET)) {
-	    !(Object.keys(spec).length === 1) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Cannot have more than one key in an object with %s', COMMAND_SET) : invariant(false) : void 0;
+	    !(Object.keys(spec).length === 1) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Cannot have more than one key in an object with %s', COMMAND_SET) : _prodInvariant('4', COMMAND_SET) : void 0;
 
 	    return spec[COMMAND_SET];
 	  }
@@ -1439,8 +1524,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  if (hasOwnProperty.call(spec, COMMAND_MERGE)) {
 	    var mergeObj = spec[COMMAND_MERGE];
-	    !(mergeObj && typeof mergeObj === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a spec of type \'object\'; got %s', COMMAND_MERGE, mergeObj) : invariant(false) : void 0;
-	    !(nextValue && typeof nextValue === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a target of type \'object\'; got %s', COMMAND_MERGE, nextValue) : invariant(false) : void 0;
+	    !(mergeObj && typeof mergeObj === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a spec of type \'object\'; got %s', COMMAND_MERGE, mergeObj) : _prodInvariant('5', COMMAND_MERGE, mergeObj) : void 0;
+	    !(nextValue && typeof nextValue === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a target of type \'object\'; got %s', COMMAND_MERGE, nextValue) : _prodInvariant('6', COMMAND_MERGE, nextValue) : void 0;
 	    _assign(nextValue, spec[COMMAND_MERGE]);
 	  }
 
@@ -1459,16 +1544,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  if (hasOwnProperty.call(spec, COMMAND_SPLICE)) {
-	    !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected %s target to be an array; got %s', COMMAND_SPLICE, value) : invariant(false) : void 0;
-	    !Array.isArray(spec[COMMAND_SPLICE]) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. ' + 'Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : invariant(false) : void 0;
+	    !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected %s target to be an array; got %s', COMMAND_SPLICE, value) : _prodInvariant('7', COMMAND_SPLICE, value) : void 0;
+	    !Array.isArray(spec[COMMAND_SPLICE]) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : _prodInvariant('8', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : void 0;
 	    spec[COMMAND_SPLICE].forEach(function (args) {
-	      !Array.isArray(args) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. ' + 'Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : invariant(false) : void 0;
+	      !Array.isArray(args) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : _prodInvariant('8', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : void 0;
 	      nextValue.splice.apply(nextValue, args);
 	    });
 	  }
 
 	  if (hasOwnProperty.call(spec, COMMAND_APPLY)) {
-	    !(typeof spec[COMMAND_APPLY] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be a function; got %s.', COMMAND_APPLY, spec[COMMAND_APPLY]) : invariant(false) : void 0;
+	    !(typeof spec[COMMAND_APPLY] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be a function; got %s.', COMMAND_APPLY, spec[COMMAND_APPLY]) : _prodInvariant('9', COMMAND_APPLY, spec[COMMAND_APPLY]) : void 0;
 	    nextValue = spec[COMMAND_APPLY](nextValue);
 	  }
 
@@ -1613,8 +1698,52 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 19 */
 /***/ function(module, exports) {
 
-	/* eslint-disable no-unused-vars */
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule reactProdInvariant
+	 * 
+	 */
 	'use strict';
+
+	/**
+	 * WARNING: DO NOT manually require this module.
+	 * This is a replacement for `invariant(...)` used by the error code system
+	 * and will _only_ be required by the corresponding babel pass.
+	 * It always throws.
+	 */
+
+	function reactProdInvariant(code) {
+	  var argCount = arguments.length - 1;
+
+	  var message = 'Minified React error #' + code + '; visit ' + 'http://facebook.github.io/react/docs/error-decoder.html?invariant=' + code;
+
+	  for (var argIdx = 0; argIdx < argCount; argIdx++) {
+	    message += '&args[]=' + encodeURIComponent(arguments[argIdx + 1]);
+	  }
+
+	  message += ' for the full message or use the non-minified dev environment' + ' for full errors and additional helpful warnings.';
+
+	  var error = new Error(message);
+	  error.name = 'Invariant Violation';
+	  error.framesToPop = 1; // we don't care about reactProdInvariant's own frame
+
+	  throw error;
+	}
+
+	module.exports = reactProdInvariant;
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	'use strict';
+	/* eslint-disable no-unused-vars */
 	var hasOwnProperty = Object.prototype.hasOwnProperty;
 	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
@@ -1626,7 +1755,51 @@ return /******/ (function(modules) { // webpackBootstrap
 		return Object(val);
 	}
 
-	module.exports = Object.assign || function (target, source) {
+	function shouldUseNative() {
+		try {
+			if (!Object.assign) {
+				return false;
+			}
+
+			// Detect buggy property enumeration order in older V8 versions.
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+			var test1 = new String('abc');  // eslint-disable-line
+			test1[5] = 'de';
+			if (Object.getOwnPropertyNames(test1)[0] === '5') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test2 = {};
+			for (var i = 0; i < 10; i++) {
+				test2['_' + String.fromCharCode(i)] = i;
+			}
+			var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+				return test2[n];
+			});
+			if (order2.join('') !== '0123456789') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test3 = {};
+			'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+				test3[letter] = letter;
+			});
+			if (Object.keys(Object.assign({}, test3)).join('') !==
+					'abcdefghijklmnopqrst') {
+				return false;
+			}
+
+			return true;
+		} catch (e) {
+			// We don't expect any of the above to throw, but better to be safe.
+			return false;
+		}
+	}
+
+	module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 		var from;
 		var to = toObject(target);
 		var symbols;
@@ -1655,7 +1828,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1680,7 +1853,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * 'xa12' in that case. Resolve keys you want to use once at startup time, then
 	 * reuse those resolutions.
 	 */
-	var keyOf = function (oneKeyObj) {
+	var keyOf = function keyOf(oneKeyObj) {
 	  var key;
 	  for (key in oneKeyObj) {
 	    if (!oneKeyObj.hasOwnProperty(key)) {
@@ -1694,7 +1867,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = keyOf;
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -1749,7 +1922,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)))
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1759,12 +1932,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	(0, _nornj.setTmplRule)(null, null, '#');
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _react = __webpack_require__(15);
+	var _react = __webpack_require__(14);
 
 	var _react2 = babelHelpers.interopRequireDefault(_react);
 
@@ -1789,7 +1962,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1799,14 +1972,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.default = undefined;
 
-	var _paginationTmplNj = __webpack_require__(25);
+	var _paginationTmplNj = __webpack_require__(26);
 
 	var _paginationTmplNj2 = babelHelpers.interopRequireDefault(_paginationTmplNj);
 
 	exports.default = _paginationTmplNj2.default;
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1819,7 +1992,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageIndex:add(2)}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li onClick={refresh:clickBtn(next)}>...</li>\n<li class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n'], ['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageIndex:add(2)}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li onClick={refresh:clickBtn(next)}>...</li>\n<li class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n']),
 	    _templateObject3 = babelHelpers.taggedTemplateLiteral(['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n'], ['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n']),
 	    _templateObject4 = babelHelpers.taggedTemplateLiteral(['\n<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>\n  首页\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=第{pageIndex}页>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>\n  末页\n</li>\n'], ['\n<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>\n  首页\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=第{pageIndex}页>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>\n  末页\n</li>\n']),
-	    _templateObject5 = babelHelpers.taggedTemplateLiteral(['\n<#if {count:gt(1)}>\n  <div class=fj-pagn>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          共{pageCount}页\n        </li>\n      </#if>\n      <#if {showCount}>\n        <li class=fj-pagn-info>\n          共{count totalTxt}\n        </li>\n      </#if>\n      <#if {showPageSize}>\n        <li class=fj-pagn-info>\n          每页\n          <#if {setPageSize}>\n            <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizesChange}>\n              <#each {pageSizes}>\n                <option key=page{#} value={.}>{.}</option>\n              </#each>\n            </select>\n          <#else />\n            {pageSize}\n          </#if>\n          条\n        </li>\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          到\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />页\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#EmptyElem />\n</#if>\n'], ['\n<#if {count:gt(1)}>\n  <div class=fj-pagn>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          共{pageCount}页\n        </li>\n      </#if>\n      <#if {showCount}>\n        <li class=fj-pagn-info>\n          共{count totalTxt}\n        </li>\n      </#if>\n      <#if {showPageSize}>\n        <li class=fj-pagn-info>\n          每页\n          <#if {setPageSize}>\n            <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizesChange}>\n              <#each {pageSizes}>\n                <option key=page{#} value={.}>{.}</option>\n              </#each>\n            </select>\n          <#else />\n            {pageSize}\n          </#if>\n          条\n        </li>\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          到\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />页\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#EmptyElem />\n</#if>\n']);
+	    _templateObject5 = babelHelpers.taggedTemplateLiteral(['\n<#if {count:gt(1)}>\n  <div class=fj-pagn>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          共{pageCount}页\n        </li>\n      </#if>\n      <#if {showCount}>\n        <fj-PageCount {count} {totalTxt} />\n      </#if>\n      <#if {showPageSize}>\n        <fj-PageSize {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          到\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />页\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#EmptyElem />\n</#if>\n'], ['\n<#if {count:gt(1)}>\n  <div class=fj-pagn>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          共{pageCount}页\n        </li>\n      </#if>\n      <#if {showCount}>\n        <fj-PageCount {count} {totalTxt} />\n      </#if>\n      <#if {showPageSize}>\n        <fj-PageSize {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          到\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />页\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#EmptyElem />\n</#if>\n']),
+	    _templateObject6 = babelHelpers.taggedTemplateLiteral(['\n<li class=fj-pagn-info>\n  共{count totalTxt}\n</li>\n'], ['\n<li class=fj-pagn-info>\n  共{count totalTxt}\n</li>\n']),
+	    _templateObject7 = babelHelpers.taggedTemplateLiteral(['\n<li class=fj-pagn-info>\n  {prefix}\n  <#if {setPageSize}>\n    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>\n      <#each {pageSizes}>\n        <option key=page{#} value={.}>{.}</option>\n      </#each>\n    </select>\n  <#else />\n    {pageSize}\n  </#if>\n  {suffix}\n</li>\n'], ['\n<li class=fj-pagn-info>\n  {prefix}\n  <#if {setPageSize}>\n    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>\n      <#each {pageSizes}>\n        <option key=page{#} value={.}>{.}</option>\n      </#each>\n    </select>\n  <#else />\n    {pageSize}\n  </#if>\n  {suffix}\n</li>\n']);
 
 	var _nornj = __webpack_require__(2);
 
@@ -1833,10 +2008,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var pageBtns = (0, _nornj2.default)(_templateObject4, partPage1, partPage2, partPage3);
 
-	exports.default = (0, _nornj2.default)(_templateObject5, pageBtns);
+	var pagination = (0, _nornj2.default)(_templateObject5, pageBtns);
+
+	var pageCount = (0, _nornj2.default)(_templateObject6);
+
+	var pageSize = (0, _nornj2.default)(_templateObject7);
+
+	exports.default = {
+	  pagination: pagination,
+	  pageCount: pageCount,
+	  pageSize: pageSize
+	};
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1846,13 +2031,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.ClearFix = exports.Col = exports.RowRight = exports.RowLeft = exports.Row = undefined;
 
-	var _react = __webpack_require__(15);
+	var _react = __webpack_require__(14);
 
 	var _nornj = __webpack_require__(2);
 
-	__webpack_require__(22);
+	__webpack_require__(23);
 
-	var _classnames = __webpack_require__(27);
+	var _classnames = __webpack_require__(28);
 
 	var _classnames2 = babelHelpers.interopRequireDefault(_classnames);
 
@@ -1860,7 +2045,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _utils2 = babelHelpers.interopRequireDefault(_utils);
 
-	var _gridLayout = __webpack_require__(28);
+	var _gridLayout = __webpack_require__(29);
 
 	var _gridLayout2 = babelHelpers.interopRequireDefault(_gridLayout);
 
@@ -2115,7 +2300,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.ClearFix = ClearFix;
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -2169,7 +2354,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2179,14 +2364,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.default = undefined;
 
-	var _gridLayoutTmplNj = __webpack_require__(29);
+	var _gridLayoutTmplNj = __webpack_require__(30);
 
 	var _gridLayoutTmplNj2 = babelHelpers.interopRequireDefault(_gridLayoutTmplNj);
 
 	exports.default = _gridLayoutTmplNj2.default;
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
