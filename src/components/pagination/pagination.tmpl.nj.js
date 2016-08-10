@@ -77,7 +77,7 @@ const pagination = nj`
         </li>
       </#if>
       <#if {showCount}>
-        <fj-PageCount {count} {totalTxt} />
+        <fj-PageDataCount {count} {totalTxt} />
       </#if>
       <#if {showPageSize}>
         <fj-PageSize {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />
@@ -109,7 +109,7 @@ const pagination = nj`
 </#if>
 `;
 
-const pageCount = nj`
+const pageDataCount = nj`
 <li class=fj-pagn-info>
   共{count totalTxt}
 </li>
@@ -133,6 +133,6 @@ const pageSize = nj`
 
 export default {
   pagination,
-  pageCount,
+  pageDataCount,
   pageSize
 };

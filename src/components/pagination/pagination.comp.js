@@ -7,7 +7,7 @@ import {
 import Widget from '../widget';
 import utils from '../../utils/utils';
 import tmpl from './pagination.tmpl';
-const templatePageCount = compileComponent(tmpl.pageCount, 'pageCount');
+const templatePageCount = compileComponent(tmpl.pageDataCount, 'pageDataCount');
 
 //分页组件
 class Pagination extends Widget {
@@ -254,9 +254,9 @@ registerFilter({
 });
 
 //数据总数组件
-const PageCount = (props) => templatePageCount(props);
-registerComponent({ 'fj-PageCount': PageCount });
-Pagination.PageCount = PageCount;
+const PageDataCount = (props) => templatePageCount(props);
+registerComponent({ 'fj-PageDataCount': PageDataCount });
+Pagination.PageCount = PageDataCount;
 
 //每页展示数量组件
 class PageSize extends Component {
