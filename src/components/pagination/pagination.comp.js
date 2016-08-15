@@ -7,7 +7,8 @@ import {
 import Widget from '../widget';
 import utils from '../../utils/utils';
 import tmpl from './pagination.tmpl';
-const templatePageCount = compileComponent(tmpl.pageDataCount, 'pageDataCount');
+const templateDataCount = compileComponent(tmpl.pageDataCount, 'pageDataCount');
+const templatePageCount = compileComponent(tmpl.pageCount, 'pageCount');
 
 //分页组件
 class Pagination extends Widget {
@@ -16,9 +17,14 @@ class Pagination extends Widget {
     pageSize: 15,                           //每页数据数
     pageSizes: [15, 30, 50],                //可选择的每页数据数
     pageIndex: 1,                           //当前页码,从1开始
+    pageCountPrefix: '共',
+    pageCountSuffix: '页',
     count: 0,                               //数据总数
-    totalTxt: "条数据",
-    btnGoName: "跳转",                      //跳转按钮上的字
+    countPrefix: '共',
+    countSuffix: '条数据',
+    sizePrefix: '每页',
+    sizeSuffix: '条',
+    btnGoName: '跳转',                      //跳转按钮上的字
     noCount: false,                         //为true则在无法获取数据总数时使用
     setPageSize: false,                     //是否可以设置每页数据数
     showCount: true,                        //是否显示数据总数
@@ -253,10 +259,25 @@ registerFilter({
   }
 });
 
+//总页数组件
+const PageCount = (props) => templatePageCount(props);
+PageCount.defaultProps = {
+  prefix: '共',
+  suffix: '页'
+};
+
+registerComponent({ 'fj-PageCount': PageCount });
+Pagination.PageCount = PageCount;
+
 //数据总数组件
-const PageDataCount = (props) => templatePageCount(props);
+const PageDataCount = (props) => templateDataCount(props);
+PageDataCount.defaultProps = {
+  prefix: '共',
+  suffix: '条数据'
+};
+
 registerComponent({ 'fj-PageDataCount': PageDataCount });
-Pagination.PageCount = PageDataCount;
+Pagination.PageDataCount = PageDataCount;
 
 //每页展示数量组件
 class PageSize extends Component {

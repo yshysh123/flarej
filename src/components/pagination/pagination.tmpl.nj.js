@@ -73,14 +73,18 @@ const pagination = nj`
       ${pageBtns}
       <#if {showPageCount}>
         <li class=fj-pagn-info>
-          共{pageCount}页
+          <fj-PageCount prefix={pageCountPrefix} suffix={pageCountSuffix} {pageCount} />
         </li>
       </#if>
       <#if {showCount}>
-        <fj-PageDataCount {count} {totalTxt} />
+        <li class=fj-pagn-info>
+          <fj-PageDataCount prefix={countPrefix} suffix={countSuffix} {count} />
+        </li>
       </#if>
       <#if {showPageSize}>
-        <fj-PageSize {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />
+        <li class=fj-pagn-info>
+          <fj-PageSize prefix={sizePrefix} suffix={sizeSuffix} {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />
+        </li>
       </#if>
       <#if {hasBtnGo}>
         <li class=fj-pagn-txt>
@@ -109,14 +113,20 @@ const pagination = nj`
 </#if>
 `;
 
+const pageCount = nj`
+<div class=fj-pagn-part>
+  {prefix}{pageCount}{suffix}
+</div>
+`;
+
 const pageDataCount = nj`
-<li class=fj-pagn-info>
-  共{count totalTxt}
-</li>
+<div class=fj-pagn-part>
+  {prefix}{count}{suffix}
+</div>
 `;
 
 const pageSize = nj`
-<li class=fj-pagn-info>
+<div class=fj-pagn-part>
   {prefix}
   <#if {setPageSize}>
     <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>
@@ -128,11 +138,12 @@ const pageSize = nj`
     {pageSize}
   </#if>
   {suffix}
-</li>
+</div>
 `;
 
 export default {
   pagination,
+  pageCount,
   pageDataCount,
   pageSize
 };

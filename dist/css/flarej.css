@@ -1373,7 +1373,7 @@ ul {
   line-height: 25x;
   white-space: nowrap;
 }
-.fj-pagn-pages li {
+.fj-pagn-pages > li {
   display: inline-block;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -1382,6 +1382,12 @@ ul {
   margin-top: 2px;
   margin-left: 2px;
   margin-right: 2px;
+  text-align: center;
+  height: 25px;
+  line-height: 25px;
+}
+.fj-pagn-part {
+  display: inline-block;
   text-align: center;
   height: 25px;
   line-height: 25px;

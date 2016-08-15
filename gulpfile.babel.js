@@ -164,11 +164,7 @@ gulp.task('build-js', () => {
     }));
 });
 
-let isBuildingCss = false,
-  isBuildingTheme = false;
-
 gulp.task('build-css', () => {
-  isBuildingCss = true;
   let cssLibName = getCssLibName();
 
   return gulp.src('./src/styles/base.less')
@@ -184,9 +180,7 @@ gulp.task('build-css', () => {
         .pipe(gulpif(argv.p, cssnano()))
         .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
         .pipe(gulpif(argv.p, sourcemaps.write('./')))
-        .pipe(gulp.dest('./dist/css').on('end', function () {
-          isBuildingCss = false;
-        }));
+        .pipe(gulp.dest('./dist/css'));
     }));
 });
 
@@ -194,7 +188,6 @@ gulp.task('build-css', () => {
 gulp.task('build-theme', () => {
   glob('./src/styles/theme/**/base.less', {}, (err, files) => {
     files.forEach((file) => {
-      isBuildingTheme = true;
       let filePath = file.substring(0, file.lastIndexOf("/")),
         themeName = filePath.substr(filePath.lastIndexOf("/") + 1),
         themeLibName = getThemeLibName(themeName);
@@ -209,9 +202,7 @@ gulp.task('build-theme', () => {
         .pipe(gulpif(argv.p, cssnano()))
         .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
         .pipe(gulpif(argv.p, sourcemaps.write('./')))
-        .pipe(gulp.dest('./dist/css/theme').on('end', () => {
-          isBuildingTheme = false;
-        }));
+        .pipe(gulp.dest('./dist/css/theme'));
     });
   });
 });
@@ -220,19 +211,13 @@ gulp.task('build-all-css', ['build-css', 'build-theme']);
 
 //Monitor changes of LESS files
 gulp.task("watch-css", () => {
-  if (isBuildingCss) {
-    return;
-  }
-
   gulp.watch('./src/styles/**/*.less', ['build-css']);
+  gulp.start('build-css');
 });
 
 gulp.task("watch-theme", () => {
-  if (isBuildingTheme) {
-    return;
-  }
-
   gulp.watch('./src/styles/theme/**/*.less', ['build-theme']);
+  gulp.start('build-theme');
 });
 
 //Copy the third party libraries
@@ -282,4 +267,11 @@ gulp.task('eslint', () => {
 });
 
 //Default task
-gulp.task('default', ['build']);
+let defaultTasks = ['build-js', 'build-all-lib'];
+if (argv.w) {
+  defaultTasks.push('watch-css', 'watch-theme');
+}
+else {
+  defaultTasks.push('build-all-css');
+}
+gulp.task('default', defaultTasks);
