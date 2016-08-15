@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
-	var _gridLayout = __webpack_require__(27);
+	var _gridLayout = __webpack_require__(28);
 
 	babelHelpers.extends(_core2.default, _utils2.default, {
 	  Pagination: _pagination2.default,
@@ -885,7 +885,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _nornj = __webpack_require__(2);
 
-	var _widget = __webpack_require__(15);
+	var _classnames = __webpack_require__(15);
+
+	var _classnames2 = babelHelpers.interopRequireDefault(_classnames);
+
+	var _widget = __webpack_require__(16);
 
 	var _widget2 = babelHelpers.interopRequireDefault(_widget);
 
@@ -893,7 +897,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _utils2 = babelHelpers.interopRequireDefault(_utils);
 
-	var _pagination = __webpack_require__(25);
+	var _pagination = __webpack_require__(26);
 
 	var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
@@ -1191,7 +1195,29 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//总页数组件
 	var PageCount = function PageCount(props) {
-	  return templatePageCount(props);
+	  var _utils$splitObject = _utils2.default.splitObject(props, ['className', 'prefix', 'pageCount', 'suffix']);
+
+	  var _utils$splitObject2 = babelHelpers.slicedToArray(_utils$splitObject, 2);
+
+	  var _utils$splitObject2$ = _utils$splitObject2[0];
+	  var className = _utils$splitObject2$.className;
+	  var prefix = _utils$splitObject2$.prefix;
+	  var pageCount = _utils$splitObject2$.pageCount;
+	  var suffix = _utils$splitObject2$.suffix;
+	  var others = _utils$splitObject2[1];
+
+
+	  var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
+	    'fj-pagn-part': true
+	  }, className, className));
+
+	  return templatePageCount({
+	    props: others,
+	    classes: classes,
+	    prefix: prefix,
+	    pageCount: pageCount,
+	    suffix: suffix
+	  });
 	};
 	PageCount.defaultProps = {
 	  prefix: '共',
@@ -1203,7 +1229,29 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//数据总数组件
 	var PageDataCount = function PageDataCount(props) {
-	  return templateDataCount(props);
+	  var _utils$splitObject3 = _utils2.default.splitObject(props, ['className', 'prefix', 'count', 'suffix']);
+
+	  var _utils$splitObject4 = babelHelpers.slicedToArray(_utils$splitObject3, 2);
+
+	  var _utils$splitObject4$ = _utils$splitObject4[0];
+	  var className = _utils$splitObject4$.className;
+	  var prefix = _utils$splitObject4$.prefix;
+	  var count = _utils$splitObject4$.count;
+	  var suffix = _utils$splitObject4$.suffix;
+	  var others = _utils$splitObject4[1];
+
+
+	  var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
+	    'fj-pagn-part': true
+	  }, className, className));
+
+	  return templateDataCount({
+	    props: others,
+	    classes: classes,
+	    prefix: prefix,
+	    count: count,
+	    suffix: suffix
+	  });
 	};
 	PageDataCount.defaultProps = {
 	  prefix: '共',
@@ -1254,7 +1302,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  PageSize.prototype.render = function render() {
-	    return this.template(this.state, this.props, this);
+	    var _utils$splitObject5 = _utils2.default.splitObject(this.props, ['className', 'prefix', 'setPageSize', 'pageSize', 'pageSizes', 'suffix', 'onChange']);
+
+	    var _utils$splitObject6 = babelHelpers.slicedToArray(_utils$splitObject5, 2);
+
+	    var _utils$splitObject6$ = _utils$splitObject6[0];
+	    var className = _utils$splitObject6$.className;
+	    var prefix = _utils$splitObject6$.prefix;
+	    var setPageSize = _utils$splitObject6$.setPageSize;
+	    var pageSize = _utils$splitObject6$.pageSize;
+	    var pageSizes = _utils$splitObject6$.pageSizes;
+	    var suffix = _utils$splitObject6$.suffix;
+	    var onChange = _utils$splitObject6$.onChange;
+	    var others = _utils$splitObject6[1];
+
+
+	    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
+	      'fj-pagn-part': true
+	    }, className, className));
+
+	    return this.template(this.state, {
+	      pageSizeChange: this.pageSizeChange,
+	      props: others,
+	      classes: classes,
+	      prefix: prefix,
+	      setPageSize: setPageSize,
+	      pageSizes: pageSizes,
+	      suffix: suffix
+	    }, this.props);
 	  };
 
 	  return PageSize;
@@ -1292,6 +1367,60 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames () {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1300,19 +1429,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(14);
 
-	var _reactAddonsUpdate = __webpack_require__(16);
+	var _reactAddonsUpdate = __webpack_require__(17);
 
 	var _reactAddonsUpdate2 = babelHelpers.interopRequireDefault(_reactAddonsUpdate);
 
 	var _nornj = __webpack_require__(2);
 
-	__webpack_require__(23);
+	__webpack_require__(24);
 
 	var _utils = __webpack_require__(3);
 
 	var _utils2 = babelHelpers.interopRequireDefault(_utils);
 
-	__webpack_require__(24);
+	__webpack_require__(25);
 
 	var win = window;
 
@@ -1468,13 +1597,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Widget;
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(17);
+	module.exports = __webpack_require__(18);
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -1492,11 +1621,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _prodInvariant = __webpack_require__(19),
-	    _assign = __webpack_require__(20);
+	var _prodInvariant = __webpack_require__(20),
+	    _assign = __webpack_require__(21);
 
-	var keyOf = __webpack_require__(21);
-	var invariant = __webpack_require__(22);
+	var keyOf = __webpack_require__(22);
+	var invariant = __webpack_require__(23);
 	var hasOwnProperty = {}.hasOwnProperty;
 
 	function shallowCopy(x) {
@@ -1590,10 +1719,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = update;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(19)))
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -1718,7 +1847,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	/**
@@ -1762,7 +1891,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = reactProdInvariant;
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1851,7 +1980,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1890,7 +2019,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = keyOf;
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -1942,10 +2071,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = invariant;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(19)))
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1955,7 +2084,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	(0, _nornj.setTmplRule)(null, null, '#');
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1985,7 +2114,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1995,14 +2124,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.default = undefined;
 
-	var _paginationTmplNj = __webpack_require__(26);
+	var _paginationTmplNj = __webpack_require__(27);
 
 	var _paginationTmplNj2 = babelHelpers.interopRequireDefault(_paginationTmplNj);
 
 	exports.default = _paginationTmplNj2.default;
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2016,9 +2145,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _templateObject3 = babelHelpers.taggedTemplateLiteral(['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n'], ['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n']),
 	    _templateObject4 = babelHelpers.taggedTemplateLiteral(['\n<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>\n  首页\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=第{pageIndex}页>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>\n  末页\n</li>\n'], ['\n<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>\n  首页\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=第{pageIndex}页>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>\n  末页\n</li>\n']),
 	    _templateObject5 = babelHelpers.taggedTemplateLiteral(['\n<#if {count:gt(1)}>\n  <div class=fj-pagn>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          <fj-PageCount prefix={pageCountPrefix} suffix={pageCountSuffix} {pageCount} />\n        </li>\n      </#if>\n      <#if {showCount}>\n        <li class=fj-pagn-info>\n          <fj-PageDataCount prefix={countPrefix} suffix={countSuffix} {count} />\n        </li>\n      </#if>\n      <#if {showPageSize}>\n        <li class=fj-pagn-info>\n          <fj-PageSize prefix={sizePrefix} suffix={sizeSuffix} {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />\n        </li>\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          到\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />页\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#EmptyElem />\n</#if>\n'], ['\n<#if {count:gt(1)}>\n  <div class=fj-pagn>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          <fj-PageCount prefix={pageCountPrefix} suffix={pageCountSuffix} {pageCount} />\n        </li>\n      </#if>\n      <#if {showCount}>\n        <li class=fj-pagn-info>\n          <fj-PageDataCount prefix={countPrefix} suffix={countSuffix} {count} />\n        </li>\n      </#if>\n      <#if {showPageSize}>\n        <li class=fj-pagn-info>\n          <fj-PageSize prefix={sizePrefix} suffix={sizeSuffix} {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />\n        </li>\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          到\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />页\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#EmptyElem />\n</#if>\n']),
-	    _templateObject6 = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn-part>\n  {prefix}{pageCount}{suffix}\n</div>\n'], ['\n<div class=fj-pagn-part>\n  {prefix}{pageCount}{suffix}\n</div>\n']),
-	    _templateObject7 = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn-part>\n  {prefix}{count}{suffix}\n</div>\n'], ['\n<div class=fj-pagn-part>\n  {prefix}{count}{suffix}\n</div>\n']),
-	    _templateObject8 = babelHelpers.taggedTemplateLiteral(['\n<div class=fj-pagn-part>\n  {prefix}\n  <#if {setPageSize}>\n    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>\n      <#each {pageSizes}>\n        <option key=page{#} value={.}>{.}</option>\n      </#each>\n    </select>\n  <#else />\n    {pageSize}\n  </#if>\n  {suffix}\n</div>\n'], ['\n<div class=fj-pagn-part>\n  {prefix}\n  <#if {setPageSize}>\n    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>\n      <#each {pageSizes}>\n        <option key=page{#} value={.}>{.}</option>\n      </#each>\n    </select>\n  <#else />\n    {pageSize}\n  </#if>\n  {suffix}\n</div>\n']);
+	    _templateObject6 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes}>\n  {prefix}{pageCount}{suffix}\n</div>\n'], ['\n<div {...props} class={classes}>\n  {prefix}{pageCount}{suffix}\n</div>\n']),
+	    _templateObject7 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes}>\n  {prefix}{count}{suffix}\n</div>\n'], ['\n<div {...props} class={classes}>\n  {prefix}{count}{suffix}\n</div>\n']),
+	    _templateObject8 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes}>\n  {prefix}\n  <#if {setPageSize}>\n    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>\n      <#each {pageSizes}>\n        <option key=page{#} value={.}>{.}</option>\n      </#each>\n    </select>\n  <#else />\n    {pageSize}\n  </#if>\n  {suffix}\n</div>\n'], ['\n<div {...props} class={classes}>\n  {prefix}\n  <#if {setPageSize}>\n    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>\n      <#each {pageSizes}>\n        <option key=page{#} value={.}>{.}</option>\n      </#each>\n    </select>\n  <#else />\n    {pageSize}\n  </#if>\n  {suffix}\n</div>\n']);
 
 	var _nornj = __webpack_require__(2);
 
@@ -2048,7 +2177,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2062,9 +2191,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _nornj = __webpack_require__(2);
 
-	__webpack_require__(23);
+	__webpack_require__(24);
 
-	var _classnames = __webpack_require__(28);
+	var _classnames = __webpack_require__(15);
 
 	var _classnames2 = babelHelpers.interopRequireDefault(_classnames);
 
@@ -2325,60 +2454,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.RowRight = RowRight;
 	exports.Col = Col;
 	exports.ClearFix = ClearFix;
-
-/***/ },
-/* 28 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2016 Jed Watson.
-	  Licensed under the MIT License (MIT), see
-	  http://jedwatson.github.io/classnames
-	*/
-	/* global define */
-
-	(function () {
-		'use strict';
-
-		var hasOwn = {}.hasOwnProperty;
-
-		function classNames () {
-			var classes = [];
-
-			for (var i = 0; i < arguments.length; i++) {
-				var arg = arguments[i];
-				if (!arg) continue;
-
-				var argType = typeof arg;
-
-				if (argType === 'string' || argType === 'number') {
-					classes.push(arg);
-				} else if (Array.isArray(arg)) {
-					classes.push(classNames.apply(null, arg));
-				} else if (argType === 'object') {
-					for (var key in arg) {
-						if (hasOwn.call(arg, key) && arg[key]) {
-							classes.push(key);
-						}
-					}
-				}
-			}
-
-			return classes.join(' ');
-		}
-
-		if (typeof module !== 'undefined' && module.exports) {
-			module.exports = classNames;
-		} else if (true) {
-			// register as 'classnames', consistent with npm package name
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
-				return classNames;
-			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		} else {
-			window.classNames = classNames;
-		}
-	}());
-
 
 /***/ },
 /* 29 */

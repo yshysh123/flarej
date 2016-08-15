@@ -4,6 +4,7 @@ import {
   registerComponent,
   registerFilter
 } from 'nornj';
+import classNames from 'classnames';
 import Widget from '../widget';
 import utils from '../../utils/utils';
 import tmpl from './pagination.tmpl';
@@ -260,7 +261,27 @@ registerFilter({
 });
 
 //总页数组件
-const PageCount = (props) => templatePageCount(props);
+const PageCount = (props) => {
+  const [{
+    className,
+    prefix,
+    pageCount,
+    suffix
+  }, others] = utils.splitObject(props, ['className', 'prefix', 'pageCount', 'suffix']);
+
+  const classes = classNames({
+    'fj-pagn-part': true,
+    [className]: className
+  });
+
+  return templatePageCount({
+    props: others,
+    classes,
+    prefix,
+    pageCount,
+    suffix
+  });
+};
 PageCount.defaultProps = {
   prefix: '共',
   suffix: '页'
@@ -270,7 +291,27 @@ registerComponent({ 'fj-PageCount': PageCount });
 Pagination.PageCount = PageCount;
 
 //数据总数组件
-const PageDataCount = (props) => templateDataCount(props);
+const PageDataCount = (props) => {
+  const [{
+    className,
+    prefix,
+    count,
+    suffix
+  }, others] = utils.splitObject(props, ['className', 'prefix', 'count', 'suffix']);
+
+  const classes = classNames({
+    'fj-pagn-part': true,
+    [className]: className
+  });
+
+  return templateDataCount({
+    props: others,
+    classes,
+    prefix,
+    count,
+    suffix
+  });
+};
 PageDataCount.defaultProps = {
   prefix: '共',
   suffix: '条数据'
@@ -334,7 +375,30 @@ class PageSize extends Component {
   }
 
   render() {
-    return this.template(this.state, this.props, this);
+    const [{
+      className,
+      prefix,
+      setPageSize,
+      pageSize,
+      pageSizes,
+      suffix,
+      onChange
+    }, others] = utils.splitObject(this.props, ['className', 'prefix', 'setPageSize', 'pageSize', 'pageSizes', 'suffix', 'onChange']);
+    
+    const classes = classNames({
+      'fj-pagn-part': true,
+      [className]: className
+    });
+
+    return this.template(this.state, {
+      pageSizeChange: this.pageSizeChange,
+      props: others,
+      classes,
+      prefix,
+      setPageSize,
+      pageSizes,
+      suffix
+    }, this.props);
   }
 }
 

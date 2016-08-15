@@ -114,19 +114,19 @@ const pagination = nj`
 `;
 
 const pageCount = nj`
-<div class=fj-pagn-part>
+<div {...props} class={classes}>
   {prefix}{pageCount}{suffix}
 </div>
 `;
 
 const pageDataCount = nj`
-<div class=fj-pagn-part>
+<div {...props} class={classes}>
   {prefix}{count}{suffix}
 </div>
 `;
 
 const pageSize = nj`
-<div class=fj-pagn-part>
+<div {...props} class={classes}>
   {prefix}
   <#if {setPageSize}>
     <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>
