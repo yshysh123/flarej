@@ -936,23 +936,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var _props = this.props;
 	    var pageIndex = _props.pageIndex;
 	    var count = _props.count;
+	    var pageSize = _props.pageSize;
 
 	    pageIndex = parseInt(pageIndex, 10);
+	    pageSize = parseInt(pageSize, 10);
 	    count = parseInt(count, 10);
+
+	    var indexN = nextProps.pageIndex;
+	    var countN = nextProps.count;
+	    var pageSizeN = nextProps.pageSize;
+
+	    if (indexN != null) {
+	      indexN = parseInt(indexN, 10);
+	    }
+	    if (pageSizeN != null) {
+	      pageSizeN = parseInt(pageSizeN, 10);
+	    }
+	    if (countN != null) {
+	      countN = parseInt(countN, 10);
+	    }
 
 	    var newState = {},
 	        isSetState = false;
-	    var indexN = parseInt(nextProps.pageIndex, 10),
-	        countN = parseInt(nextProps.count, 10);
 
 	    if (indexN !== pageIndex) {
 	      isSetState = true;
 	      newState.pageIndex = indexN;
 	      this.setGoPage(indexN);
 	    }
-	    if (countN !== count) {
+	    if (pageSizeN !== pageSize || countN !== count) {
 	      isSetState = true;
-	      newState.pageCount = this.getPageCount(this.state.pageSize, countN);
+	      newState.pageSize = pageSizeN != null ? pageSizeN : this.state.pageSize;
+	      newState.pageCount = this.getPageCount(newState.pageSize, countN);
 	    }
 
 	    if (isSetState) {

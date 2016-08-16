@@ -87,23 +87,37 @@ class Pagination extends Widget {
   }
 
   componentWillReceiveProps (nextProps) {
-    let { pageIndex, count } = this.props;
+    let { pageIndex, count, pageSize } = this.props;
     pageIndex = parseInt(pageIndex, 10);
+    pageSize = parseInt(pageSize, 10);
     count = parseInt(count, 10);
+
+    let {
+      pageIndex: indexN,
+      count: countN,
+      pageSize: pageSizeN } = nextProps;
+    if(indexN != null) {
+      indexN = parseInt(indexN, 10);
+    }
+    if(pageSizeN != null) {
+      pageSizeN = parseInt(pageSizeN, 10);
+    }
+    if(countN != null) {
+      countN = parseInt(countN, 10);
+    }
 
     let newState = {},
       isSetState = false;
-    let indexN = parseInt(nextProps.pageIndex, 10),
-      countN = parseInt(nextProps.count, 10);
 
     if (indexN !== pageIndex) {
       isSetState = true;
       newState.pageIndex = indexN;
       this.setGoPage(indexN);
     }
-    if (countN !== count) {
+    if (pageSizeN !== pageSize || countN !== count) {
       isSetState = true;
-      newState.pageCount = this.getPageCount(this.state.pageSize, countN);
+      newState.pageSize = pageSizeN != null ? pageSizeN : this.state.pageSize;
+      newState.pageCount = this.getPageCount(newState.pageSize, countN);
     }
 
     if(isSetState) {
