@@ -68,7 +68,7 @@ const pageBtns = nj`
 
 const pagination = nj`
 <#if {count:gt(1)}>
-  <div class=fj-pagn>
+  <div class={classes} {style}>
     <ul class=fj-pagn-body>
       ${pageBtns}
       <#if {showPageCount}>

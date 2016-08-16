@@ -172,6 +172,7 @@ class Pagination extends Widget {
   render() {
     let disabled = ' fj-disabled',
       state = this.state,
+      props = this.props,
       extra = {
         pageSizeChange: this.pageSizeChange,
         pageIndexBlur: this.pageIndexBlur,
@@ -182,6 +183,7 @@ class Pagination extends Widget {
         nextDisabled: '',
         lastDisabled: ''
       };
+    let { className } = props;
 
     //翻页按钮展示逻辑
     if (state.pageCount <= 1) {  //只有一页
@@ -199,7 +201,12 @@ class Pagination extends Widget {
       extra.lastDisabled = disabled;
     }
 
-    return this.template(state, this.props, extra);
+    extra.classes = classNames({
+      'fj-pagn': true,
+      [className]: className
+    });
+
+    return this.template(state, props, extra);
   }
 }
 
