@@ -115,13 +115,13 @@ const pagination = nj`
 
 const pageCount = nj`
 <div {...props} class={classes}>
-  {prefix}{pageCount}{suffix}
+  {prefix}<span>{pageCount}</span>{suffix}
 </div>
 `;
 
 const pageDataCount = nj`
 <div {...props} class={classes}>
-  {prefix}{count}{suffix}
+  {prefix}<span>{count}</span>{suffix}
 </div>
 `;
 
