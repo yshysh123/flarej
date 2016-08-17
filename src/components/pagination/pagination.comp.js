@@ -11,6 +11,11 @@ import tmpl from './pagination.tmpl';
 const templateDataCount = compileComponent(tmpl.pageDataCount, 'pageDataCount');
 const templatePageCount = compileComponent(tmpl.pageCount, 'pageCount');
 
+//计算总页数
+function getPageCount(count, pageSize) {
+  return parseInt(count % pageSize > 0 ? count / pageSize + 1 : count / pageSize, 10);
+}
+
 //分页组件
 class Pagination extends Widget {
   static defaultProps = {
@@ -131,7 +136,7 @@ class Pagination extends Widget {
   }
 
   getPageCount(pageSize = this.state.pageSize, count = this.props.count) {
-    return parseInt(count % pageSize > 0 ? count / pageSize + 1 : count / pageSize, 10);
+    return getPageCount(count, pageSize);
   }
 
   //切换每页数据数
@@ -283,17 +288,24 @@ registerFilter({
 
 //总页数组件
 const PageCount = (props) => {
-  const [{
+  let [{
     className,
     prefix,
     pageCount,
+    count,
+    pageSize,
     suffix
-  }, others] = utils.splitObject(props, ['className', 'prefix', 'pageCount', 'suffix']);
+  }, others] = utils.splitObject(props, ['className', 'prefix', 'pageCount', 'count', 'pageSize', 'suffix']);
 
   const classes = classNames({
     'fj-pagn-part': true,
     [className]: className
   });
+
+  //计算总页数
+  if(count != null && pageSize != null) {
+    pageCount = getPageCount(count, pageSize);
+  }
 
   return templatePageCount({
     props: others,
