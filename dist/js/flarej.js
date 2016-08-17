@@ -1,6 +1,4 @@
 (function(e){var r=e.babelHelpers={};r.typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(e){return typeof e}:function(e){return e&&typeof Symbol==="function"&&e.constructor===Symbol?"symbol":typeof e};r.jsx=function(){var e=typeof Symbol==="function"&&Symbol.for&&Symbol.for("react.element")||60103;return function r(t,n,o,i){var f=t&&t.defaultProps;var u=arguments.length-3;if(!n&&u!==0){n={}}if(n&&f){for(var a in f){if(n[a]===void 0){n[a]=f[a]}}}else if(!n){n=f||{}}if(u===1){n.children=i}else if(u>1){var l=Array(u);for(var c=0;c<u;c++){l[c]=arguments[c+3]}n.children=l}return{$$typeof:e,type:t,key:o===undefined?null:""+o,ref:null,props:n,_owner:null}}}();r.asyncToGenerator=function(e){return function(){var r=e.apply(this,arguments);return new Promise(function(e,t){function n(o,i){try{var f=r[o](i);var u=f.value}catch(e){t(e);return}if(f.done){e(u)}else{Promise.resolve(u).then(function(e){n("next",e)},function(e){n("throw",e)})}}n("next")})}};r.classCallCheck=function(e,r){if(!(e instanceof r)){throw new TypeError("Cannot call a class as a function")}};r.createClass=function(){function e(e,r){for(var t=0;t<r.length;t++){var n=r[t];n.enumerable=n.enumerable||false;n.configurable=true;if("value"in n)n.writable=true;Object.defineProperty(e,n.key,n)}}return function(r,t,n){if(t)e(r.prototype,t);if(n)e(r,n);return r}}();r.defineEnumerableProperties=function(e,r){for(var t in r){var n=r[t];n.configurable=n.enumerable=true;if("value"in n)n.writable=true;Object.defineProperty(e,t,n)}return e};r.defaults=function(e,r){var t=Object.getOwnPropertyNames(r);for(var n=0;n<t.length;n++){var o=t[n];var i=Object.getOwnPropertyDescriptor(r,o);if(i&&i.configurable&&e[o]===undefined){Object.defineProperty(e,o,i)}}return e};r.defineProperty=function(e,r,t){if(r in e){Object.defineProperty(e,r,{value:t,enumerable:true,configurable:true,writable:true})}else{e[r]=t}return e};r.extends=Object.assign||function(e){for(var r=1;r<arguments.length;r++){var t=arguments[r];for(var n in t){if(Object.prototype.hasOwnProperty.call(t,n)){e[n]=t[n]}}}return e};r.get=function e(r,t,n){if(r===null)r=Function.prototype;var o=Object.getOwnPropertyDescriptor(r,t);if(o===undefined){var i=Object.getPrototypeOf(r);if(i===null){return undefined}else{return e(i,t,n)}}else if("value"in o){return o.value}else{var f=o.get;if(f===undefined){return undefined}return f.call(n)}};r.inherits=function(e,r){if(typeof r!=="function"&&r!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof r)}e.prototype=Object.create(r&&r.prototype,{constructor:{value:e,enumerable:false,writable:true,configurable:true}});if(r)Object.setPrototypeOf?Object.setPrototypeOf(e,r):e.__proto__=r};r.instanceof=function(e,r){if(r!=null&&typeof Symbol!=="undefined"&&r[Symbol.hasInstance]){return r[Symbol.hasInstance](e)}else{return e instanceof r}};r.interopRequireDefault=function(e){return e&&e.__esModule?e:{default:e}};r.interopRequireWildcard=function(e){if(e&&e.__esModule){return e}else{var r={};if(e!=null){for(var t in e){if(Object.prototype.hasOwnProperty.call(e,t))r[t]=e[t]}}r.default=e;return r}};r.newArrowCheck=function(e,r){if(e!==r){throw new TypeError("Cannot instantiate an arrow function")}};r.objectDestructuringEmpty=function(e){if(e==null)throw new TypeError("Cannot destructure undefined")};r.objectWithoutProperties=function(e,r){var t={};for(var n in e){if(r.indexOf(n)>=0)continue;if(!Object.prototype.hasOwnProperty.call(e,n))continue;t[n]=e[n]}return t};r.possibleConstructorReturn=function(e,r){if(!e){throw new ReferenceError("this hasn't been initialised - super() hasn't been called")}return r&&(typeof r==="object"||typeof r==="function")?r:e};r.selfGlobal=typeof e==="undefined"?self:e;r.set=function e(r,t,n,o){var i=Object.getOwnPropertyDescriptor(r,t);if(i===undefined){var f=Object.getPrototypeOf(r);if(f!==null){e(f,t,n,o)}}else if("value"in i&&i.writable){i.value=n}else{var u=i.set;if(u!==undefined){u.call(o,n)}}return n};r.slicedToArray=function(){function e(e,r){var t=[];var n=true;var o=false;var i=undefined;try{for(var f=e[Symbol.iterator](),u;!(n=(u=f.next()).done);n=true){t.push(u.value);if(r&&t.length===r)break}}catch(e){o=true;i=e}finally{try{if(!n&&f["return"])f["return"]()}finally{if(o)throw i}}return t}return function(r,t){if(Array.isArray(r)){return r}else if(Symbol.iterator in Object(r)){return e(r,t)}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}}}();r.slicedToArrayLoose=function(e,r){if(Array.isArray(e)){return e}else if(Symbol.iterator in Object(e)){var t=[];for(var n=e[Symbol.iterator](),o;!(o=n.next()).done;){t.push(o.value);if(r&&t.length===r)break}return t}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}};r.taggedTemplateLiteral=function(e,r){return Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(r)}}))};r.taggedTemplateLiteralLoose=function(e,r){e.raw=r;return e};r.temporalRef=function(e,r,t){if(e===t){throw new ReferenceError(r+" is not defined - temporal dead zone")}else{return e}};r.temporalUndefined={};r.toArray=function(e){return Array.isArray(e)?e:Array.from(e)};r.toConsumableArray=function(e){if(Array.isArray(e)){for(var r=0,t=Array(e.length);r<e.length;r++)t[r]=e[r];return t}else{return Array.from(e)}}})(typeof global==="undefined"?self:global);
-(function(e){var r=e.babelHelpers={};r.typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(e){return typeof e}:function(e){return e&&typeof Symbol==="function"&&e.constructor===Symbol?"symbol":typeof e};r.jsx=function(){var e=typeof Symbol==="function"&&Symbol.for&&Symbol.for("react.element")||60103;return function r(t,n,o,i){var f=t&&t.defaultProps;var u=arguments.length-3;if(!n&&u!==0){n={}}if(n&&f){for(var a in f){if(n[a]===void 0){n[a]=f[a]}}}else if(!n){n=f||{}}if(u===1){n.children=i}else if(u>1){var l=Array(u);for(var c=0;c<u;c++){l[c]=arguments[c+3]}n.children=l}return{$$typeof:e,type:t,key:o===undefined?null:""+o,ref:null,props:n,_owner:null}}}();r.asyncToGenerator=function(e){return function(){var r=e.apply(this,arguments);return new Promise(function(e,t){function n(o,i){try{var f=r[o](i);var u=f.value}catch(e){t(e);return}if(f.done){e(u)}else{Promise.resolve(u).then(function(e){n("next",e)},function(e){n("throw",e)})}}n("next")})}};r.classCallCheck=function(e,r){if(!(e instanceof r)){throw new TypeError("Cannot call a class as a function")}};r.createClass=function(){function e(e,r){for(var t=0;t<r.length;t++){var n=r[t];n.enumerable=n.enumerable||false;n.configurable=true;if("value"in n)n.writable=true;Object.defineProperty(e,n.key,n)}}return function(r,t,n){if(t)e(r.prototype,t);if(n)e(r,n);return r}}();r.defineEnumerableProperties=function(e,r){for(var t in r){var n=r[t];n.configurable=n.enumerable=true;if("value"in n)n.writable=true;Object.defineProperty(e,t,n)}return e};r.defaults=function(e,r){var t=Object.getOwnPropertyNames(r);for(var n=0;n<t.length;n++){var o=t[n];var i=Object.getOwnPropertyDescriptor(r,o);if(i&&i.configurable&&e[o]===undefined){Object.defineProperty(e,o,i)}}return e};r.defineProperty=function(e,r,t){if(r in e){Object.defineProperty(e,r,{value:t,enumerable:true,configurable:true,writable:true})}else{e[r]=t}return e};r.extends=Object.assign||function(e){for(var r=1;r<arguments.length;r++){var t=arguments[r];for(var n in t){if(Object.prototype.hasOwnProperty.call(t,n)){e[n]=t[n]}}}return e};r.get=function e(r,t,n){if(r===null)r=Function.prototype;var o=Object.getOwnPropertyDescriptor(r,t);if(o===undefined){var i=Object.getPrototypeOf(r);if(i===null){return undefined}else{return e(i,t,n)}}else if("value"in o){return o.value}else{var f=o.get;if(f===undefined){return undefined}return f.call(n)}};r.inherits=function(e,r){if(typeof r!=="function"&&r!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof r)}e.prototype=Object.create(r&&r.prototype,{constructor:{value:e,enumerable:false,writable:true,configurable:true}});if(r)Object.setPrototypeOf?Object.setPrototypeOf(e,r):e.__proto__=r};r.instanceof=function(e,r){if(r!=null&&typeof Symbol!=="undefined"&&r[Symbol.hasInstance]){return r[Symbol.hasInstance](e)}else{return e instanceof r}};r.interopRequireDefault=function(e){return e&&e.__esModule?e:{default:e}};r.interopRequireWildcard=function(e){if(e&&e.__esModule){return e}else{var r={};if(e!=null){for(var t in e){if(Object.prototype.hasOwnProperty.call(e,t))r[t]=e[t]}}r.default=e;return r}};r.newArrowCheck=function(e,r){if(e!==r){throw new TypeError("Cannot instantiate an arrow function")}};r.objectDestructuringEmpty=function(e){if(e==null)throw new TypeError("Cannot destructure undefined")};r.objectWithoutProperties=function(e,r){var t={};for(var n in e){if(r.indexOf(n)>=0)continue;if(!Object.prototype.hasOwnProperty.call(e,n))continue;t[n]=e[n]}return t};r.possibleConstructorReturn=function(e,r){if(!e){throw new ReferenceError("this hasn't been initialised - super() hasn't been called")}return r&&(typeof r==="object"||typeof r==="function")?r:e};r.selfGlobal=typeof e==="undefined"?self:e;r.set=function e(r,t,n,o){var i=Object.getOwnPropertyDescriptor(r,t);if(i===undefined){var f=Object.getPrototypeOf(r);if(f!==null){e(f,t,n,o)}}else if("value"in i&&i.writable){i.value=n}else{var u=i.set;if(u!==undefined){u.call(o,n)}}return n};r.slicedToArray=function(){function e(e,r){var t=[];var n=true;var o=false;var i=undefined;try{for(var f=e[Symbol.iterator](),u;!(n=(u=f.next()).done);n=true){t.push(u.value);if(r&&t.length===r)break}}catch(e){o=true;i=e}finally{try{if(!n&&f["return"])f["return"]()}finally{if(o)throw i}}return t}return function(r,t){if(Array.isArray(r)){return r}else if(Symbol.iterator in Object(r)){return e(r,t)}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}}}();r.slicedToArrayLoose=function(e,r){if(Array.isArray(e)){return e}else if(Symbol.iterator in Object(e)){var t=[];for(var n=e[Symbol.iterator](),o;!(o=n.next()).done;){t.push(o.value);if(r&&t.length===r)break}return t}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}};r.taggedTemplateLiteral=function(e,r){return Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(r)}}))};r.taggedTemplateLiteralLoose=function(e,r){e.raw=r;return e};r.temporalRef=function(e,r,t){if(e===t){throw new ReferenceError(r+" is not defined - temporal dead zone")}else{return e}};r.temporalUndefined={};r.toArray=function(e){return Array.isArray(e)?e:Array.from(e)};r.toConsumableArray=function(e){if(Array.isArray(e)){for(var r=0,t=Array(e.length);r<e.length;r++)t[r]=e[r];return t}else{return Array.from(e)}}})(typeof global==="undefined"?self:global);
-(function(e){var r=e.babelHelpers={};r.typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(e){return typeof e}:function(e){return e&&typeof Symbol==="function"&&e.constructor===Symbol?"symbol":typeof e};r.jsx=function(){var e=typeof Symbol==="function"&&Symbol.for&&Symbol.for("react.element")||60103;return function r(t,n,o,i){var f=t&&t.defaultProps;var u=arguments.length-3;if(!n&&u!==0){n={}}if(n&&f){for(var a in f){if(n[a]===void 0){n[a]=f[a]}}}else if(!n){n=f||{}}if(u===1){n.children=i}else if(u>1){var l=Array(u);for(var c=0;c<u;c++){l[c]=arguments[c+3]}n.children=l}return{$$typeof:e,type:t,key:o===undefined?null:""+o,ref:null,props:n,_owner:null}}}();r.asyncToGenerator=function(e){return function(){var r=e.apply(this,arguments);return new Promise(function(e,t){function n(o,i){try{var f=r[o](i);var u=f.value}catch(e){t(e);return}if(f.done){e(u)}else{Promise.resolve(u).then(function(e){n("next",e)},function(e){n("throw",e)})}}n("next")})}};r.classCallCheck=function(e,r){if(!(e instanceof r)){throw new TypeError("Cannot call a class as a function")}};r.createClass=function(){function e(e,r){for(var t=0;t<r.length;t++){var n=r[t];n.enumerable=n.enumerable||false;n.configurable=true;if("value"in n)n.writable=true;Object.defineProperty(e,n.key,n)}}return function(r,t,n){if(t)e(r.prototype,t);if(n)e(r,n);return r}}();r.defineEnumerableProperties=function(e,r){for(var t in r){var n=r[t];n.configurable=n.enumerable=true;if("value"in n)n.writable=true;Object.defineProperty(e,t,n)}return e};r.defaults=function(e,r){var t=Object.getOwnPropertyNames(r);for(var n=0;n<t.length;n++){var o=t[n];var i=Object.getOwnPropertyDescriptor(r,o);if(i&&i.configurable&&e[o]===undefined){Object.defineProperty(e,o,i)}}return e};r.defineProperty=function(e,r,t){if(r in e){Object.defineProperty(e,r,{value:t,enumerable:true,configurable:true,writable:true})}else{e[r]=t}return e};r.extends=Object.assign||function(e){for(var r=1;r<arguments.length;r++){var t=arguments[r];for(var n in t){if(Object.prototype.hasOwnProperty.call(t,n)){e[n]=t[n]}}}return e};r.get=function e(r,t,n){if(r===null)r=Function.prototype;var o=Object.getOwnPropertyDescriptor(r,t);if(o===undefined){var i=Object.getPrototypeOf(r);if(i===null){return undefined}else{return e(i,t,n)}}else if("value"in o){return o.value}else{var f=o.get;if(f===undefined){return undefined}return f.call(n)}};r.inherits=function(e,r){if(typeof r!=="function"&&r!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof r)}e.prototype=Object.create(r&&r.prototype,{constructor:{value:e,enumerable:false,writable:true,configurable:true}});if(r)Object.setPrototypeOf?Object.setPrototypeOf(e,r):e.__proto__=r};r.instanceof=function(e,r){if(r!=null&&typeof Symbol!=="undefined"&&r[Symbol.hasInstance]){return r[Symbol.hasInstance](e)}else{return e instanceof r}};r.interopRequireDefault=function(e){return e&&e.__esModule?e:{default:e}};r.interopRequireWildcard=function(e){if(e&&e.__esModule){return e}else{var r={};if(e!=null){for(var t in e){if(Object.prototype.hasOwnProperty.call(e,t))r[t]=e[t]}}r.default=e;return r}};r.newArrowCheck=function(e,r){if(e!==r){throw new TypeError("Cannot instantiate an arrow function")}};r.objectDestructuringEmpty=function(e){if(e==null)throw new TypeError("Cannot destructure undefined")};r.objectWithoutProperties=function(e,r){var t={};for(var n in e){if(r.indexOf(n)>=0)continue;if(!Object.prototype.hasOwnProperty.call(e,n))continue;t[n]=e[n]}return t};r.possibleConstructorReturn=function(e,r){if(!e){throw new ReferenceError("this hasn't been initialised - super() hasn't been called")}return r&&(typeof r==="object"||typeof r==="function")?r:e};r.selfGlobal=typeof e==="undefined"?self:e;r.set=function e(r,t,n,o){var i=Object.getOwnPropertyDescriptor(r,t);if(i===undefined){var f=Object.getPrototypeOf(r);if(f!==null){e(f,t,n,o)}}else if("value"in i&&i.writable){i.value=n}else{var u=i.set;if(u!==undefined){u.call(o,n)}}return n};r.slicedToArray=function(){function e(e,r){var t=[];var n=true;var o=false;var i=undefined;try{for(var f=e[Symbol.iterator](),u;!(n=(u=f.next()).done);n=true){t.push(u.value);if(r&&t.length===r)break}}catch(e){o=true;i=e}finally{try{if(!n&&f["return"])f["return"]()}finally{if(o)throw i}}return t}return function(r,t){if(Array.isArray(r)){return r}else if(Symbol.iterator in Object(r)){return e(r,t)}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}}}();r.slicedToArrayLoose=function(e,r){if(Array.isArray(e)){return e}else if(Symbol.iterator in Object(e)){var t=[];for(var n=e[Symbol.iterator](),o;!(o=n.next()).done;){t.push(o.value);if(r&&t.length===r)break}return t}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}};r.taggedTemplateLiteral=function(e,r){return Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(r)}}))};r.taggedTemplateLiteralLoose=function(e,r){e.raw=r;return e};r.temporalRef=function(e,r,t){if(e===t){throw new ReferenceError(r+" is not defined - temporal dead zone")}else{return e}};r.temporalUndefined={};r.toArray=function(e){return Array.isArray(e)?e:Array.from(e)};r.toConsumableArray=function(e){if(Array.isArray(e)){for(var r=0,t=Array(e.length);r<e.length;r++)t[r]=e[r];return t}else{return Array.from(e)}}})(typeof global==="undefined"?self:global);
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("nornj"), require("react"));
@@ -182,7 +180,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.splitObject = exports.guid = undefined;
+	exports.guid = undefined;
 
 	var _core = __webpack_require__(1);
 
@@ -191,19 +189,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	//Get global unique id
 	var guid = exports.guid = function guid() {
 	  return new Date().getTime() + Math.random().toFixed(6).substr(2);
-	};
-
-	var splitObject = exports.splitObject = function splitObject(obj, parts) {
-	  var left = {};
-	  var right = {};
-	  Object.keys(obj).forEach(function (k) {
-	    if (parts.indexOf(k) !== -1) {
-	      left[k] = obj[k];
-	    } else {
-	      right[k] = obj[k];
-	    }
-	  });
-	  return [left, right];
 	};
 
 /***/ },
@@ -857,8 +842,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    amount = (amount + '').match(/\.\d*$/g); //截取小数点及小数部分
 	    //amount = (amount + '').replace(/0+?$/g, '');  //去除小数点后多余的0
 	  } else {
-	    amount = '';
-	  }
+	      amount = '';
+	    }
 
 	  return amount;
 	};
@@ -1224,18 +1209,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//总页数组件
 	var PageCount = function PageCount(props) {
-	  var _utils$splitObject = _utils2.default.splitObject(props, ['className', 'prefix', 'pageCount', 'count', 'pageSize', 'suffix']);
-
-	  var _utils$splitObject2 = babelHelpers.slicedToArray(_utils$splitObject, 2);
-
-	  var _utils$splitObject2$ = _utils$splitObject2[0];
-	  var className = _utils$splitObject2$.className;
-	  var prefix = _utils$splitObject2$.prefix;
-	  var pageCount = _utils$splitObject2$.pageCount;
-	  var count = _utils$splitObject2$.count;
-	  var pageSize = _utils$splitObject2$.pageSize;
-	  var suffix = _utils$splitObject2$.suffix;
-	  var others = _utils$splitObject2[1];
+	  var className = props.className;
+	  var prefix = props.prefix;
+	  var pageCount = props.pageCount;
+	  var count = props.count;
+	  var pageSize = props.pageSize;
+	  var suffix = props.suffix;
+	  var others = babelHelpers.objectWithoutProperties(props, ['className', 'prefix', 'pageCount', 'count', 'pageSize', 'suffix']);
 
 
 	  var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
@@ -1243,7 +1223,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, className, className));
 
 	  //计算总页数
-	  if (count != null && pageSize != null) {}
+	  if (count != null && pageSize != null) {
+	    pageCount = _getPageCount(count, pageSize);
+	  }
 
 	  return templatePageCount({
 	    props: others,
@@ -1263,16 +1245,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//数据总数组件
 	var PageDataCount = function PageDataCount(props) {
-	  var _utils$splitObject3 = _utils2.default.splitObject(props, ['className', 'prefix', 'count', 'suffix']);
-
-	  var _utils$splitObject4 = babelHelpers.slicedToArray(_utils$splitObject3, 2);
-
-	  var _utils$splitObject4$ = _utils$splitObject4[0];
-	  var className = _utils$splitObject4$.className;
-	  var prefix = _utils$splitObject4$.prefix;
-	  var count = _utils$splitObject4$.count;
-	  var suffix = _utils$splitObject4$.suffix;
-	  var others = _utils$splitObject4[1];
+	  var className = props.className;
+	  var prefix = props.prefix;
+	  var count = props.count;
+	  var suffix = props.suffix;
+	  var others = babelHelpers.objectWithoutProperties(props, ['className', 'prefix', 'count', 'suffix']);
 
 
 	  var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
@@ -1336,19 +1313,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  PageSize.prototype.render = function render() {
-	    var _utils$splitObject5 = _utils2.default.splitObject(this.props, ['className', 'prefix', 'setPageSize', 'pageSize', 'pageSizes', 'suffix', 'onChange']);
-
-	    var _utils$splitObject6 = babelHelpers.slicedToArray(_utils$splitObject5, 2);
-
-	    var _utils$splitObject6$ = _utils$splitObject6[0];
-	    var className = _utils$splitObject6$.className;
-	    var prefix = _utils$splitObject6$.prefix;
-	    var setPageSize = _utils$splitObject6$.setPageSize;
-	    var pageSize = _utils$splitObject6$.pageSize;
-	    var pageSizes = _utils$splitObject6$.pageSizes;
-	    var suffix = _utils$splitObject6$.suffix;
-	    var onChange = _utils$splitObject6$.onChange;
-	    var others = _utils$splitObject6[1];
+	    var _props2 = this.props;
+	    var className = _props2.className;
+	    var prefix = _props2.prefix;
+	    var setPageSize = _props2.setPageSize;
+	    var pageSize = _props2.pageSize;
+	    var pageSizes = _props2.pageSizes;
+	    var suffix = _props2.suffix;
+	    var onChange = _props2.onChange;
+	    var others = babelHelpers.objectWithoutProperties(_props2, ['className', 'prefix', 'setPageSize', 'pageSize', 'pageSizes', 'suffix', 'onChange']);
 
 
 	    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
@@ -2231,10 +2204,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = babelHelpers.interopRequireDefault(_classnames);
 
-	var _utils = __webpack_require__(3);
-
-	var _utils2 = babelHelpers.interopRequireDefault(_utils);
-
 	var _gridLayout = __webpack_require__(29);
 
 	var _gridLayout2 = babelHelpers.interopRequireDefault(_gridLayout);
@@ -2254,17 +2223,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  Row.prototype.render = function render() {
-	    var _utils$splitObject = _utils2.default.splitObject(this.props, ['className', 'style', 'left', 'right', 'children']);
-
-	    var _utils$splitObject2 = babelHelpers.slicedToArray(_utils$splitObject, 2);
-
-	    var _utils$splitObject2$ = _utils$splitObject2[0];
-	    var className = _utils$splitObject2$.className;
-	    var style = _utils$splitObject2$.style;
-	    var left = _utils$splitObject2$.left;
-	    var right = _utils$splitObject2$.right;
-	    var children = _utils$splitObject2$.children;
-	    var others = _utils$splitObject2[1];
+	    var _props = this.props;
+	    var className = _props.className;
+	    var style = _props.style;
+	    var left = _props.left;
+	    var right = _props.right;
+	    var children = _props.children;
+	    var others = babelHelpers.objectWithoutProperties(_props, ['className', 'style', 'left', 'right', 'children']);
 
 
 	    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
@@ -2293,25 +2258,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return Row;
 	}(_react.Component);
 
-	Row.defaultProps = {
-	  fjType: 'row'
-	};
-
-
 	function _createRowRender(context, compClass) {
 	  return function () {
 	    var _classNames2;
 
-	    var _utils$splitObject3 = _utils2.default.splitObject(this.props, ['className', 'style', 'width', 'children']);
-
-	    var _utils$splitObject4 = babelHelpers.slicedToArray(_utils$splitObject3, 2);
-
-	    var _utils$splitObject4$ = _utils$splitObject4[0];
-	    var className = _utils$splitObject4$.className;
-	    var style = _utils$splitObject4$.style;
-	    var width = _utils$splitObject4$.width;
-	    var children = _utils$splitObject4$.children;
-	    var others = _utils$splitObject4[1];
+	    var _props2 = this.props;
+	    var className = _props2.className;
+	    var style = _props2.style;
+	    var width = _props2.width;
+	    var children = _props2.children;
+	    var others = babelHelpers.objectWithoutProperties(_props2, ['className', 'style', 'width', 'children']);
 
 
 	    var classes = (0, _classnames2.default)((_classNames2 = {}, babelHelpers.defineProperty(_classNames2, compClass, true), babelHelpers.defineProperty(_classNames2, className, className), _classNames2));
@@ -2353,10 +2309,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	//Grid row right container
 
 
-	RowLeft.defaultProps = {
-	  fjType: 'rowLeft'
-	};
-
 	var RowRight = function (_Component3) {
 	  babelHelpers.inherits(RowRight, _Component3);
 
@@ -2375,10 +2327,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	//Grid col
 
 
-	RowRight.defaultProps = {
-	  fjType: 'rowRight'
-	};
-
 	var Col = function (_Component4) {
 	  babelHelpers.inherits(Col, _Component4);
 
@@ -2390,30 +2338,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Col.prototype.render = function render() {
 	    var _classNames3;
 
-	    var _utils$splitObject5 = _utils2.default.splitObject(this.props, ['className', 'l', 'm', 's', 'ms', 'right', 'left', 'shift', 'rightM', 'leftM', 'shiftM', 'rightS', 'leftS', 'shiftS', 'rightMs', 'leftMs', 'shiftMs', 'children']);
-
-	    var _utils$splitObject6 = babelHelpers.slicedToArray(_utils$splitObject5, 2);
-
-	    var _utils$splitObject6$ = _utils$splitObject6[0];
-	    var className = _utils$splitObject6$.className;
-	    var l = _utils$splitObject6$.l;
-	    var m = _utils$splitObject6$.m;
-	    var s = _utils$splitObject6$.s;
-	    var ms = _utils$splitObject6$.ms;
-	    var right = _utils$splitObject6$.right;
-	    var left = _utils$splitObject6$.left;
-	    var shift = _utils$splitObject6$.shift;
-	    var rightM = _utils$splitObject6$.rightM;
-	    var leftM = _utils$splitObject6$.leftM;
-	    var shiftM = _utils$splitObject6$.shiftM;
-	    var rightS = _utils$splitObject6$.rightS;
-	    var leftS = _utils$splitObject6$.leftS;
-	    var shiftS = _utils$splitObject6$.shiftS;
-	    var rightMs = _utils$splitObject6$.rightMs;
-	    var leftMs = _utils$splitObject6$.leftMs;
-	    var shiftMs = _utils$splitObject6$.shiftMs;
-	    var children = _utils$splitObject6$.children;
-	    var others = _utils$splitObject6[1];
+	    var _props3 = this.props;
+	    var className = _props3.className;
+	    var l = _props3.l;
+	    var m = _props3.m;
+	    var s = _props3.s;
+	    var ms = _props3.ms;
+	    var right = _props3.right;
+	    var left = _props3.left;
+	    var shift = _props3.shift;
+	    var rightM = _props3.rightM;
+	    var leftM = _props3.leftM;
+	    var shiftM = _props3.shiftM;
+	    var rightS = _props3.rightS;
+	    var leftS = _props3.leftS;
+	    var shiftS = _props3.shiftS;
+	    var rightMs = _props3.rightMs;
+	    var leftMs = _props3.leftMs;
+	    var shiftMs = _props3.shiftMs;
+	    var children = _props3.children;
+	    var others = babelHelpers.objectWithoutProperties(_props3, ['className', 'l', 'm', 's', 'ms', 'right', 'left', 'shift', 'rightM', 'leftM', 'shiftM', 'rightS', 'leftS', 'shiftS', 'rightMs', 'leftMs', 'shiftMs', 'children']);
 
 
 	    var classes = (0, _classnames2.default)((_classNames3 = {}, babelHelpers.defineProperty(_classNames3, 'fj-col' + l, l != null), babelHelpers.defineProperty(_classNames3, 'fj-col-m' + m, m != null), babelHelpers.defineProperty(_classNames3, 'fj-col-s' + s, s != null), babelHelpers.defineProperty(_classNames3, 'fj-col-ms' + ms, ms != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right' + right, right != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left' + left, left != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift' + shift, shift != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-m' + rightM, rightM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-m' + leftM, leftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-m' + shiftM, shiftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-s' + rightS, rightS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-s' + leftS, leftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-s' + shiftS, shiftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-ms' + rightMs, rightMs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-ms' + leftMs, leftMs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-ms' + shiftMs, shiftMs != null), babelHelpers.defineProperty(_classNames3, className, className), _classNames3));
@@ -2431,10 +2375,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	//Clear the float style
 
 
-	Col.defaultProps = {
-	  fjType: 'Col'
-	};
-
 	var ClearFix = function (_Component5) {
 	  babelHelpers.inherits(ClearFix, _Component5);
 
@@ -2446,17 +2386,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  ClearFix.prototype.render = function render() {
 	    var _classNames4;
 
-	    var _utils$splitObject7 = _utils2.default.splitObject(this.props, ['className', 'l', 'm', 's', 'ms']);
-
-	    var _utils$splitObject8 = babelHelpers.slicedToArray(_utils$splitObject7, 2);
-
-	    var _utils$splitObject8$ = _utils$splitObject8[0];
-	    var className = _utils$splitObject8$.className;
-	    var l = _utils$splitObject8$.l;
-	    var m = _utils$splitObject8$.m;
-	    var s = _utils$splitObject8$.s;
-	    var ms = _utils$splitObject8$.ms;
-	    var others = _utils$splitObject8[1];
+	    var _props4 = this.props;
+	    var className = _props4.className;
+	    var l = _props4.l;
+	    var m = _props4.m;
+	    var s = _props4.s;
+	    var ms = _props4.ms;
+	    var others = babelHelpers.objectWithoutProperties(_props4, ['className', 'l', 'm', 's', 'ms']);
 
 
 	    var classes = (0, _classnames2.default)((_classNames4 = {}, babelHelpers.defineProperty(_classNames4, 'fj-clearfix', l != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-m', m != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-s', s != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-ms', ms != null), babelHelpers.defineProperty(_classNames4, className, className), _classNames4));
@@ -2469,11 +2405,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return ClearFix;
 	}(_react.Component);
-
-	ClearFix.defaultProps = {
-	  fjType: 'ClearFix'
-	};
-
 
 	(0, _nornj.registerComponent)({
 	  'fj-Row': Row,

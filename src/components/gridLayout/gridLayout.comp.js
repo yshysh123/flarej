@@ -5,7 +5,6 @@ import {
 } from 'nornj';
 import '../../njConfig';
 import classNames from 'classnames';
-import utils from '../../utils/utils';
 import tmpl from './gridLayout.tmpl';
 const templateRow = compileComponent(tmpl.row, 'row');
 const templateCol = compileComponent(tmpl.col, 'col');
@@ -13,18 +12,13 @@ const templateClearFix = compileComponent(tmpl.clearFix, 'clearFix');
 
 //Grid row
 class Row extends Component {
-  static defaultProps = {
-    fjType: 'row'
-  }
-
   render() {
-    const [{
+    const {
       className,
       style,
       left,
       right,
-      children
-    }, others] = utils.splitObject(this.props, ['className', 'style', 'left', 'right', 'children']);
+      children, ...others } = this.props;
 
     const classes = classNames({
       'fj-row': true,
@@ -53,12 +47,12 @@ class Row extends Component {
 
 function _createRowRender(context, compClass) {
   return function() {
-    const [{
+    const {
       className,
       style,
       width,
       children
-    }, others] = utils.splitObject(this.props, ['className', 'style', 'width', 'children']);
+    , ...others } = this.props;
 
     const classes = classNames({
       [compClass]: true,
@@ -84,10 +78,6 @@ function _createRowRender(context, compClass) {
 
 //Grid row left container
 class RowLeft extends Component {
-  static defaultProps = {
-    fjType: 'rowLeft'
-  }
-
   constructor(props) {
     super(props);
 
@@ -97,10 +87,6 @@ class RowLeft extends Component {
 
 //Grid row right container
 class RowRight extends Component {
-  static defaultProps = {
-    fjType: 'rowRight'
-  }
-
   constructor(props) {
     super(props);
 
@@ -110,12 +96,8 @@ class RowRight extends Component {
 
 //Grid col
 class Col extends Component {
-  static defaultProps = {
-    fjType: 'Col'
-  }
-
   render() {
-    const [{
+    const {
       className,
       l,
       m,
@@ -133,27 +115,7 @@ class Col extends Component {
       rightMs,
       leftMs,
       shiftMs,
-      children
-    }, others] = utils.splitObject(this.props, [
-      'className',
-      'l',
-      'm',
-      's',
-      'ms',
-      'right',
-      'left',
-      'shift',
-      'rightM',
-      'leftM',
-      'shiftM',
-      'rightS',
-      'leftS',
-      'shiftS',
-      'rightMs',
-      'leftMs',
-      'shiftMs',
-      'children'
-    ]);
+      children, ...others } = this.props;
 
     const classes = classNames({
       ['fj-col' + l]: l != null,
@@ -185,18 +147,13 @@ class Col extends Component {
 
 //Clear the float style
 class ClearFix extends Component {
-  static defaultProps = {
-    fjType: 'ClearFix'
-  }
-
   render() {
-    const [{
+    const {
       className,
       l,
       m,
       s,
-      ms
-    }, others] = utils.splitObject(this.props, ['className', 'l', 'm', 's', 'ms']);
+      ms, ...others } = this.props;
 
     const classes = classNames({
       ['fj-clearfix']: l != null,

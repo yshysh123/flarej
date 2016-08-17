@@ -288,14 +288,13 @@ registerFilter({
 
 //总页数组件
 const PageCount = (props) => {
-  let [{
+  let {
     className,
     prefix,
     pageCount,
     count,
     pageSize,
-    suffix
-  }, others] = utils.splitObject(props, ['className', 'prefix', 'pageCount', 'count', 'pageSize', 'suffix']);
+    suffix, ...others } = props;
 
   const classes = classNames({
     'fj-pagn-part': true,
@@ -325,12 +324,11 @@ Pagination.PageCount = PageCount;
 
 //数据总数组件
 const PageDataCount = (props) => {
-  const [{
+  const {
     className,
     prefix,
     count,
-    suffix
-  }, others] = utils.splitObject(props, ['className', 'prefix', 'count', 'suffix']);
+    suffix, ...others } = props;
 
   const classes = classNames({
     'fj-pagn-part': true,
@@ -408,15 +406,14 @@ class PageSize extends Component {
   }
 
   render() {
-    const [{
+    const {
       className,
       prefix,
       setPageSize,
       pageSize,
       pageSizes,
       suffix,
-      onChange
-    }, others] = utils.splitObject(this.props, ['className', 'prefix', 'setPageSize', 'pageSize', 'pageSizes', 'suffix', 'onChange']);
+      onChange, ...others } = this.props;
     
     const classes = classNames({
       'fj-pagn-part': true,
