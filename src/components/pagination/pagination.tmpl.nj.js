@@ -68,7 +68,7 @@ const pageBtns = nj`
 
 const pagination = nj`
 <#if {count:gt(1)}>
-  <div class={classes} {style} ref=wrap>
+  <div class={classes} {style} ref={wrap}>
     <ul class=fj-pagn-body>
       ${pageBtns}
       <#if {showPageCount}>
@@ -114,19 +114,19 @@ const pagination = nj`
 `;
 
 const pageCount = nj`
-<div {...props} class={classes} ref=wrap>
+<div {...props} class={classes} ref={wrap}>
   {prefix}<span>{pageCount}</span>{suffix}
 </div>
 `;
 
 const pageDataCount = nj`
-<div {...props} class={classes} ref=wrap>
+<div {...props} class={classes} ref={wrap}>
   {prefix}<span>{count}</span>{suffix}
 </div>
 `;
 
 const pageSize = nj`
-<div {...props} class={classes} ref=wrap>
+<div {...props} class={classes} ref={wrap}>
   {prefix}
   <#if {setPageSize}>
     <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>
