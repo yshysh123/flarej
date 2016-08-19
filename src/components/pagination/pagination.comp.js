@@ -224,6 +224,7 @@ class Pagination extends Widget {
       'fj-pagn': true,
       [className]: className
     });
+    extra.wrap = c => this.wrap = c;
 
     return this.template(state, props, extra);
   }
@@ -287,66 +288,74 @@ registerFilter({
 });
 
 //总页数组件
-const PageCount = (props) => {
-  let {
-    className,
-    prefix,
-    pageCount,
-    count,
-    pageSize,
-    suffix, ...others } = props;
+class PageCount extends Component {
+  static defaultProps = {
+    prefix: '共',
+    suffix: '页'
+  };
 
-  const classes = classNames({
-    'fj-pagn-part': true,
-    [className]: className
-  });
-
-  //计算总页数
-  if(count != null && pageSize != null) {
-    pageCount = getPageCount(count, pageSize);
+  render() {
+    let {
+      className,
+      prefix,
+      pageCount,
+      count,
+      pageSize,
+      suffix, ...others } = this.props;
+    
+    const classes = classNames({
+      'fj-pagn-part': true,
+      [className]: className
+    });
+    
+    //计算总页数
+    if(count != null && pageSize != null) {
+      pageCount = getPageCount(count, pageSize);
+    }
+    
+    return templatePageCount({
+      props: others,
+      classes,
+      prefix,
+      pageCount,
+      suffix,
+      wrap: c => this.wrap = c
+    });
   }
-
-  return templatePageCount({
-    props: others,
-    classes,
-    prefix,
-    pageCount,
-    suffix
-  });
-};
-PageCount.defaultProps = {
-  prefix: '共',
-  suffix: '页'
-};
+}
 
 registerComponent({ 'fj-PageCount': PageCount });
 Pagination.PageCount = PageCount;
 
 //数据总数组件
-const PageDataCount = (props) => {
-  const {
-    className,
-    prefix,
-    count,
-    suffix, ...others } = props;
+class PageDataCount extends Component {
+  static defaultProps = {
+    prefix: '共',
+    suffix: '条数据'
+  };
 
-  const classes = classNames({
-    'fj-pagn-part': true,
-    [className]: className
-  });
-
-  return templateDataCount({
-    props: others,
-    classes,
-    prefix,
-    count,
-    suffix
-  });
-};
-PageDataCount.defaultProps = {
-  prefix: '共',
-  suffix: '条数据'
-};
+  render() {
+    const {
+      className,
+      prefix,
+      count,
+      suffix, ...others } = this.props;
+    
+    const classes = classNames({
+      'fj-pagn-part': true,
+      [className]: className
+    });
+    
+    return templateDataCount({
+      props: others,
+      classes,
+      prefix,
+      count,
+      suffix,
+      wrap: c => this.wrap = c
+    });
+  }
+}
 
 registerComponent({ 'fj-PageDataCount': PageDataCount });
 Pagination.PageDataCount = PageDataCount;
@@ -427,8 +436,9 @@ class PageSize extends Component {
       prefix,
       setPageSize,
       pageSizes,
-      suffix
-    }, this.props);
+      suffix,
+      wrap: c => this.wrap = c
+    });
   }
 }
 

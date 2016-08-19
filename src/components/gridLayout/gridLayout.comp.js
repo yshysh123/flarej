@@ -40,7 +40,8 @@ class Row extends Component {
       props: others,
       classes,
       styles,
-      children
+      children,
+      wrap: c => this.wrap = c
     });
   }
 }
@@ -71,7 +72,8 @@ function _createRowRender(context, compClass) {
       props: others,
       classes,
       styles,
-      children
+      children,
+      wrap: c => this.wrap = c
     });
   }.bind(context);
 }
@@ -140,7 +142,8 @@ class Col extends Component {
     return templateCol({
       props: others,
       classes,
-      children
+      children,
+      wrap: c => this.wrap = c
     });
   }
 }
@@ -165,7 +168,8 @@ class ClearFix extends Component {
 
     return templateClearFix({
       props: others,
-      classes
+      classes,
+      wrap: c => this.wrap = c
     });
   }
 }

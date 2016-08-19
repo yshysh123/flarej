@@ -1042,6 +1042,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Pagination.prototype.render = function render() {
+	    var _this2 = this;
+
 	    var disabled = ' fj-disabled',
 	        state = this.state,
 	        props = this.props,
@@ -1078,6 +1080,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    extra.classes = (0, _classnames2.default)(babelHelpers.defineProperty({
 	      'fj-pagn': true
 	    }, className, className));
+	    extra.wrap = function (c) {
+	      return _this2.wrap = c;
+	    };
 
 	    return this.template(state, props, extra);
 	  };
@@ -1143,7 +1148,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	(0, _nornj.registerFilter)({
 	  clickBtn: function clickBtn(fn, type) {
-	    var _this2 = this;
+	    var _this3 = this;
 
 	    var _data$ = this.data[0];
 	    var pageIndex = _data$.pageIndex;
@@ -1177,8 +1182,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 	      case 'index':
 	        return function () {
-	          if (_this2.index != pageIndex) {
-	            fn(_this2.index);
+	          if (_this3.index != pageIndex) {
+	            fn(_this3.index);
 	          }
 	        };
 	      default:
@@ -1208,89 +1213,129 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 	//总页数组件
-	var PageCount = function PageCount(props) {
-	  var className = props.className;
-	  var prefix = props.prefix;
-	  var pageCount = props.pageCount;
-	  var count = props.count;
-	  var pageSize = props.pageSize;
-	  var suffix = props.suffix;
-	  var others = babelHelpers.objectWithoutProperties(props, ['className', 'prefix', 'pageCount', 'count', 'pageSize', 'suffix']);
 
+	var PageCount = function (_Component) {
+	  babelHelpers.inherits(PageCount, _Component);
 
-	  var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
-	    'fj-pagn-part': true
-	  }, className, className));
-
-	  //计算总页数
-	  if (count != null && pageSize != null) {
-	    pageCount = _getPageCount(count, pageSize);
+	  function PageCount() {
+	    babelHelpers.classCallCheck(this, PageCount);
+	    return babelHelpers.possibleConstructorReturn(this, _Component.apply(this, arguments));
 	  }
 
-	  return templatePageCount({
-	    props: others,
-	    classes: classes,
-	    prefix: prefix,
-	    pageCount: pageCount,
-	    suffix: suffix
-	  });
-	};
+	  PageCount.prototype.render = function render() {
+	    var _this5 = this;
+
+	    var _props2 = this.props;
+	    var className = _props2.className;
+	    var prefix = _props2.prefix;
+	    var pageCount = _props2.pageCount;
+	    var count = _props2.count;
+	    var pageSize = _props2.pageSize;
+	    var suffix = _props2.suffix;
+	    var others = babelHelpers.objectWithoutProperties(_props2, ['className', 'prefix', 'pageCount', 'count', 'pageSize', 'suffix']);
+
+
+	    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
+	      'fj-pagn-part': true
+	    }, className, className));
+
+	    //计算总页数
+	    if (count != null && pageSize != null) {
+	      pageCount = _getPageCount(count, pageSize);
+	    }
+
+	    return templatePageCount({
+	      props: others,
+	      classes: classes,
+	      prefix: prefix,
+	      pageCount: pageCount,
+	      suffix: suffix,
+	      wrap: function wrap(c) {
+	        return _this5.wrap = c;
+	      }
+	    });
+	  };
+
+	  return PageCount;
+	}(_react.Component);
+
 	PageCount.defaultProps = {
 	  prefix: '共',
 	  suffix: '页'
 	};
 
+
 	(0, _nornj.registerComponent)({ 'fj-PageCount': PageCount });
 	Pagination.PageCount = PageCount;
 
 	//数据总数组件
-	var PageDataCount = function PageDataCount(props) {
-	  var className = props.className;
-	  var prefix = props.prefix;
-	  var count = props.count;
-	  var suffix = props.suffix;
-	  var others = babelHelpers.objectWithoutProperties(props, ['className', 'prefix', 'count', 'suffix']);
+
+	var PageDataCount = function (_Component2) {
+	  babelHelpers.inherits(PageDataCount, _Component2);
+
+	  function PageDataCount() {
+	    babelHelpers.classCallCheck(this, PageDataCount);
+	    return babelHelpers.possibleConstructorReturn(this, _Component2.apply(this, arguments));
+	  }
+
+	  PageDataCount.prototype.render = function render() {
+	    var _this7 = this;
+
+	    var _props3 = this.props;
+	    var className = _props3.className;
+	    var prefix = _props3.prefix;
+	    var count = _props3.count;
+	    var suffix = _props3.suffix;
+	    var others = babelHelpers.objectWithoutProperties(_props3, ['className', 'prefix', 'count', 'suffix']);
 
 
-	  var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
-	    'fj-pagn-part': true
-	  }, className, className));
+	    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
+	      'fj-pagn-part': true
+	    }, className, className));
 
-	  return templateDataCount({
-	    props: others,
-	    classes: classes,
-	    prefix: prefix,
-	    count: count,
-	    suffix: suffix
-	  });
-	};
+	    return templateDataCount({
+	      props: others,
+	      classes: classes,
+	      prefix: prefix,
+	      count: count,
+	      suffix: suffix,
+	      wrap: function wrap(c) {
+	        return _this7.wrap = c;
+	      }
+	    });
+	  };
+
+	  return PageDataCount;
+	}(_react.Component);
+
 	PageDataCount.defaultProps = {
 	  prefix: '共',
 	  suffix: '条数据'
 	};
+
 
 	(0, _nornj.registerComponent)({ 'fj-PageDataCount': PageDataCount });
 	Pagination.PageDataCount = PageDataCount;
 
 	//每页展示数量组件
 
-	var PageSize = function (_Component) {
-	  babelHelpers.inherits(PageSize, _Component);
+	var PageSize = function (_Component3) {
+	  babelHelpers.inherits(PageSize, _Component3);
 
 	  function PageSize(props) {
 	    babelHelpers.classCallCheck(this, PageSize);
 
-	    var _this3 = babelHelpers.possibleConstructorReturn(this, _Component.call(this, props));
+	    var _this8 = babelHelpers.possibleConstructorReturn(this, _Component3.call(this, props));
 
-	    _this3.state = {
+	    _this8.state = {
 	      pageSize: null
 	    };
-	    _this3.template = (0, _nornj.compileComponent)(_pagination2.default.pageSize, 'pageSize');
+	    _this8.template = (0, _nornj.compileComponent)(_pagination2.default.pageSize, 'pageSize');
 
 
-	    _this3.state.pageSize = _this3.props.pageSize;
-	    _this3.pageSizeChange = _this3.pageSizeChange.bind(_this3);
-	    return _this3;
+	    _this8.state.pageSize = _this8.props.pageSize;
+	    _this8.pageSizeChange = _this8.pageSizeChange.bind(_this8);
+	    return _this8;
 	  }
 
 	  PageSize.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
@@ -1313,15 +1358,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  PageSize.prototype.render = function render() {
-	    var _props2 = this.props;
-	    var className = _props2.className;
-	    var prefix = _props2.prefix;
-	    var setPageSize = _props2.setPageSize;
-	    var pageSize = _props2.pageSize;
-	    var pageSizes = _props2.pageSizes;
-	    var suffix = _props2.suffix;
-	    var onChange = _props2.onChange;
-	    var others = babelHelpers.objectWithoutProperties(_props2, ['className', 'prefix', 'setPageSize', 'pageSize', 'pageSizes', 'suffix', 'onChange']);
+	    var _this9 = this;
+
+	    var _props4 = this.props;
+	    var className = _props4.className;
+	    var prefix = _props4.prefix;
+	    var setPageSize = _props4.setPageSize;
+	    var pageSize = _props4.pageSize;
+	    var pageSizes = _props4.pageSizes;
+	    var suffix = _props4.suffix;
+	    var onChange = _props4.onChange;
+	    var others = babelHelpers.objectWithoutProperties(_props4, ['className', 'prefix', 'setPageSize', 'pageSize', 'pageSizes', 'suffix', 'onChange']);
 
 
 	    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
@@ -1335,8 +1382,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      prefix: prefix,
 	      setPageSize: setPageSize,
 	      pageSizes: pageSizes,
-	      suffix: suffix
-	    }, this.props);
+	      suffix: suffix,
+	      wrap: function wrap(c) {
+	        return _this9.wrap = c;
+	      }
+	    });
 	  };
 
 	  return PageSize;
@@ -2151,10 +2201,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageIndex:add(2)}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li onClick={refresh:clickBtn(next)}>...</li>\n<li class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n'], ['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageIndex:add(2)}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li onClick={refresh:clickBtn(next)}>...</li>\n<li class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n']),
 	    _templateObject3 = babelHelpers.taggedTemplateLiteral(['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n'], ['\n<li class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n']),
 	    _templateObject4 = babelHelpers.taggedTemplateLiteral(['\n<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>\n  首页\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=第{pageIndex}页>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>\n  末页\n</li>\n'], ['\n<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>\n  首页\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=第{pageIndex}页>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>\n  末页\n</li>\n']),
-	    _templateObject5 = babelHelpers.taggedTemplateLiteral(['\n<#if {count:gt(1)}>\n  <div class={classes} {style}>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          <fj-PageCount prefix={pageCountPrefix} suffix={pageCountSuffix} {pageCount} />\n        </li>\n      </#if>\n      <#if {showCount}>\n        <li class=fj-pagn-info>\n          <fj-PageDataCount prefix={countPrefix} suffix={countSuffix} {count} />\n        </li>\n      </#if>\n      <#if {showPageSize}>\n        <li class=fj-pagn-info>\n          <fj-PageSize prefix={sizePrefix} suffix={sizeSuffix} {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />\n        </li>\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          到\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />页\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#EmptyElem />\n</#if>\n'], ['\n<#if {count:gt(1)}>\n  <div class={classes} {style}>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          <fj-PageCount prefix={pageCountPrefix} suffix={pageCountSuffix} {pageCount} />\n        </li>\n      </#if>\n      <#if {showCount}>\n        <li class=fj-pagn-info>\n          <fj-PageDataCount prefix={countPrefix} suffix={countSuffix} {count} />\n        </li>\n      </#if>\n      <#if {showPageSize}>\n        <li class=fj-pagn-info>\n          <fj-PageSize prefix={sizePrefix} suffix={sizeSuffix} {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />\n        </li>\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          到\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />页\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#EmptyElem />\n</#if>\n']),
-	    _templateObject6 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes}>\n  {prefix}<span>{pageCount}</span>{suffix}\n</div>\n'], ['\n<div {...props} class={classes}>\n  {prefix}<span>{pageCount}</span>{suffix}\n</div>\n']),
-	    _templateObject7 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes}>\n  {prefix}<span>{count}</span>{suffix}\n</div>\n'], ['\n<div {...props} class={classes}>\n  {prefix}<span>{count}</span>{suffix}\n</div>\n']),
-	    _templateObject8 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes}>\n  {prefix}\n  <#if {setPageSize}>\n    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>\n      <#each {pageSizes}>\n        <option key=page{#} value={.}>{.}</option>\n      </#each>\n    </select>\n  <#else />\n    {pageSize}\n  </#if>\n  {suffix}\n</div>\n'], ['\n<div {...props} class={classes}>\n  {prefix}\n  <#if {setPageSize}>\n    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>\n      <#each {pageSizes}>\n        <option key=page{#} value={.}>{.}</option>\n      </#each>\n    </select>\n  <#else />\n    {pageSize}\n  </#if>\n  {suffix}\n</div>\n']);
+	    _templateObject5 = babelHelpers.taggedTemplateLiteral(['\n<#if {count:gt(1)}>\n  <div class={classes} {style} ref=wrap>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          <fj-PageCount prefix={pageCountPrefix} suffix={pageCountSuffix} {pageCount} />\n        </li>\n      </#if>\n      <#if {showCount}>\n        <li class=fj-pagn-info>\n          <fj-PageDataCount prefix={countPrefix} suffix={countSuffix} {count} />\n        </li>\n      </#if>\n      <#if {showPageSize}>\n        <li class=fj-pagn-info>\n          <fj-PageSize prefix={sizePrefix} suffix={sizeSuffix} {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />\n        </li>\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          到\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />页\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#EmptyElem />\n</#if>\n'], ['\n<#if {count:gt(1)}>\n  <div class={classes} {style} ref=wrap>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          <fj-PageCount prefix={pageCountPrefix} suffix={pageCountSuffix} {pageCount} />\n        </li>\n      </#if>\n      <#if {showCount}>\n        <li class=fj-pagn-info>\n          <fj-PageDataCount prefix={countPrefix} suffix={countSuffix} {count} />\n        </li>\n      </#if>\n      <#if {showPageSize}>\n        <li class=fj-pagn-info>\n          <fj-PageSize prefix={sizePrefix} suffix={sizeSuffix} {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />\n        </li>\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          到\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />页\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#EmptyElem />\n</#if>\n']),
+	    _templateObject6 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} ref=wrap>\n  {prefix}<span>{pageCount}</span>{suffix}\n</div>\n'], ['\n<div {...props} class={classes} ref=wrap>\n  {prefix}<span>{pageCount}</span>{suffix}\n</div>\n']),
+	    _templateObject7 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} ref=wrap>\n  {prefix}<span>{count}</span>{suffix}\n</div>\n'], ['\n<div {...props} class={classes} ref=wrap>\n  {prefix}<span>{count}</span>{suffix}\n</div>\n']),
+	    _templateObject8 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} ref=wrap>\n  {prefix}\n  <#if {setPageSize}>\n    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>\n      <#each {pageSizes}>\n        <option key=page{#} value={.}>{.}</option>\n      </#each>\n    </select>\n  <#else />\n    {pageSize}\n  </#if>\n  {suffix}\n</div>\n'], ['\n<div {...props} class={classes} ref=wrap>\n  {prefix}\n  <#if {setPageSize}>\n    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>\n      <#each {pageSizes}>\n        <option key=page{#} value={.}>{.}</option>\n      </#each>\n    </select>\n  <#else />\n    {pageSize}\n  </#if>\n  {suffix}\n</div>\n']);
 
 	var _nornj = __webpack_require__(2);
 
@@ -2223,6 +2273,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  Row.prototype.render = function render() {
+	    var _this2 = this;
+
 	    var _props = this.props;
 	    var className = _props.className;
 	    var style = _props.style;
@@ -2251,7 +2303,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      props: others,
 	      classes: classes,
 	      styles: styles,
-	      children: children
+	      children: children,
+	      wrap: function wrap(c) {
+	        return _this2.wrap = c;
+	      }
 	    });
 	  };
 
@@ -2260,7 +2315,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _createRowRender(context, compClass) {
 	  return function () {
-	    var _classNames2;
+	    var _classNames2,
+	        _this3 = this;
 
 	    var _props2 = this.props;
 	    var className = _props2.className;
@@ -2284,7 +2340,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      props: others,
 	      classes: classes,
 	      styles: styles,
-	      children: children
+	      children: children,
+	      wrap: function wrap(c) {
+	        return _this3.wrap = c;
+	      }
 	    });
 	  }.bind(context);
 	}
@@ -2297,10 +2356,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function RowLeft(props) {
 	    babelHelpers.classCallCheck(this, RowLeft);
 
-	    var _this2 = babelHelpers.possibleConstructorReturn(this, _Component2.call(this, props));
+	    var _this4 = babelHelpers.possibleConstructorReturn(this, _Component2.call(this, props));
 
-	    _this2.render = _createRowRender(_this2, 'fj-row-left');
-	    return _this2;
+	    _this4.render = _createRowRender(_this4, 'fj-row-left');
+	    return _this4;
 	  }
 
 	  return RowLeft;
@@ -2315,10 +2374,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function RowRight(props) {
 	    babelHelpers.classCallCheck(this, RowRight);
 
-	    var _this3 = babelHelpers.possibleConstructorReturn(this, _Component3.call(this, props));
+	    var _this5 = babelHelpers.possibleConstructorReturn(this, _Component3.call(this, props));
 
-	    _this3.render = _createRowRender(_this3, 'fj-row-right');
-	    return _this3;
+	    _this5.render = _createRowRender(_this5, 'fj-row-right');
+	    return _this5;
 	  }
 
 	  return RowRight;
@@ -2336,7 +2395,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  Col.prototype.render = function render() {
-	    var _classNames3;
+	    var _classNames3,
+	        _this7 = this;
 
 	    var _props3 = this.props;
 	    var className = _props3.className;
@@ -2365,7 +2425,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return templateCol({
 	      props: others,
 	      classes: classes,
-	      children: children
+	      children: children,
+	      wrap: function wrap(c) {
+	        return _this7.wrap = c;
+	      }
 	    });
 	  };
 
@@ -2384,7 +2447,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  ClearFix.prototype.render = function render() {
-	    var _classNames4;
+	    var _classNames4,
+	        _this9 = this;
 
 	    var _props4 = this.props;
 	    var className = _props4.className;
@@ -2399,7 +2463,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return templateClearFix({
 	      props: others,
-	      classes: classes
+	      classes: classes,
+	      wrap: function wrap(c) {
+	        return _this9.wrap = c;
+	      }
 	    });
 	  };
 
@@ -2447,9 +2514,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} style={styles}>\n  {children}\n</div>\n'], ['\n<div {...props} class={classes} style={styles}>\n  {children}\n</div>\n']),
-	    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes}>\n  {children}\n</div>\n'], ['\n<div {...props} class={classes}>\n  {children}\n</div>\n']),
-	    _templateObject3 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} />\n'], ['\n<div {...props} class={classes} />\n']);
+	var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} style={styles} ref=wrap>\n  {children}\n</div>\n'], ['\n<div {...props} class={classes} style={styles} ref=wrap>\n  {children}\n</div>\n']),
+	    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} ref=wrap>\n  {children}\n</div>\n'], ['\n<div {...props} class={classes} ref=wrap>\n  {children}\n</div>\n']),
+	    _templateObject3 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} ref=wrap/>\n'], ['\n<div {...props} class={classes} ref=wrap/>\n']);
 
 	var _nornj = __webpack_require__(2);
 
