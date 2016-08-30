@@ -2179,7 +2179,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = undefined;
 
 	var _paginationTmplNj = __webpack_require__(27);
 
@@ -2496,7 +2495,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = undefined;
 
 	var _gridLayoutTmplNj = __webpack_require__(30);
 
