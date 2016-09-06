@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { cloneElement } from 'react';
 import nj, { registerFilter, registerExpr } from 'nornj';
 import utils from '../utils/utils';
 
@@ -9,5 +9,8 @@ registerFilter({
 });
 
 registerExpr({
-  EmptyElem: () => <div className="fj-empty-elem"></div>
+  emptyElem: () => <div className="fj-empty-elem"></div>,
+  cloneElem: function(props) {
+    return cloneElement(this.result()[0], props);
+  }
 });

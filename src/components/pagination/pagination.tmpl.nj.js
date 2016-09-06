@@ -109,7 +109,7 @@ const pagination = nj`
     </ul>
   </div>
 <#else />
-  <#EmptyElem />
+  <#emptyElem />
 </#if>
 `;
 

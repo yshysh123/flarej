@@ -1,14 +1,15 @@
 ﻿import fj from './core';
 import nj from 'nornj';
 import utils from './utils/utils';
-import Pagination from './components/pagination/pagination.comp';
+import Pagination from './components/pagination';
 import {
   Row,
   RowLeft,
   RowRight,
   Col,
   ClearFix
-} from './components/gridLayout/gridLayout.comp';
+} from './components/gridLayout';
+import Gesture from './components/gesture';
 
 Object.assign(fj, utils, {
   Pagination,
@@ -16,7 +17,8 @@ Object.assign(fj, utils, {
   RowLeft,
   RowRight,
   Col,
-  ClearFix
+  ClearFix,
+  Gesture
 });
 
 let global = typeof self !== 'undefined' ? self : this;
