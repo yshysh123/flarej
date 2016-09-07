@@ -15,8 +15,12 @@
   <div>
     <Container class="nj-component">
       <nj:#tmpl>
-        <fj-Gesture>
-          <div style="width:500px;height:500px;background-color:blue;">aaa</div>
+        <fj-Gesture on-tap="{onTap}"
+                    on-tap-hold="{onTapHold}"
+                    on-pan="{onPan}"
+                    on-swipe-left="{onSwipeLeft}"
+                    on-swipe-right="{onSwipeRight}">
+          <div style="width:500px;height:500px;background-color:yellow;color:blue;">{msg}</div>
         </fj-Gesture>
       </nj:#tmpl>
     </Container>
@@ -29,12 +33,34 @@
     nj.registerComponent('Container', React.createClass({
       getInitialState: function () {
         return {
-          pageSize: 5
+          msg: 'touch me ' + Date.now()
         };
+      },
+      onTap: function () {
+        console.log('tap');
+        this.setState({ msg: 'touch me ' + Date.now() });
+      },
+      onTapHold: function () {
+        console.log('tapHold');
+      },
+      onPan: function (p) {
+        console.log('onPan');
+        //console.log('x:' + p.x + ',y:' + p.y);
+      },
+      onSwipeLeft: function () {
+        console.log('onSwipeLeft');
+      },
+      onSwipeRight: function () {
+        console.log('onSwipeRight');
       },
       render: function () {
         return nj.renderTmplExpr(this.props.tmpls[0], {
-          
+          onTap: this.onTap,
+          onTapHold: this.onTapHold,
+          onPan: this.onPan,
+          onSwipeLeft: this.onSwipeLeft,
+          onSwipeRight: this.onSwipeRight,
+          msg: this.state.msg
         });
       }
     }));

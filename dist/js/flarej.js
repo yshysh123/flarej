@@ -1,6 +1,4 @@
 (function(e){var r=e.babelHelpers={};r.typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(e){return typeof e}:function(e){return e&&typeof Symbol==="function"&&e.constructor===Symbol?"symbol":typeof e};r.jsx=function(){var e=typeof Symbol==="function"&&Symbol.for&&Symbol.for("react.element")||60103;return function r(t,n,o,i){var f=t&&t.defaultProps;var u=arguments.length-3;if(!n&&u!==0){n={}}if(n&&f){for(var a in f){if(n[a]===void 0){n[a]=f[a]}}}else if(!n){n=f||{}}if(u===1){n.children=i}else if(u>1){var l=Array(u);for(var c=0;c<u;c++){l[c]=arguments[c+3]}n.children=l}return{$$typeof:e,type:t,key:o===undefined?null:""+o,ref:null,props:n,_owner:null}}}();r.asyncToGenerator=function(e){return function(){var r=e.apply(this,arguments);return new Promise(function(e,t){function n(o,i){try{var f=r[o](i);var u=f.value}catch(e){t(e);return}if(f.done){e(u)}else{Promise.resolve(u).then(function(e){n("next",e)},function(e){n("throw",e)})}}n("next")})}};r.classCallCheck=function(e,r){if(!(e instanceof r)){throw new TypeError("Cannot call a class as a function")}};r.createClass=function(){function e(e,r){for(var t=0;t<r.length;t++){var n=r[t];n.enumerable=n.enumerable||false;n.configurable=true;if("value"in n)n.writable=true;Object.defineProperty(e,n.key,n)}}return function(r,t,n){if(t)e(r.prototype,t);if(n)e(r,n);return r}}();r.defineEnumerableProperties=function(e,r){for(var t in r){var n=r[t];n.configurable=n.enumerable=true;if("value"in n)n.writable=true;Object.defineProperty(e,t,n)}return e};r.defaults=function(e,r){var t=Object.getOwnPropertyNames(r);for(var n=0;n<t.length;n++){var o=t[n];var i=Object.getOwnPropertyDescriptor(r,o);if(i&&i.configurable&&e[o]===undefined){Object.defineProperty(e,o,i)}}return e};r.defineProperty=function(e,r,t){if(r in e){Object.defineProperty(e,r,{value:t,enumerable:true,configurable:true,writable:true})}else{e[r]=t}return e};r.extends=Object.assign||function(e){for(var r=1;r<arguments.length;r++){var t=arguments[r];for(var n in t){if(Object.prototype.hasOwnProperty.call(t,n)){e[n]=t[n]}}}return e};r.get=function e(r,t,n){if(r===null)r=Function.prototype;var o=Object.getOwnPropertyDescriptor(r,t);if(o===undefined){var i=Object.getPrototypeOf(r);if(i===null){return undefined}else{return e(i,t,n)}}else if("value"in o){return o.value}else{var f=o.get;if(f===undefined){return undefined}return f.call(n)}};r.inherits=function(e,r){if(typeof r!=="function"&&r!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof r)}e.prototype=Object.create(r&&r.prototype,{constructor:{value:e,enumerable:false,writable:true,configurable:true}});if(r)Object.setPrototypeOf?Object.setPrototypeOf(e,r):e.__proto__=r};r.instanceof=function(e,r){if(r!=null&&typeof Symbol!=="undefined"&&r[Symbol.hasInstance]){return r[Symbol.hasInstance](e)}else{return e instanceof r}};r.interopRequireDefault=function(e){return e&&e.__esModule?e:{default:e}};r.interopRequireWildcard=function(e){if(e&&e.__esModule){return e}else{var r={};if(e!=null){for(var t in e){if(Object.prototype.hasOwnProperty.call(e,t))r[t]=e[t]}}r.default=e;return r}};r.newArrowCheck=function(e,r){if(e!==r){throw new TypeError("Cannot instantiate an arrow function")}};r.objectDestructuringEmpty=function(e){if(e==null)throw new TypeError("Cannot destructure undefined")};r.objectWithoutProperties=function(e,r){var t={};for(var n in e){if(r.indexOf(n)>=0)continue;if(!Object.prototype.hasOwnProperty.call(e,n))continue;t[n]=e[n]}return t};r.possibleConstructorReturn=function(e,r){if(!e){throw new ReferenceError("this hasn't been initialised - super() hasn't been called")}return r&&(typeof r==="object"||typeof r==="function")?r:e};r.selfGlobal=typeof e==="undefined"?self:e;r.set=function e(r,t,n,o){var i=Object.getOwnPropertyDescriptor(r,t);if(i===undefined){var f=Object.getPrototypeOf(r);if(f!==null){e(f,t,n,o)}}else if("value"in i&&i.writable){i.value=n}else{var u=i.set;if(u!==undefined){u.call(o,n)}}return n};r.slicedToArray=function(){function e(e,r){var t=[];var n=true;var o=false;var i=undefined;try{for(var f=e[Symbol.iterator](),u;!(n=(u=f.next()).done);n=true){t.push(u.value);if(r&&t.length===r)break}}catch(e){o=true;i=e}finally{try{if(!n&&f["return"])f["return"]()}finally{if(o)throw i}}return t}return function(r,t){if(Array.isArray(r)){return r}else if(Symbol.iterator in Object(r)){return e(r,t)}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}}}();r.slicedToArrayLoose=function(e,r){if(Array.isArray(e)){return e}else if(Symbol.iterator in Object(e)){var t=[];for(var n=e[Symbol.iterator](),o;!(o=n.next()).done;){t.push(o.value);if(r&&t.length===r)break}return t}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}};r.taggedTemplateLiteral=function(e,r){return Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(r)}}))};r.taggedTemplateLiteralLoose=function(e,r){e.raw=r;return e};r.temporalRef=function(e,r,t){if(e===t){throw new ReferenceError(r+" is not defined - temporal dead zone")}else{return e}};r.temporalUndefined={};r.toArray=function(e){return Array.isArray(e)?e:Array.from(e)};r.toConsumableArray=function(e){if(Array.isArray(e)){for(var r=0,t=Array(e.length);r<e.length;r++)t[r]=e[r];return t}else{return Array.from(e)}}})(typeof global==="undefined"?self:global);
-(function(e){var r=e.babelHelpers={};r.typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(e){return typeof e}:function(e){return e&&typeof Symbol==="function"&&e.constructor===Symbol?"symbol":typeof e};r.jsx=function(){var e=typeof Symbol==="function"&&Symbol.for&&Symbol.for("react.element")||60103;return function r(t,n,o,i){var f=t&&t.defaultProps;var u=arguments.length-3;if(!n&&u!==0){n={}}if(n&&f){for(var a in f){if(n[a]===void 0){n[a]=f[a]}}}else if(!n){n=f||{}}if(u===1){n.children=i}else if(u>1){var l=Array(u);for(var c=0;c<u;c++){l[c]=arguments[c+3]}n.children=l}return{$$typeof:e,type:t,key:o===undefined?null:""+o,ref:null,props:n,_owner:null}}}();r.asyncToGenerator=function(e){return function(){var r=e.apply(this,arguments);return new Promise(function(e,t){function n(o,i){try{var f=r[o](i);var u=f.value}catch(e){t(e);return}if(f.done){e(u)}else{Promise.resolve(u).then(function(e){n("next",e)},function(e){n("throw",e)})}}n("next")})}};r.classCallCheck=function(e,r){if(!(e instanceof r)){throw new TypeError("Cannot call a class as a function")}};r.createClass=function(){function e(e,r){for(var t=0;t<r.length;t++){var n=r[t];n.enumerable=n.enumerable||false;n.configurable=true;if("value"in n)n.writable=true;Object.defineProperty(e,n.key,n)}}return function(r,t,n){if(t)e(r.prototype,t);if(n)e(r,n);return r}}();r.defineEnumerableProperties=function(e,r){for(var t in r){var n=r[t];n.configurable=n.enumerable=true;if("value"in n)n.writable=true;Object.defineProperty(e,t,n)}return e};r.defaults=function(e,r){var t=Object.getOwnPropertyNames(r);for(var n=0;n<t.length;n++){var o=t[n];var i=Object.getOwnPropertyDescriptor(r,o);if(i&&i.configurable&&e[o]===undefined){Object.defineProperty(e,o,i)}}return e};r.defineProperty=function(e,r,t){if(r in e){Object.defineProperty(e,r,{value:t,enumerable:true,configurable:true,writable:true})}else{e[r]=t}return e};r.extends=Object.assign||function(e){for(var r=1;r<arguments.length;r++){var t=arguments[r];for(var n in t){if(Object.prototype.hasOwnProperty.call(t,n)){e[n]=t[n]}}}return e};r.get=function e(r,t,n){if(r===null)r=Function.prototype;var o=Object.getOwnPropertyDescriptor(r,t);if(o===undefined){var i=Object.getPrototypeOf(r);if(i===null){return undefined}else{return e(i,t,n)}}else if("value"in o){return o.value}else{var f=o.get;if(f===undefined){return undefined}return f.call(n)}};r.inherits=function(e,r){if(typeof r!=="function"&&r!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof r)}e.prototype=Object.create(r&&r.prototype,{constructor:{value:e,enumerable:false,writable:true,configurable:true}});if(r)Object.setPrototypeOf?Object.setPrototypeOf(e,r):e.__proto__=r};r.instanceof=function(e,r){if(r!=null&&typeof Symbol!=="undefined"&&r[Symbol.hasInstance]){return r[Symbol.hasInstance](e)}else{return e instanceof r}};r.interopRequireDefault=function(e){return e&&e.__esModule?e:{default:e}};r.interopRequireWildcard=function(e){if(e&&e.__esModule){return e}else{var r={};if(e!=null){for(var t in e){if(Object.prototype.hasOwnProperty.call(e,t))r[t]=e[t]}}r.default=e;return r}};r.newArrowCheck=function(e,r){if(e!==r){throw new TypeError("Cannot instantiate an arrow function")}};r.objectDestructuringEmpty=function(e){if(e==null)throw new TypeError("Cannot destructure undefined")};r.objectWithoutProperties=function(e,r){var t={};for(var n in e){if(r.indexOf(n)>=0)continue;if(!Object.prototype.hasOwnProperty.call(e,n))continue;t[n]=e[n]}return t};r.possibleConstructorReturn=function(e,r){if(!e){throw new ReferenceError("this hasn't been initialised - super() hasn't been called")}return r&&(typeof r==="object"||typeof r==="function")?r:e};r.selfGlobal=typeof e==="undefined"?self:e;r.set=function e(r,t,n,o){var i=Object.getOwnPropertyDescriptor(r,t);if(i===undefined){var f=Object.getPrototypeOf(r);if(f!==null){e(f,t,n,o)}}else if("value"in i&&i.writable){i.value=n}else{var u=i.set;if(u!==undefined){u.call(o,n)}}return n};r.slicedToArray=function(){function e(e,r){var t=[];var n=true;var o=false;var i=undefined;try{for(var f=e[Symbol.iterator](),u;!(n=(u=f.next()).done);n=true){t.push(u.value);if(r&&t.length===r)break}}catch(e){o=true;i=e}finally{try{if(!n&&f["return"])f["return"]()}finally{if(o)throw i}}return t}return function(r,t){if(Array.isArray(r)){return r}else if(Symbol.iterator in Object(r)){return e(r,t)}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}}}();r.slicedToArrayLoose=function(e,r){if(Array.isArray(e)){return e}else if(Symbol.iterator in Object(e)){var t=[];for(var n=e[Symbol.iterator](),o;!(o=n.next()).done;){t.push(o.value);if(r&&t.length===r)break}return t}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}};r.taggedTemplateLiteral=function(e,r){return Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(r)}}))};r.taggedTemplateLiteralLoose=function(e,r){e.raw=r;return e};r.temporalRef=function(e,r,t){if(e===t){throw new ReferenceError(r+" is not defined - temporal dead zone")}else{return e}};r.temporalUndefined={};r.toArray=function(e){return Array.isArray(e)?e:Array.from(e)};r.toConsumableArray=function(e){if(Array.isArray(e)){for(var r=0,t=Array(e.length);r<e.length;r++)t[r]=e[r];return t}else{return Array.from(e)}}})(typeof global==="undefined"?self:global);
-(function(e){var r=e.babelHelpers={};r.typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(e){return typeof e}:function(e){return e&&typeof Symbol==="function"&&e.constructor===Symbol?"symbol":typeof e};r.jsx=function(){var e=typeof Symbol==="function"&&Symbol.for&&Symbol.for("react.element")||60103;return function r(t,n,o,i){var f=t&&t.defaultProps;var u=arguments.length-3;if(!n&&u!==0){n={}}if(n&&f){for(var a in f){if(n[a]===void 0){n[a]=f[a]}}}else if(!n){n=f||{}}if(u===1){n.children=i}else if(u>1){var l=Array(u);for(var c=0;c<u;c++){l[c]=arguments[c+3]}n.children=l}return{$$typeof:e,type:t,key:o===undefined?null:""+o,ref:null,props:n,_owner:null}}}();r.asyncToGenerator=function(e){return function(){var r=e.apply(this,arguments);return new Promise(function(e,t){function n(o,i){try{var f=r[o](i);var u=f.value}catch(e){t(e);return}if(f.done){e(u)}else{Promise.resolve(u).then(function(e){n("next",e)},function(e){n("throw",e)})}}n("next")})}};r.classCallCheck=function(e,r){if(!(e instanceof r)){throw new TypeError("Cannot call a class as a function")}};r.createClass=function(){function e(e,r){for(var t=0;t<r.length;t++){var n=r[t];n.enumerable=n.enumerable||false;n.configurable=true;if("value"in n)n.writable=true;Object.defineProperty(e,n.key,n)}}return function(r,t,n){if(t)e(r.prototype,t);if(n)e(r,n);return r}}();r.defineEnumerableProperties=function(e,r){for(var t in r){var n=r[t];n.configurable=n.enumerable=true;if("value"in n)n.writable=true;Object.defineProperty(e,t,n)}return e};r.defaults=function(e,r){var t=Object.getOwnPropertyNames(r);for(var n=0;n<t.length;n++){var o=t[n];var i=Object.getOwnPropertyDescriptor(r,o);if(i&&i.configurable&&e[o]===undefined){Object.defineProperty(e,o,i)}}return e};r.defineProperty=function(e,r,t){if(r in e){Object.defineProperty(e,r,{value:t,enumerable:true,configurable:true,writable:true})}else{e[r]=t}return e};r.extends=Object.assign||function(e){for(var r=1;r<arguments.length;r++){var t=arguments[r];for(var n in t){if(Object.prototype.hasOwnProperty.call(t,n)){e[n]=t[n]}}}return e};r.get=function e(r,t,n){if(r===null)r=Function.prototype;var o=Object.getOwnPropertyDescriptor(r,t);if(o===undefined){var i=Object.getPrototypeOf(r);if(i===null){return undefined}else{return e(i,t,n)}}else if("value"in o){return o.value}else{var f=o.get;if(f===undefined){return undefined}return f.call(n)}};r.inherits=function(e,r){if(typeof r!=="function"&&r!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof r)}e.prototype=Object.create(r&&r.prototype,{constructor:{value:e,enumerable:false,writable:true,configurable:true}});if(r)Object.setPrototypeOf?Object.setPrototypeOf(e,r):e.__proto__=r};r.instanceof=function(e,r){if(r!=null&&typeof Symbol!=="undefined"&&r[Symbol.hasInstance]){return r[Symbol.hasInstance](e)}else{return e instanceof r}};r.interopRequireDefault=function(e){return e&&e.__esModule?e:{default:e}};r.interopRequireWildcard=function(e){if(e&&e.__esModule){return e}else{var r={};if(e!=null){for(var t in e){if(Object.prototype.hasOwnProperty.call(e,t))r[t]=e[t]}}r.default=e;return r}};r.newArrowCheck=function(e,r){if(e!==r){throw new TypeError("Cannot instantiate an arrow function")}};r.objectDestructuringEmpty=function(e){if(e==null)throw new TypeError("Cannot destructure undefined")};r.objectWithoutProperties=function(e,r){var t={};for(var n in e){if(r.indexOf(n)>=0)continue;if(!Object.prototype.hasOwnProperty.call(e,n))continue;t[n]=e[n]}return t};r.possibleConstructorReturn=function(e,r){if(!e){throw new ReferenceError("this hasn't been initialised - super() hasn't been called")}return r&&(typeof r==="object"||typeof r==="function")?r:e};r.selfGlobal=typeof e==="undefined"?self:e;r.set=function e(r,t,n,o){var i=Object.getOwnPropertyDescriptor(r,t);if(i===undefined){var f=Object.getPrototypeOf(r);if(f!==null){e(f,t,n,o)}}else if("value"in i&&i.writable){i.value=n}else{var u=i.set;if(u!==undefined){u.call(o,n)}}return n};r.slicedToArray=function(){function e(e,r){var t=[];var n=true;var o=false;var i=undefined;try{for(var f=e[Symbol.iterator](),u;!(n=(u=f.next()).done);n=true){t.push(u.value);if(r&&t.length===r)break}}catch(e){o=true;i=e}finally{try{if(!n&&f["return"])f["return"]()}finally{if(o)throw i}}return t}return function(r,t){if(Array.isArray(r)){return r}else if(Symbol.iterator in Object(r)){return e(r,t)}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}}}();r.slicedToArrayLoose=function(e,r){if(Array.isArray(e)){return e}else if(Symbol.iterator in Object(e)){var t=[];for(var n=e[Symbol.iterator](),o;!(o=n.next()).done;){t.push(o.value);if(r&&t.length===r)break}return t}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}};r.taggedTemplateLiteral=function(e,r){return Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(r)}}))};r.taggedTemplateLiteralLoose=function(e,r){e.raw=r;return e};r.temporalRef=function(e,r,t){if(e===t){throw new ReferenceError(r+" is not defined - temporal dead zone")}else{return e}};r.temporalUndefined={};r.toArray=function(e){return Array.isArray(e)?e:Array.from(e)};r.toConsumableArray=function(e){if(Array.isArray(e)){for(var r=0,t=Array(e.length);r<e.length;r++)t[r]=e[r];return t}else{return Array.from(e)}}})(typeof global==="undefined"?self:global);
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("nornj"), require("react"));
@@ -188,6 +186,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 	exports.guid = undefined;
+	exports.bindThis = bindThis;
 
 	var _core = __webpack_require__(1);
 
@@ -197,6 +196,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	var guid = exports.guid = function guid() {
 	  return new Date().getTime() + Math.random().toFixed(6).substr(2);
 	};
+
+	//为方法绑定this对象
+	function bindThis(context, fns) {
+	  fns.forEach(function (fn) {
+	    context[fn] = context[fn].bind(context);
+	  });
+	}
 
 /***/ },
 /* 5 */
@@ -2620,31 +2626,508 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _nornj = __webpack_require__(2);
 
+	var _browsers = __webpack_require__(6);
+
+	var _delayOperate = __webpack_require__(7);
+
+	var _domEvent = __webpack_require__(8);
+
+	var _common = __webpack_require__(4);
+
 	var T = (0, _nornj.tmplByKey)('fj-Gesture');
 
 	var Gesture = function (_Component) {
 	babelHelpers.inherits(Gesture, _Component);
-
-	  function Gesture() {
-	babelHelpers.classCallCheck(this, Gesture);
-	    return babelHelpers.possibleConstructorReturn(this, _Component.apply(this, arguments));
-	  }
-
 	  //解除冻结摇动延迟时间
 
-	  Gesture.prototype.render = function render() {
-	    return T(_templateObject).renderComp([{
-	      props: {
-	        onTouchStart: function onTouchStart() {
-	          console.log(Date.now());
+	  function Gesture(props) {
+	babelHelpers.classCallCheck(this, Gesture);
+
+	    var _this = babelHelpers.possibleConstructorReturn(this, _Component.call(this, props));
+
+	    if (_browsers.isMobile) {
+	      (0, _common.bindThis)(_this, ['touchStart', 'touchMove', 'touchEnd']);
+
+	      _this.startPosX = 0; //起始触摸点x轴坐标
+	      _this.lastPosX = 0; //最后触摸点x轴坐标
+	      _this.startPosY = 0; //起始触摸点y轴坐标
+	      _this.lastPosY = 0; //最后触摸点y轴坐标
+	      _this.dx = 0; //触摸x轴移动距离
+	      _this.dy = 0; //触摸y轴移动距离
+	      _this.lastPinchTime = 0; //最后缩放时间
+	      _this.lastScale = 0; //最后一次缩放的比例值
+	      _this.lastPanTime = 0; //最后一次平移时间
+	      _this.lastRotateTime = 0; //最后旋转时间
+	      _this.lastRotation = 0; //最后一次旋转的角度变化值
+	      _this.preventScroll = props.preventScroll;
+
+	      //滚动条所在元素
+	      if (props.onTapHold) {
+	        if (props.scrollElemV) {
+	          _this.scrollElemV = props.scrollElemV;
+	        } else {
+	          _this.scrollElemV = document.body;
+	        }
+	        if (!props.scrollElemH) {
+	          _this.scrollElemH = _this.scrollElemV;
 	        }
 	      }
+
+	      //是否支持摇动
+	      _this.supportShake = 'DeviceMotionEvent' in window;
+	      if (_this.supportShake && _this.props.onShake) {
+	        //记录上一次检测的摇动值
+	        (0, _common.bindThis)(_this, ['deviceMotion']);
+
+	        _this.lastShakeX = 0;
+	        _this.lastShakeY = 0;
+	        _this.lastShakeZ = 0;
+	        _this.lastTime = 0;
+	        _this.freezeShake = false;
+
+	        (0, _domEvent.on)("devicemotion", _this.deviceMotion, window);
+	      }
+	    }
+	    return _this;
+	  }
+
+	  //触摸开始
+	  //摇动
+
+
+	  Gesture.prototype.touchStart = function touchStart(e) {
+	    var _this2 = this;
+
+	    var props = this.props,
+	        posAll = this.getTouchPos(e),
+	        pos = posAll[0],
+	        x = pos[0],
+	        y = pos[1],
+	        tl = posAll.length,
+	        ret = { e: e, x: x, y: y, fingers: tl },
+	        scrollElemV = null,
+	        scrollElemH = null;
+
+	    //记录触摸手指数
+	    this.tapFingers = tl;
+
+	    //起始与结束点坐标
+	    this.startPosX = x;
+	    this.lastPosX = x;
+	    this.startPosY = y;
+	    this.lastPosY = y;
+
+	    if (tl == 1) {
+	      //各参数初始化
+	      this.duration = Date.now();
+	      this.isScroll = null;
+	      this.scale = null;
+	      this.lastScale = 0;
+	      this.isPinch = false;
+	      this.rotation = null;
+	      this.lastRotation = 0;
+	      this.isRotate = false;
+	      this.dx = 0;
+	      this.dy = 0;
+
+	      //如注册长按事件则需检测滚动条位
+	      if (props.onTapHold) {
+	        this.scrollElemTop = this.scrollElemV.scrollTop;
+	        this.scrollElemLeft = this.scrollElemH.scrollLeft;
+	      }
+
+	      props.onTapStart && props.onTapStart.call(this, ret);
+
+	      //触摸交互时长大于阀值并没有发生位移,则视为长按
+	      if (props.onTapHold) {
+	        this.timeoutH = (0, _delayOperate.lazyDo)(function () {
+	          if (!_this2.isPinch && !_this2.isRotate && _this2.dx <= props.holdLimitX && _this2.dy <= props.holdLimitY && _this2.scrollElemTop == _this2.scrollElemV.scrollTop && _this2.scrollElemLeft == _this2.scrollElemH.scrollLeft) {
+	            ret.fingers = _this2.tapFingers;
+	            props.onTapHold.call(_this2, ret);
+	          }
+	        }, props.durationLimitH);
+	      }
+	    } else {
+	      if (tl == 2) {
+	        var pos1 = posAll[0],
+	            pos2 = posAll[1];
+
+	        //计算两指触摸点间初始距离
+	        this.fingerDistS = this.getPosDistance(pos1, pos2);
+
+	        //计算两指触摸点间初始角度
+	        this.fingerRotateS = this.getPosAngle(pos1, pos2);
+	      }
+
+	      //多点tapStart事件
+	      if (props.multiTapStart) {
+	        props.onTapStart && props.onTapStart.call(this, ret);
+	      }
+	    }
+	  };
+
+	  //触摸移动
+
+
+	  Gesture.prototype.touchMove = function touchMove(e) {
+	    var props = this.props,
+	        posAll = this.getTouchPos(e),
+	        pos = posAll[0],
+	        x = pos[0],
+	        y = pos[1],
+	        mx = props.scrollMaxX,
+	        my = props.scrollMaxY,
+	        ix = props.scrollMinX,
+	        iy = props.scrollMinY,
+	        tl = posAll.length,
+	        twoFingers = tl === 2 && (props.onPinch || props.onRotate);
+
+	    this.lastPosX = x;
+	    this.dx = this.lastPosX - this.startPosX;
+	    this.lastPosY = y;
+	    this.dy = this.lastPosY - this.startPosY;
+
+	    if (twoFingers) {
+	      //缩放时禁止默认滚动
+	      e.preventDefault();
+	    }
+
+	    if (this.isScroll) {
+	      //如果在上次触发的touchMove事件中执行了滚动,则本次也视作为滚动
+	      return;
+	    }
+	    if (this.isScroll == null) {
+	      if (mx != null && Math.abs(this.dy) >= iy && Math.abs(this.dx) <= mx) {
+	        //如果垂直发生过位移且大于阀值,并且水平位移在滚动阀值内则视为滚动
+	        this.isScroll = true;
+	        return;
+	      }
+	      if (my != null && Math.abs(this.dx) >= ix && Math.abs(this.dy) <= my) {
+	        //如果水平发生过位移且大于阀值,并且垂直位移在滚动阀值内则视为滚动
+	        this.isScroll = true;
+	        return;
+	      }
+	    }
+
+	    //如果非滚动,则本次触摸一直为平移
+	    if (this.preventScroll) {
+	      e.preventDefault(); //阻止默认滚动
+	    }
+	    this.isScroll = false;
+
+	    //移动方向
+	    var dir = this.getMoveDir(),
+	        curTime = Date.now();
+
+	    if (twoFingers) {
+	      var diffTime = curTime - this.lastPinchTime;
+
+	      //双指缩放
+	      if (diffTime > props.durationPinch) {
+	        //每隔一定时间检测
+	        this.lastPinchTime = curTime;
+	        this.isPinch = true;
+
+	        //计算缩放比例
+	        var scale = this.getPosScale(posAll[0], posAll[1]),
+	            dirS = null;
+
+	        if (scale != this.lastScale) {
+	          //比例有变化时才执行缩放
+	          this.lastScale = scale;
+
+	          if (scale < 1 && scale % 1 < 1 - props.scalePinchClose || scale > 1 && scale % 1 > props.scalePinchOpen) {
+	            //大于缩放阀值时执行事件
+	            dirS = scale < 1 ? -1 : 1;
+	            this.scale = scale;
+
+	            this.preventScroll = true; //缩放时阻止滚动
+	            props.onPinch && props.onPinch.call(this, { e: e, scale: scale, dir: dirS });
+	          }
+	        }
+	      }
+
+	      diffTime = curTime - this.lastRotateTime;
+
+	      //双指旋转
+	      if (diffTime > props.durationRotate) {
+	        //每隔一定时间检测
+	        this.lastRotateTime = curTime;
+	        this.isRotate = true;
+
+	        //计算旋转角度变化值
+	        var rotation = this.getPosRotation(posAll[0], posAll[1]),
+	            _dirS = null;
+
+	        if (rotation != this.lastRotation) {
+	          //旋转角度有变化时才执行旋转
+	          this.lastRotation = rotation;
+
+	          if (rotation < 1 && -1 * rotation > props.rotationCcw || rotation > 1 && rotation > props.rotationCw) {
+	            //大于旋转阀值时执行事件
+	            _dirS = rotation < 1 ? -1 : 1;
+	            this.rotation = rotation;
+
+	            this.preventScroll = true; //缩放时阻止滚动
+	            props.onRotate && props.onRotate.call(this, { e: e, rotation: rotation, dir: _dirS });
+	          }
+	        }
+	      }
+	    }
+
+	    //平移
+	    if (props.durationPan == null || curTime - this.lastPanTime > props.durationPan) {
+	      this.lastPanTime = curTime;
+	      props.onPan && props.onPan.call(this, { e: e, x: x, y: y, dx: this.dx, dy: this.dy, dirX: dir[0], dirY: dir[1], fingers: tl, touchId: this.getTouchIndex(e) });
+	    }
+	  };
+
+	  //触摸结束
+
+
+	  Gesture.prototype.touchEnd = function touchEnd(e) {
+	    var props = this.props,
+	        isScroll = this.isScroll;
+
+	    if (e.touches.length > 0) {
+	      return;
+	    }
+
+	    //清除长按检测
+	    if (this.timeoutH) {
+	      clearTimeout(this.timeoutH);
+	      this.timeoutH = null;
+	    }
+
+	    if (this.isScroll) {
+	      props.onScrollEnd && props.onScrollEnd.call(this, { e: e });
+	      return;
+	    }
+
+	    var dir = this.getMoveDir(),
+	        //移动方向
+	    ret = { e: e, x: this.lastPosX, y: this.lastPosY, dx: this.dx, dy: this.dy, dirX: dir[0], dirY: dir[1], fingers: this.tapFingers },
+	        //返回参数对象
+	    gtH = Math.abs(this.dx) > props.distanceLimitH,
+	        gtV = Math.abs(this.dy) > props.distanceLimitV,
+	        cTime = Date.now(),
+	        duration = cTime - this.duration;
+
+	    //如触摸交互时长小于阀值则视作扫动
+	    if (duration <= props.durationLimitS) {
+	      var dirS = '';
+	      if (gtH) {
+	        if (dir[0] == 'l') {
+	          dirS += 'l';
+	          props.onSwipeLeft && props.onSwipeLeft.call(this, ret);
+	        } else {
+	          dirS += 'r';
+	          props.onSwipeRight && props.onSwipeRight.call(this, ret);
+	        }
+	      }
+	      if (gtV) {
+	        if (dir[1] == 't') {
+	          dirS += 't';
+	          props.onSwipeTop && props.onSwipeTop.call(this, ret);
+	        } else {
+	          dirS += 'b';
+	          props.onSwipeBottom && props.onSwipeBottom.call(this, ret);
+	        }
+	      }
+	      if (gtH || gtV) {
+	        ret.dirS = dirS; //扫动方向
+	        props.onSwipe && props.onSwipe.call(this, ret);
+	      }
+	    }
+
+	    //如果触摸交互时长小于阀值且没有发生位移,则视为轻触
+	    if (duration <= props.tapDuration && this.dx <= props.tapLimitX && this.dy <= props.tapLimitY) {
+	      if (props.preventClick) {
+	        e.preventDefault();
+	      }
+
+	      props.onTap && props.onTap.call(this, ret);
+	    }
+
+	    //是否缩放过
+	    if (this.scale != null) {
+	      ret.scale = this.scale;
+	    }
+
+	    //是否旋转过
+	    if (this.rotation != null) {
+	      ret.rotation = this.rotation;
+	    }
+
+	    props.onTapEnd && props.onTapEnd.call(this, ret);
+	  };
+
+	  //设备摇动侦测
+
+
+	  Gesture.prototype.deviceMotion = function deviceMotion(e) {
+	    var _this3 = this;
+
+	    var props = this.props,
+	        acceleration = e.accelerationIncludingGravity,
+	        //获取含重力的加速度
+	    curTime = Date.now(),
+	        diffTime = curTime - this.lastTime,
+	        //获取当前时间和最后检测时间间隔
+	    ret = { e: e };
+
+	    //每隔一定时间检测一次
+	    if (diffTime > props.shakeDuration) {
+	      this.lastTime = curTime;
+	      var x = acceleration.x,
+	          y = acceleration.y,
+	          z = acceleration.z,
+	          speed = Math.abs(x + y + z - this.lastShakeX - this.lastShakeY - this.lastShakeZ) / diffTime;
+
+	      if (speed > props.shakeLimit) {
+	        //摇动速度超过阀值
+	        if (!this.freezeShake) {
+	          this.freezeShake = true; //为防止同一次摇动中多次摇中,此处设置如果摇中一次,则本次摇动中不可能再次摇中
+	          props.onShake(ret);
+	        }
+
+	        (0, _delayOperate.lazyDo)(function () {
+	          _this3.freezeShake = false;
+	        }, props.shakeFreezeDelay, 'gesture_shake', this);
+	      }
+
+	      this.lastShakeX = x;
+	      this.lastShakeY = y;
+	      this.lastShakeZ = z;
+	    }
+	  };
+
+	  //计算触摸点坐标值
+
+
+	  Gesture.prototype.getTouchPos = function getTouchPos(e) {
+	    var touches = e.touches,
+	        osLeft = this.wrapper.offsetLeft,
+	        osTop = this.wrapper.offsetTop,
+	        ts = null,
+	        ret = [];
+
+	    for (var i = 0, l = touches.length; i < l; i++) {
+	      ts = touches[i];
+	      ret[ret.length] = [ts.pageX - osLeft, ts.pageY - osTop]; //参数依次为:x轴坐标、y轴坐标、触摸点唯一标识
+	    }
+
+	    return ret;
+	  };
+
+	  //计算触摸移动方向
+
+
+	  Gesture.prototype.getMoveDir = function getMoveDir() {
+	    var dirX = void 0,
+	        dirY = void 0;
+	    if (this.dx > 0) {
+	      dirX = "r";
+	    } else {
+	      dirX = "l";
+	    }
+	    if (this.dy > 0) {
+	      dirY = "b";
+	    } else {
+	      dirY = "t";
+	    }
+
+	    return [dirX, dirY];
+	  };
+
+	  //获取触摸点索引
+
+
+	  Gesture.prototype.getTouchIndex = function getTouchIndex(e) {
+	    var targetTouch = e.targetTouches[0],
+	        touches = e.touches;
+
+	    for (var i = 0, l = touches.length; i < l; i++) {
+	      if (touches[i].identifier === targetTouch.identifier) {
+	        return i;
+	      }
+	    }
+	  };
+
+	  //计算两点间距离
+
+
+	  Gesture.prototype.getPosDistance = function getPosDistance(pos1, pos2) {
+	    var x = pos1[0] - pos2[0],
+	        y = pos1[1] - pos2[1];
+
+	    return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+	  };
+
+	  //计算缩放比例
+
+
+	  Gesture.prototype.getPosScale = function getPosScale(pos1, pos2) {
+	    return this.getPosDistance(pos1, pos2) / this.fingerDistS;
+	  };
+
+	  //计算两点间角度
+
+
+	  Gesture.prototype.getPosAngle = function getPosAngle(pos1, pos2) {
+	    var x = pos1[0] - pos2[0],
+	        y = pos1[1] - pos2[1];
+
+	    return Math.atan2(y, x) * 180 / Math.PI;
+	  };
+
+	  //计算旋转角度
+
+
+	  Gesture.prototype.getPosRotation = function getPosRotation(pos1, pos2) {
+	    return this.getPosAngle(pos1, pos2) - this.fingerRotateS;
+	  };
+
+	  Gesture.prototype.componentWillUnmount = function componentWillUnmount() {
+	    if (_browsers.isMobile && this.supportShake && this.props.onShake) {
+	      (0, _domEvent.off)("devicemotion", this.deviceMotion, window);
+	    }
+	  };
+
+	  Gesture.prototype.render = function render() {
+	    var _this4 = this;
+
+	    return T(_templateObject).renderComp([{
+	      props: _browsers.isMobile ? {
+	        ref: function ref(c) {
+	          return _this4.wrapper = c;
+	        },
+	        onTouchStart: this.touchStart,
+	        onTouchMove: this.touchMove,
+	        onTouchEnd: this.touchEnd,
+	        onTouchCancel: this.touchEnd
+	      } : null
 	    }, this.props]);
 	  };
 
 	  return Gesture;
 	}(_react.Component);
 
+	Gesture.propTypes = {
+	  onTapStart: _react.PropTypes.func, //触摸开始
+	  onTap: _react.PropTypes.func, //轻触
+	  onPan: _react.PropTypes.func, //平移
+	  onTapEnd: _react.PropTypes.func, //触摸结束
+	  onTapHold: _react.PropTypes.func, //长按
+	  onSwipe: _react.PropTypes.func, //扫动
+	  onSwipeLeft: _react.PropTypes.func, //左扫动
+	  onSwipeRight: _react.PropTypes.func, //右扫动
+	  onSwipeTop: _react.PropTypes.func, //上扫动
+	  onSwipeBottom: _react.PropTypes.func, //下扫动
+	  onScrollEnd: _react.PropTypes.func, //滚动结束
+	  onPinch: _react.PropTypes.func, //双指缩放
+	  onRotate: _react.PropTypes.func, //双指旋转
+	  onShake: _react.PropTypes.func };
 	Gesture.defaultProps = {
 	  multiTapStart: false, //是否执行多点触控的tapStart事件
 	  preventScroll: true, //是否阻止滚动
