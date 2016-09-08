@@ -855,8 +855,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    amount = (amount + '').match(/\.\d*$/g); //截取小数点及小数部分
 	    //amount = (amount + '').replace(/0+?$/g, '');  //去除小数点后多余的0
 	  } else {
-	      amount = '';
-	    }
+	    amount = '';
+	  }
 
 	  return amount;
 	};
@@ -2637,11 +2637,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var T = (0, _nornj.tmplByKey)('fj-Gesture');
 
 	var Gesture = function (_Component) {
-	babelHelpers.inherits(Gesture, _Component);
-	  //解除冻结摇动延迟时间
+	  babelHelpers.inherits(Gesture, _Component);
 
 	  function Gesture(props) {
-	babelHelpers.classCallCheck(this, Gesture);
+	    babelHelpers.classCallCheck(this, Gesture);
 
 	    var _this = babelHelpers.possibleConstructorReturn(this, _Component.call(this, props));
 
@@ -2692,7 +2691,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  //触摸开始
-	  //摇动
 
 
 	  Gesture.prototype.touchStart = function touchStart(e) {
@@ -3127,7 +3125,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  onScrollEnd: _react.PropTypes.func, //滚动结束
 	  onPinch: _react.PropTypes.func, //双指缩放
 	  onRotate: _react.PropTypes.func, //双指旋转
-	  onShake: _react.PropTypes.func };
+	  onShake: _react.PropTypes.func //摇动
+	};
 	Gesture.defaultProps = {
 	  multiTapStart: false, //是否执行多点触控的tapStart事件
 	  preventScroll: true, //是否阻止滚动
@@ -3156,7 +3155,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  holdLimitY: 1, //检测长按移动y轴距离阀值
 	  shakeLimit: 0.23, //摇动速度超过该阀值则视为摇动
 	  shakeDuration: 100, //每次检测摇动间隔时间
-	  shakeFreezeDelay: 800 };
+	  shakeFreezeDelay: 800 //解除冻结摇动延迟时间
+	};
 
 
 	(0, _nornj.registerComponent)({

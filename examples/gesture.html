@@ -18,9 +18,11 @@
         <fj-Gesture on-tap="{onTap}"
                     on-tap-hold="{onTapHold}"
                     on-pan="{onPan}"
+                    on-pinch="{onPinch}"
+                    on-rotate="{onRotate}"
                     on-swipe-left="{onSwipeLeft}"
                     on-swipe-right="{onSwipeRight}">
-          <div style="width:500px;height:500px;background-color:yellow;color:blue;">{msg}</div>
+          <div style="height:500px;background-color:yellow;color:blue;">{msg}</div>
         </fj-Gesture>
       </nj:#tmpl>
     </Container>
@@ -47,6 +49,14 @@
         console.log('onPan');
         //console.log('x:' + p.x + ',y:' + p.y);
       },
+      onPinch: function (p) {
+        console.log('onPinch');
+        //console.log('scale:' + p.scale);
+      },
+      onRotate: function (p) {
+        console.log('onRotate');
+        //console.log('rotation:' + p.rotation);
+      },
       onSwipeLeft: function () {
         console.log('onSwipeLeft');
       },
@@ -58,6 +68,8 @@
           onTap: this.onTap,
           onTapHold: this.onTapHold,
           onPan: this.onPan,
+          onPinch: this.onPinch,
+          onRotate: this.onRotate,
           onSwipeLeft: this.onSwipeLeft,
           onSwipeRight: this.onSwipeRight,
           msg: this.state.msg

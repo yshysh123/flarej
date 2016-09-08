@@ -7,6 +7,7 @@
 目前已完成的组件：
 * Pagination(分页)
 * GridLayout(栅格布局)
+* Gesture(触摸手势)
 
 ### 安装
 
