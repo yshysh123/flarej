@@ -13,43 +13,45 @@
 </head>
 <body>
   <div>
-    <Container class="nj-component">
-      <nj:#tmpl>
-        <nj:table class="table">
-          <nj:thead>
-            <nj:tr>
-              <nj:th>#</nj:th>
-              <nj:th>First Name</nj:th>
-              <nj:th>Last Name</nj:th>
-              <nj:th>Username</nj:th>
-            </nj:tr>
-          </nj:thead>
-          <nj:tbody>
-            <nj:#each refer="{data}">
-              <nj:tr>
-                <nj:th scope="row">{no}</nj:th>
-                <nj:td>{firstName}</nj:td>
-                <nj:td>{lastName}</nj:td>
-                <nj:td>{username}</nj:td>
-              </nj:tr>
-            </nj:#each>
-          </nj:tbody>
-        </nj:table>
-        <!--<nj:#each refer="{list}">-->
-        <fj-Pagination set-page-size="true"
-                       page-index="{pageIndex}"
-                       page-size="{pageSize}"
-                       page-sizes="{pageSizes}"
-                       count="{count}"
-                       responsive="true"
-                       responsive-param="{rp}"
-                       show-data-count="true"
-                       show-refresh="true"
-                       on-change="{pagnChange}">
-        </fj-Pagination>
-        <!--</nj:#each>-->
-      </nj:#tmpl>
-    </Container>
+    <script type="text/nornj" autoRender id="t1">
+      <Container>
+        <#tmpl>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+              </tr>
+            </thead>
+            <tbody>
+              <#each {data}>
+                <tr key={no}>
+                  <th scope="row">{no}</th>
+                  <td>{firstName}</td>
+                  <td>{lastName}</td>
+                  <td>{username}</td>
+                </tr>
+              </#each>
+            </tbody>
+          </table>
+          <!--<#each {list}>-->
+          <fj-Pagination setPageSize="true"
+                         pageIndex="{pageIndex}"
+                         pageSize="{pageSize}"
+                         pageSizes="{pageSizes}"
+                         count="{count}"
+                         responsive="true"
+                         responsiveParam="{rp}"
+                         showDataCount="true"
+                         showRefresh="true"
+                         onChange="{pagnChange}">
+          </fj-Pagination>
+          <!--</#each>-->
+        </#tmpl>
+      </Container>
+    </script>
   </div>
   <script src="../node_modules/react/dist/react.js"></script>
   <script src="../node_modules/react-dom/dist/react-dom.js"></script>
@@ -77,7 +79,7 @@
           count: datas.length
         };
       },
-      componentWillMount: function() {
+      componentWillMount: function () {
         var appTarget = {
           index: function (request, options) {
             console.log(request);
@@ -106,7 +108,7 @@
 
         Aviator.dispatch();
       },
-      resetData: function(pageIndex, pageSize) {
+      resetData: function (pageIndex, pageSize) {
         pageIndex = parseInt(pageIndex, 10);
         pageSize = pageSize != null ? pageSize : this.state.pageSize;
 
@@ -128,7 +130,7 @@
         this.resetData(pageIndex, pageSize);
 
         var silent = true;
-        if(!this._routerStarted) {  //第一次加载时需要触发历史事件，之后点击分页按钮时不触发历史事件
+        if (!this._routerStarted) {  //第一次加载时需要触发历史事件，之后点击分页按钮时不触发历史事件
           silent = false;
           this._routerStarted = false;
         }
@@ -136,7 +138,8 @@
       },
       //template: nj.compileComponent('<div onClick={click}>{tmpl}</div>'),
       render: function () {
-        return nj.renderTmplExpr(this.props.tmpls[0], {
+        console.log(nj.templates.t1._mainT1.toString());
+        return this.props.tmpls[0]({
           //return this.template({
           //tmpl: this.props.tmpls[0],
           data: this.state.data,

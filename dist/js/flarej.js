@@ -934,6 +934,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function Pagination(props) {
 	    babelHelpers.classCallCheck(this, Pagination);
 
+	    console.log(1);
+
 	    var _this = babelHelpers.possibleConstructorReturn(this, _Widget.call(this, props, {
 	      pageIndex: parseInt(props.pageIndex, 10),
 	      pageSize: parseInt(props.pageSize, 10)
