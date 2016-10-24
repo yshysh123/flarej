@@ -475,7 +475,7 @@ class Gesture extends Component {
   }
 
   render() {
-    return T`<#cloneElem {props}>{children}</#cloneElem>`.renderComp([{
+    return T`<#cloneElem {props}>{children}</#cloneElem>`.renderComponent([{
       props: isMobile ? {
         ref: c => this.wrapper = c,
         onTouchStart: this.touchStart,

@@ -234,7 +234,7 @@ registerComponent({ 'fj-Pagination': Pagination });
 
 registerFilter({
   clickBtn: function(fn, type) {
-    let { pageIndex, pageCount } = this.data[0];
+    let { pageIndex, pageCount } = this.data;
 
     switch(type){
       case 'first':
@@ -272,10 +272,10 @@ registerFilter({
     }
   },
   isCurrentPage: function(no) {
-    return parseInt(no, 10) == this.data[0].pageIndex ? '-c' : '';
+    return parseInt(no, 10) == this.data.pageIndex ? '-c' : '';
   },
   showPartPage: function(no, type) {
-    let { pageCount } = this.data[0];
+    let { pageCount } = this.data;
     switch(type){
       case '1':  //当前页码<=4:左侧显示所有+当前页码+右侧2个页码+...+尾页
         return no <= 4;

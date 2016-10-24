@@ -13,19 +13,21 @@
 </head>
 <body>
   <div>
-    <Container class="nj-component">
-      <nj:#tmpl>
-        <fj-Gesture on-tap="{onTap}"
-                    on-tap-hold="{onTapHold}"
-                    on-pan="{onPan}"
-                    on-pinch="{onPinch}"
-                    on-rotate="{onRotate}"
-                    on-swipe-left="{onSwipeLeft}"
-                    on-swipe-right="{onSwipeRight}">
-          <div style="height:500px;background-color:yellow;color:blue;">{msg}</div>
-        </fj-Gesture>
-      </nj:#tmpl>
-    </Container>
+    <script type="text/nornj" autoRender>
+      <Container>
+        <#tmpl>
+          <fj-Gesture {onTap}
+                      {onTapHold}
+                      {onPan}
+                      {onPinch}
+                      {onRotate}
+                      {onSwipeLeft}
+                      {onSwipeRight}>
+            <div style="height:500px;background-color:yellow;color:blue;">{msg}</div>
+          </fj-Gesture>
+        </#tmpl>
+      </Container>
+    </script>
   </div>
   <script src="../node_modules/react/dist/react.js"></script>
   <script src="../node_modules/react-dom/dist/react-dom.js"></script>
@@ -64,16 +66,9 @@
         console.log('onSwipeRight');
       },
       render: function () {
-        return nj.renderTmplExpr(this.props.tmpls[0], {
-          onTap: this.onTap,
-          onTapHold: this.onTapHold,
-          onPan: this.onPan,
-          onPinch: this.onPinch,
-          onRotate: this.onRotate,
-          onSwipeLeft: this.onSwipeLeft,
-          onSwipeRight: this.onSwipeRight,
+        return this.props.tmpls[0]({
           msg: this.state.msg
-        });
+        }, this);
       }
     }));
   </script>

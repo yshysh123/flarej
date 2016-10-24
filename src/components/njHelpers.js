@@ -11,6 +11,6 @@ registerFilter({
 registerExpr({
   emptyElem: () => <div className="fj-empty-elem"></div>,
   cloneElem: function(props) {
-    return cloneElement(this.result()[0], props);
+    return cloneElement(this.result(), props);
   }
 });

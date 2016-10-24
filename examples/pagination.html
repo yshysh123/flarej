@@ -16,39 +16,39 @@
     <script type="text/nornj" autoRender id="t1">
       <Container>
         <#tmpl>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
-              </tr>
-            </thead>
-            <tbody>
-              <#each {data}>
-                <tr key={no}>
-                  <th scope="row">{no}</th>
-                  <td>{firstName}</td>
-                  <td>{lastName}</td>
-                  <td>{username}</td>
+          <div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Username</th>
                 </tr>
-              </#each>
-            </tbody>
-          </table>
-          <!--<#each {list}>-->
-          <fj-Pagination setPageSize="true"
-                         pageIndex="{pageIndex}"
-                         pageSize="{pageSize}"
-                         pageSizes="{pageSizes}"
-                         count="{count}"
-                         responsive="true"
-                         responsiveParam="{rp}"
-                         showDataCount="true"
-                         showRefresh="true"
-                         onChange="{pagnChange}">
-          </fj-Pagination>
-          <!--</#each>-->
+              </thead>
+              <tbody>
+                <#each {data}>
+                  <tr key={no}>
+                    <th scope="row">{no}</th>
+                    <td>{firstName}</td>
+                    <td>{lastName}</td>
+                    <td>{username}</td>
+                  </tr>
+                </#each>
+              </tbody>
+            </table>
+            <fj-Pagination setPageSize="true"
+                           {pageIndex}
+                           {pageSize}
+                           {pageSizes}
+                           {count}
+                           responsive="true"
+                           responsiveParam="{rp}"
+                           showDataCount="true"
+                           showRefresh="true"
+                           onChange="{pagnChange}">
+            </fj-Pagination>
+          </div>
         </#tmpl>
       </Container>
     </script>
@@ -136,12 +136,9 @@
         }
         Aviator.navigate('/page/' + pageIndex, { silent: silent });
       },
-      //template: nj.compileComponent('<div onClick={click}>{tmpl}</div>'),
       render: function () {
-        console.log(nj.templates.t1._mainT1.toString());
+        //console.log(nj.templates.t1._mainT1.toString());
         return this.props.tmpls[0]({
-          //return this.template({
-          //tmpl: this.props.tmpls[0],
           data: this.state.data,
           pageSizes: [20, 5, 50],
           pageSize: this.state.pageSize,

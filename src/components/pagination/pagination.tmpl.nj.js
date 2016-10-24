@@ -2,27 +2,27 @@
 
 const partPage1 = nj`
 <#for {'1' pageIndex:add(2)}>
-  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>
+  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>
 </#for>
-<li onClick={refresh:clickBtn(next)}>...</li>
-<li class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>
+<li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>
+<li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>
 `;
 
 const partPage2 = nj`
-<li class="fj-pagn-pageno{'1':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>
-<li onClick={refresh:clickBtn(prev)}>...</li>
+<li key=1 class="fj-pagn-pageno{'1':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>
+<li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>
 <#for {pageIndex:add(-2) pageIndex:add(2)}>
-  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>
+  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>
 </#for>
-<li onClick={refresh:clickBtn(next)}>...</li>
-<li class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>
+<li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>
+<li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>
 `;
 
 const partPage3 = nj`
-<li class="fj-pagn-pageno{'1':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>
-<li onClick={refresh:clickBtn(prev)}>...</li>
+<li key=1 class="fj-pagn-pageno{'1':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>
+<li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>
 <#for {pageIndex:add(-2) pageCount}>
-  <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>
+  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>
 </#for>
 `;
 
@@ -38,7 +38,7 @@ const pageBtns = nj`
     <#if {hasPages}>
       <#if {pageCount:lt(10)}>
         <#for {'1' pageCount}>
-          <li class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>
+          <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>
         </#for>
       <#else />
         <#if {pageIndex:showPartPage(1)}>
@@ -131,7 +131,7 @@ const pageSize = nj`
   <#if {setPageSize}>
     <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>
       <#each {pageSizes}>
-        <option key=page{#} value={.}>{.}</option>
+        <option key={#} value={.}>{.}</option>
       </#each>
     </select>
   <#else />
