@@ -54,7 +54,6 @@
     "gulp-postcss": "^6.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sequence": "^0.4.4",
-    "gulp-sourcemaps": "^1.6.0",
     "gulp-template": "^4.0.0",
     "gulp-uglify": "^1.5.1",
     "jsdom": "^8.1.0",
@@ -65,5 +64,6 @@
     "webpack": "^1.13.1",
     "webpack-stream": "^3.2.0",
     "yargs": "^4.2.0"
-  }
+  },
+  "//": "The gulp-sourcemaps needs to be installed separately."
 }
