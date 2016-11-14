@@ -1,20 +1,25 @@
 # FlareJ
-一款基于响应式Web设计的UI组件库
 
-此UI组件库以前的版本为底层使用jQuery实现，已在公司的生产项目中服役多年。现需重构为使用React实现，日后会逐步将各组件重构并且开源。
+一套基于React的响应式Web设计UI组件库
 
 # 组件
+
 目前已完成的组件：
+
 * Pagination(分页)
 * GridLayout(栅格布局)
 * Gesture(触摸手势)
+
+### 依赖的项目
+
+* [NornJ模板引擎](https://github.com/joe-sky/nornj)
 
 ### 安装
 
 使用npm安装:
 
 ```sh
-npm install --save flarej
+npm install flarej
 ```
 
 ### 浏览器支持

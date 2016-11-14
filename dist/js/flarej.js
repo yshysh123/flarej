@@ -898,6 +898,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
+	var _dec, _class, _class2, _temp, _dec2, _class3, _class4, _temp2, _dec3, _class5, _class6, _temp3, _dec4, _class7, _class8, _temp4;
+
 	var _react = __webpack_require__(15);
 
 	var _nornj = __webpack_require__(2);
@@ -918,29 +920,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
-	var templateDataCount = (0, _nornj.compileComponent)(_pagination2.default.pageDataCount, 'pageDataCount');
-	var templatePageCount = (0, _nornj.compileComponent)(_pagination2.default.pageCount, 'pageCount');
-
-	//计算总页数
+	/**
+	 * 计算总页数
+	 */
 	function _getPageCount(count, pageSize) {
 	  return parseInt(count % pageSize > 0 ? count / pageSize + 1 : count / pageSize, 10);
 	}
 
-	//分页组件
-
-	var Pagination = function (_Widget) {
+	/**
+	 * 分页组件
+	 */
+	var Pagination = (_dec = (0, _nornj.registerTmpl)({
+	  name: 'fj-Pagination',
+	  template: _pagination2.default.pagination
+	}), _dec(_class = (_temp = _class2 = function (_Widget) {
 	  babelHelpers.inherits(Pagination, _Widget);
 
 	  function Pagination(props) {
 	    babelHelpers.classCallCheck(this, Pagination);
-
-	    var _this = babelHelpers.possibleConstructorReturn(this, _Widget.call(this, props, {
+	    return babelHelpers.possibleConstructorReturn(this, _Widget.call(this, props, {
 	      pageIndex: parseInt(props.pageIndex, 10),
 	      pageSize: parseInt(props.pageSize, 10)
 	    }));
-
-	    _this.template = (0, _nornj.compileComponent)(_pagination2.default.pagination, 'pagination');
-	    return _this;
 	  }
 
 	  Pagination.prototype.init = function init() {
@@ -1118,9 +1119,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  return Pagination;
-	}(_widget2.default);
-
-	Pagination.defaultProps = {
+	}(_widget2.default), _class2.defaultProps = {
 	  fjType: 'pagn',
 	  pageSize: 15, //每页数据数
 	  pageSizes: [15, 30, 50], //可选择的每页数据数
@@ -1171,10 +1170,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    }
 	  }
-	};
+	}, _temp)) || _class);
 
-
-	(0, _nornj.registerComponent)({ 'fj-Pagination': Pagination });
 
 	(0, _nornj.registerFilter)({
 	  clickBtn: function clickBtn(fn, type) {
@@ -1242,9 +1239,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 
-	//总页数组件
-
-	var PageCount = function (_Component) {
+	/**
+	 * 总页数组件
+	 */
+	var PageCount = (_dec2 = (0, _nornj.registerTmpl)({
+	  name: 'fj-PageCount',
+	  template: _pagination2.default.pageCount
+	}), _dec2(_class3 = (_temp2 = _class4 = function (_Component) {
 	  babelHelpers.inherits(PageCount, _Component);
 
 	  function PageCount() {
@@ -1274,7 +1275,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      pageCount = _getPageCount(count, pageSize);
 	    }
 
-	    return templatePageCount({
+	    return this.template({
 	      props: others,
 	      classes: classes,
 	      prefix: prefix,
@@ -1287,20 +1288,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  return PageCount;
-	}(_react.Component);
-
-	PageCount.defaultProps = {
+	}(_react.Component), _class4.defaultProps = {
 	  prefix: '共',
 	  suffix: '页'
-	};
+	}, _temp2)) || _class3);
 
 
-	(0, _nornj.registerComponent)({ 'fj-PageCount': PageCount });
 	Pagination.PageCount = PageCount;
 
-	//数据总数组件
-
-	var PageDataCount = function (_Component2) {
+	/**
+	 * 数据总数组件
+	 */
+	var PageDataCount = (_dec3 = (0, _nornj.registerTmpl)({
+	  name: 'fj-PageDataCount',
+	  template: _pagination2.default.pageDataCount
+	}), _dec3(_class5 = (_temp3 = _class6 = function (_Component2) {
 	  babelHelpers.inherits(PageDataCount, _Component2);
 
 	  function PageDataCount() {
@@ -1323,7 +1325,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      'fj-pagn-part': true
 	    }, className, className));
 
-	    return templateDataCount({
+	    return this.template({
 	      props: others,
 	      classes: classes,
 	      prefix: prefix,
@@ -1336,20 +1338,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  return PageDataCount;
-	}(_react.Component);
-
-	PageDataCount.defaultProps = {
+	}(_react.Component), _class6.defaultProps = {
 	  prefix: '共',
 	  suffix: '条数据'
-	};
+	}, _temp3)) || _class5);
 
 
-	(0, _nornj.registerComponent)({ 'fj-PageDataCount': PageDataCount });
 	Pagination.PageDataCount = PageDataCount;
 
-	//每页展示数量组件
-
-	var PageSize = function (_Component3) {
+	/**
+	 * 每页展示数量组件
+	 */
+	var PageSize = (_dec4 = (0, _nornj.registerTmpl)({
+	  name: 'fj-PageSize',
+	  template: _pagination2.default.pageSize
+	}), _dec4(_class7 = (_temp4 = _class8 = function (_Component3) {
 	  babelHelpers.inherits(PageSize, _Component3);
 
 	  function PageSize(props) {
@@ -1360,7 +1363,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _this8.state = {
 	      pageSize: null
 	    };
-	    _this8.template = (0, _nornj.compileComponent)(_pagination2.default.pageSize, 'pageSize');
 
 
 	    _this8.state.pageSize = _this8.props.pageSize;
@@ -1420,26 +1422,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  return PageSize;
-	}(_react.Component);
-
-	PageSize.propTypes = {
+	}(_react.Component), _class8.propTypes = {
 	  pageSize: _react.PropTypes.number,
 	  pageSizes: _react.PropTypes.array,
 	  setPageSize: _react.PropTypes.oneOfType([_react.PropTypes.bool, _react.PropTypes.string]),
 	  prefix: _react.PropTypes.string,
 	  suffix: _react.PropTypes.string,
 	  onChange: _react.PropTypes.func
-	};
-	PageSize.defaultProps = {
+	}, _class8.defaultProps = {
 	  pageSize: 15, //每页数据数
 	  pageSizes: [15, 30, 50], //可选择的每页数据数
 	  setPageSize: false, //是否可以设置每页数据数
 	  prefix: '每页',
 	  suffix: '条'
-	};
+	}, _temp4)) || _class7);
 
 
-	(0, _nornj.registerComponent)({ 'fj-PageSize': PageSize });
 	Pagination.PageSize = PageSize;
 
 	exports.default = Pagination;
@@ -2359,6 +2357,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.ClearFix = exports.Col = exports.RowRight = exports.RowLeft = exports.Row = undefined;
 
+	var _dec, _class, _dec2, _class2, _dec3, _class3, _dec4, _class4, _dec5, _class5;
+
 	var _react = __webpack_require__(15);
 
 	var _nornj = __webpack_require__(2);
@@ -2373,13 +2373,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _gridLayout2 = babelHelpers.interopRequireDefault(_gridLayout);
 
-	var templateRow = (0, _nornj.compileComponent)(_gridLayout2.default.row, 'row');
-	var templateCol = (0, _nornj.compileComponent)(_gridLayout2.default.col, 'col');
-	var templateClearFix = (0, _nornj.compileComponent)(_gridLayout2.default.clearFix, 'clearFix');
+	var templateRow = (0, _nornj.compileComponent)(_gridLayout2.default.row);
 
-	//Grid row
-
-	var Row = function (_Component) {
+	/**
+	 * Grid row
+	 */
+	var Row = (_dec = (0, _nornj.registerTmpl)('fj-Row'), _dec(_class = function (_Component) {
 	  babelHelpers.inherits(Row, _Component);
 
 	  function Row() {
@@ -2426,7 +2425,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  return Row;
-	}(_react.Component);
+	}(_react.Component)) || _class);
+
 
 	function _createRowRender(context, compClass) {
 	  return function () {
@@ -2463,9 +2463,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }.bind(context);
 	}
 
-	//Grid row left container
-
-	var RowLeft = function (_Component2) {
+	/**
+	 * Grid row left container
+	 */
+	var RowLeft = (_dec2 = (0, _nornj.registerTmpl)('fj-RowLeft'), _dec2(_class2 = function (_Component2) {
 	  babelHelpers.inherits(RowLeft, _Component2);
 
 	  function RowLeft(props) {
@@ -2478,12 +2479,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  return RowLeft;
-	}(_react.Component);
+	}(_react.Component)) || _class2);
 
-	//Grid row right container
+	/**
+	 * Grid row right container
+	 */
 
-
-	var RowRight = function (_Component3) {
+	var RowRight = (_dec3 = (0, _nornj.registerTmpl)('fj-RowRight'), _dec3(_class3 = function (_Component3) {
 	  babelHelpers.inherits(RowRight, _Component3);
 
 	  function RowRight(props) {
@@ -2496,12 +2498,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  return RowRight;
-	}(_react.Component);
+	}(_react.Component)) || _class3);
 
-	//Grid col
+	/**
+	 * Grid col
+	 */
 
-
-	var Col = function (_Component4) {
+	var Col = (_dec4 = (0, _nornj.registerTmpl)({
+	  name: 'fj-Col',
+	  template: _gridLayout2.default.col
+	}), _dec4(_class4 = function (_Component4) {
 	  babelHelpers.inherits(Col, _Component4);
 
 	  function Col() {
@@ -2537,7 +2543,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var classes = (0, _classnames2.default)((_classNames3 = {}, babelHelpers.defineProperty(_classNames3, 'fj-col' + l, l != null), babelHelpers.defineProperty(_classNames3, 'fj-col-m' + m, m != null), babelHelpers.defineProperty(_classNames3, 'fj-col-s' + s, s != null), babelHelpers.defineProperty(_classNames3, 'fj-col-ms' + ms, ms != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right' + right, right != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left' + left, left != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift' + shift, shift != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-m' + rightM, rightM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-m' + leftM, leftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-m' + shiftM, shiftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-s' + rightS, rightS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-s' + leftS, leftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-s' + shiftS, shiftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-ms' + rightMs, rightMs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-ms' + leftMs, leftMs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-ms' + shiftMs, shiftMs != null), babelHelpers.defineProperty(_classNames3, className, className), _classNames3));
 
-	    return templateCol({
+	    return this.template({
 	      props: others,
 	      classes: classes,
 	      children: children,
@@ -2548,12 +2554,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  return Col;
-	}(_react.Component);
+	}(_react.Component)) || _class4);
 
-	//Clear the float style
+	/**
+	 * Clear the float style
+	 */
 
-
-	var ClearFix = function (_Component5) {
+	var ClearFix = (_dec5 = (0, _nornj.registerTmpl)({
+	  name: 'fj-ClearFix',
+	  template: _gridLayout2.default.clearFix
+	}), _dec5(_class5 = function (_Component5) {
 	  babelHelpers.inherits(ClearFix, _Component5);
 
 	  function ClearFix() {
@@ -2576,7 +2586,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var classes = (0, _classnames2.default)((_classNames4 = {}, babelHelpers.defineProperty(_classNames4, 'fj-clearfix', l != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-m', m != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-s', s != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-ms', ms != null), babelHelpers.defineProperty(_classNames4, className, className), _classNames4));
 
-	    return templateClearFix({
+	    return this.template({
 	      props: others,
 	      classes: classes,
 	      wrap: function wrap(c) {
@@ -2586,16 +2596,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  return ClearFix;
-	}(_react.Component);
-
-	(0, _nornj.registerComponent)({
-	  'fj-Row': Row,
-	  'fj-RowLeft': RowLeft,
-	  'fj-RowRight': RowRight,
-	  'fj-Col': Col,
-	  'fj-ClearFix': ClearFix
-	});
-
+	}(_react.Component)) || _class5);
 	exports.Row = Row;
 	exports.RowLeft = RowLeft;
 	exports.RowRight = RowRight;
@@ -2679,9 +2680,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Gesture = undefined;
+	exports.default = undefined;
 
-	var _templateObject = babelHelpers.taggedTemplateLiteral(['<#cloneElem {props}>{children}</#cloneElem>'], ['<#cloneElem {props}>{children}</#cloneElem>']);
+	var _dec, _class, _class2, _temp;
 
 	var _react = __webpack_require__(15);
 
@@ -2695,9 +2696,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _common = __webpack_require__(4);
 
-	var T = (0, _nornj.tmplByKey)('fj-Gesture');
-
-	var Gesture = function (_Component) {
+	var Gesture = (_dec = (0, _nornj.registerTmpl)({
+	  name: 'fj-Gesture',
+	  template: '<#cloneElem {props}>{children}</#cloneElem>'
+	}), _dec(_class = (_temp = _class2 = function (_Component) {
 	  babelHelpers.inherits(Gesture, _Component);
 
 	  function Gesture(props) {
@@ -3156,7 +3158,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Gesture.prototype.render = function render() {
 	    var _this4 = this;
 
-	    return T(_templateObject).renderComponent([{
+	    return this.template({
 	      props: _browsers.isMobile ? {
 	        ref: function ref(c) {
 	          return _this4.wrapper = c;
@@ -3166,13 +3168,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        onTouchEnd: this.touchEnd,
 	        onTouchCancel: this.touchEnd
 	      } : null
-	    }, this.props]);
+	    }, this.props);
 	  };
 
 	  return Gesture;
-	}(_react.Component);
-
-	Gesture.propTypes = {
+	}(_react.Component), _class2.propTypes = {
 	  onTapStart: _react.PropTypes.func, //触摸开始
 	  onTap: _react.PropTypes.func, //轻触
 	  onPan: _react.PropTypes.func, //平移
@@ -3187,8 +3187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  onPinch: _react.PropTypes.func, //双指缩放
 	  onRotate: _react.PropTypes.func, //双指旋转
 	  onShake: _react.PropTypes.func //摇动
-	};
-	Gesture.defaultProps = {
+	}, _class2.defaultProps = {
 	  multiTapStart: false, //是否执行多点触控的tapStart事件
 	  preventScroll: true, //是否阻止滚动
 	  preventClick: true, //是否阻止点击
@@ -3217,14 +3216,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  shakeLimit: 0.23, //摇动速度超过该阀值则视为摇动
 	  shakeDuration: 100, //每次检测摇动间隔时间
 	  shakeFreezeDelay: 800 //解除冻结摇动延迟时间
-	};
-
-
-	(0, _nornj.registerComponent)({
-	  'fj-Gesture': Gesture
-	});
-
-	exports.Gesture = Gesture;
+	}, _temp)) || _class);
+	exports.default = Gesture;
 
 /***/ }
 /******/ ])

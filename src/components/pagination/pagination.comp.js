@@ -1,22 +1,24 @@
 ﻿import { Component, PropTypes } from 'react';
-import {
-  compileComponent,
-  registerComponent,
-  registerFilter
-} from 'nornj';
+import { registerTmpl, registerFilter } from 'nornj';
 import classNames from 'classnames';
 import Widget from '../widget';
 import utils from '../../utils/utils';
 import tmpl from './pagination.tmpl';
-const templateDataCount = compileComponent(tmpl.pageDataCount, 'pageDataCount');
-const templatePageCount = compileComponent(tmpl.pageCount, 'pageCount');
 
-//计算总页数
+/**
+ * 计算总页数
+ */
 function getPageCount(count, pageSize) {
   return parseInt(count % pageSize > 0 ? count / pageSize + 1 : count / pageSize, 10);
 }
 
-//分页组件
+/**
+ * 分页组件
+ */
+@registerTmpl({
+  name: 'fj-Pagination',
+  template: tmpl.pagination
+})
 class Pagination extends Widget {
   static defaultProps = {
     fjType: 'pagn',
@@ -70,8 +72,6 @@ class Pagination extends Widget {
       }
     }
   };
-
-  template = compileComponent(tmpl.pagination, 'pagination');
   
   constructor(props) {
     super(props, {
@@ -230,8 +230,6 @@ class Pagination extends Widget {
   }
 }
 
-registerComponent({ 'fj-Pagination': Pagination });
-
 registerFilter({
   clickBtn: function(fn, type) {
     let { pageIndex, pageCount } = this.data;
@@ -287,7 +285,13 @@ registerFilter({
   }
 });
 
-//总页数组件
+/**
+ * 总页数组件
+ */
+@registerTmpl({
+  name: 'fj-PageCount',
+  template: tmpl.pageCount
+})
 class PageCount extends Component {
   static defaultProps = {
     prefix: '共',
@@ -313,7 +317,7 @@ class PageCount extends Component {
       pageCount = getPageCount(count, pageSize);
     }
     
-    return templatePageCount({
+    return this.template({
       props: others,
       classes,
       prefix,
@@ -324,10 +328,15 @@ class PageCount extends Component {
   }
 }
 
-registerComponent({ 'fj-PageCount': PageCount });
 Pagination.PageCount = PageCount;
 
-//数据总数组件
+/**
+ * 数据总数组件
+ */
+@registerTmpl({
+  name: 'fj-PageDataCount',
+  template: tmpl.pageDataCount
+})
 class PageDataCount extends Component {
   static defaultProps = {
     prefix: '共',
@@ -346,7 +355,7 @@ class PageDataCount extends Component {
       [className]: className
     });
     
-    return templateDataCount({
+    return this.template({
       props: others,
       classes,
       prefix,
@@ -357,10 +366,15 @@ class PageDataCount extends Component {
   }
 }
 
-registerComponent({ 'fj-PageDataCount': PageDataCount });
 Pagination.PageDataCount = PageDataCount;
 
-//每页展示数量组件
+/**
+ * 每页展示数量组件
+ */
+@registerTmpl({
+  name: 'fj-PageSize',
+  template: tmpl.pageSize
+})
 class PageSize extends Component {
   static propTypes = {
     pageSize: PropTypes.number,
@@ -385,8 +399,6 @@ class PageSize extends Component {
   state = {
     pageSize: null
   };
-
-  template = compileComponent(tmpl.pageSize, 'pageSize');
   
   constructor(props) {
     super(props);
@@ -442,7 +454,6 @@ class PageSize extends Component {
   }
 }
 
-registerComponent({ 'fj-PageSize': PageSize });
 Pagination.PageSize = PageSize;
 
 export default Pagination;

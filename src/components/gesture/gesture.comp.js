@@ -1,12 +1,15 @@
 ﻿import { Component, PropTypes, Children } from 'react';
-import { tmplByKey, registerComponent } from 'nornj';
-const T = tmplByKey('fj-Gesture');
+import { registerTmpl } from 'nornj';
 import { isMobile } from '../../utils/browsers';
 import { lazyDo } from '../../utils/delayOperate';
 import { on, off } from '../../utils/domEvent';
 import { bindThis } from '../../utils/common';
 
-class Gesture extends Component {
+@registerTmpl({
+  name: 'fj-Gesture',
+  template: '<#cloneElem {props}>{children}</#cloneElem>'
+})
+export default class Gesture extends Component {
   static propTypes = {
     onTapStart: PropTypes.func,    //触摸开始
     onTap: PropTypes.func,         //轻触
@@ -475,7 +478,7 @@ class Gesture extends Component {
   }
 
   render() {
-    return T`<#cloneElem {props}>{children}</#cloneElem>`.renderComponent([{
+    return this.template({
       props: isMobile ? {
         ref: c => this.wrapper = c,
         onTouchStart: this.touchStart,
@@ -483,14 +486,6 @@ class Gesture extends Component {
         onTouchEnd: this.touchEnd,
         onTouchCancel: this.touchEnd
       } : null
-    }, this.props]);
+    }, this.props);
   }
 }
-
-registerComponent({
-  'fj-Gesture': Gesture
-});
-
-export {
-  Gesture
-};

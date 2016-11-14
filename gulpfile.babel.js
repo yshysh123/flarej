@@ -6,15 +6,21 @@ import uglify from 'gulp-uglify';
 import jasmine from 'gulp-jasmine';
 import template from 'gulp-template';
 import sourcemaps from 'gulp-sourcemaps';
+import ignore from 'gulp-ignore';
+import cleanCSS from 'gulp-clean-css';
 import rename from 'gulp-rename';
 import concat from 'gulp-concat';
 import gulpif from 'gulp-if';
 import less from 'gulp-less';
+var less2 = require('postcss-less-engine');
+const autoprefixer = require('gulp-autoprefixer');
 import cssnano from 'gulp-cssnano';
 import eslint from 'gulp-eslint';
 import notify from 'gulp-notify';
 import postcss from 'gulp-postcss';
-import autoprefixer from 'autoprefixer';
+var LessAutoprefix = require('less-plugin-autoprefix');
+var autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] });
+//import autoprefixer from 'autoprefixer';
 import { argv } from 'yargs';
 import glob from 'glob';
 import precompiler from 'nornj/precompiler';
@@ -167,21 +173,31 @@ gulp.task('build-js', () => {
 gulp.task('build-css', () => {
   let cssLibName = getCssLibName();
 
-  return gulp.src('./src/styles/base.less')
-    .pipe(template({
-      ns: libNameSpace
+  return gulp.src('./src/styles/index-all.less')
+    .pipe(gulpif(argv.p, sourcemaps.init()))
+    //.pipe(postcss([
+    //  autoprefixer({ browsers: ['last 50 versions'] }),
+    //  less2
+    //], { parser: less2.parser }))
+    .pipe(less({
+      plugins: [autoprefix]
     }))
-    .pipe(less())
+    //.pipe(autoprefixer({ browsers: ['last 50 versions'] }))
+    //.pipe(template({
+    //  ns: libNameSpace
+    //}))
+    //.pipe(gulp.dest('./dist/css'))
+    //.pipe(gulpif(argv.p, ignore.exclude('*.map')))
+    //.pipe(rename(cssLibName))
+    //.pipe(gulpif(argv.p, cssnano()))
+    .pipe(gulpif(argv.p, cleanCSS()))
     .pipe(rename(cssLibName))
-    .pipe(gulp.dest('./dist/css').on('end', function () {
-      gulp.src(['./vendor/normalize.css', './dist/css/' + cssLibName])
-        .pipe(gulpif(argv.p, sourcemaps.init()))
-        .pipe(concat(cssLibName))
-        .pipe(gulpif(argv.p, cssnano()))
-        .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
-        .pipe(gulpif(argv.p, sourcemaps.write('./')))
-        .pipe(gulp.dest('./dist/css'));
-    }));
+    .pipe(gulpif(argv.p, sourcemaps.write('./', { sourceRoot: '../../src/styles' })))
+    //.pipe(gulpif(argv.p, ignore.exclude('*.map')))
+    
+    //.pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
+    
+    .pipe(gulp.dest('./dist/css'));
 });
 
 //Build theme css
@@ -238,6 +254,11 @@ gulp.task('build', ['build-js', 'build-all-css', 'build-all-lib']);
 gulp.task("lib", () => {
   precompileNj(false);
 
+  //Copy style
+  gulp.src('./src/styles/**/*.less')
+    .pipe(gulp.dest('./lib'));
+
+  //Convert js
   return gulp.src(['./src/**/*.js', '!./src/components/**/*.nj.js'])
     .pipe(babel())
     .pipe(gulp.dest('./lib'));

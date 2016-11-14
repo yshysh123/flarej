@@ -1,16 +1,14 @@
 ﻿import { Component } from 'react';
-import {
-  compileComponent,
-  registerComponent
-} from 'nornj';
+import { registerTmpl, compileComponent } from 'nornj';
 import '../../njConfig';
 import classNames from 'classnames';
 import tmpl from './gridLayout.tmpl';
-const templateRow = compileComponent(tmpl.row, 'row');
-const templateCol = compileComponent(tmpl.col, 'col');
-const templateClearFix = compileComponent(tmpl.clearFix, 'clearFix');
+const templateRow = compileComponent(tmpl.row);
 
-//Grid row
+/**
+ * Grid row
+ */
+@registerTmpl('fj-Row')
 class Row extends Component {
   render() {
     const {
@@ -78,7 +76,10 @@ function _createRowRender(context, compClass) {
   }.bind(context);
 }
 
-//Grid row left container
+/**
+ * Grid row left container
+ */
+@registerTmpl('fj-RowLeft')
 class RowLeft extends Component {
   constructor(props) {
     super(props);
@@ -87,7 +88,10 @@ class RowLeft extends Component {
   }
 }
 
-//Grid row right container
+/**
+ * Grid row right container
+ */
+@registerTmpl('fj-RowRight')
 class RowRight extends Component {
   constructor(props) {
     super(props);
@@ -96,7 +100,13 @@ class RowRight extends Component {
   }
 }
 
-//Grid col
+/**
+ * Grid col
+ */
+@registerTmpl({
+  name: 'fj-Col',
+  template: tmpl.col
+})
 class Col extends Component {
   render() {
     const {
@@ -139,7 +149,7 @@ class Col extends Component {
       [className]: className
     });
 
-    return templateCol({
+    return this.template({
       props: others,
       classes,
       children,
@@ -148,7 +158,13 @@ class Col extends Component {
   }
 }
 
-//Clear the float style
+/**
+ * Clear the float style
+ */
+@registerTmpl({
+  name: 'fj-ClearFix',
+  template: tmpl.clearFix
+})
 class ClearFix extends Component {
   render() {
     const {
@@ -166,21 +182,13 @@ class ClearFix extends Component {
       [className]: className
     });
 
-    return templateClearFix({
+    return this.template({
       props: others,
       classes,
       wrap: c => this.wrap = c
     });
   }
 }
-
-registerComponent({
-  'fj-Row': Row,
-  'fj-RowLeft': RowLeft,
-  'fj-RowRight': RowRight,
-  'fj-Col': Col,
-  'fj-ClearFix': ClearFix
-});
 
 export {
   Row,
