@@ -445,8 +445,8 @@ ul {
           box-shadow: inset 0 1px 1px #eeeeee;
   -webkit-transition: border-color ease-in-out 0.1s, -webkit-box-shadow ease-in-out 0.1s;
   transition: border-color ease-in-out 0.1s, -webkit-box-shadow ease-in-out 0.1s;
-  -moz-transition: border-color ease-in-out 0.1s, box-shadow ease-in-out 0.1s, -moz-box-shadow ease-in-out 0.1s;
   -o-transition: border-color ease-in-out 0.1s, box-shadow ease-in-out 0.1s;
+  -moz-transition: border-color ease-in-out 0.1s, box-shadow ease-in-out 0.1s, -moz-box-shadow ease-in-out 0.1s;
   transition: border-color ease-in-out 0.1s, box-shadow ease-in-out 0.1s;
   transition: border-color ease-in-out 0.1s, box-shadow ease-in-out 0.1s, -webkit-box-shadow ease-in-out 0.1s, -moz-box-shadow ease-in-out 0.1s;
   -webkit-box-sizing: border-box;

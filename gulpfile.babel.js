@@ -6,28 +6,18 @@ import uglify from 'gulp-uglify';
 import jasmine from 'gulp-jasmine';
 import template from 'gulp-template';
 import sourcemaps from 'gulp-sourcemaps';
-//import ignore from 'gulp-ignore';
-//import cleanCSS from 'gulp-clean-css';
 import rename from 'gulp-rename';
 import concat from 'gulp-concat';
 import gulpif from 'gulp-if';
 import less from 'gulp-less';
-//var less2 = require('postcss-less-engine');
-//const autoprefixer = require('gulp-autoprefixer');
 import cssnano from 'gulp-cssnano';
 import eslint from 'gulp-eslint';
 import notify from 'gulp-notify';
 import postcss from 'gulp-postcss';
-//var LessAutoprefix = require('less-plugin-autoprefix');
-//var autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] });
 import autoprefixer from 'autoprefixer';
 import { argv } from 'yargs';
 import glob from 'glob';
 import precompiler from 'nornj/precompiler';
-
-//let ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-//let libNameSpace = 'fj';
 
 function getJsLibName() {
   let libName = 'flarej.js';
@@ -113,9 +103,6 @@ gulp.task('build-js', () => {
 
   let jsLibName = getJsLibName(),
     plugins = [
-      //new webpack.DefinePlugin({
-      //  G_NS: JSON.stringify(libNameSpace)
-      //}),
       new webpack.NoErrorsPlugin()
     ],
     lastHash = null;
@@ -174,53 +161,14 @@ gulp.task('build-js', () => {
 
 gulp.task('build-css', () => {
   let cssLibName = getCssLibName();
-  //let extractLESS = new ExtractTextPlugin(cssLibName);
-
-  //return gulp.src('./src/styles/index-all.js')
-  //  .pipe(webpackStream({
-  //    devtool: argv.p ? 'source-map' : null,
-  //    watch: argv.w ? true : false,
-  //    output: {
-  //      filename: cssLibName
-  //    },
-  //    module: {
-  //      loaders: [
-  //        {
-  //          test : /\.less$/,
-  //          loader: ExtractTextPlugin.extract("style-loader", "css?sourceMap!less")
-  //        },
-  //      ],
-  //    },
-  //    plugins: [
-  //      extractLESS
-  //    ]
-  //  }))
-  //  .on('error', handlebuildError)
-  //  .pipe(gulp.dest('./dist/css'));
 
   return gulp.src('./src/styles/index-all.less')
-    //.pipe(template({
-    //  ns: libNameSpace
-    //}))
     .pipe(gulpif(argv.p, sourcemaps.init()))
-    //.pipe(postcss([
-    //  autoprefixer({ browsers: ['last 50 versions'] }),
-    //  less2
-    //], { parser: less2.parser }))
     .pipe(less())
-    //  plugins: [autoprefix]
-    //}))
-    //.pipe(autoprefixer({ browsers: ['last 50 versions'] }))
-    //.pipe(gulp.dest('./dist/css'))
-    //.pipe(gulpif(argv.p, ignore.exclude('*.map')))
-    //.pipe(rename(cssLibName))
     .pipe(gulpif(argv.p, cssnano()))
     .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
-    //.pipe(gulpif(argv.p, cleanCSS()))
     .pipe(rename(cssLibName))
     .pipe(gulpif(argv.p, sourcemaps.write('./', { sourceRoot: '' })))
-    //.pipe(gulpif(argv.p, ignore.exclude('*.map'))) 
-    //.pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
     .pipe(gulp.dest('./dist/css'));
 });
 
@@ -234,9 +182,6 @@ gulp.task('build-theme', () => {
 
       gulp.src(file)
         .pipe(gulpif(argv.p, sourcemaps.init()))
-        //.pipe(template({
-        //  ns: libNameSpace
-        //}))
         .pipe(less())
         .pipe(gulpif(argv.p, cssnano()))
         .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
