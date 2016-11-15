@@ -90,8 +90,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 	var global = typeof self !== 'undefined' ? self : undefined;
-	var libName =  true ? ("fj") : 'fj';
-	module.exports = global.FlareJ = global[libName] = _core2.default;
+	module.exports = global.FlareJ = global.fj = _core2.default;
 
 /***/ },
 /* 1 */
@@ -423,14 +422,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//Add dom event
 	var on = exports.on = function on(name, fn, elem) {
-	  var useCapture = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+	  var useCapture = arguments.length <= 3 || arguments[3] === undefined ? false : arguments[3];
 
 	  (elem || doc).addEventListener(name, fn, useCapture);
 	};
 
 	//Remove dom event
 	var off = exports.off = function off(name, fn, elem) {
-	  var useCapture = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+	  var useCapture = arguments.length <= 3 || arguments[3] === undefined ? false : arguments[3];
 
 	  (elem || doc).removeEventListener(name, fn, useCapture);
 	};
@@ -540,9 +539,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    sp = '';
 	  }
 
-	  var _fj$GB2312Pinyin = _core2.default.GB2312Pinyin,
-	      fonts = _fj$GB2312Pinyin.fonts,
-	      pinyin = _fj$GB2312Pinyin.pinyin;
+	  var _fj$GB2312Pinyin = _core2.default.GB2312Pinyin;
+	  var fonts = _fj$GB2312Pinyin.fonts;
+	  var pinyin = _fj$GB2312Pinyin.pinyin;
 
 	  for (i = 0, l = str.length; i < l; i++) {
 	    if (str.charCodeAt(i) >= 0x4e00) {
@@ -565,7 +564,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//简单值比较算法
 	var compare = function compare(x, y) {
-	  var isAsc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+	  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
 	  var spC = arguments[3];
 	  var spC2 = arguments[4];
 	  var spV = arguments[5];
@@ -590,7 +589,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//数字比较算法
 	var compareNumber = function compareNumber(x, y) {
-	  var isAsc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+	  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
 	  var spC = arguments[3];
 	  var spC2 = arguments[4];
 	  var spV = arguments[5];
@@ -603,7 +602,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//日期比较算法
 	var compareDate = function compareDate(x, y) {
-	  var isAsc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+	  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
 	  var spC = arguments[3];
 	  var spC2 = arguments[4];
 	  var spV = arguments[5];
@@ -627,7 +626,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//英文字符串比较算法
 	var compareStringEN = function compareStringEN(x, y) {
-	  var isAsc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+	  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
 	  var spC = arguments[3];
 	  var spC2 = arguments[4];
 	  var spV = arguments[5];
@@ -639,7 +638,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//中文字符串比较算法
 	var compareStringCH = function compareStringCH(x, y) {
-	  var isAsc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+	  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
 	  var spC = arguments[3];
 	  var spC2 = arguments[4];
 	  var spV = arguments[5];
@@ -806,7 +805,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	//千分位转换
 	var outputMoney = function outputMoney(number) {
-	  var bit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+	  var bit = arguments.length <= 1 || arguments[1] === undefined ? 2 : arguments[1];
 
 	  var numO = number; //保存原先值
 	  if (isNaN(number) || number == '') {
@@ -956,18 +955,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Pagination.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-	    var _props = this.props,
-	        pageIndex = _props.pageIndex,
-	        count = _props.count,
-	        pageSize = _props.pageSize;
+	    var _props = this.props;
+	    var pageIndex = _props.pageIndex;
+	    var count = _props.count;
+	    var pageSize = _props.pageSize;
 
 	    pageIndex = parseInt(pageIndex, 10);
 	    pageSize = parseInt(pageSize, 10);
 	    count = parseInt(count, 10);
 
-	    var indexN = nextProps.pageIndex,
-	        countN = nextProps.count,
-	        pageSizeN = nextProps.pageSize;
+	    var indexN = nextProps.pageIndex;
+	    var countN = nextProps.count;
+	    var pageSizeN = nextProps.pageSize;
 
 	    if (indexN != null) {
 	      indexN = parseInt(indexN, 10);
@@ -1004,8 +1003,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Pagination.prototype.getPageCount = function getPageCount() {
-	    var pageSize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.state.pageSize;
-	    var count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.props.count;
+	    var pageSize = arguments.length <= 0 || arguments[0] === undefined ? this.state.pageSize : arguments[0];
+	    var count = arguments.length <= 1 || arguments[1] === undefined ? this.props.count : arguments[1];
 
 	    return _getPageCount(count, pageSize);
 	  };
@@ -1039,8 +1038,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	  Pagination.prototype.refresh = function refresh() {
-	    var pageIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.state.pageIndex;
-	    var pageSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.state.pageSize;
+	    var pageIndex = arguments.length <= 0 || arguments[0] === undefined ? this.state.pageIndex : arguments[0];
+	    var pageSize = arguments.length <= 1 || arguments[1] === undefined ? this.state.pageSize : arguments[1];
 
 	    var props = this.props,
 	        pageCount = this.getPageCount(pageSize);
@@ -1177,9 +1176,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  clickBtn: function clickBtn(fn, type) {
 	    var _this3 = this;
 
-	    var _data = this.data,
-	        pageIndex = _data.pageIndex,
-	        pageCount = _data.pageCount;
+	    var _data = this.data;
+	    var pageIndex = _data.pageIndex;
+	    var pageCount = _data.pageCount;
 
 
 	    switch (type) {
@@ -1256,14 +1255,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  PageCount.prototype.render = function render() {
 	    var _this5 = this;
 
-	    var _props2 = this.props,
-	        className = _props2.className,
-	        prefix = _props2.prefix,
-	        pageCount = _props2.pageCount,
-	        count = _props2.count,
-	        pageSize = _props2.pageSize,
-	        suffix = _props2.suffix,
-	        others = babelHelpers.objectWithoutProperties(_props2, ['className', 'prefix', 'pageCount', 'count', 'pageSize', 'suffix']);
+	    var _props2 = this.props;
+	    var className = _props2.className;
+	    var prefix = _props2.prefix;
+	    var pageCount = _props2.pageCount;
+	    var count = _props2.count;
+	    var pageSize = _props2.pageSize;
+	    var suffix = _props2.suffix;
+	    var others = babelHelpers.objectWithoutProperties(_props2, ['className', 'prefix', 'pageCount', 'count', 'pageSize', 'suffix']);
 
 
 	    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
@@ -1313,12 +1312,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  PageDataCount.prototype.render = function render() {
 	    var _this7 = this;
 
-	    var _props3 = this.props,
-	        className = _props3.className,
-	        prefix = _props3.prefix,
-	        count = _props3.count,
-	        suffix = _props3.suffix,
-	        others = babelHelpers.objectWithoutProperties(_props3, ['className', 'prefix', 'count', 'suffix']);
+	    var _props3 = this.props;
+	    var className = _props3.className;
+	    var prefix = _props3.prefix;
+	    var count = _props3.count;
+	    var suffix = _props3.suffix;
+	    var others = babelHelpers.objectWithoutProperties(_props3, ['className', 'prefix', 'count', 'suffix']);
 
 
 	    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
@@ -1392,15 +1391,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  PageSize.prototype.render = function render() {
 	    var _this9 = this;
 
-	    var _props4 = this.props,
-	        className = _props4.className,
-	        prefix = _props4.prefix,
-	        setPageSize = _props4.setPageSize,
-	        pageSize = _props4.pageSize,
-	        pageSizes = _props4.pageSizes,
-	        suffix = _props4.suffix,
-	        onChange = _props4.onChange,
-	        others = babelHelpers.objectWithoutProperties(_props4, ['className', 'prefix', 'setPageSize', 'pageSize', 'pageSizes', 'suffix', 'onChange']);
+	    var _props4 = this.props;
+	    var className = _props4.className;
+	    var prefix = _props4.prefix;
+	    var setPageSize = _props4.setPageSize;
+	    var pageSize = _props4.pageSize;
+	    var pageSizes = _props4.pageSizes;
+	    var suffix = _props4.suffix;
+	    var onChange = _props4.onChange;
+	    var others = babelHelpers.objectWithoutProperties(_props4, ['className', 'prefix', 'setPageSize', 'pageSize', 'pageSizes', 'suffix', 'onChange']);
 
 
 	    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
@@ -1811,6 +1810,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	// shim for using process in browser
+
 	var process = module.exports = {};
 
 	// cached from whatever global is present so that test runners that stub it
@@ -1821,84 +1821,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	var cachedSetTimeout;
 	var cachedClearTimeout;
 
-	function defaultSetTimout() {
-	    throw new Error('setTimeout has not been defined');
-	}
-	function defaultClearTimeout () {
-	    throw new Error('clearTimeout has not been defined');
-	}
 	(function () {
-	    try {
-	        if (typeof setTimeout === 'function') {
-	            cachedSetTimeout = setTimeout;
-	        } else {
-	            cachedSetTimeout = defaultSetTimout;
-	        }
-	    } catch (e) {
-	        cachedSetTimeout = defaultSetTimout;
+	  try {
+	    cachedSetTimeout = setTimeout;
+	  } catch (e) {
+	    cachedSetTimeout = function () {
+	      throw new Error('setTimeout is not defined');
 	    }
-	    try {
-	        if (typeof clearTimeout === 'function') {
-	            cachedClearTimeout = clearTimeout;
-	        } else {
-	            cachedClearTimeout = defaultClearTimeout;
-	        }
-	    } catch (e) {
-	        cachedClearTimeout = defaultClearTimeout;
+	  }
+	  try {
+	    cachedClearTimeout = clearTimeout;
+	  } catch (e) {
+	    cachedClearTimeout = function () {
+	      throw new Error('clearTimeout is not defined');
 	    }
+	  }
 	} ())
-	function runTimeout(fun) {
-	    if (cachedSetTimeout === setTimeout) {
-	        //normal enviroments in sane situations
-	        return setTimeout(fun, 0);
-	    }
-	    // if setTimeout wasn't available but was latter defined
-	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-	        cachedSetTimeout = setTimeout;
-	        return setTimeout(fun, 0);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedSetTimeout(fun, 0);
-	    } catch(e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-	            return cachedSetTimeout.call(null, fun, 0);
-	        } catch(e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-	            return cachedSetTimeout.call(this, fun, 0);
-	        }
-	    }
-
-
-	}
-	function runClearTimeout(marker) {
-	    if (cachedClearTimeout === clearTimeout) {
-	        //normal enviroments in sane situations
-	        return clearTimeout(marker);
-	    }
-	    // if clearTimeout wasn't available but was latter defined
-	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-	        cachedClearTimeout = clearTimeout;
-	        return clearTimeout(marker);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedClearTimeout(marker);
-	    } catch (e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-	            return cachedClearTimeout.call(null, marker);
-	        } catch (e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-	            return cachedClearTimeout.call(this, marker);
-	        }
-	    }
-
-
-
-	}
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -1923,7 +1861,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = runTimeout(cleanUpNextTick);
+	    var timeout = cachedSetTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -1940,7 +1878,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    runClearTimeout(timeout);
+	    cachedClearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -1952,7 +1890,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        runTimeout(drainQueue);
+	        cachedSetTimeout(drainQueue, 0);
 	    }
 	};
 
@@ -2288,11 +2226,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<#for {\'1\' pageIndex:add(2)}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>\n<li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=\u7B2C{pageCount}\u9875 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n'], ['\n<#for {\'1\' pageIndex:add(2)}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>\n<li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=\u7B2C{pageCount}\u9875 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n']),
-	    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<li key=1 class="fj-pagn-pageno{\'1\':isCurrentPage}" title=\u7B2C1\u9875 onClick={refresh:clickBtn(first)}>1</li>\n<li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageIndex:add(2)}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>\n<li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=\u7B2C{pageCount}\u9875 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n'], ['\n<li key=1 class="fj-pagn-pageno{\'1\':isCurrentPage}" title=\u7B2C1\u9875 onClick={refresh:clickBtn(first)}>1</li>\n<li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageIndex:add(2)}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>\n<li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=\u7B2C{pageCount}\u9875 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n']),
-	    _templateObject3 = babelHelpers.taggedTemplateLiteral(['\n<li key=1 class="fj-pagn-pageno{\'1\':isCurrentPage}" title=\u7B2C1\u9875 onClick={refresh:clickBtn(first)}>1</li>\n<li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n'], ['\n<li key=1 class="fj-pagn-pageno{\'1\':isCurrentPage}" title=\u7B2C1\u9875 onClick={refresh:clickBtn(first)}>1</li>\n<li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n']),
-	    _templateObject4 = babelHelpers.taggedTemplateLiteral(['\n<li key=first class=fj-pagn-btn{firstDisabled} title=\u9996\u9875 onClick={refresh:clickBtn(first)}>\n  \u9996\u9875\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=\u4E0A\u4E00\u9875 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=\u7B2C{pageIndex}\u9875>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=\u4E0B\u4E00\u9875 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=\u672B\u9875 onClick={refresh:clickBtn(last)}>\n  \u672B\u9875\n</li>\n'], ['\n<li key=first class=fj-pagn-btn{firstDisabled} title=\u9996\u9875 onClick={refresh:clickBtn(first)}>\n  \u9996\u9875\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=\u4E0A\u4E00\u9875 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=\u7B2C{pageIndex}\u9875>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=\u4E0B\u4E00\u9875 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=\u672B\u9875 onClick={refresh:clickBtn(last)}>\n  \u672B\u9875\n</li>\n']),
-	    _templateObject5 = babelHelpers.taggedTemplateLiteral(['\n<#if {count:gt(1)}>\n  <div class={classes} {style} ref={wrap}>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          <fj-PageCount prefix={pageCountPrefix} suffix={pageCountSuffix} {pageCount} />\n        </li>\n      </#if>\n      <#if {showCount}>\n        <li class=fj-pagn-info>\n          <fj-PageDataCount prefix={countPrefix} suffix={countSuffix} {count} />\n        </li>\n      </#if>\n      <#if {showPageSize}>\n        <li class=fj-pagn-info>\n          <fj-PageSize prefix={sizePrefix} suffix={sizeSuffix} {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />\n        </li>\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          \u5230\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />\u9875\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=\u5237\u65B0 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#emptyElem />\n</#if>\n'], ['\n<#if {count:gt(1)}>\n  <div class={classes} {style} ref={wrap}>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          <fj-PageCount prefix={pageCountPrefix} suffix={pageCountSuffix} {pageCount} />\n        </li>\n      </#if>\n      <#if {showCount}>\n        <li class=fj-pagn-info>\n          <fj-PageDataCount prefix={countPrefix} suffix={countSuffix} {count} />\n        </li>\n      </#if>\n      <#if {showPageSize}>\n        <li class=fj-pagn-info>\n          <fj-PageSize prefix={sizePrefix} suffix={sizeSuffix} {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />\n        </li>\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          \u5230\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />\u9875\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=\u5237\u65B0 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#emptyElem />\n</#if>\n']),
+	var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<#for {\'1\' pageIndex:add(2)}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>\n<li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n'], ['\n<#for {\'1\' pageIndex:add(2)}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>\n<li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n']),
+	    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<li key=1 class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageIndex:add(2)}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>\n<li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n'], ['\n<li key=1 class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageIndex:add(2)}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>\n<li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n']),
+	    _templateObject3 = babelHelpers.taggedTemplateLiteral(['\n<li key=1 class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n'], ['\n<li key=1 class="fj-pagn-pageno{\'1\':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>\n<li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n']),
+	    _templateObject4 = babelHelpers.taggedTemplateLiteral(['\n<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>\n  首页\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=第{pageIndex}页>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>\n  末页\n</li>\n'], ['\n<li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>\n  首页\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=第{pageIndex}页>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>\n  末页\n</li>\n']),
+	    _templateObject5 = babelHelpers.taggedTemplateLiteral(['\n<#if {count:gt(1)}>\n  <div class={classes} {style} ref={wrap}>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          <fj-PageCount prefix={pageCountPrefix} suffix={pageCountSuffix} {pageCount} />\n        </li>\n      </#if>\n      <#if {showCount}>\n        <li class=fj-pagn-info>\n          <fj-PageDataCount prefix={countPrefix} suffix={countSuffix} {count} />\n        </li>\n      </#if>\n      <#if {showPageSize}>\n        <li class=fj-pagn-info>\n          <fj-PageSize prefix={sizePrefix} suffix={sizeSuffix} {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />\n        </li>\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          到\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />页\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#emptyElem />\n</#if>\n'], ['\n<#if {count:gt(1)}>\n  <div class={classes} {style} ref={wrap}>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          <fj-PageCount prefix={pageCountPrefix} suffix={pageCountSuffix} {pageCount} />\n        </li>\n      </#if>\n      <#if {showCount}>\n        <li class=fj-pagn-info>\n          <fj-PageDataCount prefix={countPrefix} suffix={countSuffix} {count} />\n        </li>\n      </#if>\n      <#if {showPageSize}>\n        <li class=fj-pagn-info>\n          <fj-PageSize prefix={sizePrefix} suffix={sizeSuffix} {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />\n        </li>\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          到\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />页\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#emptyElem />\n</#if>\n']),
 	    _templateObject6 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} ref={wrap}>\n  {prefix}<span>{pageCount}</span>{suffix}\n</div>\n'], ['\n<div {...props} class={classes} ref={wrap}>\n  {prefix}<span>{pageCount}</span>{suffix}\n</div>\n']),
 	    _templateObject7 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} ref={wrap}>\n  {prefix}<span>{count}</span>{suffix}\n</div>\n'], ['\n<div {...props} class={classes} ref={wrap}>\n  {prefix}<span>{count}</span>{suffix}\n</div>\n']),
 	    _templateObject8 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} ref={wrap}>\n  {prefix}\n  <#if {setPageSize}>\n    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>\n      <#each {pageSizes}>\n        <option key={#} value={.}>{.}</option>\n      </#each>\n    </select>\n  <#else />\n    {pageSize}\n  </#if>\n  {suffix}\n</div>\n'], ['\n<div {...props} class={classes} ref={wrap}>\n  {prefix}\n  <#if {setPageSize}>\n    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>\n      <#each {pageSizes}>\n        <option key={#} value={.}>{.}</option>\n      </#each>\n    </select>\n  <#else />\n    {pageSize}\n  </#if>\n  {suffix}\n</div>\n']);
@@ -2337,7 +2275,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _gridLayout = __webpack_require__(30);
 
 	Object.keys(_gridLayout).forEach(function (key) {
-	  if (key === "default" || key === "__esModule") return;
+	  if (key === "default") return;
 	  Object.defineProperty(exports, key, {
 	    enumerable: true,
 	    get: function get() {
@@ -2389,13 +2327,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Row.prototype.render = function render() {
 	    var _this2 = this;
 
-	    var _props = this.props,
-	        className = _props.className,
-	        style = _props.style,
-	        left = _props.left,
-	        right = _props.right,
-	        children = _props.children,
-	        others = babelHelpers.objectWithoutProperties(_props, ['className', 'style', 'left', 'right', 'children']);
+	    var _props = this.props;
+	    var className = _props.className;
+	    var style = _props.style;
+	    var left = _props.left;
+	    var right = _props.right;
+	    var children = _props.children;
+	    var others = babelHelpers.objectWithoutProperties(_props, ['className', 'style', 'left', 'right', 'children']);
 
 
 	    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
@@ -2433,12 +2371,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var _classNames2,
 	        _this3 = this;
 
-	    var _props2 = this.props,
-	        className = _props2.className,
-	        style = _props2.style,
-	        width = _props2.width,
-	        children = _props2.children,
-	        others = babelHelpers.objectWithoutProperties(_props2, ['className', 'style', 'width', 'children']);
+	    var _props2 = this.props;
+	    var className = _props2.className;
+	    var style = _props2.style;
+	    var width = _props2.width;
+	    var children = _props2.children;
+	    var others = babelHelpers.objectWithoutProperties(_props2, ['className', 'style', 'width', 'children']);
 
 
 	    var classes = (0, _classnames2.default)((_classNames2 = {}, babelHelpers.defineProperty(_classNames2, compClass, true), babelHelpers.defineProperty(_classNames2, className, className), _classNames2));
@@ -2519,26 +2457,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var _classNames3,
 	        _this7 = this;
 
-	    var _props3 = this.props,
-	        className = _props3.className,
-	        l = _props3.l,
-	        m = _props3.m,
-	        s = _props3.s,
-	        ms = _props3.ms,
-	        right = _props3.right,
-	        left = _props3.left,
-	        shift = _props3.shift,
-	        rightM = _props3.rightM,
-	        leftM = _props3.leftM,
-	        shiftM = _props3.shiftM,
-	        rightS = _props3.rightS,
-	        leftS = _props3.leftS,
-	        shiftS = _props3.shiftS,
-	        rightMs = _props3.rightMs,
-	        leftMs = _props3.leftMs,
-	        shiftMs = _props3.shiftMs,
-	        children = _props3.children,
-	        others = babelHelpers.objectWithoutProperties(_props3, ['className', 'l', 'm', 's', 'ms', 'right', 'left', 'shift', 'rightM', 'leftM', 'shiftM', 'rightS', 'leftS', 'shiftS', 'rightMs', 'leftMs', 'shiftMs', 'children']);
+	    var _props3 = this.props;
+	    var className = _props3.className;
+	    var l = _props3.l;
+	    var m = _props3.m;
+	    var s = _props3.s;
+	    var ms = _props3.ms;
+	    var right = _props3.right;
+	    var left = _props3.left;
+	    var shift = _props3.shift;
+	    var rightM = _props3.rightM;
+	    var leftM = _props3.leftM;
+	    var shiftM = _props3.shiftM;
+	    var rightS = _props3.rightS;
+	    var leftS = _props3.leftS;
+	    var shiftS = _props3.shiftS;
+	    var rightMs = _props3.rightMs;
+	    var leftMs = _props3.leftMs;
+	    var shiftMs = _props3.shiftMs;
+	    var children = _props3.children;
+	    var others = babelHelpers.objectWithoutProperties(_props3, ['className', 'l', 'm', 's', 'ms', 'right', 'left', 'shift', 'rightM', 'leftM', 'shiftM', 'rightS', 'leftS', 'shiftS', 'rightMs', 'leftMs', 'shiftMs', 'children']);
 
 
 	    var classes = (0, _classnames2.default)((_classNames3 = {}, babelHelpers.defineProperty(_classNames3, 'fj-col' + l, l != null), babelHelpers.defineProperty(_classNames3, 'fj-col-m' + m, m != null), babelHelpers.defineProperty(_classNames3, 'fj-col-s' + s, s != null), babelHelpers.defineProperty(_classNames3, 'fj-col-ms' + ms, ms != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right' + right, right != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left' + left, left != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift' + shift, shift != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-m' + rightM, rightM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-m' + leftM, leftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-m' + shiftM, shiftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-s' + rightS, rightS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-s' + leftS, leftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-s' + shiftS, shiftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-ms' + rightMs, rightMs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-ms' + leftMs, leftMs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-ms' + shiftMs, shiftMs != null), babelHelpers.defineProperty(_classNames3, className, className), _classNames3));
@@ -2575,13 +2513,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var _classNames4,
 	        _this9 = this;
 
-	    var _props4 = this.props,
-	        className = _props4.className,
-	        l = _props4.l,
-	        m = _props4.m,
-	        s = _props4.s,
-	        ms = _props4.ms,
-	        others = babelHelpers.objectWithoutProperties(_props4, ['className', 'l', 'm', 's', 'ms']);
+	    var _props4 = this.props;
+	    var className = _props4.className;
+	    var l = _props4.l;
+	    var m = _props4.m;
+	    var s = _props4.s;
+	    var ms = _props4.ms;
+	    var others = babelHelpers.objectWithoutProperties(_props4, ['className', 'l', 'm', 's', 'ms']);
 
 
 	    var classes = (0, _classnames2.default)((_classNames4 = {}, babelHelpers.defineProperty(_classNames4, 'fj-clearfix', l != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-m', m != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-s', s != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-ms', ms != null), babelHelpers.defineProperty(_classNames4, className, className), _classNames4));
@@ -2662,7 +2600,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _gesture = __webpack_require__(34);
 
 	Object.keys(_gesture).forEach(function (key) {
-	  if (key === "default" || key === "__esModule") return;
+	  if (key === "default") return;
 	  Object.defineProperty(exports, key, {
 	    enumerable: true,
 	    get: function get() {

@@ -25,9 +25,9 @@ import { argv } from 'yargs';
 import glob from 'glob';
 import precompiler from 'nornj/precompiler';
 
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
+//let ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-let libNameSpace = 'fj';
+//let libNameSpace = 'fj';
 
 function getJsLibName() {
   let libName = 'flarej.js';
@@ -113,9 +113,9 @@ gulp.task('build-js', () => {
 
   let jsLibName = getJsLibName(),
     plugins = [
-      new webpack.DefinePlugin({
-        G_NS: JSON.stringify(libNameSpace)
-      }),
+      //new webpack.DefinePlugin({
+      //  G_NS: JSON.stringify(libNameSpace)
+      //}),
       new webpack.NoErrorsPlugin()
     ],
     lastHash = null;
@@ -199,6 +199,9 @@ gulp.task('build-css', () => {
   //  .pipe(gulp.dest('./dist/css'));
 
   return gulp.src('./src/styles/index-all.less')
+    //.pipe(template({
+    //  ns: libNameSpace
+    //}))
     .pipe(gulpif(argv.p, sourcemaps.init()))
     //.pipe(postcss([
     //  autoprefixer({ browsers: ['last 50 versions'] }),
@@ -208,9 +211,6 @@ gulp.task('build-css', () => {
     //  plugins: [autoprefix]
     //}))
     //.pipe(autoprefixer({ browsers: ['last 50 versions'] }))
-    //.pipe(template({
-    //  ns: libNameSpace
-    //}))
     //.pipe(gulp.dest('./dist/css'))
     //.pipe(gulpif(argv.p, ignore.exclude('*.map')))
     //.pipe(rename(cssLibName))
@@ -218,17 +218,15 @@ gulp.task('build-css', () => {
     .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
     //.pipe(gulpif(argv.p, cleanCSS()))
     .pipe(rename(cssLibName))
-    .pipe(gulpif(argv.p, sourcemaps.write('./', { sourceRoot: '../../src/styles' })))
-    //.pipe(gulpif(argv.p, ignore.exclude('*.map')))
-    
+    .pipe(gulpif(argv.p, sourcemaps.write('./', { sourceRoot: '' })))
+    //.pipe(gulpif(argv.p, ignore.exclude('*.map'))) 
     //.pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
-    
     .pipe(gulp.dest('./dist/css'));
 });
 
 //Build theme css
 gulp.task('build-theme', () => {
-  glob('./src/styles/theme/**/base.less', {}, (err, files) => {
+  glob('./src/styles/theme/**/index-all.less', {}, (err, files) => {
     files.forEach((file) => {
       let filePath = file.substring(0, file.lastIndexOf("/")),
         themeName = filePath.substr(filePath.lastIndexOf("/") + 1),
@@ -236,14 +234,14 @@ gulp.task('build-theme', () => {
 
       gulp.src(file)
         .pipe(gulpif(argv.p, sourcemaps.init()))
-        .pipe(template({
-          ns: libNameSpace
-        }))
+        //.pipe(template({
+        //  ns: libNameSpace
+        //}))
         .pipe(less())
-        .pipe(rename(themeLibName))
         .pipe(gulpif(argv.p, cssnano()))
         .pipe(postcss([autoprefixer({ browsers: ['last 50 versions'] })]))
-        .pipe(gulpif(argv.p, sourcemaps.write('./')))
+        .pipe(rename(themeLibName))
+        .pipe(gulpif(argv.p, sourcemaps.write('./', { sourceRoot: themeName })))
         .pipe(gulp.dest('./dist/css/theme'));
     });
   });
@@ -280,11 +278,11 @@ gulp.task('build', ['build-js', 'build-all-css', 'build-all-lib']);
 gulp.task("lib", () => {
   precompileNj(false);
 
-  //Copy style
+  //Copy style files
   gulp.src('./src/styles/**/*.less')
-    .pipe(gulp.dest('./lib'));
+    .pipe(gulp.dest('./lib/styles'));
 
-  //Convert js
+  //Convert js files
   return gulp.src(['./src/**/*.js', '!./src/components/**/*.nj.js'])
     .pipe(babel())
     .pipe(gulp.dest('./lib'));

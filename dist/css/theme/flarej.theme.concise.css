@@ -1,5 +1,8 @@
-/* Global variables */
 /* import all modules */
+/* Global variables */
+/* Classes of no value
+.fj-fixsize: Fix icon size unless chrome browser.
+*/
 .fj-pagn-btn {
   border-color: #e1e1e1;
 }
