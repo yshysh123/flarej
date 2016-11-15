@@ -1,10 +1,10 @@
 ﻿import React, { cloneElement } from 'react';
 import nj, { registerFilter, registerExpr } from 'nornj';
-import utils from '../utils/utils';
+import { isWebkit } from '../utils';
 
 registerFilter({
   fixIconSize: (val) => {
-    return val + (!utils.isWebkit ? ' fj-fixsize' : '');
+    return val + (!isWebkit ? ' fj-fixsize' : '');
   }
 });
 

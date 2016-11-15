@@ -2,7 +2,7 @@
 import update from 'react-addons-update';
 import { each } from 'nornj';
 import '../njConfig';
-import utils from '../utils/utils';
+import * as utils from '../utils';
 import './njHelpers';
 let win = window;
 

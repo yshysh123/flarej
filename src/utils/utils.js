@@ -1,25 +1,9 @@
-﻿import * as common from './common';
-import * as page from './page';
-import * as browsers from './browsers';
-import * as delayOperate from './delayOperate';
-import * as domEvent from './domEvent';
-import * as regExp from './regexp';
-import * as sort from './sort';
-import * as math from './math';
-import * as date from './date';
-let utils = {};
-
-Object.assign(
-  utils,
-  common,
-  page,
-  browsers, 
-  delayOperate,
-  domEvent,
-  { RegExp: regExp },
-  { Sort: sort },
-  { Math: math },
-  { Date: date }
-);
-
-export default utils;
+﻿export * from './common';
+export * from './page';
+export * from './browsers';
+export * from './delayOperate';
+export * from './domEvent';
+export * as RegExp from './regexp';
+export * as Sort from './sort';
+export * as Math from './math';
+export * as Date from './date';

@@ -2,7 +2,7 @@
 import { registerTmpl, registerFilter } from 'nornj';
 import classNames from 'classnames';
 import Widget from '../widget';
-import utils from '../../utils/utils';
+import * as utils from '../../utils';
 import tmpl from './pagination.tmpl';
 
 /**

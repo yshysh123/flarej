@@ -1,6 +1,6 @@
 ﻿import fj from './core';
 import nj from 'nornj';
-import utils from './utils/utils';
+import * as utils from './utils';
 import Pagination from './components/pagination';
 import {
   Row,
