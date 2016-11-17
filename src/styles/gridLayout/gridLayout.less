@@ -1,20 +1,15 @@
 ﻿@import "../common/base";
 
-.@{ns}container {
-  margin-left: auto;
-  margin-right: auto;
-  min-width: 1025px;
-  position: relative;
-}
-
 .@{ns}row {
   position: relative;
+  .fj-util-border-box;
 }
 
 .@{ns}row-left,
 .@{ns}row-right {
   position: absolute;
   top: 0;
+  .fj-util-border-box;
 }
 
 .@{ns}row-left {
@@ -54,6 +49,7 @@
   min-height: 1px;
   padding-left: 0;
   padding-right: 0;
+  .fj-util-border-box;
 }
 
 .@{ns}col12 {
@@ -290,6 +286,7 @@
     min-height: 1px;
     padding-left: 0;
     padding-right: 0;
+    .fj-util-border-box;
   }
 
   .@{ns}col-ms12 {
@@ -499,11 +496,6 @@
 
 /*---medium screen size---*/
 @media screen and (min-width: 481px) and (max-width: 1024px) {
-  .@{ns}container {
-    min-width: 481px;
-    max-width: 1024px;
-  }
-
   .@{ns}clearfix-m::before,
   .@{ns}clearfix-m::after {
     display: table;
@@ -532,6 +524,7 @@
     min-height: 1px;
     padding-left: 0;
     padding-right: 0;
+    .fj-util-border-box;
   }
 
   .@{ns}col-m12 {
@@ -741,11 +734,6 @@
 
 /*---small screen size---*/
 @media screen and (max-width: 480px) {
-  .@{ns}container {
-    min-width: 240px;
-    max-width: 480px;
-  }
-
   .@{ns}clearfix-s::before,
   .@{ns}clearfix-s::after {
     display: table;
@@ -774,6 +762,7 @@
     min-height: 1px;
     padding-left: 0;
     padding-right: 0;
+    .fj-util-border-box;
   }
 
   .@{ns}col-s12 {

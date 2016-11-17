@@ -629,19 +629,19 @@ ul {
   line-height: 25px;
   margin: 0 3px;
 }
-.fj-container {
-  margin-left: auto;
-  margin-right: auto;
-  min-width: 1025px;
-  position: relative;
-}
 .fj-row {
   position: relative;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .fj-row-left,
 .fj-row-right {
   position: absolute;
   top: 0;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .fj-row-left {
   left: 0;
@@ -676,6 +676,9 @@ ul {
   min-height: 1px;
   padding-left: 0;
   padding-right: 0;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .fj-col12 {
   width: 100%;
@@ -858,6 +861,9 @@ ul {
     min-height: 1px;
     padding-left: 0;
     padding-right: 0;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
   }
   .fj-col-ms12 {
     width: 100%;
@@ -1015,10 +1021,6 @@ ul {
 }
 /*---medium screen size---*/
 @media screen and (min-width: 481px) and (max-width: 1024px) {
-  .fj-container {
-    min-width: 481px;
-    max-width: 1024px;
-  }
   .fj-clearfix-m::before,
   .fj-clearfix-m::after {
     display: table;
@@ -1045,6 +1047,9 @@ ul {
     min-height: 1px;
     padding-left: 0;
     padding-right: 0;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
   }
   .fj-col-m12 {
     width: 100%;
@@ -1202,10 +1207,6 @@ ul {
 }
 /*---small screen size---*/
 @media screen and (max-width: 480px) {
-  .fj-container {
-    min-width: 240px;
-    max-width: 480px;
-  }
   .fj-clearfix-s::before,
   .fj-clearfix-s::after {
     display: table;
@@ -1232,6 +1233,9 @@ ul {
     min-height: 1px;
     padding-left: 0;
     padding-right: 0;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
   }
   .fj-col-s12 {
     width: 100%;
