@@ -1,1 +1,1 @@
-﻿export * from './gridLayout.comp';
+﻿export * from './gridLayout';

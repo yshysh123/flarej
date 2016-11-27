@@ -17,7 +17,6 @@ import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 import { argv } from 'yargs';
 import glob from 'glob';
-import precompiler from 'nornj/precompiler';
 
 function getJsLibName() {
   let libName = 'flarej.js';
@@ -82,14 +81,6 @@ function handlebuildError() {
   this.emit('end');
 }
 
-function precompileNj(isDev) {
-  precompiler({
-    source: __dirname + '/src/components/**/*.nj.js',
-    exprRule: '#',
-    devMode: isDev
-  });
-}
-
 function concatBabelHelpers(jsLibName) {
   gulp.src(['./vendor/babelHelpers.min.js', './dist/js/' + jsLibName])
     .pipe(gulpif(argv.p, sourcemaps.init({ loadMaps: true })))
@@ -99,8 +90,6 @@ function concatBabelHelpers(jsLibName) {
 }
 
 gulp.task('build-js', () => {
-  precompileNj(!argv.p);
-
   let jsLibName = getJsLibName(),
     plugins = [
       new webpack.NoErrorsPlugin()
@@ -134,6 +123,11 @@ gulp.task('build-js', () => {
           { test: /\.js$/, loader: 'babel', exclude: /node_modules/,
             query: {
               plugins: ['external-helpers']
+            }
+          },
+          { test: /\.html$/, loader: 'nornj', exclude: /node_modules/,
+            query: {
+              outputComponent: true
             }
           }
         ],
@@ -221,14 +215,16 @@ gulp.task('build', ['build-js', 'build-all-css', 'build-all-lib']);
 
 //Convert es6 code to es5 from src to lib
 gulp.task("lib", () => {
-  precompileNj(false);
-
   //Copy style files
   gulp.src('./src/styles/**/*.less')
     .pipe(gulp.dest('./lib/styles'));
 
+  //Copy html files
+  gulp.src('./src/**/*.html')
+    .pipe(gulp.dest('./lib'));
+
   //Convert js files
-  return gulp.src(['./src/**/*.js', '!./src/components/**/*.nj.js'])
+  return gulp.src('./src/**/*.js')
     .pipe(babel())
     .pipe(gulp.dest('./lib'));
 });

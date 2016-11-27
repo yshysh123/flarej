@@ -73,9 +73,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
-	var _gridLayout = __webpack_require__(30);
+	var _gridLayout = __webpack_require__(28);
 
-	var _gesture = __webpack_require__(34);
+	var _gesture = __webpack_require__(31);
 
 	var _gesture2 = babelHelpers.interopRequireDefault(_gesture);
 
@@ -484,14 +484,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//Add dom event
 	var on = exports.on = function on(name, fn, elem) {
-	  var useCapture = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+	  var useCapture = arguments.length <= 3 || arguments[3] === undefined ? false : arguments[3];
 
 	  (elem || doc).addEventListener(name, fn, useCapture);
 	};
 
 	//Remove dom event
 	var off = exports.off = function off(name, fn, elem) {
-	  var useCapture = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+	  var useCapture = arguments.length <= 3 || arguments[3] === undefined ? false : arguments[3];
 
 	  (elem || doc).removeEventListener(name, fn, useCapture);
 	};
@@ -601,9 +601,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    sp = '';
 	  }
 
-	  var _fj$GB2312Pinyin = _core2.default.GB2312Pinyin,
-	      fonts = _fj$GB2312Pinyin.fonts,
-	      pinyin = _fj$GB2312Pinyin.pinyin;
+	  var _fj$GB2312Pinyin = _core2.default.GB2312Pinyin;
+	  var fonts = _fj$GB2312Pinyin.fonts;
+	  var pinyin = _fj$GB2312Pinyin.pinyin;
 
 	  for (i = 0, l = str.length; i < l; i++) {
 	    if (str.charCodeAt(i) >= 0x4e00) {
@@ -626,7 +626,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//简单值比较算法
 	var compare = function compare(x, y) {
-	  var isAsc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+	  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
 	  var spC = arguments[3];
 	  var spC2 = arguments[4];
 	  var spV = arguments[5];
@@ -651,7 +651,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//数字比较算法
 	var compareNumber = function compareNumber(x, y) {
-	  var isAsc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+	  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
 	  var spC = arguments[3];
 	  var spC2 = arguments[4];
 	  var spV = arguments[5];
@@ -664,7 +664,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//日期比较算法
 	var compareDate = function compareDate(x, y) {
-	  var isAsc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+	  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
 	  var spC = arguments[3];
 	  var spC2 = arguments[4];
 	  var spV = arguments[5];
@@ -688,7 +688,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//英文字符串比较算法
 	var compareStringEN = function compareStringEN(x, y) {
-	  var isAsc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+	  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
 	  var spC = arguments[3];
 	  var spC2 = arguments[4];
 	  var spV = arguments[5];
@@ -700,7 +700,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	//中文字符串比较算法
 	var compareStringCH = function compareStringCH(x, y) {
-	  var isAsc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+	  var isAsc = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
 	  var spC = arguments[3];
 	  var spC2 = arguments[4];
 	  var spV = arguments[5];
@@ -867,7 +867,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	//千分位转换
 	var outputMoney = function outputMoney(number) {
-	  var bit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+	  var bit = arguments.length <= 1 || arguments[1] === undefined ? 2 : arguments[1];
 
 	  var numO = number; //保存原先值
 	  if (isNaN(number) || number == '') {
@@ -977,9 +977,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var utils = babelHelpers.interopRequireWildcard(_utils);
 
-	var _pagination = __webpack_require__(28);
+	var _paginationT = __webpack_require__(27);
 
-	var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
+	var _paginationT2 = babelHelpers.interopRequireDefault(_paginationT);
 
 	/**
 	 * 计算总页数
@@ -993,7 +993,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	var Pagination = (_dec = (0, _nornj.registerTmpl)({
 	  name: 'fj-Pagination',
-	  template: _pagination2.default.pagination
+	  template: _paginationT2.default.pagination
 	}), _dec(_class = (_temp = _class2 = function (_Widget) {
 	  babelHelpers.inherits(Pagination, _Widget);
 
@@ -1017,18 +1017,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Pagination.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-	    var _props = this.props,
-	        pageIndex = _props.pageIndex,
-	        count = _props.count,
-	        pageSize = _props.pageSize;
+	    var _props = this.props;
+	    var pageIndex = _props.pageIndex;
+	    var count = _props.count;
+	    var pageSize = _props.pageSize;
 
 	    pageIndex = parseInt(pageIndex, 10);
 	    pageSize = parseInt(pageSize, 10);
 	    count = parseInt(count, 10);
 
-	    var indexN = nextProps.pageIndex,
-	        countN = nextProps.count,
-	        pageSizeN = nextProps.pageSize;
+	    var indexN = nextProps.pageIndex;
+	    var countN = nextProps.count;
+	    var pageSizeN = nextProps.pageSize;
 
 	    if (indexN != null) {
 	      indexN = parseInt(indexN, 10);
@@ -1065,8 +1065,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Pagination.prototype.getPageCount = function getPageCount() {
-	    var pageSize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.state.pageSize;
-	    var count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.props.count;
+	    var pageSize = arguments.length <= 0 || arguments[0] === undefined ? this.state.pageSize : arguments[0];
+	    var count = arguments.length <= 1 || arguments[1] === undefined ? this.props.count : arguments[1];
 
 	    return _getPageCount(count, pageSize);
 	  };
@@ -1100,8 +1100,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	  Pagination.prototype.refresh = function refresh() {
-	    var pageIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.state.pageIndex;
-	    var pageSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.state.pageSize;
+	    var pageIndex = arguments.length <= 0 || arguments[0] === undefined ? this.state.pageIndex : arguments[0];
+	    var pageSize = arguments.length <= 1 || arguments[1] === undefined ? this.state.pageSize : arguments[1];
 
 	    var props = this.props,
 	        pageCount = this.getPageCount(pageSize);
@@ -1238,9 +1238,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  clickBtn: function clickBtn(fn, type) {
 	    var _this3 = this;
 
-	    var _data = this.data,
-	        pageIndex = _data.pageIndex,
-	        pageCount = _data.pageCount;
+	    var _data = this.data;
+	    var pageIndex = _data.pageIndex;
+	    var pageCount = _data.pageCount;
 
 
 	    switch (type) {
@@ -1305,7 +1305,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	var PageCount = (_dec2 = (0, _nornj.registerTmpl)({
 	  name: 'fj-PageCount',
-	  template: _pagination2.default.pageCount
+	  template: _paginationT2.default.pageCount
 	}), _dec2(_class3 = (_temp2 = _class4 = function (_Component) {
 	  babelHelpers.inherits(PageCount, _Component);
 
@@ -1317,14 +1317,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  PageCount.prototype.render = function render() {
 	    var _this5 = this;
 
-	    var _props2 = this.props,
-	        className = _props2.className,
-	        prefix = _props2.prefix,
-	        pageCount = _props2.pageCount,
-	        count = _props2.count,
-	        pageSize = _props2.pageSize,
-	        suffix = _props2.suffix,
-	        others = babelHelpers.objectWithoutProperties(_props2, ['className', 'prefix', 'pageCount', 'count', 'pageSize', 'suffix']);
+	    var _props2 = this.props;
+	    var className = _props2.className;
+	    var prefix = _props2.prefix;
+	    var pageCount = _props2.pageCount;
+	    var count = _props2.count;
+	    var pageSize = _props2.pageSize;
+	    var suffix = _props2.suffix;
+	    var others = babelHelpers.objectWithoutProperties(_props2, ['className', 'prefix', 'pageCount', 'count', 'pageSize', 'suffix']);
 
 
 	    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
@@ -1362,7 +1362,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	var PageDataCount = (_dec3 = (0, _nornj.registerTmpl)({
 	  name: 'fj-PageDataCount',
-	  template: _pagination2.default.pageDataCount
+	  template: _paginationT2.default.pageDataCount
 	}), _dec3(_class5 = (_temp3 = _class6 = function (_Component2) {
 	  babelHelpers.inherits(PageDataCount, _Component2);
 
@@ -1374,12 +1374,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  PageDataCount.prototype.render = function render() {
 	    var _this7 = this;
 
-	    var _props3 = this.props,
-	        className = _props3.className,
-	        prefix = _props3.prefix,
-	        count = _props3.count,
-	        suffix = _props3.suffix,
-	        others = babelHelpers.objectWithoutProperties(_props3, ['className', 'prefix', 'count', 'suffix']);
+	    var _props3 = this.props;
+	    var className = _props3.className;
+	    var prefix = _props3.prefix;
+	    var count = _props3.count;
+	    var suffix = _props3.suffix;
+	    var others = babelHelpers.objectWithoutProperties(_props3, ['className', 'prefix', 'count', 'suffix']);
 
 
 	    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
@@ -1412,7 +1412,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	var PageSize = (_dec4 = (0, _nornj.registerTmpl)({
 	  name: 'fj-PageSize',
-	  template: _pagination2.default.pageSize
+	  template: _paginationT2.default.pageSize
 	}), _dec4(_class7 = (_temp4 = _class8 = function (_Component3) {
 	  babelHelpers.inherits(PageSize, _Component3);
 
@@ -1453,15 +1453,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  PageSize.prototype.render = function render() {
 	    var _this9 = this;
 
-	    var _props4 = this.props,
-	        className = _props4.className,
-	        prefix = _props4.prefix,
-	        setPageSize = _props4.setPageSize,
-	        pageSize = _props4.pageSize,
-	        pageSizes = _props4.pageSizes,
-	        suffix = _props4.suffix,
-	        onChange = _props4.onChange,
-	        others = babelHelpers.objectWithoutProperties(_props4, ['className', 'prefix', 'setPageSize', 'pageSize', 'pageSizes', 'suffix', 'onChange']);
+	    var _props4 = this.props;
+	    var className = _props4.className;
+	    var prefix = _props4.prefix;
+	    var setPageSize = _props4.setPageSize;
+	    var pageSize = _props4.pageSize;
+	    var pageSizes = _props4.pageSizes;
+	    var suffix = _props4.suffix;
+	    var onChange = _props4.onChange;
+	    var others = babelHelpers.objectWithoutProperties(_props4, ['className', 'prefix', 'setPageSize', 'pageSize', 'pageSizes', 'suffix', 'onChange']);
 
 
 	    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
@@ -1581,13 +1581,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _nornj = __webpack_require__(2);
 
-	__webpack_require__(26);
+	__webpack_require__(25);
 
 	var _utils = __webpack_require__(3);
 
 	var utils = babelHelpers.interopRequireWildcard(_utils);
 
-	__webpack_require__(27);
+	__webpack_require__(26);
 
 	var win = window;
 
@@ -1760,7 +1760,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 * @providesModule update
 	 */
 
 	/* global hasOwnProperty:true */
@@ -1770,8 +1769,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _prodInvariant = __webpack_require__(22),
 	    _assign = __webpack_require__(23);
 
-	var keyOf = __webpack_require__(24);
-	var invariant = __webpack_require__(25);
+	var invariant = __webpack_require__(24);
 	var hasOwnProperty = {}.hasOwnProperty;
 
 	function shallowCopy(x) {
@@ -1784,12 +1782,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 
-	var COMMAND_PUSH = keyOf({ $push: null });
-	var COMMAND_UNSHIFT = keyOf({ $unshift: null });
-	var COMMAND_SPLICE = keyOf({ $splice: null });
-	var COMMAND_SET = keyOf({ $set: null });
-	var COMMAND_MERGE = keyOf({ $merge: null });
-	var COMMAND_APPLY = keyOf({ $apply: null });
+	var COMMAND_PUSH = '$push';
+	var COMMAND_UNSHIFT = '$unshift';
+	var COMMAND_SPLICE = '$splice';
+	var COMMAND_SET = '$set';
+	var COMMAND_MERGE = '$merge';
+	var COMMAND_APPLY = '$apply';
 
 	var ALL_COMMANDS_LIST = [COMMAND_PUSH, COMMAND_UNSHIFT, COMMAND_SPLICE, COMMAND_SET, COMMAND_MERGE, COMMAND_APPLY];
 
@@ -1872,6 +1870,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	// shim for using process in browser
+
 	var process = module.exports = {};
 
 	// cached from whatever global is present so that test runners that stub it
@@ -1882,84 +1881,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	var cachedSetTimeout;
 	var cachedClearTimeout;
 
-	function defaultSetTimout() {
-	    throw new Error('setTimeout has not been defined');
-	}
-	function defaultClearTimeout () {
-	    throw new Error('clearTimeout has not been defined');
-	}
 	(function () {
-	    try {
-	        if (typeof setTimeout === 'function') {
-	            cachedSetTimeout = setTimeout;
-	        } else {
-	            cachedSetTimeout = defaultSetTimout;
-	        }
-	    } catch (e) {
-	        cachedSetTimeout = defaultSetTimout;
+	  try {
+	    cachedSetTimeout = setTimeout;
+	  } catch (e) {
+	    cachedSetTimeout = function () {
+	      throw new Error('setTimeout is not defined');
 	    }
-	    try {
-	        if (typeof clearTimeout === 'function') {
-	            cachedClearTimeout = clearTimeout;
-	        } else {
-	            cachedClearTimeout = defaultClearTimeout;
-	        }
-	    } catch (e) {
-	        cachedClearTimeout = defaultClearTimeout;
+	  }
+	  try {
+	    cachedClearTimeout = clearTimeout;
+	  } catch (e) {
+	    cachedClearTimeout = function () {
+	      throw new Error('clearTimeout is not defined');
 	    }
+	  }
 	} ())
-	function runTimeout(fun) {
-	    if (cachedSetTimeout === setTimeout) {
-	        //normal enviroments in sane situations
-	        return setTimeout(fun, 0);
-	    }
-	    // if setTimeout wasn't available but was latter defined
-	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-	        cachedSetTimeout = setTimeout;
-	        return setTimeout(fun, 0);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedSetTimeout(fun, 0);
-	    } catch(e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-	            return cachedSetTimeout.call(null, fun, 0);
-	        } catch(e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-	            return cachedSetTimeout.call(this, fun, 0);
-	        }
-	    }
-
-
-	}
-	function runClearTimeout(marker) {
-	    if (cachedClearTimeout === clearTimeout) {
-	        //normal enviroments in sane situations
-	        return clearTimeout(marker);
-	    }
-	    // if clearTimeout wasn't available but was latter defined
-	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-	        cachedClearTimeout = clearTimeout;
-	        return clearTimeout(marker);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedClearTimeout(marker);
-	    } catch (e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-	            return cachedClearTimeout.call(null, marker);
-	        } catch (e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-	            return cachedClearTimeout.call(this, marker);
-	        }
-	    }
-
-
-
-	}
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -1984,7 +1921,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = runTimeout(cleanUpNextTick);
+	    var timeout = cachedSetTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -2001,7 +1938,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    runClearTimeout(timeout);
+	    cachedClearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -2013,7 +1950,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        runTimeout(drainQueue);
+	        cachedSetTimeout(drainQueue, 0);
 	    }
 	};
 
@@ -2065,7 +2002,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 * @providesModule reactProdInvariant
 	 * 
 	 */
 	'use strict';
@@ -2188,45 +2124,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 24 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 */
-
-	/**
-	 * Allows extraction of a minified key. Let's the build system minify keys
-	 * without losing the ability to dynamically use key strings as values
-	 * themselves. Pass in an object with a single key/val pair and it will return
-	 * you the string key of that single record. Suppose you want to grab the
-	 * value for a key 'className' inside of an object. Key/val minification may
-	 * have aliased that key to be 'xa12'. keyOf({className: null}) will return
-	 * 'xa12' in that case. Resolve keys you want to use once at startup time, then
-	 * reuse those resolutions.
-	 */
-	var keyOf = function keyOf(oneKeyObj) {
-	  var key;
-	  for (key in oneKeyObj) {
-	    if (!oneKeyObj.hasOwnProperty(key)) {
-	      continue;
-	    }
-	    return key;
-	  }
-	  return null;
-	};
-
-	module.exports = keyOf;
-
-/***/ },
-/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2281,7 +2178,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2291,7 +2188,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	(0, _nornj.setTmplRule)(null, null, '#');
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2322,6 +2219,1515 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
+/* 27 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = {
+	  pagination: {
+	  useString: false,
+	  fn4: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p1.lightObj(),
+	  _parent = p2.parent,
+	  multiData = p3.multiData,
+	  hasItem = 'item' in p4;
+	parent.data = hasItem ? p4.item : _parent.data;
+	parent.parent = p4.fallback ? _parent : _parent.parent;
+	parent.index = 'index' in p4 ? p4.index : _parent.index;
+	var data;
+	if(hasItem) data = p1.getNewData(p4.item, p2.data, multiData, p4.addData);
+	else data = p2.data;
+	var _p2 = p1.lightObj();
+	_p2.parent = parent;
+	_p2.data = data;
+	var _p3 = p1.lightObj();
+	if(p4.addData) multiData = true;
+	_p3.multiData = multiData;
+
+	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value0 = parent.index;
+
+	var _filter0 = p1.filters['iscurrentpage'];
+	if (!_filter0) {
+	  p1.warn('iscurrentpage', 'filter');
+	}
+	else {
+	  var _thisF0 = p1.lightObj();
+	  _thisF0.useString = p1.useString;
+	  _thisF0.data = parent.data;
+	  _thisF0.parent = parent.parent;
+	  _thisF0.index = parent.index;
+
+	  _value0 = _filter0.apply(_thisF0, [_value0]);
+	}
+	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter1 = p1.filters['clickbtn'];
+	if (!_filter1) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF1 = p1.lightObj();
+	  _thisF1.useString = p1.useString;
+	  _thisF1.data = parent.data;
+	  _thisF1.parent = parent.parent;
+	  _thisF1.index = parent.index;
+
+	  _value1 = _filter1.apply(_thisF1, [_value1, 'index']);
+	}
+	var _params0 = {
+	  'key': parent.index,
+	  'className': 'fj-pagn-pageno' + (_value0),
+	  'title': '第' + (parent.index) + '页',
+	  'onClick': _value1
+	};
+	var _compParam0 = [_type0, _params0];
+
+	_compParam0.push(parent.index);
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	},
+	  fn3: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	var _expr0 = p1.exprs['for'];
+	var _dataRefer0 = [
+	  '1',  (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))
+	];
+	p1.throwIf(_expr0, 'for', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.useString = p1.useString;
+	_this0.data = parent.data;
+	_this0.result = p1.exprRet(p1, p2, p3, p1.fn4, p5);
+	_this0.inverse = p1.noop;
+
+	return _expr0.apply(_this0, _dataRefer0);
+	},
+	  fn7: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p1.lightObj(),
+	  _parent = p2.parent,
+	  multiData = p3.multiData,
+	  hasItem = 'item' in p4;
+	parent.data = hasItem ? p4.item : _parent.data;
+	parent.parent = p4.fallback ? _parent : _parent.parent;
+	parent.index = 'index' in p4 ? p4.index : _parent.index;
+	var data;
+	if(hasItem) data = p1.getNewData(p4.item, p2.data, multiData, p4.addData);
+	else data = p2.data;
+	var _p2 = p1.lightObj();
+	_p2.parent = parent;
+	_p2.data = data;
+	var _p3 = p1.lightObj();
+	if(p4.addData) multiData = true;
+	_p3.multiData = multiData;
+
+	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value0 = parent.index;
+
+	var _filter0 = p1.filters['iscurrentpage'];
+	if (!_filter0) {
+	  p1.warn('iscurrentpage', 'filter');
+	}
+	else {
+	  var _thisF0 = p1.lightObj();
+	  _thisF0.useString = p1.useString;
+	  _thisF0.data = parent.data;
+	  _thisF0.parent = parent.parent;
+	  _thisF0.index = parent.index;
+
+	  _value0 = _filter0.apply(_thisF0, [_value0]);
+	}
+	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter1 = p1.filters['clickbtn'];
+	if (!_filter1) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF1 = p1.lightObj();
+	  _thisF1.useString = p1.useString;
+	  _thisF1.data = parent.data;
+	  _thisF1.parent = parent.parent;
+	  _thisF1.index = parent.index;
+
+	  _value1 = _filter1.apply(_thisF1, [_value1, 'index']);
+	}
+	var _params0 = {
+	  'key': parent.index,
+	  'className': 'fj-pagn-pageno' + (_value0),
+	  'title': '第' + (parent.index) + '页',
+	  'onClick': _value1
+	};
+	var _compParam0 = [_type0, _params0];
+
+	_compParam0.push(parent.index);
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	},
+	  fn6: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+	var ret = [];
+
+	var _expr0 = p1.exprs['for'];
+	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
+
+	var _filter0 = p1.filters['add'];
+	if (!_filter0) {
+	  p1.warn('add', 'filter');
+	}
+	else {
+	  var _thisF0 = p1.lightObj();
+	  _thisF0.useString = p1.useString;
+
+	  _value0 = _filter0.apply(_thisF0, [_value0, '2']);
+	}
+	var _dataRefer0 = [
+	  '1',  _value0
+	];
+	p1.throwIf(_expr0, 'for', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.useString = p1.useString;
+	_this0.data = parent.data;
+	_this0.result = p1.exprRet(p1, p2, p3, p1.fn7, p5);
+	_this0.inverse = p1.noop;
+
+	ret.push(_expr0.apply(_this0, _dataRefer0));
+
+	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter1 = p1.filters['clickbtn'];
+	if (!_filter1) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF1 = p1.lightObj();
+	  _thisF1.useString = p1.useString;
+	  _thisF1.data = parent.data;
+	  _thisF1.parent = parent.parent;
+	  _thisF1.index = parent.index;
+
+	  _value1 = _filter1.apply(_thisF1, [_value1, 'next']);
+	}
+	var _params0 = {
+	  'key': 'ellipsis2',
+	  'onClick': _value1
+	};
+	var _compParam0 = [_type0, _params0];
+
+	_compParam0.push('...');
+
+	ret.push(p1.compPort.apply(p1.compLib, _compParam0));
+
+	var _type1 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value2 = (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'));
+
+	var _filter2 = p1.filters['iscurrentpage'];
+	if (!_filter2) {
+	  p1.warn('iscurrentpage', 'filter');
+	}
+	else {
+	  var _thisF2 = p1.lightObj();
+	  _thisF2.useString = p1.useString;
+	  _thisF2.data = parent.data;
+	  _thisF2.parent = parent.parent;
+	  _thisF2.index = parent.index;
+
+	  _value2 = _filter2.apply(_thisF2, [_value2]);
+	}
+	var _value3 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter3 = p1.filters['clickbtn'];
+	if (!_filter3) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF3 = p1.lightObj();
+	  _thisF3.useString = p1.useString;
+	  _thisF3.data = parent.data;
+	  _thisF3.parent = parent.parent;
+	  _thisF3.index = parent.index;
+
+	  _value3 = _filter3.apply(_thisF3, [_value3, 'last']);
+	}
+	var _params1 = {
+	  'key': (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')),
+	  'className': 'fj-pagn-pageno' + (_value2),
+	  'title': '第' + ((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))) + '页',
+	  'onClick': _value3
+	};
+	var _compParam1 = [_type1, _params1];
+
+	_compParam1.push((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')));
+
+	ret.push(p1.compPort.apply(p1.compLib, _compParam1));
+	return ret;
+	},
+	  fn10: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p1.lightObj(),
+	  _parent = p2.parent,
+	  multiData = p3.multiData,
+	  hasItem = 'item' in p4;
+	parent.data = hasItem ? p4.item : _parent.data;
+	parent.parent = p4.fallback ? _parent : _parent.parent;
+	parent.index = 'index' in p4 ? p4.index : _parent.index;
+	var data;
+	if(hasItem) data = p1.getNewData(p4.item, p2.data, multiData, p4.addData);
+	else data = p2.data;
+	var _p2 = p1.lightObj();
+	_p2.parent = parent;
+	_p2.data = data;
+	var _p3 = p1.lightObj();
+	if(p4.addData) multiData = true;
+	_p3.multiData = multiData;
+
+	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value0 = parent.index;
+
+	var _filter0 = p1.filters['iscurrentpage'];
+	if (!_filter0) {
+	  p1.warn('iscurrentpage', 'filter');
+	}
+	else {
+	  var _thisF0 = p1.lightObj();
+	  _thisF0.useString = p1.useString;
+	  _thisF0.data = parent.data;
+	  _thisF0.parent = parent.parent;
+	  _thisF0.index = parent.index;
+
+	  _value0 = _filter0.apply(_thisF0, [_value0]);
+	}
+	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter1 = p1.filters['clickbtn'];
+	if (!_filter1) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF1 = p1.lightObj();
+	  _thisF1.useString = p1.useString;
+	  _thisF1.data = parent.data;
+	  _thisF1.parent = parent.parent;
+	  _thisF1.index = parent.index;
+
+	  _value1 = _filter1.apply(_thisF1, [_value1, 'index']);
+	}
+	var _params0 = {
+	  'key': parent.index,
+	  'className': 'fj-pagn-pageno' + (_value0),
+	  'title': '第' + (parent.index) + '页',
+	  'onClick': _value1
+	};
+	var _compParam0 = [_type0, _params0];
+
+	_compParam0.push(parent.index);
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	},
+	  fn9: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+	var ret = [];
+
+	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value0 = '1';
+
+	var _filter0 = p1.filters['iscurrentpage'];
+	if (!_filter0) {
+	  p1.warn('iscurrentpage', 'filter');
+	}
+	else {
+	  var _thisF0 = p1.lightObj();
+	  _thisF0.useString = p1.useString;
+	  _thisF0.data = parent.data;
+	  _thisF0.parent = parent.parent;
+	  _thisF0.index = parent.index;
+
+	  _value0 = _filter0.apply(_thisF0, [_value0]);
+	}
+	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter1 = p1.filters['clickbtn'];
+	if (!_filter1) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF1 = p1.lightObj();
+	  _thisF1.useString = p1.useString;
+	  _thisF1.data = parent.data;
+	  _thisF1.parent = parent.parent;
+	  _thisF1.index = parent.index;
+
+	  _value1 = _filter1.apply(_thisF1, [_value1, 'first']);
+	}
+	var _params0 = {
+	  'key': '1',
+	  'className': 'fj-pagn-pageno' + (_value0),
+	  'title': '第1页',
+	  'onClick': _value1
+	};
+	var _compParam0 = [_type0, _params0];
+
+	_compParam0.push('1');
+
+	ret.push(p1.compPort.apply(p1.compLib, _compParam0));
+
+	var _type1 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value2 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter2 = p1.filters['clickbtn'];
+	if (!_filter2) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF2 = p1.lightObj();
+	  _thisF2.useString = p1.useString;
+	  _thisF2.data = parent.data;
+	  _thisF2.parent = parent.parent;
+	  _thisF2.index = parent.index;
+
+	  _value2 = _filter2.apply(_thisF2, [_value2, 'prev']);
+	}
+	var _params1 = {
+	  'key': 'ellipsis1',
+	  'onClick': _value2
+	};
+	var _compParam1 = [_type1, _params1];
+
+	_compParam1.push('...');
+
+	ret.push(p1.compPort.apply(p1.compLib, _compParam1));
+
+	var _expr0 = p1.exprs['for'];
+	var _value3 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
+
+	var _filter3 = p1.filters['add'];
+	if (!_filter3) {
+	  p1.warn('add', 'filter');
+	}
+	else {
+	  var _thisF3 = p1.lightObj();
+	  _thisF3.useString = p1.useString;
+
+	  _value3 = _filter3.apply(_thisF3, [_value3, '-2']);
+	}
+	var _value4 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
+
+	var _filter4 = p1.filters['add'];
+	if (!_filter4) {
+	  p1.warn('add', 'filter');
+	}
+	else {
+	  var _thisF4 = p1.lightObj();
+	  _thisF4.useString = p1.useString;
+
+	  _value4 = _filter4.apply(_thisF4, [_value4, '2']);
+	}
+	var _dataRefer0 = [
+	  _value3,  _value4
+	];
+	p1.throwIf(_expr0, 'for', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.useString = p1.useString;
+	_this0.data = parent.data;
+	_this0.result = p1.exprRet(p1, p2, p3, p1.fn10, p5);
+	_this0.inverse = p1.noop;
+
+	ret.push(_expr0.apply(_this0, _dataRefer0));
+
+	var _type2 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value5 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter5 = p1.filters['clickbtn'];
+	if (!_filter5) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF5 = p1.lightObj();
+	  _thisF5.useString = p1.useString;
+	  _thisF5.data = parent.data;
+	  _thisF5.parent = parent.parent;
+	  _thisF5.index = parent.index;
+
+	  _value5 = _filter5.apply(_thisF5, [_value5, 'next']);
+	}
+	var _params2 = {
+	  'key': 'ellipsis2',
+	  'onClick': _value5
+	};
+	var _compParam2 = [_type2, _params2];
+
+	_compParam2.push('...');
+
+	ret.push(p1.compPort.apply(p1.compLib, _compParam2));
+
+	var _type3 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value6 = (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'));
+
+	var _filter6 = p1.filters['iscurrentpage'];
+	if (!_filter6) {
+	  p1.warn('iscurrentpage', 'filter');
+	}
+	else {
+	  var _thisF6 = p1.lightObj();
+	  _thisF6.useString = p1.useString;
+	  _thisF6.data = parent.data;
+	  _thisF6.parent = parent.parent;
+	  _thisF6.index = parent.index;
+
+	  _value6 = _filter6.apply(_thisF6, [_value6]);
+	}
+	var _value7 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter7 = p1.filters['clickbtn'];
+	if (!_filter7) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF7 = p1.lightObj();
+	  _thisF7.useString = p1.useString;
+	  _thisF7.data = parent.data;
+	  _thisF7.parent = parent.parent;
+	  _thisF7.index = parent.index;
+
+	  _value7 = _filter7.apply(_thisF7, [_value7, 'last']);
+	}
+	var _params3 = {
+	  'key': (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')),
+	  'className': 'fj-pagn-pageno' + (_value6),
+	  'title': '第' + ((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))) + '页',
+	  'onClick': _value7
+	};
+	var _compParam3 = [_type3, _params3];
+
+	_compParam3.push((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')));
+
+	ret.push(p1.compPort.apply(p1.compLib, _compParam3));
+	return ret;
+	},
+	  fn13: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p1.lightObj(),
+	  _parent = p2.parent,
+	  multiData = p3.multiData,
+	  hasItem = 'item' in p4;
+	parent.data = hasItem ? p4.item : _parent.data;
+	parent.parent = p4.fallback ? _parent : _parent.parent;
+	parent.index = 'index' in p4 ? p4.index : _parent.index;
+	var data;
+	if(hasItem) data = p1.getNewData(p4.item, p2.data, multiData, p4.addData);
+	else data = p2.data;
+	var _p2 = p1.lightObj();
+	_p2.parent = parent;
+	_p2.data = data;
+	var _p3 = p1.lightObj();
+	if(p4.addData) multiData = true;
+	_p3.multiData = multiData;
+
+	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value0 = parent.index;
+
+	var _filter0 = p1.filters['iscurrentpage'];
+	if (!_filter0) {
+	  p1.warn('iscurrentpage', 'filter');
+	}
+	else {
+	  var _thisF0 = p1.lightObj();
+	  _thisF0.useString = p1.useString;
+	  _thisF0.data = parent.data;
+	  _thisF0.parent = parent.parent;
+	  _thisF0.index = parent.index;
+
+	  _value0 = _filter0.apply(_thisF0, [_value0]);
+	}
+	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter1 = p1.filters['clickbtn'];
+	if (!_filter1) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF1 = p1.lightObj();
+	  _thisF1.useString = p1.useString;
+	  _thisF1.data = parent.data;
+	  _thisF1.parent = parent.parent;
+	  _thisF1.index = parent.index;
+
+	  _value1 = _filter1.apply(_thisF1, [_value1, 'index']);
+	}
+	var _params0 = {
+	  'key': parent.index,
+	  'className': 'fj-pagn-pageno' + (_value0),
+	  'title': '第' + (parent.index) + '页',
+	  'onClick': _value1
+	};
+	var _compParam0 = [_type0, _params0];
+
+	_compParam0.push(parent.index);
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	},
+	  fn12: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+	var ret = [];
+
+	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value0 = '1';
+
+	var _filter0 = p1.filters['iscurrentpage'];
+	if (!_filter0) {
+	  p1.warn('iscurrentpage', 'filter');
+	}
+	else {
+	  var _thisF0 = p1.lightObj();
+	  _thisF0.useString = p1.useString;
+	  _thisF0.data = parent.data;
+	  _thisF0.parent = parent.parent;
+	  _thisF0.index = parent.index;
+
+	  _value0 = _filter0.apply(_thisF0, [_value0]);
+	}
+	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter1 = p1.filters['clickbtn'];
+	if (!_filter1) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF1 = p1.lightObj();
+	  _thisF1.useString = p1.useString;
+	  _thisF1.data = parent.data;
+	  _thisF1.parent = parent.parent;
+	  _thisF1.index = parent.index;
+
+	  _value1 = _filter1.apply(_thisF1, [_value1, 'first']);
+	}
+	var _params0 = {
+	  'key': '1',
+	  'className': 'fj-pagn-pageno' + (_value0),
+	  'title': '第1页',
+	  'onClick': _value1
+	};
+	var _compParam0 = [_type0, _params0];
+
+	_compParam0.push('1');
+
+	ret.push(p1.compPort.apply(p1.compLib, _compParam0));
+
+	var _type1 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value2 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter2 = p1.filters['clickbtn'];
+	if (!_filter2) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF2 = p1.lightObj();
+	  _thisF2.useString = p1.useString;
+	  _thisF2.data = parent.data;
+	  _thisF2.parent = parent.parent;
+	  _thisF2.index = parent.index;
+
+	  _value2 = _filter2.apply(_thisF2, [_value2, 'prev']);
+	}
+	var _params1 = {
+	  'key': 'ellipsis1',
+	  'onClick': _value2
+	};
+	var _compParam1 = [_type1, _params1];
+
+	_compParam1.push('...');
+
+	ret.push(p1.compPort.apply(p1.compLib, _compParam1));
+
+	var _expr0 = p1.exprs['for'];
+	var _value3 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
+
+	var _filter3 = p1.filters['add'];
+	if (!_filter3) {
+	  p1.warn('add', 'filter');
+	}
+	else {
+	  var _thisF3 = p1.lightObj();
+	  _thisF3.useString = p1.useString;
+
+	  _value3 = _filter3.apply(_thisF3, [_value3, '-2']);
+	}
+	var _dataRefer0 = [
+	  _value3,  (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))
+	];
+	p1.throwIf(_expr0, 'for', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.useString = p1.useString;
+	_this0.data = parent.data;
+	_this0.result = p1.exprRet(p1, p2, p3, p1.fn13, p5);
+	_this0.inverse = p1.noop;
+
+	ret.push(_expr0.apply(_this0, _dataRefer0));
+	return ret;
+	},
+	  fn11: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	var _expr0 = p1.exprs['if'];
+	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
+
+	var _filter0 = p1.filters['showpartpage'];
+	if (!_filter0) {
+	  p1.warn('showpartpage', 'filter');
+	}
+	else {
+	  var _thisF0 = p1.lightObj();
+	  _thisF0.useString = p1.useString;
+	  _thisF0.data = parent.data;
+	  _thisF0.parent = parent.parent;
+	  _thisF0.index = parent.index;
+
+	  _value0 = _filter0.apply(_thisF0, [_value0, '3']);
+	}
+	var _dataRefer0 = [
+	  _value0
+	];
+	p1.throwIf(_expr0, 'if', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.useString = p1.useString;
+	_this0.result = p1.exprRet(p1, p2, p3, p1.fn12, p5);
+	_this0.inverse = p1.noop;
+
+	return _expr0.apply(_this0, _dataRefer0);
+	},
+	  fn8: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	var _expr0 = p1.exprs['if'];
+	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
+
+	var _filter0 = p1.filters['showpartpage'];
+	if (!_filter0) {
+	  p1.warn('showpartpage', 'filter');
+	}
+	else {
+	  var _thisF0 = p1.lightObj();
+	  _thisF0.useString = p1.useString;
+	  _thisF0.data = parent.data;
+	  _thisF0.parent = parent.parent;
+	  _thisF0.index = parent.index;
+
+	  _value0 = _filter0.apply(_thisF0, [_value0, '2']);
+	}
+	var _dataRefer0 = [
+	  _value0
+	];
+	p1.throwIf(_expr0, 'if', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.useString = p1.useString;
+	_this0.result = p1.exprRet(p1, p2, p3, p1.fn9, p5);
+	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn11, p5);
+
+	return _expr0.apply(_this0, _dataRefer0);
+	},
+	  fn5: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	var _expr0 = p1.exprs['if'];
+	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
+
+	var _filter0 = p1.filters['showpartpage'];
+	if (!_filter0) {
+	  p1.warn('showpartpage', 'filter');
+	}
+	else {
+	  var _thisF0 = p1.lightObj();
+	  _thisF0.useString = p1.useString;
+	  _thisF0.data = parent.data;
+	  _thisF0.parent = parent.parent;
+	  _thisF0.index = parent.index;
+
+	  _value0 = _filter0.apply(_thisF0, [_value0, '1']);
+	}
+	var _dataRefer0 = [
+	  _value0
+	];
+	p1.throwIf(_expr0, 'if', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.useString = p1.useString;
+	_this0.result = p1.exprRet(p1, p2, p3, p1.fn6, p5);
+	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn8, p5);
+
+	return _expr0.apply(_this0, _dataRefer0);
+	},
+	  fn2: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	var _expr0 = p1.exprs['if'];
+	var _value0 = (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'));
+
+	var _filter0 = p1.filters['lt'];
+	if (!_filter0) {
+	  p1.warn('lt', 'filter');
+	}
+	else {
+	  var _thisF0 = p1.lightObj();
+	  _thisF0.useString = p1.useString;
+
+	  _value0 = _filter0.apply(_thisF0, [_value0, '10']);
+	}
+	var _dataRefer0 = [
+	  _value0
+	];
+	p1.throwIf(_expr0, 'if', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.useString = p1.useString;
+	_this0.result = p1.exprRet(p1, p2, p3, p1.fn3, p5);
+	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn5, p5);
+
+	return _expr0.apply(_this0, _dataRefer0);
+	},
+	  fn14: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _params0 = {
+	  'className': 'fj-pagn-pageno-c',
+	  'title': '第' + ((!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'))) + '页'
+	};
+	var _compParam0 = [_type0, _params0];
+
+	_compParam0.push((!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex')));
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	},
+	  fn15: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _params0 = {
+	  'className': 'fj-pagn-info'
+	};
+	var _compParam0 = [_type0, _params0];
+
+	var _type1 = p1.compClass['fj-pagecount'] ? p1.compClass['fj-pagecount'] : 'fj-pagecount';
+	var _params1 = {
+	  'prefix': (!multiData ? data['pageCountPrefix'] : p1.getDatasValue(data, 'pageCountPrefix')),
+	  'suffix': (!multiData ? data['pageCountSuffix'] : p1.getDatasValue(data, 'pageCountSuffix')),
+	  'pageCount': (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))
+	};
+	var _compParam1 = [_type1, _params1];
+
+	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	},
+	  fn16: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _params0 = {
+	  'className': 'fj-pagn-info'
+	};
+	var _compParam0 = [_type0, _params0];
+
+	var _type1 = p1.compClass['fj-pagedatacount'] ? p1.compClass['fj-pagedatacount'] : 'fj-pagedatacount';
+	var _params1 = {
+	  'prefix': (!multiData ? data['countPrefix'] : p1.getDatasValue(data, 'countPrefix')),
+	  'suffix': (!multiData ? data['countSuffix'] : p1.getDatasValue(data, 'countSuffix')),
+	  'count': (!multiData ? data['count'] : p1.getDatasValue(data, 'count'))
+	};
+	var _compParam1 = [_type1, _params1];
+
+	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	},
+	  fn17: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _params0 = {
+	  'className': 'fj-pagn-info'
+	};
+	var _compParam0 = [_type0, _params0];
+
+	var _type1 = p1.compClass['fj-pagesize'] ? p1.compClass['fj-pagesize'] : 'fj-pagesize';
+	var _params1 = {
+	  'prefix': (!multiData ? data['sizePrefix'] : p1.getDatasValue(data, 'sizePrefix')),
+	  'suffix': (!multiData ? data['sizeSuffix'] : p1.getDatasValue(data, 'sizeSuffix')),
+	  'pageSize': (!multiData ? data['pageSize'] : p1.getDatasValue(data, 'pageSize')),
+	  'pageSizes': (!multiData ? data['pageSizes'] : p1.getDatasValue(data, 'pageSizes')),
+	  'setPageSize': (!multiData ? data['setPageSize'] : p1.getDatasValue(data, 'setPageSize')),
+	  'onChange': (!multiData ? data['pageSizeChange'] : p1.getDatasValue(data, 'pageSizeChange'))
+	};
+	var _compParam1 = [_type1, _params1];
+
+	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	},
+	  fn18: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _params0 = {
+	  'className': 'fj-pagn-txt'
+	};
+	var _compParam0 = [_type0, _params0];
+
+	_compParam0.push('到');
+
+	var _type1 = p1.compClass['input'] ? p1.compClass['input'] : 'input';
+	var _params1 = {
+	  'type': 'text',
+	  'ref': 'pageTxt',
+	  'defaultValue': (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex')),
+	  'className': 'fj-form-elem fj-pagn-pageindex',
+	  'autoComplete': 'off',
+	  'onBlur': (!multiData ? data['pageIndexBlur'] : p1.getDatasValue(data, 'pageIndexBlur'))
+	};
+	var _compParam1 = [_type1, _params1];
+
+	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+
+	_compParam0.push('页\n');
+
+	var _type2 = p1.compClass['button'] ? p1.compClass['button'] : 'button';
+	var _params2 = {
+	  'className': 'fj-btn fj-pagn-btn-go',
+	  'type': 'button',
+	  'onClick': (!multiData ? data['goPage'] : p1.getDatasValue(data, 'goPage'))
+	};
+	var _compParam2 = [_type2, _params2];
+
+	_compParam2.push((!multiData ? data['btnGoName'] : p1.getDatasValue(data, 'btnGoName')));
+
+	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam2));
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	},
+	  fn19: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value0 = 'fj-pagn-btn-refresh';
+
+	var _filter0 = p1.filters['fixiconsize'];
+	if (!_filter0) {
+	  p1.warn('fixiconsize', 'filter');
+	}
+	else {
+	  var _thisF0 = p1.lightObj();
+	  _thisF0.useString = p1.useString;
+	  _thisF0.data = parent.data;
+	  _thisF0.parent = parent.parent;
+	  _thisF0.index = parent.index;
+
+	  _value0 = _filter0.apply(_thisF0, [_value0]);
+	}
+	var _params0 = {
+	  'className': _value0
+	};
+	var _compParam0 = [_type0, _params0];
+
+	var _type1 = p1.compClass['i'] ? p1.compClass['i'] : 'i';
+	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter1 = p1.filters['clickbtn'];
+	if (!_filter1) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF1 = p1.lightObj();
+	  _thisF1.useString = p1.useString;
+	  _thisF1.data = parent.data;
+	  _thisF1.parent = parent.parent;
+	  _thisF1.index = parent.index;
+
+	  _value1 = _filter1.apply(_thisF1, [_value1]);
+	}
+	var _params1 = {
+	  'className': 'fa fa-refresh',
+	  'title': '刷新',
+	  'onClick': _value1
+	};
+	var _compParam1 = [_type1, _params1];
+
+	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	},
+	  fn1: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	var _type0 = p1.compClass['div'] ? p1.compClass['div'] : 'div';
+	var _params0 = {
+	  'className': (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes')),
+	  'style': p1.styleProps((!multiData ? data['style'] : p1.getDatasValue(data, 'style'))),
+	  'ref': (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'))
+	};
+	var _compParam0 = [_type0, _params0];
+
+	var _type1 = p1.compClass['ul'] ? p1.compClass['ul'] : 'ul';
+	var _params1 = {
+	  'className': 'fj-pagn-body'
+	};
+	var _compParam1 = [_type1, _params1];
+
+	var _type2 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value0 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter0 = p1.filters['clickbtn'];
+	if (!_filter0) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF0 = p1.lightObj();
+	  _thisF0.useString = p1.useString;
+	  _thisF0.data = parent.data;
+	  _thisF0.parent = parent.parent;
+	  _thisF0.index = parent.index;
+
+	  _value0 = _filter0.apply(_thisF0, [_value0, 'first']);
+	}
+	var _params2 = {
+	  'key': 'first',
+	  'className': 'fj-pagn-btn' + ((!multiData ? data['firstDisabled'] : p1.getDatasValue(data, 'firstDisabled'))),
+	  'title': '首页',
+	  'onClick': _value0
+	};
+	var _compParam2 = [_type2, _params2];
+
+	_compParam2.push('首页');
+
+	_compParam1.push(p1.compPort.apply(p1.compLib, _compParam2));
+
+	var _type3 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter1 = p1.filters['clickbtn'];
+	if (!_filter1) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF1 = p1.lightObj();
+	  _thisF1.useString = p1.useString;
+	  _thisF1.data = parent.data;
+	  _thisF1.parent = parent.parent;
+	  _thisF1.index = parent.index;
+
+	  _value1 = _filter1.apply(_thisF1, [_value1, 'prev']);
+	}
+	var _params3 = {
+	  'key': 'prev',
+	  'className': 'fj-pagn-btn' + ((!multiData ? data['prevDisabled'] : p1.getDatasValue(data, 'prevDisabled'))),
+	  'title': '上一页',
+	  'onClick': _value1
+	};
+	var _compParam3 = [_type3, _params3];
+
+	var _type4 = p1.compClass['i'] ? p1.compClass['i'] : 'i';
+	var _params4 = {
+	  'className': 'fa fa-chevron-left'
+	};
+	var _compParam4 = [_type4, _params4];
+
+	_compParam3.push(p1.compPort.apply(p1.compLib, _compParam4));
+
+	_compParam1.push(p1.compPort.apply(p1.compLib, _compParam3));
+
+	var _type5 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _compParam5 = [_type5, null];
+
+	var _type6 = p1.compClass['ul'] ? p1.compClass['ul'] : 'ul';
+	var _params5 = {
+	  'className': 'fj-pagn-pages'
+	};
+	var _compParam6 = [_type6, _params5];
+
+	var _expr0 = p1.exprs['if'];
+	var _dataRefer0 = [
+	  (!multiData ? data['hasPages'] : p1.getDatasValue(data, 'hasPages'))
+	];
+	p1.throwIf(_expr0, 'if', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.useString = p1.useString;
+	_this0.result = p1.exprRet(p1, p2, p3, p1.fn2, p5);
+	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn14, p5);
+
+	_compParam6.push(_expr0.apply(_this0, _dataRefer0));
+
+	_compParam5.push(p1.compPort.apply(p1.compLib, _compParam6));
+
+	_compParam1.push(p1.compPort.apply(p1.compLib, _compParam5));
+
+	var _type7 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value2 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter2 = p1.filters['clickbtn'];
+	if (!_filter2) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF2 = p1.lightObj();
+	  _thisF2.useString = p1.useString;
+	  _thisF2.data = parent.data;
+	  _thisF2.parent = parent.parent;
+	  _thisF2.index = parent.index;
+
+	  _value2 = _filter2.apply(_thisF2, [_value2, 'next']);
+	}
+	var _params6 = {
+	  'key': 'next',
+	  'className': 'fj-pagn-btn' + ((!multiData ? data['nextDisabled'] : p1.getDatasValue(data, 'nextDisabled'))),
+	  'title': '下一页',
+	  'onClick': _value2
+	};
+	var _compParam7 = [_type7, _params6];
+
+	var _type8 = p1.compClass['i'] ? p1.compClass['i'] : 'i';
+	var _params7 = {
+	  'className': 'fa fa-chevron-right'
+	};
+	var _compParam8 = [_type8, _params7];
+
+	_compParam7.push(p1.compPort.apply(p1.compLib, _compParam8));
+
+	_compParam1.push(p1.compPort.apply(p1.compLib, _compParam7));
+
+	var _type9 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _value3 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+
+	var _filter3 = p1.filters['clickbtn'];
+	if (!_filter3) {
+	  p1.warn('clickbtn', 'filter');
+	}
+	else {
+	  var _thisF3 = p1.lightObj();
+	  _thisF3.useString = p1.useString;
+	  _thisF3.data = parent.data;
+	  _thisF3.parent = parent.parent;
+	  _thisF3.index = parent.index;
+
+	  _value3 = _filter3.apply(_thisF3, [_value3, 'last']);
+	}
+	var _params8 = {
+	  'key': 'last',
+	  'className': 'fj-pagn-btn' + ((!multiData ? data['lastDisabled'] : p1.getDatasValue(data, 'lastDisabled'))),
+	  'title': '末页',
+	  'onClick': _value3
+	};
+	var _compParam9 = [_type9, _params8];
+
+	_compParam9.push('末页');
+
+	_compParam1.push(p1.compPort.apply(p1.compLib, _compParam9));
+
+	var _expr1 = p1.exprs['if'];
+	var _dataRefer1 = [
+	  (!multiData ? data['showPageCount'] : p1.getDatasValue(data, 'showPageCount'))
+	];
+	p1.throwIf(_expr1, 'if', 'expr');
+
+	var _this1 = p1.lightObj();
+	_this1.useString = p1.useString;
+	_this1.result = p1.exprRet(p1, p2, p3, p1.fn15, p5);
+	_this1.inverse = p1.noop;
+
+	_compParam1.push(_expr1.apply(_this1, _dataRefer1));
+
+	var _expr2 = p1.exprs['if'];
+	var _dataRefer2 = [
+	  (!multiData ? data['showCount'] : p1.getDatasValue(data, 'showCount'))
+	];
+	p1.throwIf(_expr2, 'if', 'expr');
+
+	var _this2 = p1.lightObj();
+	_this2.useString = p1.useString;
+	_this2.result = p1.exprRet(p1, p2, p3, p1.fn16, p5);
+	_this2.inverse = p1.noop;
+
+	_compParam1.push(_expr2.apply(_this2, _dataRefer2));
+
+	var _expr3 = p1.exprs['if'];
+	var _dataRefer3 = [
+	  (!multiData ? data['showPageSize'] : p1.getDatasValue(data, 'showPageSize'))
+	];
+	p1.throwIf(_expr3, 'if', 'expr');
+
+	var _this3 = p1.lightObj();
+	_this3.useString = p1.useString;
+	_this3.result = p1.exprRet(p1, p2, p3, p1.fn17, p5);
+	_this3.inverse = p1.noop;
+
+	_compParam1.push(_expr3.apply(_this3, _dataRefer3));
+
+	var _expr4 = p1.exprs['if'];
+	var _dataRefer4 = [
+	  (!multiData ? data['hasBtnGo'] : p1.getDatasValue(data, 'hasBtnGo'))
+	];
+	p1.throwIf(_expr4, 'if', 'expr');
+
+	var _this4 = p1.lightObj();
+	_this4.useString = p1.useString;
+	_this4.result = p1.exprRet(p1, p2, p3, p1.fn18, p5);
+	_this4.inverse = p1.noop;
+
+	_compParam1.push(_expr4.apply(_this4, _dataRefer4));
+
+	var _expr5 = p1.exprs['if'];
+	var _dataRefer5 = [
+	  (!multiData ? data['showRefresh'] : p1.getDatasValue(data, 'showRefresh'))
+	];
+	p1.throwIf(_expr5, 'if', 'expr');
+
+	var _this5 = p1.lightObj();
+	_this5.useString = p1.useString;
+	_this5.result = p1.exprRet(p1, p2, p3, p1.fn19, p5);
+	_this5.inverse = p1.noop;
+
+	_compParam1.push(_expr5.apply(_this5, _dataRefer5));
+
+	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	},
+	  fn20: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	var _expr0 = p1.exprs['emptyelem'];
+	p1.throwIf(_expr0, 'emptyelem', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.useString = p1.useString;
+	_this0.data = parent.data;
+	_this0.parent = parent.parent;
+	_this0.index = parent.index;
+	_this0.paramsExpr = p5;
+	_this0.result = p1.noop;
+	_this0.inverse = p1.noop;
+
+	return _expr0.apply(_this0);
+	},
+	  main: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+	if(!parent) {
+	  parent = p1.lightObj();
+	  if (data) {
+	    parent.data = multiData ? data[0] : data;
+	  }
+	  p2.parent = parent;
+	};
+
+	var _expr0 = p1.exprs['if'];
+	var _value0 = (!multiData ? data['count'] : p1.getDatasValue(data, 'count'));
+
+	var _filter0 = p1.filters['gt'];
+	if (!_filter0) {
+	  p1.warn('gt', 'filter');
+	}
+	else {
+	  var _thisF0 = p1.lightObj();
+	  _thisF0.useString = p1.useString;
+
+	  _value0 = _filter0.apply(_thisF0, [_value0, '1']);
+	}
+	var _dataRefer0 = [
+	  _value0
+	];
+	p1.throwIf(_expr0, 'if', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.useString = p1.useString;
+	_this0.result = p1.exprRet(p1, p2, p3, p1.fn1, p5);
+	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn20, p5);
+
+	return _expr0.apply(_this0, _dataRefer0);
+	}
+	},
+	  pageCount: {
+	  useString: false,
+	  main: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+	if(!parent) {
+	  parent = p1.lightObj();
+	  if (data) {
+	    parent.data = multiData ? data[0] : data;
+	  }
+	  p2.parent = parent;
+	};
+
+	var _type0 = p1.compClass['div'] ? p1.compClass['div'] : 'div';
+	var _params0 = null;
+	var _paramsE0 = {};
+
+	var _expr0 = p1.exprs['spreadparam'];
+	var _dataRefer0 = [
+	  (!multiData ? data['props'] : p1.getDatasValue(data, 'props'))
+	];
+	p1.throwIf(_expr0, 'spreadparam', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.paramsExpr = _paramsE0;
+
+	_expr0.apply(_this0, _dataRefer0);
+
+	_params0 = _paramsE0;
+	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
+	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	var _compParam0 = [_type0, _params0];
+
+	_compParam0.push('\n    ' + ((!multiData ? data['prefix'] : p1.getDatasValue(data, 'prefix'))));
+
+	var _type1 = p1.compClass['span'] ? p1.compClass['span'] : 'span';
+	var _compParam1 = [_type1, null];
+
+	_compParam1.push((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')));
+
+	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+
+	_compParam0.push(((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix'))) + '\n');
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	}
+	},
+	  pageDataCount: {
+	  useString: false,
+	  main: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+	if(!parent) {
+	  parent = p1.lightObj();
+	  if (data) {
+	    parent.data = multiData ? data[0] : data;
+	  }
+	  p2.parent = parent;
+	};
+
+	var _type0 = p1.compClass['div'] ? p1.compClass['div'] : 'div';
+	var _params0 = null;
+	var _paramsE0 = {};
+
+	var _expr0 = p1.exprs['spreadparam'];
+	var _dataRefer0 = [
+	  (!multiData ? data['props'] : p1.getDatasValue(data, 'props'))
+	];
+	p1.throwIf(_expr0, 'spreadparam', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.paramsExpr = _paramsE0;
+
+	_expr0.apply(_this0, _dataRefer0);
+
+	_params0 = _paramsE0;
+	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
+	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	var _compParam0 = [_type0, _params0];
+
+	_compParam0.push('\n    ' + ((!multiData ? data['prefix'] : p1.getDatasValue(data, 'prefix'))));
+
+	var _type1 = p1.compClass['span'] ? p1.compClass['span'] : 'span';
+	var _compParam1 = [_type1, null];
+
+	_compParam1.push((!multiData ? data['count'] : p1.getDatasValue(data, 'count')));
+
+	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+
+	_compParam0.push(((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix'))) + '\n');
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	}
+	},
+	  pageSize: {
+	  useString: false,
+	  fn2: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p1.lightObj(),
+	  _parent = p2.parent,
+	  multiData = p3.multiData,
+	  hasItem = 'item' in p4;
+	parent.data = hasItem ? p4.item : _parent.data;
+	parent.parent = p4.fallback ? _parent : _parent.parent;
+	parent.index = 'index' in p4 ? p4.index : _parent.index;
+	var data;
+	if(hasItem) data = p1.getNewData(p4.item, p2.data, multiData, p4.addData);
+	else data = p2.data;
+	var _p2 = p1.lightObj();
+	_p2.parent = parent;
+	_p2.data = data;
+	var _p3 = p1.lightObj();
+	if(p4.addData) multiData = true;
+	_p3.multiData = multiData;
+
+	var _type0 = p1.compClass['option'] ? p1.compClass['option'] : 'option';
+	var _params0 = {
+	  'key': parent.index,
+	  'value': parent.data
+	};
+	var _compParam0 = [_type0, _params0];
+
+	_compParam0.push(parent.data);
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	},
+	  fn1: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	var _type0 = p1.compClass['select'] ? p1.compClass['select'] : 'select';
+	var _params0 = {
+	  'className': 'fj-form-elem fj-pagn-pagesize',
+	  'value': (!multiData ? data['pageSize'] : p1.getDatasValue(data, 'pageSize')),
+	  'onChange': (!multiData ? data['pageSizeChange'] : p1.getDatasValue(data, 'pageSizeChange'))
+	};
+	var _compParam0 = [_type0, _params0];
+
+	var _expr0 = p1.exprs['each'];
+	var _dataRefer0 = [
+	  (!multiData ? data['pageSizes'] : p1.getDatasValue(data, 'pageSizes'))
+	];
+	p1.throwIf(_expr0, 'each', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.useString = p1.useString;
+	_this0.result = p1.exprRet(p1, p2, p3, p1.fn2, p5);
+	_this0.inverse = p1.noop;
+
+	_compParam0.push(_expr0.apply(_this0, _dataRefer0));
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	},
+	  fn3: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+
+	return (!multiData ? data['pageSize'] : p1.getDatasValue(data, 'pageSize'));
+	},
+	  main: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+	if(!parent) {
+	  parent = p1.lightObj();
+	  if (data) {
+	    parent.data = multiData ? data[0] : data;
+	  }
+	  p2.parent = parent;
+	};
+
+	var _type0 = p1.compClass['div'] ? p1.compClass['div'] : 'div';
+	var _params0 = null;
+	var _paramsE0 = {};
+
+	var _expr0 = p1.exprs['spreadparam'];
+	var _dataRefer0 = [
+	  (!multiData ? data['props'] : p1.getDatasValue(data, 'props'))
+	];
+	p1.throwIf(_expr0, 'spreadparam', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.paramsExpr = _paramsE0;
+
+	_expr0.apply(_this0, _dataRefer0);
+
+	_params0 = _paramsE0;
+	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
+	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	var _compParam0 = [_type0, _params0];
+
+	_compParam0.push((!multiData ? data['prefix'] : p1.getDatasValue(data, 'prefix')));
+
+	var _expr1 = p1.exprs['if'];
+	var _dataRefer1 = [
+	  (!multiData ? data['setPageSize'] : p1.getDatasValue(data, 'setPageSize'))
+	];
+	p1.throwIf(_expr1, 'if', 'expr');
+
+	var _this1 = p1.lightObj();
+	_this1.useString = p1.useString;
+	_this1.result = p1.exprRet(p1, p2, p3, p1.fn1, p5);
+	_this1.inverse = p1.exprRet(p1, p2, p3, p1.fn3, p5);
+
+	_compParam0.push(_expr1.apply(_this1, _dataRefer1));
+
+	_compParam0.push((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix')));
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	}
+	}
+	};
+
+/***/ },
 /* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -2331,69 +3737,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _paginationTmplNj = __webpack_require__(29);
-
-	var _paginationTmplNj2 = babelHelpers.interopRequireDefault(_paginationTmplNj);
-
-	exports.default = _paginationTmplNj2.default;
-
-/***/ },
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<#for {\'1\' pageIndex:add(2)}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>\n<li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=\u7B2C{pageCount}\u9875 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n'], ['\n<#for {\'1\' pageIndex:add(2)}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>\n<li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=\u7B2C{pageCount}\u9875 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n']),
-	    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<li key=1 class="fj-pagn-pageno{\'1\':isCurrentPage}" title=\u7B2C1\u9875 onClick={refresh:clickBtn(first)}>1</li>\n<li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageIndex:add(2)}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>\n<li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=\u7B2C{pageCount}\u9875 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n'], ['\n<li key=1 class="fj-pagn-pageno{\'1\':isCurrentPage}" title=\u7B2C1\u9875 onClick={refresh:clickBtn(first)}>1</li>\n<li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageIndex:add(2)}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n<li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>\n<li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=\u7B2C{pageCount}\u9875 onClick={refresh:clickBtn(last)}>{pageCount}</li>\n']),
-	    _templateObject3 = babelHelpers.taggedTemplateLiteral(['\n<li key=1 class="fj-pagn-pageno{\'1\':isCurrentPage}" title=\u7B2C1\u9875 onClick={refresh:clickBtn(first)}>1</li>\n<li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n'], ['\n<li key=1 class="fj-pagn-pageno{\'1\':isCurrentPage}" title=\u7B2C1\u9875 onClick={refresh:clickBtn(first)}>1</li>\n<li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>\n<#for {pageIndex:add(-2) pageCount}>\n  <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n</#for>\n']),
-	    _templateObject4 = babelHelpers.taggedTemplateLiteral(['\n<li key=first class=fj-pagn-btn{firstDisabled} title=\u9996\u9875 onClick={refresh:clickBtn(first)}>\n  \u9996\u9875\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=\u4E0A\u4E00\u9875 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=\u7B2C{pageIndex}\u9875>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=\u4E0B\u4E00\u9875 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=\u672B\u9875 onClick={refresh:clickBtn(last)}>\n  \u672B\u9875\n</li>\n'], ['\n<li key=first class=fj-pagn-btn{firstDisabled} title=\u9996\u9875 onClick={refresh:clickBtn(first)}>\n  \u9996\u9875\n</li>\n<li key=prev class=fj-pagn-btn{prevDisabled} title=\u4E0A\u4E00\u9875 onClick={refresh:clickBtn(prev)}>\n  <i class="fa fa-chevron-left"></i>\n</li>\n<li>\n  <ul class=fj-pagn-pages>\n    <#if {hasPages}>\n      <#if {pageCount:lt(10)}>\n        <#for {\'1\' pageCount}>\n          <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=\u7B2C{#}\u9875 onClick={refresh:clickBtn(index)}>{#}</li>\n        </#for>\n      <#else />\n        <#if {pageIndex:showPartPage(1)}>\n          ', '\n        <#else />\n          <#if {pageIndex:showPartPage(2)}>\n            ', '\n          <#else />\n            <#if {pageIndex:showPartPage(3)}>\n              ', '\n            </#if>\n          </#if>\n        </#if>\n      </#if>\n    <#else />\n      <li class=fj-pagn-pageno-c title=\u7B2C{pageIndex}\u9875>{pageIndex}</li>\n    </#if>\n  </ul>\n</li>\n<li key=next class=fj-pagn-btn{nextDisabled} title=\u4E0B\u4E00\u9875 onClick={refresh:clickBtn(next)}>\n  <i class="fa fa-chevron-right"></i>\n</li>\n<li key=last class=fj-pagn-btn{lastDisabled} title=\u672B\u9875 onClick={refresh:clickBtn(last)}>\n  \u672B\u9875\n</li>\n']),
-	    _templateObject5 = babelHelpers.taggedTemplateLiteral(['\n<#if {count:gt(1)}>\n  <div class={classes} {style} ref={wrap}>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          <fj-PageCount prefix={pageCountPrefix} suffix={pageCountSuffix} {pageCount} />\n        </li>\n      </#if>\n      <#if {showCount}>\n        <li class=fj-pagn-info>\n          <fj-PageDataCount prefix={countPrefix} suffix={countSuffix} {count} />\n        </li>\n      </#if>\n      <#if {showPageSize}>\n        <li class=fj-pagn-info>\n          <fj-PageSize prefix={sizePrefix} suffix={sizeSuffix} {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />\n        </li>\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          \u5230\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />\u9875\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=\u5237\u65B0 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#emptyElem />\n</#if>\n'], ['\n<#if {count:gt(1)}>\n  <div class={classes} {style} ref={wrap}>\n    <ul class=fj-pagn-body>\n      ', '\n      <#if {showPageCount}>\n        <li class=fj-pagn-info>\n          <fj-PageCount prefix={pageCountPrefix} suffix={pageCountSuffix} {pageCount} />\n        </li>\n      </#if>\n      <#if {showCount}>\n        <li class=fj-pagn-info>\n          <fj-PageDataCount prefix={countPrefix} suffix={countSuffix} {count} />\n        </li>\n      </#if>\n      <#if {showPageSize}>\n        <li class=fj-pagn-info>\n          <fj-PageSize prefix={sizePrefix} suffix={sizeSuffix} {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />\n        </li>\n      </#if>\n      <#if {hasBtnGo}>\n        <li class=fj-pagn-txt>\n          \u5230\n          <input type=text\n                 ref=pageTxt\n                 defaultValue={pageIndex}\n                 class="fj-form-elem fj-pagn-pageindex"\n                 autoComplete=off\n                 onBlur={pageIndexBlur}\n          />\u9875\n          <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>\n            {btnGoName}\n          </button>\n        </li>\n      </#if>\n      <#if {showRefresh}>\n        <li class="{\'fj-pagn-btn-refresh\':fixIconSize}">\n          <i class="fa fa-refresh" title=\u5237\u65B0 onClick={refresh:clickBtn}></i>\n        </li>\n      </#if>\n    </ul>\n  </div>\n<#else />\n  <#emptyElem />\n</#if>\n']),
-	    _templateObject6 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} ref={wrap}>\n  {prefix}<span>{pageCount}</span>{suffix}\n</div>\n'], ['\n<div {...props} class={classes} ref={wrap}>\n  {prefix}<span>{pageCount}</span>{suffix}\n</div>\n']),
-	    _templateObject7 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} ref={wrap}>\n  {prefix}<span>{count}</span>{suffix}\n</div>\n'], ['\n<div {...props} class={classes} ref={wrap}>\n  {prefix}<span>{count}</span>{suffix}\n</div>\n']),
-	    _templateObject8 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} ref={wrap}>\n  {prefix}\n  <#if {setPageSize}>\n    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>\n      <#each {pageSizes}>\n        <option key={#} value={.}>{.}</option>\n      </#each>\n    </select>\n  <#else />\n    {pageSize}\n  </#if>\n  {suffix}\n</div>\n'], ['\n<div {...props} class={classes} ref={wrap}>\n  {prefix}\n  <#if {setPageSize}>\n    <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>\n      <#each {pageSizes}>\n        <option key={#} value={.}>{.}</option>\n      </#each>\n    </select>\n  <#else />\n    {pageSize}\n  </#if>\n  {suffix}\n</div>\n']);
-
-	var _nornj = __webpack_require__(2);
-
-	var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
-
-	var partPage1 = (0, _nornj2.default)(_templateObject);
-
-	var partPage2 = (0, _nornj2.default)(_templateObject2);
-
-	var partPage3 = (0, _nornj2.default)(_templateObject3);
-
-	var pageBtns = (0, _nornj2.default)(_templateObject4, partPage1, partPage2, partPage3);
-
-	var pagination = (0, _nornj2.default)(_templateObject5, pageBtns);
-
-	var pageCount = (0, _nornj2.default)(_templateObject6);
-
-	var pageDataCount = (0, _nornj2.default)(_templateObject7);
-
-	var pageSize = (0, _nornj2.default)(_templateObject8);
-
-	exports.default = {
-	  pagination: pagination,
-	  pageCount: pageCount,
-	  pageDataCount: pageDataCount,
-	  pageSize: pageSize
-	};
-
-/***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _gridLayout = __webpack_require__(31);
+	var _gridLayout = __webpack_require__(29);
 
 	Object.keys(_gridLayout).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -2406,7 +3750,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 31 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2422,17 +3766,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _nornj = __webpack_require__(2);
 
-	__webpack_require__(26);
+	__webpack_require__(25);
 
 	var _classnames = __webpack_require__(17);
 
 	var _classnames2 = babelHelpers.interopRequireDefault(_classnames);
 
-	var _gridLayout = __webpack_require__(32);
+	var _gridLayoutT = __webpack_require__(30);
 
-	var _gridLayout2 = babelHelpers.interopRequireDefault(_gridLayout);
+	var _gridLayoutT2 = babelHelpers.interopRequireDefault(_gridLayoutT);
 
-	var templateRow = (0, _nornj.compileComponent)(_gridLayout2.default.row);
+	var templateRow = (0, _nornj.compileComponent)(_gridLayoutT2.default.row);
 
 	/**
 	 * Grid row
@@ -2448,13 +3792,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Row.prototype.render = function render() {
 	    var _this2 = this;
 
-	    var _props = this.props,
-	        className = _props.className,
-	        style = _props.style,
-	        left = _props.left,
-	        right = _props.right,
-	        children = _props.children,
-	        others = babelHelpers.objectWithoutProperties(_props, ['className', 'style', 'left', 'right', 'children']);
+	    var _props = this.props;
+	    var className = _props.className;
+	    var style = _props.style;
+	    var left = _props.left;
+	    var right = _props.right;
+	    var children = _props.children;
+	    var others = babelHelpers.objectWithoutProperties(_props, ['className', 'style', 'left', 'right', 'children']);
 
 
 	    var classes = (0, _classnames2.default)(babelHelpers.defineProperty({
@@ -2492,12 +3836,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var _classNames2,
 	        _this3 = this;
 
-	    var _props2 = this.props,
-	        className = _props2.className,
-	        style = _props2.style,
-	        width = _props2.width,
-	        children = _props2.children,
-	        others = babelHelpers.objectWithoutProperties(_props2, ['className', 'style', 'width', 'children']);
+	    var _props2 = this.props;
+	    var className = _props2.className;
+	    var style = _props2.style;
+	    var width = _props2.width;
+	    var children = _props2.children;
+	    var others = babelHelpers.objectWithoutProperties(_props2, ['className', 'style', 'width', 'children']);
 
 
 	    var classes = (0, _classnames2.default)((_classNames2 = {}, babelHelpers.defineProperty(_classNames2, compClass, true), babelHelpers.defineProperty(_classNames2, className, className), _classNames2));
@@ -2565,7 +3909,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var Col = (_dec4 = (0, _nornj.registerTmpl)({
 	  name: 'fj-Col',
-	  template: _gridLayout2.default.col
+	  template: _gridLayoutT2.default.col
 	}), _dec4(_class4 = function (_Component4) {
 	  babelHelpers.inherits(Col, _Component4);
 
@@ -2578,26 +3922,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var _classNames3,
 	        _this7 = this;
 
-	    var _props3 = this.props,
-	        className = _props3.className,
-	        l = _props3.l,
-	        m = _props3.m,
-	        s = _props3.s,
-	        ms = _props3.ms,
-	        right = _props3.right,
-	        left = _props3.left,
-	        shift = _props3.shift,
-	        rightM = _props3.rightM,
-	        leftM = _props3.leftM,
-	        shiftM = _props3.shiftM,
-	        rightS = _props3.rightS,
-	        leftS = _props3.leftS,
-	        shiftS = _props3.shiftS,
-	        rightMs = _props3.rightMs,
-	        leftMs = _props3.leftMs,
-	        shiftMs = _props3.shiftMs,
-	        children = _props3.children,
-	        others = babelHelpers.objectWithoutProperties(_props3, ['className', 'l', 'm', 's', 'ms', 'right', 'left', 'shift', 'rightM', 'leftM', 'shiftM', 'rightS', 'leftS', 'shiftS', 'rightMs', 'leftMs', 'shiftMs', 'children']);
+	    var _props3 = this.props;
+	    var className = _props3.className;
+	    var l = _props3.l;
+	    var m = _props3.m;
+	    var s = _props3.s;
+	    var ms = _props3.ms;
+	    var right = _props3.right;
+	    var left = _props3.left;
+	    var shift = _props3.shift;
+	    var rightM = _props3.rightM;
+	    var leftM = _props3.leftM;
+	    var shiftM = _props3.shiftM;
+	    var rightS = _props3.rightS;
+	    var leftS = _props3.leftS;
+	    var shiftS = _props3.shiftS;
+	    var rightMs = _props3.rightMs;
+	    var leftMs = _props3.leftMs;
+	    var shiftMs = _props3.shiftMs;
+	    var children = _props3.children;
+	    var others = babelHelpers.objectWithoutProperties(_props3, ['className', 'l', 'm', 's', 'ms', 'right', 'left', 'shift', 'rightM', 'leftM', 'shiftM', 'rightS', 'leftS', 'shiftS', 'rightMs', 'leftMs', 'shiftMs', 'children']);
 
 
 	    var classes = (0, _classnames2.default)((_classNames3 = {}, babelHelpers.defineProperty(_classNames3, 'fj-col' + l, l != null), babelHelpers.defineProperty(_classNames3, 'fj-col-m' + m, m != null), babelHelpers.defineProperty(_classNames3, 'fj-col-s' + s, s != null), babelHelpers.defineProperty(_classNames3, 'fj-col-ms' + ms, ms != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right' + right, right != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left' + left, left != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift' + shift, shift != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-m' + rightM, rightM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-m' + leftM, leftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-m' + shiftM, shiftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-s' + rightS, rightS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-s' + leftS, leftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-s' + shiftS, shiftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-ms' + rightMs, rightMs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-ms' + leftMs, leftMs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-ms' + shiftMs, shiftMs != null), babelHelpers.defineProperty(_classNames3, className, className), _classNames3));
@@ -2621,7 +3965,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var ClearFix = (_dec5 = (0, _nornj.registerTmpl)({
 	  name: 'fj-ClearFix',
-	  template: _gridLayout2.default.clearFix
+	  template: _gridLayoutT2.default.clearFix
 	}), _dec5(_class5 = function (_Component5) {
 	  babelHelpers.inherits(ClearFix, _Component5);
 
@@ -2634,13 +3978,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var _classNames4,
 	        _this9 = this;
 
-	    var _props4 = this.props,
-	        className = _props4.className,
-	        l = _props4.l,
-	        m = _props4.m,
-	        s = _props4.s,
-	        ms = _props4.ms,
-	        others = babelHelpers.objectWithoutProperties(_props4, ['className', 'l', 'm', 's', 'ms']);
+	    var _props4 = this.props;
+	    var className = _props4.className;
+	    var l = _props4.l;
+	    var m = _props4.m;
+	    var s = _props4.s;
+	    var ms = _props4.ms;
+	    var others = babelHelpers.objectWithoutProperties(_props4, ['className', 'l', 'm', 's', 'ms']);
 
 
 	    var classes = (0, _classnames2.default)((_classNames4 = {}, babelHelpers.defineProperty(_classNames4, 'fj-clearfix', l != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-m', m != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-s', s != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-ms', ms != null), babelHelpers.defineProperty(_classNames4, className, className), _classNames4));
@@ -2663,53 +4007,135 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.ClearFix = ClearFix;
 
 /***/ },
-/* 32 */
-/***/ function(module, exports, __webpack_require__) {
+/* 30 */
+/***/ function(module, exports) {
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
+	module.exports = {
+	  row: {
+	  useString: false,
+	  main: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+	if(!parent) {
+	  parent = p1.lightObj();
+	  if (data) {
+	    parent.data = multiData ? data[0] : data;
+	  }
+	  p2.parent = parent;
+	};
 
-	var _gridLayoutTmplNj = __webpack_require__(33);
+	var _type0 = p1.compClass['div'] ? p1.compClass['div'] : 'div';
+	var _params0 = null;
+	var _paramsE0 = {};
 
-	var _gridLayoutTmplNj2 = babelHelpers.interopRequireDefault(_gridLayoutTmplNj);
+	var _expr0 = p1.exprs['spreadparam'];
+	var _dataRefer0 = [
+	  (!multiData ? data['props'] : p1.getDatasValue(data, 'props'))
+	];
+	p1.throwIf(_expr0, 'spreadparam', 'expr');
 
-	exports.default = _gridLayoutTmplNj2.default;
+	var _this0 = p1.lightObj();
+	_this0.paramsExpr = _paramsE0;
 
-/***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
+	_expr0.apply(_this0, _dataRefer0);
 
-	'use strict';
+	_params0 = _paramsE0;
+	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
+	_params0['style'] = p1.styleProps((!multiData ? data['styles'] : p1.getDatasValue(data, 'styles')));
+	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	var _compParam0 = [_type0, _params0];
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
+	_compParam0.push((!multiData ? data['children'] : p1.getDatasValue(data, 'children')));
 
-	var _templateObject = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} style={styles} ref={wrap}>\n  {children}\n</div>\n'], ['\n<div {...props} class={classes} style={styles} ref={wrap}>\n  {children}\n</div>\n']),
-	    _templateObject2 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} ref={wrap}>\n  {children}\n</div>\n'], ['\n<div {...props} class={classes} ref={wrap}>\n  {children}\n</div>\n']),
-	    _templateObject3 = babelHelpers.taggedTemplateLiteral(['\n<div {...props} class={classes} ref={wrap}/>\n'], ['\n<div {...props} class={classes} ref={wrap}/>\n']);
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	}
+	},
+	  col: {
+	  useString: false,
+	  main: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+	if(!parent) {
+	  parent = p1.lightObj();
+	  if (data) {
+	    parent.data = multiData ? data[0] : data;
+	  }
+	  p2.parent = parent;
+	};
 
-	var _nornj = __webpack_require__(2);
+	var _type0 = p1.compClass['div'] ? p1.compClass['div'] : 'div';
+	var _params0 = null;
+	var _paramsE0 = {};
 
-	var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
+	var _expr0 = p1.exprs['spreadparam'];
+	var _dataRefer0 = [
+	  (!multiData ? data['props'] : p1.getDatasValue(data, 'props'))
+	];
+	p1.throwIf(_expr0, 'spreadparam', 'expr');
 
-	var row = (0, _nornj2.default)(_templateObject);
+	var _this0 = p1.lightObj();
+	_this0.paramsExpr = _paramsE0;
 
-	var col = (0, _nornj2.default)(_templateObject2);
+	_expr0.apply(_this0, _dataRefer0);
 
-	var clearFix = (0, _nornj2.default)(_templateObject3);
+	_params0 = _paramsE0;
+	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
+	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	var _compParam0 = [_type0, _params0];
 
-	exports.default = {
-	  row: row,
-	  col: col,
-	  clearFix: clearFix
+	_compParam0.push((!multiData ? data['children'] : p1.getDatasValue(data, 'children')));
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	}
+	},
+	  clearFix: {
+	  useString: false,
+	  main: function anonymous(p1,p2,p3,p4,p5
+	/**/) {
+	var parent = p2.parent,
+	  data = p2.data,
+	  multiData = p3.multiData;
+	if(!parent) {
+	  parent = p1.lightObj();
+	  if (data) {
+	    parent.data = multiData ? data[0] : data;
+	  }
+	  p2.parent = parent;
+	};
+
+	var _type0 = p1.compClass['div'] ? p1.compClass['div'] : 'div';
+	var _params0 = null;
+	var _paramsE0 = {};
+
+	var _expr0 = p1.exprs['spreadparam'];
+	var _dataRefer0 = [
+	  (!multiData ? data['props'] : p1.getDatasValue(data, 'props'))
+	];
+	p1.throwIf(_expr0, 'spreadparam', 'expr');
+
+	var _this0 = p1.lightObj();
+	_this0.paramsExpr = _paramsE0;
+
+	_expr0.apply(_this0, _dataRefer0);
+
+	_params0 = _paramsE0;
+	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
+	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	var _compParam0 = [_type0, _params0];
+
+	return p1.compPort.apply(p1.compLib, _compParam0);
+	}
+	}
 	};
 
 /***/ },
-/* 34 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2718,7 +4144,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _gesture = __webpack_require__(35);
+	var _gesture = __webpack_require__(32);
 
 	Object.keys(_gesture).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -2731,7 +4157,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 35 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

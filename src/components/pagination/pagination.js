@@ -3,7 +3,7 @@ import { registerTmpl, registerFilter } from 'nornj';
 import classNames from 'classnames';
 import Widget from '../widget';
 import * as utils from '../../utils';
-import tmpl from './pagination.tmpl';
+import tmpl from './pagination.t.html';
 
 /**
  * 计算总页数

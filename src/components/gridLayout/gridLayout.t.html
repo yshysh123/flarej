@@ -1,0 +1,15 @@
+<template name="row">
+  <div {...props} class={classes} style={styles} ref={wrap}>
+    {children}
+  </div>
+</template>
+
+<template name="col">
+  <div {...props} class={classes} ref={wrap}>
+    {children}
+  </div>
+</template>
+
+<template name="clearFix">
+  <div {...props} class={classes} ref={wrap}/>
+</template>

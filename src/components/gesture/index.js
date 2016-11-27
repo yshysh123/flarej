@@ -1,1 +1,1 @@
-﻿export * from './gesture.comp';
+﻿export * from './gesture';

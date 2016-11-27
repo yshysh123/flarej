@@ -1,0 +1,134 @@
+﻿<template name="partPage1" local>
+  <#for { '1' pageIndex:add(2)}>
+    <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>
+  </#for>
+  <li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>
+  <li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>
+</template>
+
+<template name="partPage2" local>
+  <li key=1 class="fj-pagn-pageno{'1':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>
+  <li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>
+  <#for {pageIndex:add(-2) pageIndex:add(2)}>
+    <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>
+  </#for>
+  <li key=ellipsis2 onClick={refresh:clickBtn(next)}>...</li>
+  <li key={pageCount} class=fj-pagn-pageno{pageCount:isCurrentPage} title=第{pageCount}页 onClick={refresh:clickBtn(last)}>{pageCount}</li>
+</template>
+
+<template name="partPage3" local>
+  <li key=1 class="fj-pagn-pageno{'1':isCurrentPage}" title=第1页 onClick={refresh:clickBtn(first)}>1</li>
+  <li key=ellipsis1 onClick={refresh:clickBtn(prev)}>...</li>
+  <#for {pageIndex:add(-2) pageCount}>
+    <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>
+  </#for>
+</template>
+
+<template name="pageBtns" local>
+  <li key=first class=fj-pagn-btn{firstDisabled} title=首页 onClick={refresh:clickBtn(first)}>
+    首页
+  </li>
+  <li key=prev class=fj-pagn-btn{prevDisabled} title=上一页 onClick={refresh:clickBtn(prev)}>
+    <i class="fa fa-chevron-left"></i>
+  </li>
+  <li>
+    <ul class=fj-pagn-pages>
+      <#if {hasPages}>
+        <#if {pageCount:lt(10)}>
+          <#for { '1' pageCount}>
+            <li key={#} class=fj-pagn-pageno{#:isCurrentPage} title=第{#}页 onClick={refresh:clickBtn(index)}>{#}</li>
+          </#for>
+          <#else />
+          <#if {pageIndex:showPartPage(1)}>
+            <#include name="partPage1" />
+            <#else />
+            <#if {pageIndex:showPartPage(2)}>
+              <#include name="partPage2" />
+              <#else />
+              <#if {pageIndex:showPartPage(3)}>
+                <#include name="partPage3" />
+              </#if>
+            </#if>
+          </#if>
+        </#if>
+        <#else />
+        <li class=fj-pagn-pageno-c title=第{pageIndex}页>{pageIndex}</li>
+      </#if>
+    </ul>
+  </li>
+  <li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick={refresh:clickBtn(next)}>
+    <i class="fa fa-chevron-right"></i>
+  </li>
+  <li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick={refresh:clickBtn(last)}>
+    末页
+  </li>
+</template>
+
+<template name="pagination">
+  <#if {count:gt(1)}>
+    <div class={classes} {style} ref={wrap}>
+      <ul class=fj-pagn-body>
+        <#include name="pageBtns" />
+        <#if {showPageCount}>
+          <li class=fj-pagn-info>
+            <fj-PageCount prefix={pageCountPrefix} suffix={pageCountSuffix} {pageCount} />
+          </li>
+        </#if>
+        <#if {showCount}>
+          <li class=fj-pagn-info>
+            <fj-PageDataCount prefix={countPrefix} suffix={countSuffix} {count} />
+          </li>
+        </#if>
+        <#if {showPageSize}>
+          <li class=fj-pagn-info>
+            <fj-PageSize prefix={sizePrefix} suffix={sizeSuffix} {pageSize} {pageSizes} {setPageSize} onChange={pageSizeChange} />
+          </li>
+        </#if>
+        <#if {hasBtnGo}>
+          <li class=fj-pagn-txt>
+            到
+            <input type=text ref=pageTxt defaultValue={pageIndex} class="fj-form-elem fj-pagn-pageindex" autoComplete=off onBlur={pageIndexBlur}
+            />页
+            <button class="fj-btn fj-pagn-btn-go" type=button onClick={goPage}>
+            {btnGoName}
+          </button>
+          </li>
+        </#if>
+        <#if {showRefresh}>
+          <li class="{'fj-pagn-btn-refresh':fixIconSize}">
+            <i class="fa fa-refresh" title=刷新 onClick={refresh:clickBtn}></i>
+          </li>
+        </#if>
+      </ul>
+    </div>
+    <#else />
+    <#emptyElem />
+  </#if>
+</template>
+
+<template name="pageCount">
+  <div {...props} class={classes} ref={wrap}>
+    {prefix}<span>{pageCount}</span>{suffix}
+  </div>
+</template>
+
+<template name="pageDataCount">
+  <div {...props} class={classes} ref={wrap}>
+    {prefix}<span>{count}</span>{suffix}
+  </div>
+</template>
+
+<template name="pageSize">
+  <div {...props} class={classes} ref={wrap}>
+    {prefix}
+    <#if {setPageSize}>
+      <select class="fj-form-elem fj-pagn-pagesize" value={pageSize} onChange={pageSizeChange}>
+      <#each {pageSizes}>
+        <option key={#} value={.}>{.}</option>
+      </#each>
+      </select>
+      <#else /> {pageSize}
+    </#if>
+    {suffix}
+  </div>
+</template>

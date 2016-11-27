@@ -1,1 +1,1 @@
-﻿export default from './pagination.comp';
+﻿export default from './pagination';

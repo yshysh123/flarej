@@ -2,7 +2,7 @@
 import { registerTmpl, compileComponent } from 'nornj';
 import '../../njConfig';
 import classNames from 'classnames';
-import tmpl from './gridLayout.tmpl';
+import tmpl from './gridLayout.t.html';
 const templateRow = compileComponent(tmpl.row);
 
 /**
