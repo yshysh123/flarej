@@ -125,7 +125,7 @@ gulp.task('build-js', () => {
               plugins: ['external-helpers']
             }
           },
-          { test: /\.html$/, loader: 'nornj', exclude: /node_modules/,
+          { test: /\.t.html$/, loader: 'nornj',
             query: {
               outputComponent: true
             }
