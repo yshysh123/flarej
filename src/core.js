@@ -8,6 +8,6 @@
 };
 
 //Set globel configs
-fj.setConfig = (config) => Object.assign(fj, config);
+fj.config = (config) => Object.assign(fj, config);
 
 export default fj;

@@ -111,7 +111,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	//Set globel configs
-	fj.setConfig = function (config) {
+	fj.config = function (config) {
 	  return babelHelpers.extends(fj, config);
 	};
 
