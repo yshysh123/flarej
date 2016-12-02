@@ -2332,22 +2332,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  useString: false,
 	  fn4: function anonymous(p1,p2,p3,p4,p5
 	/**/) {
-	var parent = p1.lightObj(),
-	  _parent = p2.parent,
-	  multiData = p3.multiData,
-	  hasItem = 'item' in p4;
-	parent.data = hasItem ? p4.item : _parent.data;
-	parent.parent = p4.fallback ? _parent : _parent.parent;
-	parent.index = 'index' in p4 ? p4.index : _parent.index;
-	var data;
-	if(hasItem) data = p1.getNewData(p4.item, p2.data, multiData, p4.addData);
-	else data = p2.data;
-	var _p2 = p1.lightObj();
-	_p2.parent = parent;
-	_p2.data = data;
-	var _p3 = p1.lightObj();
-	if(p4.addData) multiData = true;
-	_p3.multiData = multiData;
+	var _newVars = p1.newContextVars(p1, p2, p3, p4),
+	  parent = _newVars._1,
+	  data = _newVars._2,
+	  multiData = _newVars._3,
+	  _p2 = _newVars._4,
+	  _p3 = _newVars._5;
 
 	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
 	var _value0 = parent.index;
@@ -2414,22 +2404,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	},
 	  fn7: function anonymous(p1,p2,p3,p4,p5
 	/**/) {
-	var parent = p1.lightObj(),
-	  _parent = p2.parent,
-	  multiData = p3.multiData,
-	  hasItem = 'item' in p4;
-	parent.data = hasItem ? p4.item : _parent.data;
-	parent.parent = p4.fallback ? _parent : _parent.parent;
-	parent.index = 'index' in p4 ? p4.index : _parent.index;
-	var data;
-	if(hasItem) data = p1.getNewData(p4.item, p2.data, multiData, p4.addData);
-	else data = p2.data;
-	var _p2 = p1.lightObj();
-	_p2.parent = parent;
-	_p2.data = data;
-	var _p3 = p1.lightObj();
-	if(p4.addData) multiData = true;
-	_p3.multiData = multiData;
+	var _newVars = p1.newContextVars(p1, p2, p3, p4),
+	  parent = _newVars._1,
+	  data = _newVars._2,
+	  multiData = _newVars._3,
+	  _p2 = _newVars._4,
+	  _p3 = _newVars._5;
 
 	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
 	var _value0 = parent.index;
@@ -2579,22 +2559,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	},
 	  fn10: function anonymous(p1,p2,p3,p4,p5
 	/**/) {
-	var parent = p1.lightObj(),
-	  _parent = p2.parent,
-	  multiData = p3.multiData,
-	  hasItem = 'item' in p4;
-	parent.data = hasItem ? p4.item : _parent.data;
-	parent.parent = p4.fallback ? _parent : _parent.parent;
-	parent.index = 'index' in p4 ? p4.index : _parent.index;
-	var data;
-	if(hasItem) data = p1.getNewData(p4.item, p2.data, multiData, p4.addData);
-	else data = p2.data;
-	var _p2 = p1.lightObj();
-	_p2.parent = parent;
-	_p2.data = data;
-	var _p3 = p1.lightObj();
-	if(p4.addData) multiData = true;
-	_p3.multiData = multiData;
+	var _newVars = p1.newContextVars(p1, p2, p3, p4),
+	  parent = _newVars._1,
+	  data = _newVars._2,
+	  multiData = _newVars._3,
+	  _p2 = _newVars._4,
+	  _p3 = _newVars._5;
 
 	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
 	var _value0 = parent.index;
@@ -2825,22 +2795,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	},
 	  fn13: function anonymous(p1,p2,p3,p4,p5
 	/**/) {
-	var parent = p1.lightObj(),
-	  _parent = p2.parent,
-	  multiData = p3.multiData,
-	  hasItem = 'item' in p4;
-	parent.data = hasItem ? p4.item : _parent.data;
-	parent.parent = p4.fallback ? _parent : _parent.parent;
-	parent.index = 'index' in p4 ? p4.index : _parent.index;
-	var data;
-	if(hasItem) data = p1.getNewData(p4.item, p2.data, multiData, p4.addData);
-	else data = p2.data;
-	var _p2 = p1.lightObj();
-	_p2.parent = parent;
-	_p2.data = data;
-	var _p3 = p1.lightObj();
-	if(p4.addData) multiData = true;
-	_p3.multiData = multiData;
+	var _newVars = p1.newContextVars(p1, p2, p3, p4),
+	  parent = _newVars._1,
+	  data = _newVars._2,
+	  multiData = _newVars._3,
+	  _p2 = _newVars._4,
+	  _p3 = _newVars._5;
 
 	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
 	var _value0 = parent.index;
@@ -3575,10 +3535,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  data = p2.data,
 	  multiData = p3.multiData;
 	if(!parent) {
-	  parent = p1.lightObj();
-	  if (data) {
-	    parent.data = multiData ? data[0] : data;
-	  }
+	  if (data) parent = { data: multiData ? data[0] : data };
+	  else parent = {};
 	  p2.parent = parent;
 	};
 
@@ -3616,10 +3574,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  data = p2.data,
 	  multiData = p3.multiData;
 	if(!parent) {
-	  parent = p1.lightObj();
-	  if (data) {
-	    parent.data = multiData ? data[0] : data;
-	  }
+	  if (data) parent = { data: multiData ? data[0] : data };
+	  else parent = {};
 	  p2.parent = parent;
 	};
 
@@ -3665,10 +3621,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  data = p2.data,
 	  multiData = p3.multiData;
 	if(!parent) {
-	  parent = p1.lightObj();
-	  if (data) {
-	    parent.data = multiData ? data[0] : data;
-	  }
+	  if (data) parent = { data: multiData ? data[0] : data };
+	  else parent = {};
 	  p2.parent = parent;
 	};
 
@@ -3710,22 +3664,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  useString: false,
 	  fn2: function anonymous(p1,p2,p3,p4,p5
 	/**/) {
-	var parent = p1.lightObj(),
-	  _parent = p2.parent,
-	  multiData = p3.multiData,
-	  hasItem = 'item' in p4;
-	parent.data = hasItem ? p4.item : _parent.data;
-	parent.parent = p4.fallback ? _parent : _parent.parent;
-	parent.index = 'index' in p4 ? p4.index : _parent.index;
-	var data;
-	if(hasItem) data = p1.getNewData(p4.item, p2.data, multiData, p4.addData);
-	else data = p2.data;
-	var _p2 = p1.lightObj();
-	_p2.parent = parent;
-	_p2.data = data;
-	var _p3 = p1.lightObj();
-	if(p4.addData) multiData = true;
-	_p3.multiData = multiData;
+	var _newVars = p1.newContextVars(p1, p2, p3, p4),
+	  parent = _newVars._1,
+	  data = _newVars._2,
+	  multiData = _newVars._3,
+	  _p2 = _newVars._4,
+	  _p3 = _newVars._5;
 
 	var _type0 = p1.compClass['option'] ? p1.compClass['option'] : 'option';
 	var _params0 = {
@@ -3781,10 +3725,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  data = p2.data,
 	  multiData = p3.multiData;
 	if(!parent) {
-	  parent = p1.lightObj();
-	  if (data) {
-	    parent.data = multiData ? data[0] : data;
-	  }
+	  if (data) parent = { data: multiData ? data[0] : data };
+	  else parent = {};
 	  p2.parent = parent;
 	};
 
@@ -4124,10 +4066,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  data = p2.data,
 	  multiData = p3.multiData;
 	if(!parent) {
-	  parent = p1.lightObj();
-	  if (data) {
-	    parent.data = multiData ? data[0] : data;
-	  }
+	  if (data) parent = { data: multiData ? data[0] : data };
+	  else parent = {};
 	  p2.parent = parent;
 	};
 
@@ -4165,10 +4105,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  data = p2.data,
 	  multiData = p3.multiData;
 	if(!parent) {
-	  parent = p1.lightObj();
-	  if (data) {
-	    parent.data = multiData ? data[0] : data;
-	  }
+	  if (data) parent = { data: multiData ? data[0] : data };
+	  else parent = {};
 	  p2.parent = parent;
 	};
 
@@ -4205,10 +4143,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  data = p2.data,
 	  multiData = p3.multiData;
 	if(!parent) {
-	  parent = p1.lightObj();
-	  if (data) {
-	    parent.data = multiData ? data[0] : data;
-	  }
+	  if (data) parent = { data: multiData ? data[0] : data };
+	  else parent = {};
 	  p2.parent = parent;
 	};
 
