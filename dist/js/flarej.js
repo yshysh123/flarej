@@ -1,14 +1,14 @@
 (function(e){var r=e.babelHelpers={};r.typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(e){return typeof e}:function(e){return e&&typeof Symbol==="function"&&e.constructor===Symbol?"symbol":typeof e};r.jsx=function(){var e=typeof Symbol==="function"&&Symbol.for&&Symbol.for("react.element")||60103;return function r(t,n,o,i){var f=t&&t.defaultProps;var u=arguments.length-3;if(!n&&u!==0){n={}}if(n&&f){for(var a in f){if(n[a]===void 0){n[a]=f[a]}}}else if(!n){n=f||{}}if(u===1){n.children=i}else if(u>1){var l=Array(u);for(var c=0;c<u;c++){l[c]=arguments[c+3]}n.children=l}return{$$typeof:e,type:t,key:o===undefined?null:""+o,ref:null,props:n,_owner:null}}}();r.asyncToGenerator=function(e){return function(){var r=e.apply(this,arguments);return new Promise(function(e,t){function n(o,i){try{var f=r[o](i);var u=f.value}catch(e){t(e);return}if(f.done){e(u)}else{Promise.resolve(u).then(function(e){n("next",e)},function(e){n("throw",e)})}}n("next")})}};r.classCallCheck=function(e,r){if(!(e instanceof r)){throw new TypeError("Cannot call a class as a function")}};r.createClass=function(){function e(e,r){for(var t=0;t<r.length;t++){var n=r[t];n.enumerable=n.enumerable||false;n.configurable=true;if("value"in n)n.writable=true;Object.defineProperty(e,n.key,n)}}return function(r,t,n){if(t)e(r.prototype,t);if(n)e(r,n);return r}}();r.defineEnumerableProperties=function(e,r){for(var t in r){var n=r[t];n.configurable=n.enumerable=true;if("value"in n)n.writable=true;Object.defineProperty(e,t,n)}return e};r.defaults=function(e,r){var t=Object.getOwnPropertyNames(r);for(var n=0;n<t.length;n++){var o=t[n];var i=Object.getOwnPropertyDescriptor(r,o);if(i&&i.configurable&&e[o]===undefined){Object.defineProperty(e,o,i)}}return e};r.defineProperty=function(e,r,t){if(r in e){Object.defineProperty(e,r,{value:t,enumerable:true,configurable:true,writable:true})}else{e[r]=t}return e};r.extends=Object.assign||function(e){for(var r=1;r<arguments.length;r++){var t=arguments[r];for(var n in t){if(Object.prototype.hasOwnProperty.call(t,n)){e[n]=t[n]}}}return e};r.get=function e(r,t,n){if(r===null)r=Function.prototype;var o=Object.getOwnPropertyDescriptor(r,t);if(o===undefined){var i=Object.getPrototypeOf(r);if(i===null){return undefined}else{return e(i,t,n)}}else if("value"in o){return o.value}else{var f=o.get;if(f===undefined){return undefined}return f.call(n)}};r.inherits=function(e,r){if(typeof r!=="function"&&r!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof r)}e.prototype=Object.create(r&&r.prototype,{constructor:{value:e,enumerable:false,writable:true,configurable:true}});if(r)Object.setPrototypeOf?Object.setPrototypeOf(e,r):e.__proto__=r};r.instanceof=function(e,r){if(r!=null&&typeof Symbol!=="undefined"&&r[Symbol.hasInstance]){return r[Symbol.hasInstance](e)}else{return e instanceof r}};r.interopRequireDefault=function(e){return e&&e.__esModule?e:{default:e}};r.interopRequireWildcard=function(e){if(e&&e.__esModule){return e}else{var r={};if(e!=null){for(var t in e){if(Object.prototype.hasOwnProperty.call(e,t))r[t]=e[t]}}r.default=e;return r}};r.newArrowCheck=function(e,r){if(e!==r){throw new TypeError("Cannot instantiate an arrow function")}};r.objectDestructuringEmpty=function(e){if(e==null)throw new TypeError("Cannot destructure undefined")};r.objectWithoutProperties=function(e,r){var t={};for(var n in e){if(r.indexOf(n)>=0)continue;if(!Object.prototype.hasOwnProperty.call(e,n))continue;t[n]=e[n]}return t};r.possibleConstructorReturn=function(e,r){if(!e){throw new ReferenceError("this hasn't been initialised - super() hasn't been called")}return r&&(typeof r==="object"||typeof r==="function")?r:e};r.selfGlobal=typeof e==="undefined"?self:e;r.set=function e(r,t,n,o){var i=Object.getOwnPropertyDescriptor(r,t);if(i===undefined){var f=Object.getPrototypeOf(r);if(f!==null){e(f,t,n,o)}}else if("value"in i&&i.writable){i.value=n}else{var u=i.set;if(u!==undefined){u.call(o,n)}}return n};r.slicedToArray=function(){function e(e,r){var t=[];var n=true;var o=false;var i=undefined;try{for(var f=e[Symbol.iterator](),u;!(n=(u=f.next()).done);n=true){t.push(u.value);if(r&&t.length===r)break}}catch(e){o=true;i=e}finally{try{if(!n&&f["return"])f["return"]()}finally{if(o)throw i}}return t}return function(r,t){if(Array.isArray(r)){return r}else if(Symbol.iterator in Object(r)){return e(r,t)}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}}}();r.slicedToArrayLoose=function(e,r){if(Array.isArray(e)){return e}else if(Symbol.iterator in Object(e)){var t=[];for(var n=e[Symbol.iterator](),o;!(o=n.next()).done;){t.push(o.value);if(r&&t.length===r)break}return t}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}};r.taggedTemplateLiteral=function(e,r){return Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(r)}}))};r.taggedTemplateLiteralLoose=function(e,r){e.raw=r;return e};r.temporalRef=function(e,r,t){if(e===t){throw new ReferenceError(r+" is not defined - temporal dead zone")}else{return e}};r.temporalUndefined={};r.toArray=function(e){return Array.isArray(e)?e:Array.from(e)};r.toConsumableArray=function(e){if(Array.isArray(e)){for(var r=0,t=Array(e.length);r<e.length;r++)t[r]=e[r];return t}else{return Array.from(e)}}})(typeof global==="undefined"?self:global);
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("nornj"), require("react"));
+		module.exports = factory(require("nornj"), require("react"), require("nornj-react"));
 	else if(typeof define === 'function' && define.amd)
-		define(["nornj", "react"], factory);
+		define(["nornj", "react", "nornj-react"], factory);
 	else if(typeof exports === 'object')
-		exports["FlareJ"] = factory(require("nornj"), require("react"));
+		exports["FlareJ"] = factory(require("nornj"), require("react"), require("nornj-react"));
 	else
-		root["FlareJ"] = factory(root["nj"], root["React"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_16__) {
+		root["FlareJ"] = factory(root["nj"], root["React"], root["njr"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_17__, __WEBPACK_EXTERNAL_MODULE_18__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -65,11 +65,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
 
-	var _utils = __webpack_require__(3);
+	var _config = __webpack_require__(3);
+
+	var _config2 = babelHelpers.interopRequireDefault(_config);
+
+	var _utils = __webpack_require__(4);
 
 	var utils = babelHelpers.interopRequireWildcard(_utils);
 
-	var _pagination = __webpack_require__(14);
+	var _pagination = __webpack_require__(15);
 
 	var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
@@ -79,6 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _gesture2 = babelHelpers.interopRequireDefault(_gesture);
 
+	_core2.default.config = _config2.default;
 	babelHelpers.extends(_core2.default, utils, {
 	  Pagination: _pagination2.default,
 	  Row: _gridLayout.Row,
@@ -90,6 +95,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 	var global = typeof self !== 'undefined' ? self : undefined;
+
 	module.exports = global.FlareJ = global.fj = _core2.default;
 
 /***/ },
@@ -110,11 +116,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  GB2312Pinyin: {}
 	};
 
-	//Set globel configs
-	fj.config = function (config) {
-	  return babelHelpers.extends(fj, config);
-	};
-
 	exports.default = fj;
 
 /***/ },
@@ -133,7 +134,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _utils = __webpack_require__(4);
+	exports.default = function (configs) {
+	  babelHelpers.extends(_core2.default, config);
+	};
+
+	var _core = __webpack_require__(1);
+
+	var _core2 = babelHelpers.interopRequireDefault(_core);
+
+	;
+
+	//Set globel configs
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _utils = __webpack_require__(5);
 
 	Object.keys(_utils).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -146,7 +169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -156,7 +179,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.Date = exports.Math = exports.Sort = exports.RegExp = undefined;
 
-	var _common = __webpack_require__(5);
+	var _common = __webpack_require__(6);
 
 	Object.keys(_common).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -168,7 +191,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 
-	var _page = __webpack_require__(6);
+	var _page = __webpack_require__(7);
 
 	Object.keys(_page).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -180,7 +203,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 
-	var _browsers = __webpack_require__(7);
+	var _browsers = __webpack_require__(8);
 
 	Object.keys(_browsers).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -192,7 +215,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 
-	var _delayOperate = __webpack_require__(8);
+	var _delayOperate = __webpack_require__(9);
 
 	Object.keys(_delayOperate).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -204,7 +227,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 
-	var _domEvent = __webpack_require__(9);
+	var _domEvent = __webpack_require__(10);
 
 	Object.keys(_domEvent).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -216,19 +239,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 
-	var _regexp = __webpack_require__(10);
+	var _regexp = __webpack_require__(11);
 
 	var _RegExp = babelHelpers.interopRequireWildcard(_regexp);
 
-	var _sort = __webpack_require__(11);
+	var _sort = __webpack_require__(12);
 
 	var _Sort = babelHelpers.interopRequireWildcard(_sort);
 
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 
 	var _Math = babelHelpers.interopRequireWildcard(_math);
 
-	var _date = __webpack_require__(12);
+	var _date = __webpack_require__(13);
 
 	var _Date = babelHelpers.interopRequireWildcard(_date);
 
@@ -238,7 +261,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.Date = _Date;
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -266,7 +289,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -318,7 +341,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	_core2.default.globalHeight = pageHeight();
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -405,7 +428,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var isWebkit = exports.isWebkit = isChrome || isSafari || isAndroid || isIos;
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -472,7 +495,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -497,7 +520,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -558,7 +581,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.percent = percent;
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -572,11 +595,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _core2 = babelHelpers.interopRequireDefault(_core);
 
-	var _regexp = __webpack_require__(10);
+	var _regexp = __webpack_require__(11);
 
 	var regExp = babelHelpers.interopRequireWildcard(_regexp);
 
-	var _date = __webpack_require__(12);
+	var _date = __webpack_require__(13);
 
 	var date = babelHelpers.interopRequireWildcard(_date);
 
@@ -724,7 +747,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.compareStringCH = compareStringCH;
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -734,7 +757,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.GetDateStr = exports.toFormatString = exports.dateDiff = exports.parse = undefined;
 
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 
 	var math = babelHelpers.interopRequireWildcard(_math);
 
@@ -857,7 +880,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.GetDateStr = GetDateStr;
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -933,7 +956,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.addZero = addZero;
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -943,14 +966,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.default = undefined;
 
-	var _pagination = __webpack_require__(15);
+	var _pagination = __webpack_require__(16);
 
 	var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
 	exports.default = _pagination2.default;
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -961,19 +984,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _dec, _class, _class2, _temp, _dec2, _class3, _class4, _temp2, _dec3, _class5, _class6, _temp3, _dec4, _class7, _class8, _temp4;
 
-	var _react = __webpack_require__(16);
+	var _react = __webpack_require__(17);
 
 	var _nornj = __webpack_require__(2);
 
-	var _classnames = __webpack_require__(17);
+	var _nornjReact = __webpack_require__(18);
+
+	var _classnames = __webpack_require__(19);
 
 	var _classnames2 = babelHelpers.interopRequireDefault(_classnames);
 
-	var _widget = __webpack_require__(18);
+	var _widget = __webpack_require__(20);
 
 	var _widget2 = babelHelpers.interopRequireDefault(_widget);
 
-	var _utils = __webpack_require__(3);
+	var _utils = __webpack_require__(4);
 
 	var utils = babelHelpers.interopRequireWildcard(_utils);
 
@@ -991,7 +1016,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * 分页组件
 	 */
-	var Pagination = (_dec = (0, _nornj.registerTmpl)({
+	var Pagination = (_dec = (0, _nornjReact.registerTmpl)({
 	  name: 'fj-Pagination',
 	  template: _paginationT2.default.pagination
 	}), _dec(_class = (_temp = _class2 = function (_Widget) {
@@ -1303,7 +1328,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * 总页数组件
 	 */
-	var PageCount = (_dec2 = (0, _nornj.registerTmpl)({
+	var PageCount = (_dec2 = (0, _nornjReact.registerTmpl)({
 	  name: 'fj-PageCount',
 	  template: _paginationT2.default.pageCount
 	}), _dec2(_class3 = (_temp2 = _class4 = function (_Component) {
@@ -1360,7 +1385,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * 数据总数组件
 	 */
-	var PageDataCount = (_dec3 = (0, _nornj.registerTmpl)({
+	var PageDataCount = (_dec3 = (0, _nornjReact.registerTmpl)({
 	  name: 'fj-PageDataCount',
 	  template: _paginationT2.default.pageDataCount
 	}), _dec3(_class5 = (_temp3 = _class6 = function (_Component2) {
@@ -1410,7 +1435,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * 每页展示数量组件
 	 */
-	var PageSize = (_dec4 = (0, _nornj.registerTmpl)({
+	var PageSize = (_dec4 = (0, _nornjReact.registerTmpl)({
 	  name: 'fj-PageSize',
 	  template: _paginationT2.default.pageSize
 	}), _dec4(_class7 = (_temp4 = _class8 = function (_Component3) {
@@ -1504,13 +1529,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Pagination;
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_16__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_17__;
 
 /***/ },
-/* 17 */
+/* 18 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_18__;
+
+/***/ },
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -1564,7 +1595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 18 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1573,17 +1604,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _react = __webpack_require__(16);
+	var _react = __webpack_require__(17);
 
-	var _reactAddonsUpdate = __webpack_require__(19);
+	var _reactAddonsUpdate = __webpack_require__(21);
 
 	var _reactAddonsUpdate2 = babelHelpers.interopRequireDefault(_reactAddonsUpdate);
 
 	var _nornj = __webpack_require__(2);
 
-	__webpack_require__(26);
-
-	var _utils = __webpack_require__(3);
+	var _utils = __webpack_require__(4);
 
 	var utils = babelHelpers.interopRequireWildcard(_utils);
 
@@ -1743,13 +1772,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Widget;
 
 /***/ },
-/* 19 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(20);
+	module.exports = __webpack_require__(22);
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -1760,18 +1789,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 * @providesModule update
 	 */
 
 	/* global hasOwnProperty:true */
 
 	'use strict';
 
-	var _prodInvariant = __webpack_require__(22),
-	    _assign = __webpack_require__(23);
+	var _prodInvariant = __webpack_require__(24),
+	    _assign = __webpack_require__(25);
 
-	var keyOf = __webpack_require__(24);
-	var invariant = __webpack_require__(25);
+	var invariant = __webpack_require__(26);
 	var hasOwnProperty = {}.hasOwnProperty;
 
 	function shallowCopy(x) {
@@ -1784,12 +1811,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 
-	var COMMAND_PUSH = keyOf({ $push: null });
-	var COMMAND_UNSHIFT = keyOf({ $unshift: null });
-	var COMMAND_SPLICE = keyOf({ $splice: null });
-	var COMMAND_SET = keyOf({ $set: null });
-	var COMMAND_MERGE = keyOf({ $merge: null });
-	var COMMAND_APPLY = keyOf({ $apply: null });
+	var COMMAND_PUSH = '$push';
+	var COMMAND_UNSHIFT = '$unshift';
+	var COMMAND_SPLICE = '$splice';
+	var COMMAND_SET = '$set';
+	var COMMAND_MERGE = '$merge';
+	var COMMAND_APPLY = '$apply';
 
 	var ALL_COMMANDS_LIST = [COMMAND_PUSH, COMMAND_UNSHIFT, COMMAND_SPLICE, COMMAND_SET, COMMAND_MERGE, COMMAND_APPLY];
 
@@ -1865,13 +1892,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = update;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)))
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
+
 	var process = module.exports = {};
 
 	// cached from whatever global is present so that test runners that stub it
@@ -1882,84 +1910,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	var cachedSetTimeout;
 	var cachedClearTimeout;
 
-	function defaultSetTimout() {
-	    throw new Error('setTimeout has not been defined');
-	}
-	function defaultClearTimeout () {
-	    throw new Error('clearTimeout has not been defined');
-	}
 	(function () {
-	    try {
-	        if (typeof setTimeout === 'function') {
-	            cachedSetTimeout = setTimeout;
-	        } else {
-	            cachedSetTimeout = defaultSetTimout;
-	        }
-	    } catch (e) {
-	        cachedSetTimeout = defaultSetTimout;
+	  try {
+	    cachedSetTimeout = setTimeout;
+	  } catch (e) {
+	    cachedSetTimeout = function () {
+	      throw new Error('setTimeout is not defined');
 	    }
-	    try {
-	        if (typeof clearTimeout === 'function') {
-	            cachedClearTimeout = clearTimeout;
-	        } else {
-	            cachedClearTimeout = defaultClearTimeout;
-	        }
-	    } catch (e) {
-	        cachedClearTimeout = defaultClearTimeout;
+	  }
+	  try {
+	    cachedClearTimeout = clearTimeout;
+	  } catch (e) {
+	    cachedClearTimeout = function () {
+	      throw new Error('clearTimeout is not defined');
 	    }
+	  }
 	} ())
-	function runTimeout(fun) {
-	    if (cachedSetTimeout === setTimeout) {
-	        //normal enviroments in sane situations
-	        return setTimeout(fun, 0);
-	    }
-	    // if setTimeout wasn't available but was latter defined
-	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-	        cachedSetTimeout = setTimeout;
-	        return setTimeout(fun, 0);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedSetTimeout(fun, 0);
-	    } catch(e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-	            return cachedSetTimeout.call(null, fun, 0);
-	        } catch(e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-	            return cachedSetTimeout.call(this, fun, 0);
-	        }
-	    }
-
-
-	}
-	function runClearTimeout(marker) {
-	    if (cachedClearTimeout === clearTimeout) {
-	        //normal enviroments in sane situations
-	        return clearTimeout(marker);
-	    }
-	    // if clearTimeout wasn't available but was latter defined
-	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-	        cachedClearTimeout = clearTimeout;
-	        return clearTimeout(marker);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedClearTimeout(marker);
-	    } catch (e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-	            return cachedClearTimeout.call(null, marker);
-	        } catch (e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-	            return cachedClearTimeout.call(this, marker);
-	        }
-	    }
-
-
-
-	}
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -1984,7 +1950,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = runTimeout(cleanUpNextTick);
+	    var timeout = cachedSetTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -2001,7 +1967,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    runClearTimeout(timeout);
+	    cachedClearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -2013,7 +1979,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        runTimeout(drainQueue);
+	        cachedSetTimeout(drainQueue, 0);
 	    }
 	};
 
@@ -2054,7 +2020,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 22 */
+/* 24 */
 /***/ function(module, exports) {
 
 	/**
@@ -2065,7 +2031,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 * @providesModule reactProdInvariant
 	 * 
 	 */
 	'use strict';
@@ -2098,7 +2063,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = reactProdInvariant;
 
 /***/ },
-/* 23 */
+/* 25 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2187,46 +2152,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 24 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 */
-
-	/**
-	 * Allows extraction of a minified key. Let's the build system minify keys
-	 * without losing the ability to dynamically use key strings as values
-	 * themselves. Pass in an object with a single key/val pair and it will return
-	 * you the string key of that single record. Suppose you want to grab the
-	 * value for a key 'className' inside of an object. Key/val minification may
-	 * have aliased that key to be 'xa12'. keyOf({className: null}) will return
-	 * 'xa12' in that case. Resolve keys you want to use once at startup time, then
-	 * reuse those resolutions.
-	 */
-	var keyOf = function keyOf(oneKeyObj) {
-	  var key;
-	  for (key in oneKeyObj) {
-	    if (!oneKeyObj.hasOwnProperty(key)) {
-	      continue;
-	    }
-	    return key;
-	  }
-	  return null;
-	};
-
-	module.exports = keyOf;
-
-/***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2278,17 +2204,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = invariant;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _nornj = __webpack_require__(2);
-
-	(0, _nornj.setTmplRule)(null, null, '#');
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)))
 
 /***/ },
 /* 27 */
@@ -2296,7 +2212,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _react = __webpack_require__(16);
+	var _react = __webpack_require__(17);
 
 	var _react2 = babelHelpers.interopRequireDefault(_react);
 
@@ -2304,7 +2220,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _nornj2 = babelHelpers.interopRequireDefault(_nornj);
 
-	var _utils = __webpack_require__(3);
+	var _utils = __webpack_require__(4);
 
 	(0, _nornj.registerFilter)({
 	  fixIconSize: function fixIconSize(val) {
@@ -2330,16 +2246,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = {
 	  pagination: {
 	  useString: false,
-	  fn4: function anonymous(p1,p2,p3,p4,p5
+	  fn4: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _newVars = p1.newContextVars(p1, p2, p3, p4),
-	  parent = _newVars._1,
-	  data = _newVars._2,
-	  multiData = _newVars._3,
-	  _p2 = _newVars._4,
-	  _p3 = _newVars._5;
+	var _p2 = p1.newContextVars(p1, p2, p3),
+	  parent = _p2.parent,
+	  data = _p2.data,
+	  multiData = _p2.multiData;
 
-	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = parent.index;
 
 	var _filter0 = p1.filters['iscurrentpage'];
@@ -2380,13 +2294,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam0.push(parent.index);
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn3: function anonymous(p1,p2,p3,p4,p5
+	  fn3: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['for'];
 	var _dataRefer0 = [
@@ -2397,21 +2311,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
 	_this0.data = parent.data;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn4, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn4, p4);
 	_this0.inverse = p1.noop;
 
 	return _expr0.apply(_this0, _dataRefer0);
 	},
-	  fn7: function anonymous(p1,p2,p3,p4,p5
+	  fn7: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _newVars = p1.newContextVars(p1, p2, p3, p4),
-	  parent = _newVars._1,
-	  data = _newVars._2,
-	  multiData = _newVars._3,
-	  _p2 = _newVars._4,
-	  _p3 = _newVars._5;
+	var _p2 = p1.newContextVars(p1, p2, p3),
+	  parent = _p2.parent,
+	  data = _p2.data,
+	  multiData = _p2.multiData;
 
-	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = parent.index;
 
 	var _filter0 = p1.filters['iscurrentpage'];
@@ -2452,13 +2364,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam0.push(parent.index);
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn6: function anonymous(p1,p2,p3,p4,p5
+	  fn6: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	var ret = [];
 
 	var _expr0 = p1.exprs['for'];
@@ -2482,12 +2394,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
 	_this0.data = parent.data;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn7, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn7, p4);
 	_this0.inverse = p1.noop;
 
 	ret.push(_expr0.apply(_this0, _dataRefer0));
 
-	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter1 = p1.filters['clickbtn'];
@@ -2511,9 +2423,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam0.push('...');
 
-	ret.push(p1.compPort.apply(p1.compLib, _compParam0));
+	ret.push(p1.h.apply(null, _compParam0));
 
-	var _type1 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type1 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value2 = (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'));
 
 	var _filter2 = p1.filters['iscurrentpage'];
@@ -2554,19 +2466,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam1.push((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')));
 
-	ret.push(p1.compPort.apply(p1.compLib, _compParam1));
+	ret.push(p1.h.apply(null, _compParam1));
 	return ret;
 	},
-	  fn10: function anonymous(p1,p2,p3,p4,p5
+	  fn10: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _newVars = p1.newContextVars(p1, p2, p3, p4),
-	  parent = _newVars._1,
-	  data = _newVars._2,
-	  multiData = _newVars._3,
-	  _p2 = _newVars._4,
-	  _p3 = _newVars._5;
+	var _p2 = p1.newContextVars(p1, p2, p3),
+	  parent = _p2.parent,
+	  data = _p2.data,
+	  multiData = _p2.multiData;
 
-	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = parent.index;
 
 	var _filter0 = p1.filters['iscurrentpage'];
@@ -2607,16 +2517,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam0.push(parent.index);
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn9: function anonymous(p1,p2,p3,p4,p5
+	  fn9: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	var ret = [];
 
-	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = '1';
 
 	var _filter0 = p1.filters['iscurrentpage'];
@@ -2657,9 +2567,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam0.push('1');
 
-	ret.push(p1.compPort.apply(p1.compLib, _compParam0));
+	ret.push(p1.h.apply(null, _compParam0));
 
-	var _type1 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type1 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value2 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter2 = p1.filters['clickbtn'];
@@ -2683,7 +2593,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam1.push('...');
 
-	ret.push(p1.compPort.apply(p1.compLib, _compParam1));
+	ret.push(p1.h.apply(null, _compParam1));
 
 	var _expr0 = p1.exprs['for'];
 	var _value3 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
@@ -2718,12 +2628,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
 	_this0.data = parent.data;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn10, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn10, p4);
 	_this0.inverse = p1.noop;
 
 	ret.push(_expr0.apply(_this0, _dataRefer0));
 
-	var _type2 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type2 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value5 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter5 = p1.filters['clickbtn'];
@@ -2747,9 +2657,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam2.push('...');
 
-	ret.push(p1.compPort.apply(p1.compLib, _compParam2));
+	ret.push(p1.h.apply(null, _compParam2));
 
-	var _type3 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type3 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value6 = (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'));
 
 	var _filter6 = p1.filters['iscurrentpage'];
@@ -2790,19 +2700,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam3.push((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')));
 
-	ret.push(p1.compPort.apply(p1.compLib, _compParam3));
+	ret.push(p1.h.apply(null, _compParam3));
 	return ret;
 	},
-	  fn13: function anonymous(p1,p2,p3,p4,p5
+	  fn13: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _newVars = p1.newContextVars(p1, p2, p3, p4),
-	  parent = _newVars._1,
-	  data = _newVars._2,
-	  multiData = _newVars._3,
-	  _p2 = _newVars._4,
-	  _p3 = _newVars._5;
+	var _p2 = p1.newContextVars(p1, p2, p3),
+	  parent = _p2.parent,
+	  data = _p2.data,
+	  multiData = _p2.multiData;
 
-	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = parent.index;
 
 	var _filter0 = p1.filters['iscurrentpage'];
@@ -2843,16 +2751,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam0.push(parent.index);
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn12: function anonymous(p1,p2,p3,p4,p5
+	  fn12: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	var ret = [];
 
-	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = '1';
 
 	var _filter0 = p1.filters['iscurrentpage'];
@@ -2893,9 +2801,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam0.push('1');
 
-	ret.push(p1.compPort.apply(p1.compLib, _compParam0));
+	ret.push(p1.h.apply(null, _compParam0));
 
-	var _type1 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type1 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value2 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter2 = p1.filters['clickbtn'];
@@ -2919,7 +2827,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam1.push('...');
 
-	ret.push(p1.compPort.apply(p1.compLib, _compParam1));
+	ret.push(p1.h.apply(null, _compParam1));
 
 	var _expr0 = p1.exprs['for'];
 	var _value3 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
@@ -2942,17 +2850,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
 	_this0.data = parent.data;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn13, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn13, p4);
 	_this0.inverse = p1.noop;
 
 	ret.push(_expr0.apply(_this0, _dataRefer0));
 	return ret;
 	},
-	  fn11: function anonymous(p1,p2,p3,p4,p5
+	  fn11: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['if'];
 	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
@@ -2977,16 +2885,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn12, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn12, p4);
 	_this0.inverse = p1.noop;
 
 	return _expr0.apply(_this0, _dataRefer0);
 	},
-	  fn8: function anonymous(p1,p2,p3,p4,p5
+	  fn8: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['if'];
 	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
@@ -3011,16 +2919,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn9, p5);
-	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn11, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn9, p4);
+	_this0.inverse = p1.exprRet(p1, p2, p1.fn11, p4);
 
 	return _expr0.apply(_this0, _dataRefer0);
 	},
-	  fn5: function anonymous(p1,p2,p3,p4,p5
+	  fn5: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['if'];
 	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
@@ -3045,16 +2953,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn6, p5);
-	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn8, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn6, p4);
+	_this0.inverse = p1.exprRet(p1, p2, p1.fn8, p4);
 
 	return _expr0.apply(_this0, _dataRefer0);
 	},
-	  fn2: function anonymous(p1,p2,p3,p4,p5
+	  fn2: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['if'];
 	var _value0 = (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'));
@@ -3076,18 +2984,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn3, p5);
-	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn5, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn3, p4);
+	_this0.inverse = p1.exprRet(p1, p2, p1.fn5, p4);
 
 	return _expr0.apply(_this0, _dataRefer0);
 	},
-	  fn14: function anonymous(p1,p2,p3,p4,p5
+	  fn14: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _params0 = {
 	  'className': 'fj-pagn-pageno-c',
 	  'title': '第' + ((!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'))) + '页'
@@ -3096,21 +3004,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam0.push((!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex')));
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn15: function anonymous(p1,p2,p3,p4,p5
+	  fn15: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _params0 = {
 	  'className': 'fj-pagn-info'
 	};
 	var _compParam0 = [_type0, _params0];
 
-	var _type1 = p1.compClass['fj-pagecount'] ? p1.compClass['fj-pagecount'] : 'fj-pagecount';
+	var _type1 = p1.components['fj-pagecount'] ? p1.components['fj-pagecount'] : 'fj-pagecount';
 	var _params1 = {
 	  'prefix': (!multiData ? data['pageCountPrefix'] : p1.getDatasValue(data, 'pageCountPrefix')),
 	  'suffix': (!multiData ? data['pageCountSuffix'] : p1.getDatasValue(data, 'pageCountSuffix')),
@@ -3118,23 +3026,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	var _compParam1 = [_type1, _params1];
 
-	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn16: function anonymous(p1,p2,p3,p4,p5
+	  fn16: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _params0 = {
 	  'className': 'fj-pagn-info'
 	};
 	var _compParam0 = [_type0, _params0];
 
-	var _type1 = p1.compClass['fj-pagedatacount'] ? p1.compClass['fj-pagedatacount'] : 'fj-pagedatacount';
+	var _type1 = p1.components['fj-pagedatacount'] ? p1.components['fj-pagedatacount'] : 'fj-pagedatacount';
 	var _params1 = {
 	  'prefix': (!multiData ? data['countPrefix'] : p1.getDatasValue(data, 'countPrefix')),
 	  'suffix': (!multiData ? data['countSuffix'] : p1.getDatasValue(data, 'countSuffix')),
@@ -3142,23 +3050,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	var _compParam1 = [_type1, _params1];
 
-	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn17: function anonymous(p1,p2,p3,p4,p5
+	  fn17: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _params0 = {
 	  'className': 'fj-pagn-info'
 	};
 	var _compParam0 = [_type0, _params0];
 
-	var _type1 = p1.compClass['fj-pagesize'] ? p1.compClass['fj-pagesize'] : 'fj-pagesize';
+	var _type1 = p1.components['fj-pagesize'] ? p1.components['fj-pagesize'] : 'fj-pagesize';
 	var _params1 = {
 	  'prefix': (!multiData ? data['sizePrefix'] : p1.getDatasValue(data, 'sizePrefix')),
 	  'suffix': (!multiData ? data['sizeSuffix'] : p1.getDatasValue(data, 'sizeSuffix')),
@@ -3169,17 +3077,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	var _compParam1 = [_type1, _params1];
 
-	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn18: function anonymous(p1,p2,p3,p4,p5
+	  fn18: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _params0 = {
 	  'className': 'fj-pagn-txt'
 	};
@@ -3187,7 +3095,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam0.push('到');
 
-	var _type1 = p1.compClass['input'] ? p1.compClass['input'] : 'input';
+	var _type1 = p1.components['input'] ? p1.components['input'] : 'input';
 	var _params1 = {
 	  'type': 'text',
 	  'ref': 'pageTxt',
@@ -3198,11 +3106,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	var _compParam1 = [_type1, _params1];
 
-	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
 	_compParam0.push('页\n');
 
-	var _type2 = p1.compClass['button'] ? p1.compClass['button'] : 'button';
+	var _type2 = p1.components['button'] ? p1.components['button'] : 'button';
 	var _params2 = {
 	  'className': 'fj-btn fj-pagn-btn-go',
 	  'type': 'button',
@@ -3212,17 +3120,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam2.push((!multiData ? data['btnGoName'] : p1.getDatasValue(data, 'btnGoName')));
 
-	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam2));
+	_compParam0.push(p1.h.apply(null, _compParam2));
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn19: function anonymous(p1,p2,p3,p4,p5
+	  fn19: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = 'fj-pagn-btn-refresh';
 
 	var _filter0 = p1.filters['fixiconsize'];
@@ -3243,7 +3151,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	var _compParam0 = [_type0, _params0];
 
-	var _type1 = p1.compClass['i'] ? p1.compClass['i'] : 'i';
+	var _type1 = p1.components['i'] ? p1.components['i'] : 'i';
 	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter1 = p1.filters['clickbtn'];
@@ -3266,17 +3174,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	var _compParam1 = [_type1, _params1];
 
-	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn1: function anonymous(p1,p2,p3,p4,p5
+	  fn1: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = p1.compClass['div'] ? p1.compClass['div'] : 'div';
+	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = {
 	  'className': (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes')),
 	  'style': p1.styleProps((!multiData ? data['style'] : p1.getDatasValue(data, 'style'))),
@@ -3284,13 +3192,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	var _compParam0 = [_type0, _params0];
 
-	var _type1 = p1.compClass['ul'] ? p1.compClass['ul'] : 'ul';
+	var _type1 = p1.components['ul'] ? p1.components['ul'] : 'ul';
 	var _params1 = {
 	  'className': 'fj-pagn-body'
 	};
 	var _compParam1 = [_type1, _params1];
 
-	var _type2 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type2 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter0 = p1.filters['clickbtn'];
@@ -3316,9 +3224,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam2.push('首页');
 
-	_compParam1.push(p1.compPort.apply(p1.compLib, _compParam2));
+	_compParam1.push(p1.h.apply(null, _compParam2));
 
-	var _type3 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type3 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter1 = p1.filters['clickbtn'];
@@ -3342,20 +3250,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	var _compParam3 = [_type3, _params3];
 
-	var _type4 = p1.compClass['i'] ? p1.compClass['i'] : 'i';
+	var _type4 = p1.components['i'] ? p1.components['i'] : 'i';
 	var _params4 = {
 	  'className': 'fa fa-chevron-left'
 	};
 	var _compParam4 = [_type4, _params4];
 
-	_compParam3.push(p1.compPort.apply(p1.compLib, _compParam4));
+	_compParam3.push(p1.h.apply(null, _compParam4));
 
-	_compParam1.push(p1.compPort.apply(p1.compLib, _compParam3));
+	_compParam1.push(p1.h.apply(null, _compParam3));
 
-	var _type5 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type5 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _compParam5 = [_type5, null];
 
-	var _type6 = p1.compClass['ul'] ? p1.compClass['ul'] : 'ul';
+	var _type6 = p1.components['ul'] ? p1.components['ul'] : 'ul';
 	var _params5 = {
 	  'className': 'fj-pagn-pages'
 	};
@@ -3369,16 +3277,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn2, p5);
-	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn14, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn2, p4);
+	_this0.inverse = p1.exprRet(p1, p2, p1.fn14, p4);
 
 	_compParam6.push(_expr0.apply(_this0, _dataRefer0));
 
-	_compParam5.push(p1.compPort.apply(p1.compLib, _compParam6));
+	_compParam5.push(p1.h.apply(null, _compParam6));
 
-	_compParam1.push(p1.compPort.apply(p1.compLib, _compParam5));
+	_compParam1.push(p1.h.apply(null, _compParam5));
 
-	var _type7 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type7 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value2 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter2 = p1.filters['clickbtn'];
@@ -3402,17 +3310,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	var _compParam7 = [_type7, _params6];
 
-	var _type8 = p1.compClass['i'] ? p1.compClass['i'] : 'i';
+	var _type8 = p1.components['i'] ? p1.components['i'] : 'i';
 	var _params7 = {
 	  'className': 'fa fa-chevron-right'
 	};
 	var _compParam8 = [_type8, _params7];
 
-	_compParam7.push(p1.compPort.apply(p1.compLib, _compParam8));
+	_compParam7.push(p1.h.apply(null, _compParam8));
 
-	_compParam1.push(p1.compPort.apply(p1.compLib, _compParam7));
+	_compParam1.push(p1.h.apply(null, _compParam7));
 
-	var _type9 = p1.compClass['li'] ? p1.compClass['li'] : 'li';
+	var _type9 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value3 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter3 = p1.filters['clickbtn'];
@@ -3438,7 +3346,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam9.push('末页');
 
-	_compParam1.push(p1.compPort.apply(p1.compLib, _compParam9));
+	_compParam1.push(p1.h.apply(null, _compParam9));
 
 	var _expr1 = p1.exprs['if'];
 	var _dataRefer1 = [
@@ -3448,7 +3356,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this1 = p1.lightObj();
 	_this1.useString = p1.useString;
-	_this1.result = p1.exprRet(p1, p2, p3, p1.fn15, p5);
+	_this1.result = p1.exprRet(p1, p2, p1.fn15, p4);
 	_this1.inverse = p1.noop;
 
 	_compParam1.push(_expr1.apply(_this1, _dataRefer1));
@@ -3461,7 +3369,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this2 = p1.lightObj();
 	_this2.useString = p1.useString;
-	_this2.result = p1.exprRet(p1, p2, p3, p1.fn16, p5);
+	_this2.result = p1.exprRet(p1, p2, p1.fn16, p4);
 	_this2.inverse = p1.noop;
 
 	_compParam1.push(_expr2.apply(_this2, _dataRefer2));
@@ -3474,7 +3382,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this3 = p1.lightObj();
 	_this3.useString = p1.useString;
-	_this3.result = p1.exprRet(p1, p2, p3, p1.fn17, p5);
+	_this3.result = p1.exprRet(p1, p2, p1.fn17, p4);
 	_this3.inverse = p1.noop;
 
 	_compParam1.push(_expr3.apply(_this3, _dataRefer3));
@@ -3487,7 +3395,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this4 = p1.lightObj();
 	_this4.useString = p1.useString;
-	_this4.result = p1.exprRet(p1, p2, p3, p1.fn18, p5);
+	_this4.result = p1.exprRet(p1, p2, p1.fn18, p4);
 	_this4.inverse = p1.noop;
 
 	_compParam1.push(_expr4.apply(_this4, _dataRefer4));
@@ -3500,20 +3408,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this5 = p1.lightObj();
 	_this5.useString = p1.useString;
-	_this5.result = p1.exprRet(p1, p2, p3, p1.fn19, p5);
+	_this5.result = p1.exprRet(p1, p2, p1.fn19, p4);
 	_this5.inverse = p1.noop;
 
 	_compParam1.push(_expr5.apply(_this5, _dataRefer5));
 
-	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn20: function anonymous(p1,p2,p3,p4,p5
+	  fn20: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['emptyelem'];
 	p1.throwIf(_expr0, 'emptyelem', 'expr');
@@ -3523,17 +3431,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	_this0.data = parent.data;
 	_this0.parent = parent.parent;
 	_this0.index = parent.index;
-	_this0.paramsExpr = p5;
+	_this0.paramsExpr = p4;
 	_this0.result = p1.noop;
 	_this0.inverse = p1.noop;
 
 	return _expr0.apply(_this0);
 	},
-	  main: function anonymous(p1,p2,p3,p4,p5
+	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	if(!parent) {
 	  if (data) parent = { data: multiData ? data[0] : data };
 	  else parent = {};
@@ -3560,26 +3468,26 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn1, p5);
-	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn20, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn1, p4);
+	_this0.inverse = p1.exprRet(p1, p2, p1.fn20, p4);
 
 	return _expr0.apply(_this0, _dataRefer0);
 	}
 	},
 	  pageCount: {
 	  useString: false,
-	  main: function anonymous(p1,p2,p3,p4,p5
+	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	if(!parent) {
 	  if (data) parent = { data: multiData ? data[0] : data };
 	  else parent = {};
 	  p2.parent = parent;
 	};
 
-	var _type0 = p1.compClass['div'] ? p1.compClass['div'] : 'div';
+	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = null;
 	var _paramsE0 = {};
 
@@ -3601,32 +3509,32 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam0.push('\n    ' + ((!multiData ? data['prefix'] : p1.getDatasValue(data, 'prefix'))));
 
-	var _type1 = p1.compClass['span'] ? p1.compClass['span'] : 'span';
+	var _type1 = p1.components['span'] ? p1.components['span'] : 'span';
 	var _compParam1 = [_type1, null];
 
 	_compParam1.push((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')));
 
-	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
 	_compParam0.push(((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix'))) + '\n');
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	}
 	},
 	  pageDataCount: {
 	  useString: false,
-	  main: function anonymous(p1,p2,p3,p4,p5
+	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	if(!parent) {
 	  if (data) parent = { data: multiData ? data[0] : data };
 	  else parent = {};
 	  p2.parent = parent;
 	};
 
-	var _type0 = p1.compClass['div'] ? p1.compClass['div'] : 'div';
+	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = null;
 	var _paramsE0 = {};
 
@@ -3648,30 +3556,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam0.push('\n    ' + ((!multiData ? data['prefix'] : p1.getDatasValue(data, 'prefix'))));
 
-	var _type1 = p1.compClass['span'] ? p1.compClass['span'] : 'span';
+	var _type1 = p1.components['span'] ? p1.components['span'] : 'span';
 	var _compParam1 = [_type1, null];
 
 	_compParam1.push((!multiData ? data['count'] : p1.getDatasValue(data, 'count')));
 
-	_compParam0.push(p1.compPort.apply(p1.compLib, _compParam1));
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
 	_compParam0.push(((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix'))) + '\n');
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	}
 	},
 	  pageSize: {
 	  useString: false,
-	  fn2: function anonymous(p1,p2,p3,p4,p5
+	  fn2: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _newVars = p1.newContextVars(p1, p2, p3, p4),
-	  parent = _newVars._1,
-	  data = _newVars._2,
-	  multiData = _newVars._3,
-	  _p2 = _newVars._4,
-	  _p3 = _newVars._5;
+	var _p2 = p1.newContextVars(p1, p2, p3),
+	  parent = _p2.parent,
+	  data = _p2.data,
+	  multiData = _p2.multiData;
 
-	var _type0 = p1.compClass['option'] ? p1.compClass['option'] : 'option';
+	var _type0 = p1.components['option'] ? p1.components['option'] : 'option';
 	var _params0 = {
 	  'key': parent.index,
 	  'value': parent.data
@@ -3680,15 +3586,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam0.push(parent.data);
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn1: function anonymous(p1,p2,p3,p4,p5
+	  fn1: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = p1.compClass['select'] ? p1.compClass['select'] : 'select';
+	var _type0 = p1.components['select'] ? p1.components['select'] : 'select';
 	var _params0 = {
 	  'className': 'fj-form-elem fj-pagn-pagesize',
 	  'value': (!multiData ? data['pageSize'] : p1.getDatasValue(data, 'pageSize')),
@@ -3704,33 +3610,33 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn2, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn2, p4);
 	_this0.inverse = p1.noop;
 
 	_compParam0.push(_expr0.apply(_this0, _dataRefer0));
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn3: function anonymous(p1,p2,p3,p4,p5
+	  fn3: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
 	return (!multiData ? data['pageSize'] : p1.getDatasValue(data, 'pageSize'));
 	},
-	  main: function anonymous(p1,p2,p3,p4,p5
+	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	if(!parent) {
 	  if (data) parent = { data: multiData ? data[0] : data };
 	  else parent = {};
 	  p2.parent = parent;
 	};
 
-	var _type0 = p1.compClass['div'] ? p1.compClass['div'] : 'div';
+	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = null;
 	var _paramsE0 = {};
 
@@ -3760,14 +3666,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this1 = p1.lightObj();
 	_this1.useString = p1.useString;
-	_this1.result = p1.exprRet(p1, p2, p3, p1.fn1, p5);
-	_this1.inverse = p1.exprRet(p1, p2, p3, p1.fn3, p5);
+	_this1.result = p1.exprRet(p1, p2, p1.fn1, p4);
+	_this1.inverse = p1.exprRet(p1, p2, p1.fn3, p4);
 
 	_compParam0.push(_expr1.apply(_this1, _dataRefer1));
 
 	_compParam0.push((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix')));
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	}
 	}
 	};
@@ -3807,13 +3713,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _dec, _class, _dec2, _class2, _dec3, _class3, _dec4, _class4, _dec5, _class5;
 
-	var _react = __webpack_require__(16);
+	var _react = __webpack_require__(17);
 
 	var _nornj = __webpack_require__(2);
 
-	__webpack_require__(26);
+	var _nornjReact = __webpack_require__(18);
 
-	var _classnames = __webpack_require__(17);
+	var _classnames = __webpack_require__(19);
 
 	var _classnames2 = babelHelpers.interopRequireDefault(_classnames);
 
@@ -3821,12 +3727,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _gridLayoutT2 = babelHelpers.interopRequireDefault(_gridLayoutT);
 
-	var templateRow = (0, _nornj.compileComponent)(_gridLayoutT2.default.row);
+	var templateRow = (0, _nornj.compileH)(_gridLayoutT2.default.row);
 
 	/**
 	 * Grid row
 	 */
-	var Row = (_dec = (0, _nornj.registerTmpl)('fj-Row'), _dec(_class = function (_Component) {
+	var Row = (_dec = (0, _nornjReact.registerTmpl)('fj-Row'), _dec(_class = function (_Component) {
 	  babelHelpers.inherits(Row, _Component);
 
 	  function Row() {
@@ -3914,7 +3820,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Grid row left container
 	 */
-	var RowLeft = (_dec2 = (0, _nornj.registerTmpl)('fj-RowLeft'), _dec2(_class2 = function (_Component2) {
+	var RowLeft = (_dec2 = (0, _nornjReact.registerTmpl)('fj-RowLeft'), _dec2(_class2 = function (_Component2) {
 	  babelHelpers.inherits(RowLeft, _Component2);
 
 	  function RowLeft(props) {
@@ -3933,7 +3839,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Grid row right container
 	 */
 
-	var RowRight = (_dec3 = (0, _nornj.registerTmpl)('fj-RowRight'), _dec3(_class3 = function (_Component3) {
+	var RowRight = (_dec3 = (0, _nornjReact.registerTmpl)('fj-RowRight'), _dec3(_class3 = function (_Component3) {
 	  babelHelpers.inherits(RowRight, _Component3);
 
 	  function RowRight(props) {
@@ -3952,7 +3858,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Grid col
 	 */
 
-	var Col = (_dec4 = (0, _nornj.registerTmpl)({
+	var Col = (_dec4 = (0, _nornjReact.registerTmpl)({
 	  name: 'fj-Col',
 	  template: _gridLayoutT2.default.col
 	}), _dec4(_class4 = function (_Component4) {
@@ -4008,7 +3914,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Clear the float style
 	 */
 
-	var ClearFix = (_dec5 = (0, _nornj.registerTmpl)({
+	var ClearFix = (_dec5 = (0, _nornjReact.registerTmpl)({
 	  name: 'fj-ClearFix',
 	  template: _gridLayoutT2.default.clearFix
 	}), _dec5(_class5 = function (_Component5) {
@@ -4060,18 +3966,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = {
 	  row: {
 	  useString: false,
-	  main: function anonymous(p1,p2,p3,p4,p5
+	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	if(!parent) {
 	  if (data) parent = { data: multiData ? data[0] : data };
 	  else parent = {};
 	  p2.parent = parent;
 	};
 
-	var _type0 = p1.compClass['div'] ? p1.compClass['div'] : 'div';
+	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = null;
 	var _paramsE0 = {};
 
@@ -4094,23 +4000,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam0.push((!multiData ? data['children'] : p1.getDatasValue(data, 'children')));
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	}
 	},
 	  col: {
 	  useString: false,
-	  main: function anonymous(p1,p2,p3,p4,p5
+	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	if(!parent) {
 	  if (data) parent = { data: multiData ? data[0] : data };
 	  else parent = {};
 	  p2.parent = parent;
 	};
 
-	var _type0 = p1.compClass['div'] ? p1.compClass['div'] : 'div';
+	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = null;
 	var _paramsE0 = {};
 
@@ -4132,23 +4038,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_compParam0.push((!multiData ? data['children'] : p1.getDatasValue(data, 'children')));
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	}
 	},
 	  clearFix: {
 	  useString: false,
-	  main: function anonymous(p1,p2,p3,p4,p5
+	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	if(!parent) {
 	  if (data) parent = { data: multiData ? data[0] : data };
 	  else parent = {};
 	  p2.parent = parent;
 	};
 
-	var _type0 = p1.compClass['div'] ? p1.compClass['div'] : 'div';
+	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = null;
 	var _paramsE0 = {};
 
@@ -4168,7 +4074,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
 	var _compParam0 = [_type0, _params0];
 
-	return p1.compPort.apply(p1.compLib, _compParam0);
+	return p1.h.apply(null, _compParam0);
 	}
 	}
 	};
@@ -4208,19 +4114,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _dec, _class, _class2, _temp;
 
-	var _react = __webpack_require__(16);
+	var _react = __webpack_require__(17);
 
-	var _nornj = __webpack_require__(2);
+	var _nornjReact = __webpack_require__(18);
 
-	var _browsers = __webpack_require__(7);
+	var _browsers = __webpack_require__(8);
 
-	var _delayOperate = __webpack_require__(8);
+	var _delayOperate = __webpack_require__(9);
 
-	var _domEvent = __webpack_require__(9);
+	var _domEvent = __webpack_require__(10);
 
-	var _common = __webpack_require__(5);
+	var _common = __webpack_require__(6);
 
-	var Gesture = (_dec = (0, _nornj.registerTmpl)({
+	var Gesture = (_dec = (0, _nornjReact.registerTmpl)({
 	  name: 'fj-Gesture',
 	  template: '<#cloneElem {props}>{children}</#cloneElem>'
 	}), _dec(_class = (_temp = _class2 = function (_Component) {

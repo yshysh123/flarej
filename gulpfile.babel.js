@@ -53,6 +53,12 @@ const webpackExternals = {
     commonjs: 'nornj',
     amd: 'nornj'
   },
+  'nornj-react': {
+    root: 'njr',
+    commonjs2: 'nornj-react',
+    commonjs: 'nornj-react',
+    amd: 'nornj-react'
+  },
   'react': {
     root: 'React',
     commonjs2: 'react',
@@ -60,7 +66,7 @@ const webpackExternals = {
     amd: 'react'
   },
   'react-dom': {
-    root: 'ReactDom',
+    root: 'ReactDOM',
     commonjs2: 'react-dom',
     commonjs: 'react-dom',
     amd: 'react-dom'
@@ -127,7 +133,7 @@ gulp.task('build-js', () => {
           },
           { test: /\.t.html$/, loader: 'nornj',
             query: {
-              outputComponent: true
+              outputH: true
             }
           }
         ],

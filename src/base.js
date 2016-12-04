@@ -1,5 +1,6 @@
 ﻿import fj from './core';
 import nj from 'nornj';
+import config from './config';
 import * as utils from './utils';
 import Pagination from './components/pagination';
 import {
@@ -11,6 +12,7 @@ import {
 } from './components/gridLayout';
 import Gesture from './components/gesture';
 
+fj.config = config;
 Object.assign(fj, utils, {
   Pagination,
   Row,
@@ -22,4 +24,5 @@ Object.assign(fj, utils, {
 });
 
 let global = typeof self !== 'undefined' ? self : this;
+
 module.exports = global.FlareJ = global.fj = fj;

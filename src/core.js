@@ -7,7 +7,4 @@
   GB2312Pinyin: {},
 };
 
-//Set globel configs
-fj.config = (config) => Object.assign(fj, config);
-
 export default fj;

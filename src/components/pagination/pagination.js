@@ -1,5 +1,6 @@
 ﻿import { Component, PropTypes } from 'react';
-import { registerTmpl, registerFilter } from 'nornj';
+import { registerFilter } from 'nornj';
+import { registerTmpl } from 'nornj-react';
 import classNames from 'classnames';
 import Widget from '../widget';
 import * as utils from '../../utils';

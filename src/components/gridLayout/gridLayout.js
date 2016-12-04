@@ -1,9 +1,9 @@
 ﻿import { Component } from 'react';
-import { registerTmpl, compileComponent } from 'nornj';
-import '../../njConfig';
+import { compileH } from 'nornj';
+import { registerTmpl } from 'nornj-react';
 import classNames from 'classnames';
 import tmpl from './gridLayout.t.html';
-const templateRow = compileComponent(tmpl.row);
+const templateRow = compileH(tmpl.row);
 
 /**
  * Grid row
