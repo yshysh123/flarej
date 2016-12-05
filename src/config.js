@@ -2,5 +2,5 @@
 
 //Set globel configs
 export default function(configs) {
-  Object.assign(fj, config);
+  Object.assign(fj, configs);
 };

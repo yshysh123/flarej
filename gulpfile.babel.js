@@ -131,7 +131,7 @@ gulp.task('build-js', () => {
               plugins: ['external-helpers']
             }
           },
-          { test: /\.t.html$/, loader: 'nornj',
+          { test: /\.t.html(\?[\s\S]+)*$/, loader: 'nornj',
             query: {
               outputH: true
             }
