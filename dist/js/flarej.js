@@ -2348,17 +2348,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = {
 	  pagination: {
-	  useString: true,
-	  fn4: function anonymous(p1,p2,p3,p4,p5
+	  useString: false,
+	  fn4: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _newVars = p1.newContextVars(p1, p2, p3, p4),
-	  parent = _newVars._1,
-	  data = _newVars._2,
-	  multiData = _newVars._3,
-	  _p2 = _newVars._4,
-	  _p3 = _newVars._5;
+	var _p2 = p1.newContextVars(p1, p2, p3),
+	  parent = _p2.parent,
+	  data = _p2.data,
+	  multiData = _p2.multiData;
 
-	var _type0 = 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = parent.index;
 
 	var _filter0 = p1.filters['iscurrentpage'];
@@ -2389,21 +2387,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value1 = _filter1.apply(_thisF1, [_value1, 'index']);
 	}
-	var _params0 = ' key="' + p1.escape(parent.index) + '"'
-	  + ' class="' + 'fj-pagn-pageno' + (p1.escape(_value0)) + '"'
-	  + ' title="' + '第' + (p1.escape(parent.index)) + '页' + '"'
-	  + ' onClick="' + p1.escape(_value1) + '"';
-	var _children0 = '';
+	var _params0 = {
+	  'key': parent.index,
+	  'className': 'fj-pagn-pageno' + (_value0),
+	  'title': '第' + (parent.index) + '页',
+	  'onClick': _value1
+	};
+	var _compParam0 = [_type0, _params0];
 
-	_children0 += '          ' + p1.escape(parent.index) + '\n';
+	_compParam0.push(parent.index);
 
-	return '        ' + '<' + _type0 + _params0 + '>\n' + _children0 + '        ' + '</' + _type0 + '>\n';
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn3: function anonymous(p1,p2,p3,p4,p5
+	  fn3: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['for'];
 	var _dataRefer0 = [
@@ -2414,21 +2414,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
 	_this0.data = parent.data;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn4, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn4, p4);
 	_this0.inverse = p1.noop;
 
 	return _expr0.apply(_this0, _dataRefer0);
 	},
-	  fn7: function anonymous(p1,p2,p3,p4,p5
+	  fn7: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _newVars = p1.newContextVars(p1, p2, p3, p4),
-	  parent = _newVars._1,
-	  data = _newVars._2,
-	  multiData = _newVars._3,
-	  _p2 = _newVars._4,
-	  _p3 = _newVars._5;
+	var _p2 = p1.newContextVars(p1, p2, p3),
+	  parent = _p2.parent,
+	  data = _p2.data,
+	  multiData = _p2.multiData;
 
-	var _type0 = 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = parent.index;
 
 	var _filter0 = p1.filters['iscurrentpage'];
@@ -2459,22 +2457,24 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value1 = _filter1.apply(_thisF1, [_value1, 'index']);
 	}
-	var _params0 = ' key="' + p1.escape(parent.index) + '"'
-	  + ' class="' + 'fj-pagn-pageno' + (p1.escape(_value0)) + '"'
-	  + ' title="' + '第' + (p1.escape(parent.index)) + '页' + '"'
-	  + ' onClick="' + p1.escape(_value1) + '"';
-	var _children0 = '';
+	var _params0 = {
+	  'key': parent.index,
+	  'className': 'fj-pagn-pageno' + (_value0),
+	  'title': '第' + (parent.index) + '页',
+	  'onClick': _value1
+	};
+	var _compParam0 = [_type0, _params0];
 
-	_children0 += '          ' + p1.escape(parent.index) + '\n';
+	_compParam0.push(parent.index);
 
-	return '        ' + '<' + _type0 + _params0 + '>\n' + _children0 + '        ' + '</' + _type0 + '>\n';
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn6: function anonymous(p1,p2,p3,p4,p5
+	  fn6: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
-	var ret = '';
+	  multiData = p2.multiData;
+	var ret = [];
 
 	var _expr0 = p1.exprs['for'];
 	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
@@ -2497,12 +2497,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
 	_this0.data = parent.data;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn7, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn7, p4);
 	_this0.inverse = p1.noop;
 
-	ret += _expr0.apply(_this0, _dataRefer0);
+	ret.push(_expr0.apply(_this0, _dataRefer0));
 
-	var _type0 = 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter1 = p1.filters['clickbtn'];
@@ -2518,15 +2518,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value1 = _filter1.apply(_thisF1, [_value1, 'next']);
 	}
-	var _params0 = ' key="' + 'ellipsis2' + '"'
-	  + ' onClick="' + p1.escape(_value1) + '"';
-	var _children0 = '';
+	var _params0 = {
+	  'key': 'ellipsis2',
+	  'onClick': _value1
+	};
+	var _compParam0 = [_type0, _params0];
 
-	_children0 += '          ' + '...' + '\n';
+	_compParam0.push('...');
 
-	ret += '        ' + '<' + _type0 + _params0 + '>\n' + _children0 + '        ' + '</' + _type0 + '>\n';
+	ret.push(p1.h.apply(null, _compParam0));
 
-	var _type1 = 'li';
+	var _type1 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value2 = (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'));
 
 	var _filter2 = p1.filters['iscurrentpage'];
@@ -2557,27 +2559,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value3 = _filter3.apply(_thisF3, [_value3, 'last']);
 	}
-	var _params1 = ' key="' + p1.escape((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))) + '"'
-	  + ' class="' + 'fj-pagn-pageno' + (p1.escape(_value2)) + '"'
-	  + ' title="' + '第' + (p1.escape((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')))) + '页' + '"'
-	  + ' onClick="' + p1.escape(_value3) + '"';
-	var _children1 = '';
+	var _params1 = {
+	  'key': (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')),
+	  'className': 'fj-pagn-pageno' + (_value2),
+	  'title': '第' + ((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))) + '页',
+	  'onClick': _value3
+	};
+	var _compParam1 = [_type1, _params1];
 
-	_children1 += '          ' + p1.escape((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))) + '\n';
+	_compParam1.push((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')));
 
-	ret += '        ' + '<' + _type1 + _params1 + '>\n' + _children1 + '        ' + '</' + _type1 + '>\n';
+	ret.push(p1.h.apply(null, _compParam1));
 	return ret;
 	},
-	  fn10: function anonymous(p1,p2,p3,p4,p5
+	  fn10: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _newVars = p1.newContextVars(p1, p2, p3, p4),
-	  parent = _newVars._1,
-	  data = _newVars._2,
-	  multiData = _newVars._3,
-	  _p2 = _newVars._4,
-	  _p3 = _newVars._5;
+	var _p2 = p1.newContextVars(p1, p2, p3),
+	  parent = _p2.parent,
+	  data = _p2.data,
+	  multiData = _p2.multiData;
 
-	var _type0 = 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = parent.index;
 
 	var _filter0 = p1.filters['iscurrentpage'];
@@ -2608,24 +2610,26 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value1 = _filter1.apply(_thisF1, [_value1, 'index']);
 	}
-	var _params0 = ' key="' + p1.escape(parent.index) + '"'
-	  + ' class="' + 'fj-pagn-pageno' + (p1.escape(_value0)) + '"'
-	  + ' title="' + '第' + (p1.escape(parent.index)) + '页' + '"'
-	  + ' onClick="' + p1.escape(_value1) + '"';
-	var _children0 = '';
+	var _params0 = {
+	  'key': parent.index,
+	  'className': 'fj-pagn-pageno' + (_value0),
+	  'title': '第' + (parent.index) + '页',
+	  'onClick': _value1
+	};
+	var _compParam0 = [_type0, _params0];
 
-	_children0 += '          ' + p1.escape(parent.index) + '\n';
+	_compParam0.push(parent.index);
 
-	return '        ' + '<' + _type0 + _params0 + '>\n' + _children0 + '        ' + '</' + _type0 + '>\n';
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn9: function anonymous(p1,p2,p3,p4,p5
+	  fn9: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
-	var ret = '';
+	  multiData = p2.multiData;
+	var ret = [];
 
-	var _type0 = 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = '1';
 
 	var _filter0 = p1.filters['iscurrentpage'];
@@ -2656,17 +2660,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value1 = _filter1.apply(_thisF1, [_value1, 'first']);
 	}
-	var _params0 = ' key="' + '1' + '"'
-	  + ' class="' + 'fj-pagn-pageno' + (p1.escape(_value0)) + '"'
-	  + ' title="' + '第1页' + '"'
-	  + ' onClick="' + p1.escape(_value1) + '"';
-	var _children0 = '';
+	var _params0 = {
+	  'key': '1',
+	  'className': 'fj-pagn-pageno' + (_value0),
+	  'title': '第1页',
+	  'onClick': _value1
+	};
+	var _compParam0 = [_type0, _params0];
 
-	_children0 += '          ' + '1' + '\n';
+	_compParam0.push('1');
 
-	ret += '        ' + '<' + _type0 + _params0 + '>\n' + _children0 + '        ' + '</' + _type0 + '>\n';
+	ret.push(p1.h.apply(null, _compParam0));
 
-	var _type1 = 'li';
+	var _type1 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value2 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter2 = p1.filters['clickbtn'];
@@ -2682,13 +2688,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value2 = _filter2.apply(_thisF2, [_value2, 'prev']);
 	}
-	var _params1 = ' key="' + 'ellipsis1' + '"'
-	  + ' onClick="' + p1.escape(_value2) + '"';
-	var _children1 = '';
+	var _params1 = {
+	  'key': 'ellipsis1',
+	  'onClick': _value2
+	};
+	var _compParam1 = [_type1, _params1];
 
-	_children1 += '          ' + '...' + '\n';
+	_compParam1.push('...');
 
-	ret += '        ' + '<' + _type1 + _params1 + '>\n' + _children1 + '        ' + '</' + _type1 + '>\n';
+	ret.push(p1.h.apply(null, _compParam1));
 
 	var _expr0 = p1.exprs['for'];
 	var _value3 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
@@ -2723,12 +2731,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
 	_this0.data = parent.data;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn10, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn10, p4);
 	_this0.inverse = p1.noop;
 
-	ret += _expr0.apply(_this0, _dataRefer0);
+	ret.push(_expr0.apply(_this0, _dataRefer0));
 
-	var _type2 = 'li';
+	var _type2 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value5 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter5 = p1.filters['clickbtn'];
@@ -2744,15 +2752,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value5 = _filter5.apply(_thisF5, [_value5, 'next']);
 	}
-	var _params2 = ' key="' + 'ellipsis2' + '"'
-	  + ' onClick="' + p1.escape(_value5) + '"';
-	var _children2 = '';
+	var _params2 = {
+	  'key': 'ellipsis2',
+	  'onClick': _value5
+	};
+	var _compParam2 = [_type2, _params2];
 
-	_children2 += '          ' + '...' + '\n';
+	_compParam2.push('...');
 
-	ret += '        ' + '<' + _type2 + _params2 + '>\n' + _children2 + '        ' + '</' + _type2 + '>\n';
+	ret.push(p1.h.apply(null, _compParam2));
 
-	var _type3 = 'li';
+	var _type3 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value6 = (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'));
 
 	var _filter6 = p1.filters['iscurrentpage'];
@@ -2783,27 +2793,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value7 = _filter7.apply(_thisF7, [_value7, 'last']);
 	}
-	var _params3 = ' key="' + p1.escape((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))) + '"'
-	  + ' class="' + 'fj-pagn-pageno' + (p1.escape(_value6)) + '"'
-	  + ' title="' + '第' + (p1.escape((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')))) + '页' + '"'
-	  + ' onClick="' + p1.escape(_value7) + '"';
-	var _children3 = '';
+	var _params3 = {
+	  'key': (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')),
+	  'className': 'fj-pagn-pageno' + (_value6),
+	  'title': '第' + ((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))) + '页',
+	  'onClick': _value7
+	};
+	var _compParam3 = [_type3, _params3];
 
-	_children3 += '          ' + p1.escape((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))) + '\n';
+	_compParam3.push((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')));
 
-	ret += '        ' + '<' + _type3 + _params3 + '>\n' + _children3 + '        ' + '</' + _type3 + '>\n';
+	ret.push(p1.h.apply(null, _compParam3));
 	return ret;
 	},
-	  fn13: function anonymous(p1,p2,p3,p4,p5
+	  fn13: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _newVars = p1.newContextVars(p1, p2, p3, p4),
-	  parent = _newVars._1,
-	  data = _newVars._2,
-	  multiData = _newVars._3,
-	  _p2 = _newVars._4,
-	  _p3 = _newVars._5;
+	var _p2 = p1.newContextVars(p1, p2, p3),
+	  parent = _p2.parent,
+	  data = _p2.data,
+	  multiData = _p2.multiData;
 
-	var _type0 = 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = parent.index;
 
 	var _filter0 = p1.filters['iscurrentpage'];
@@ -2834,24 +2844,26 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value1 = _filter1.apply(_thisF1, [_value1, 'index']);
 	}
-	var _params0 = ' key="' + p1.escape(parent.index) + '"'
-	  + ' class="' + 'fj-pagn-pageno' + (p1.escape(_value0)) + '"'
-	  + ' title="' + '第' + (p1.escape(parent.index)) + '页' + '"'
-	  + ' onClick="' + p1.escape(_value1) + '"';
-	var _children0 = '';
+	var _params0 = {
+	  'key': parent.index,
+	  'className': 'fj-pagn-pageno' + (_value0),
+	  'title': '第' + (parent.index) + '页',
+	  'onClick': _value1
+	};
+	var _compParam0 = [_type0, _params0];
 
-	_children0 += '          ' + p1.escape(parent.index) + '\n';
+	_compParam0.push(parent.index);
 
-	return '        ' + '<' + _type0 + _params0 + '>\n' + _children0 + '        ' + '</' + _type0 + '>\n';
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn12: function anonymous(p1,p2,p3,p4,p5
+	  fn12: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
-	var ret = '';
+	  multiData = p2.multiData;
+	var ret = [];
 
-	var _type0 = 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = '1';
 
 	var _filter0 = p1.filters['iscurrentpage'];
@@ -2882,17 +2894,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value1 = _filter1.apply(_thisF1, [_value1, 'first']);
 	}
-	var _params0 = ' key="' + '1' + '"'
-	  + ' class="' + 'fj-pagn-pageno' + (p1.escape(_value0)) + '"'
-	  + ' title="' + '第1页' + '"'
-	  + ' onClick="' + p1.escape(_value1) + '"';
-	var _children0 = '';
+	var _params0 = {
+	  'key': '1',
+	  'className': 'fj-pagn-pageno' + (_value0),
+	  'title': '第1页',
+	  'onClick': _value1
+	};
+	var _compParam0 = [_type0, _params0];
 
-	_children0 += '          ' + '1' + '\n';
+	_compParam0.push('1');
 
-	ret += '        ' + '<' + _type0 + _params0 + '>\n' + _children0 + '        ' + '</' + _type0 + '>\n';
+	ret.push(p1.h.apply(null, _compParam0));
 
-	var _type1 = 'li';
+	var _type1 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value2 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter2 = p1.filters['clickbtn'];
@@ -2908,13 +2922,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value2 = _filter2.apply(_thisF2, [_value2, 'prev']);
 	}
-	var _params1 = ' key="' + 'ellipsis1' + '"'
-	  + ' onClick="' + p1.escape(_value2) + '"';
-	var _children1 = '';
+	var _params1 = {
+	  'key': 'ellipsis1',
+	  'onClick': _value2
+	};
+	var _compParam1 = [_type1, _params1];
 
-	_children1 += '          ' + '...' + '\n';
+	_compParam1.push('...');
 
-	ret += '        ' + '<' + _type1 + _params1 + '>\n' + _children1 + '        ' + '</' + _type1 + '>\n';
+	ret.push(p1.h.apply(null, _compParam1));
 
 	var _expr0 = p1.exprs['for'];
 	var _value3 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
@@ -2937,17 +2953,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
 	_this0.data = parent.data;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn13, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn13, p4);
 	_this0.inverse = p1.noop;
 
-	ret += _expr0.apply(_this0, _dataRefer0);
+	ret.push(_expr0.apply(_this0, _dataRefer0));
 	return ret;
 	},
-	  fn11: function anonymous(p1,p2,p3,p4,p5
+	  fn11: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['if'];
 	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
@@ -2972,16 +2988,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn12, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn12, p4);
 	_this0.inverse = p1.noop;
 
 	return _expr0.apply(_this0, _dataRefer0);
 	},
-	  fn8: function anonymous(p1,p2,p3,p4,p5
+	  fn8: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['if'];
 	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
@@ -3006,16 +3022,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn9, p5);
-	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn11, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn9, p4);
+	_this0.inverse = p1.exprRet(p1, p2, p1.fn11, p4);
 
 	return _expr0.apply(_this0, _dataRefer0);
 	},
-	  fn5: function anonymous(p1,p2,p3,p4,p5
+	  fn5: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['if'];
 	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
@@ -3040,16 +3056,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn6, p5);
-	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn8, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn6, p4);
+	_this0.inverse = p1.exprRet(p1, p2, p1.fn8, p4);
 
 	return _expr0.apply(_this0, _dataRefer0);
 	},
-	  fn2: function anonymous(p1,p2,p3,p4,p5
+	  fn2: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['if'];
 	var _value0 = (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'));
@@ -3071,133 +3087,153 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn3, p5);
-	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn5, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn3, p4);
+	_this0.inverse = p1.exprRet(p1, p2, p1.fn5, p4);
 
 	return _expr0.apply(_this0, _dataRefer0);
 	},
-	  fn14: function anonymous(p1,p2,p3,p4,p5
+	  fn14: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = 'li';
-	var _params0 = ' class="' + 'fj-pagn-pageno-c' + '"'
-	  + ' title="' + '第' + (p1.escape((!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex')))) + '页' + '"';
-	var _children0 = '';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
+	var _params0 = {
+	  'className': 'fj-pagn-pageno-c',
+	  'title': '第' + ((!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'))) + '页'
+	};
+	var _compParam0 = [_type0, _params0];
 
-	_children0 += '          ' + p1.escape((!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'))) + '\n';
+	_compParam0.push((!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex')));
 
-	return '        ' + '<' + _type0 + _params0 + '>\n' + _children0 + '        ' + '</' + _type0 + '>\n';
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn15: function anonymous(p1,p2,p3,p4,p5
+	  fn15: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = 'li';
-	var _params0 = ' class="' + 'fj-pagn-info' + '"';
-	var _children0 = '';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
+	var _params0 = {
+	  'className': 'fj-pagn-info'
+	};
+	var _compParam0 = [_type0, _params0];
 
-	var _type1 = 'fj-pagecount';
-	var _params1 = ' prefix="' + p1.escape((!multiData ? data['pageCountPrefix'] : p1.getDatasValue(data, 'pageCountPrefix'))) + '"'
-	  + ' suffix="' + p1.escape((!multiData ? data['pageCountSuffix'] : p1.getDatasValue(data, 'pageCountSuffix'))) + '"'
-	  + ' pageCount="' + p1.escape((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))) + '"';
-	var _children1 = '';
+	var _type1 = p1.components['fj-pagecount'] ? p1.components['fj-pagecount'] : 'fj-pagecount';
+	var _params1 = {
+	  'prefix': (!multiData ? data['pageCountPrefix'] : p1.getDatasValue(data, 'pageCountPrefix')),
+	  'suffix': (!multiData ? data['pageCountSuffix'] : p1.getDatasValue(data, 'pageCountSuffix')),
+	  'pageCount': (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))
+	};
+	var _compParam1 = [_type1, _params1];
 
-	_children0 += '      ' + '<' + _type1 + _params1 + ' />\n';
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	return '    ' + '<' + _type0 + _params0 + '>\n' + _children0 + '    ' + '</' + _type0 + '>\n';
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn16: function anonymous(p1,p2,p3,p4,p5
+	  fn16: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = 'li';
-	var _params0 = ' class="' + 'fj-pagn-info' + '"';
-	var _children0 = '';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
+	var _params0 = {
+	  'className': 'fj-pagn-info'
+	};
+	var _compParam0 = [_type0, _params0];
 
-	var _type1 = 'fj-pagedatacount';
-	var _params1 = ' prefix="' + p1.escape((!multiData ? data['countPrefix'] : p1.getDatasValue(data, 'countPrefix'))) + '"'
-	  + ' suffix="' + p1.escape((!multiData ? data['countSuffix'] : p1.getDatasValue(data, 'countSuffix'))) + '"'
-	  + ' count="' + p1.escape((!multiData ? data['count'] : p1.getDatasValue(data, 'count'))) + '"';
-	var _children1 = '';
+	var _type1 = p1.components['fj-pagedatacount'] ? p1.components['fj-pagedatacount'] : 'fj-pagedatacount';
+	var _params1 = {
+	  'prefix': (!multiData ? data['countPrefix'] : p1.getDatasValue(data, 'countPrefix')),
+	  'suffix': (!multiData ? data['countSuffix'] : p1.getDatasValue(data, 'countSuffix')),
+	  'count': (!multiData ? data['count'] : p1.getDatasValue(data, 'count'))
+	};
+	var _compParam1 = [_type1, _params1];
 
-	_children0 += '      ' + '<' + _type1 + _params1 + ' />\n';
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	return '    ' + '<' + _type0 + _params0 + '>\n' + _children0 + '    ' + '</' + _type0 + '>\n';
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn17: function anonymous(p1,p2,p3,p4,p5
+	  fn17: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = 'li';
-	var _params0 = ' class="' + 'fj-pagn-info' + '"';
-	var _children0 = '';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
+	var _params0 = {
+	  'className': 'fj-pagn-info'
+	};
+	var _compParam0 = [_type0, _params0];
 
-	var _type1 = 'fj-pagesize';
-	var _params1 = ' prefix="' + p1.escape((!multiData ? data['sizePrefix'] : p1.getDatasValue(data, 'sizePrefix'))) + '"'
-	  + ' suffix="' + p1.escape((!multiData ? data['sizeSuffix'] : p1.getDatasValue(data, 'sizeSuffix'))) + '"'
-	  + ' pageSize="' + p1.escape((!multiData ? data['pageSize'] : p1.getDatasValue(data, 'pageSize'))) + '"'
-	  + ' pageSizes="' + p1.escape((!multiData ? data['pageSizes'] : p1.getDatasValue(data, 'pageSizes'))) + '"'
-	  + ' setPageSize="' + p1.escape((!multiData ? data['setPageSize'] : p1.getDatasValue(data, 'setPageSize'))) + '"'
-	  + ' onChange="' + p1.escape((!multiData ? data['pageSizeChange'] : p1.getDatasValue(data, 'pageSizeChange'))) + '"';
-	var _children1 = '';
+	var _type1 = p1.components['fj-pagesize'] ? p1.components['fj-pagesize'] : 'fj-pagesize';
+	var _params1 = {
+	  'prefix': (!multiData ? data['sizePrefix'] : p1.getDatasValue(data, 'sizePrefix')),
+	  'suffix': (!multiData ? data['sizeSuffix'] : p1.getDatasValue(data, 'sizeSuffix')),
+	  'pageSize': (!multiData ? data['pageSize'] : p1.getDatasValue(data, 'pageSize')),
+	  'pageSizes': (!multiData ? data['pageSizes'] : p1.getDatasValue(data, 'pageSizes')),
+	  'setPageSize': (!multiData ? data['setPageSize'] : p1.getDatasValue(data, 'setPageSize')),
+	  'onChange': (!multiData ? data['pageSizeChange'] : p1.getDatasValue(data, 'pageSizeChange'))
+	};
+	var _compParam1 = [_type1, _params1];
 
-	_children0 += '      ' + '<' + _type1 + _params1 + ' />\n';
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	return '    ' + '<' + _type0 + _params0 + '>\n' + _children0 + '    ' + '</' + _type0 + '>\n';
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn18: function anonymous(p1,p2,p3,p4,p5
+	  fn18: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = 'li';
-	var _params0 = ' class="' + 'fj-pagn-txt' + '"';
-	var _children0 = '';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
+	var _params0 = {
+	  'className': 'fj-pagn-txt'
+	};
+	var _compParam0 = [_type0, _params0];
 
-	_children0 += '      ' + '到' + '\n';
+	_compParam0.push('到');
 
-	var _type1 = 'input';
-	var _params1 = ' type="' + 'text' + '"'
-	  + ' ref="' + 'pageTxt' + '"'
-	  + ' defaultValue="' + p1.escape((!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'))) + '"'
-	  + ' class="' + 'fj-form-elem fj-pagn-pageindex' + '"'
-	  + ' autoComplete="' + 'off' + '"'
-	  + ' onBlur="' + p1.escape((!multiData ? data['pageIndexBlur'] : p1.getDatasValue(data, 'pageIndexBlur'))) + '"';
-	var _children1 = '';
+	var _type1 = p1.components['input'] ? p1.components['input'] : 'input';
+	var _params1 = {
+	  'type': 'text',
+	  'ref': 'pageTxt',
+	  'defaultValue': (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex')),
+	  'className': 'fj-form-elem fj-pagn-pageindex',
+	  'autoComplete': 'off',
+	  'onBlur': (!multiData ? data['pageIndexBlur'] : p1.getDatasValue(data, 'pageIndexBlur'))
+	};
+	var _compParam1 = [_type1, _params1];
 
-	_children0 += '      ' + '<' + _type1 + _params1 + ' />\n';
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	_children0 += '      ' + '页\n' + '\n';
+	_compParam0.push('页\n');
 
-	var _type2 = 'button';
-	var _params2 = ' class="' + 'fj-btn fj-pagn-btn-go' + '"'
-	  + ' type="' + 'button' + '"'
-	  + ' onClick="' + p1.escape((!multiData ? data['goPage'] : p1.getDatasValue(data, 'goPage'))) + '"';
-	var _children2 = '';
+	var _type2 = p1.components['button'] ? p1.components['button'] : 'button';
+	var _params2 = {
+	  'className': 'fj-btn fj-pagn-btn-go',
+	  'type': 'button',
+	  'onClick': (!multiData ? data['goPage'] : p1.getDatasValue(data, 'goPage'))
+	};
+	var _compParam2 = [_type2, _params2];
 
-	_children2 += '        ' + p1.escape((!multiData ? data['btnGoName'] : p1.getDatasValue(data, 'btnGoName'))) + '\n';
+	_compParam2.push((!multiData ? data['btnGoName'] : p1.getDatasValue(data, 'btnGoName')));
 
-	_children0 += '      ' + '<' + _type2 + _params2 + '>\n' + _children2 + '      ' + '</' + _type2 + '>\n';
+	_compParam0.push(p1.h.apply(null, _compParam2));
 
-	return '    ' + '<' + _type0 + _params0 + '>\n' + _children0 + '    ' + '</' + _type0 + '>\n';
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn19: function anonymous(p1,p2,p3,p4,p5
+	  fn19: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = 'li';
+	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = 'fj-pagn-btn-refresh';
 
 	var _filter0 = p1.filters['fixiconsize'];
@@ -3213,10 +3249,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value0 = _filter0.apply(_thisF0, [_value0]);
 	}
-	var _params0 = ' class="' + p1.escape(_value0) + '"';
-	var _children0 = '';
+	var _params0 = {
+	  'className': _value0
+	};
+	var _compParam0 = [_type0, _params0];
 
-	var _type1 = 'i';
+	var _type1 = p1.components['i'] ? p1.components['i'] : 'i';
 	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter1 = p1.filters['clickbtn'];
@@ -3232,32 +3270,38 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value1 = _filter1.apply(_thisF1, [_value1]);
 	}
-	var _params1 = ' class="' + 'fa fa-refresh' + '"'
-	  + ' title="' + '刷新' + '"'
-	  + ' onClick="' + p1.escape(_value1) + '"';
-	var _children1 = '';
+	var _params1 = {
+	  'className': 'fa fa-refresh',
+	  'title': '刷新',
+	  'onClick': _value1
+	};
+	var _compParam1 = [_type1, _params1];
 
-	_children0 += '      ' + '<' + _type1 + _params1 + '>\n' + _children1 + '      ' + '</' + _type1 + '>\n';
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	return '    ' + '<' + _type0 + _params0 + '>\n' + _children0 + '    ' + '</' + _type0 + '>\n';
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn1: function anonymous(p1,p2,p3,p4,p5
+	  fn1: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = 'div';
-	var _params0 = ' class="' + p1.escape((!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'))) + '"'
-	  + ' style="' + p1.escape((!multiData ? data['style'] : p1.getDatasValue(data, 'style'))) + '"'
-	  + ' ref="' + p1.escape((!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'))) + '"';
-	var _children0 = '';
+	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
+	var _params0 = {
+	  'className': (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes')),
+	  'style': p1.styleProps((!multiData ? data['style'] : p1.getDatasValue(data, 'style'))),
+	  'ref': (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'))
+	};
+	var _compParam0 = [_type0, _params0];
 
-	var _type1 = 'ul';
-	var _params1 = ' class="' + 'fj-pagn-body' + '"';
-	var _children1 = '';
+	var _type1 = p1.components['ul'] ? p1.components['ul'] : 'ul';
+	var _params1 = {
+	  'className': 'fj-pagn-body'
+	};
+	var _compParam1 = [_type1, _params1];
 
-	var _type2 = 'li';
+	var _type2 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter0 = p1.filters['clickbtn'];
@@ -3273,17 +3317,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value0 = _filter0.apply(_thisF0, [_value0, 'first']);
 	}
-	var _params2 = ' key="' + 'first' + '"'
-	  + ' class="' + 'fj-pagn-btn' + (p1.escape((!multiData ? data['firstDisabled'] : p1.getDatasValue(data, 'firstDisabled')))) + '"'
-	  + ' title="' + '首页' + '"'
-	  + ' onClick="' + p1.escape(_value0) + '"';
-	var _children2 = '';
+	var _params2 = {
+	  'key': 'first',
+	  'className': 'fj-pagn-btn' + ((!multiData ? data['firstDisabled'] : p1.getDatasValue(data, 'firstDisabled'))),
+	  'title': '首页',
+	  'onClick': _value0
+	};
+	var _compParam2 = [_type2, _params2];
 
-	_children2 += '      ' + '首页' + '\n';
+	_compParam2.push('首页');
 
-	_children1 += '    ' + '<' + _type2 + _params2 + '>\n' + _children2 + '    ' + '</' + _type2 + '>\n';
+	_compParam1.push(p1.h.apply(null, _compParam2));
 
-	var _type3 = 'li';
+	var _type3 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter1 = p1.filters['clickbtn'];
@@ -3299,26 +3345,32 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value1 = _filter1.apply(_thisF1, [_value1, 'prev']);
 	}
-	var _params3 = ' key="' + 'prev' + '"'
-	  + ' class="' + 'fj-pagn-btn' + (p1.escape((!multiData ? data['prevDisabled'] : p1.getDatasValue(data, 'prevDisabled')))) + '"'
-	  + ' title="' + '上一页' + '"'
-	  + ' onClick="' + p1.escape(_value1) + '"';
-	var _children3 = '';
+	var _params3 = {
+	  'key': 'prev',
+	  'className': 'fj-pagn-btn' + ((!multiData ? data['prevDisabled'] : p1.getDatasValue(data, 'prevDisabled'))),
+	  'title': '上一页',
+	  'onClick': _value1
+	};
+	var _compParam3 = [_type3, _params3];
 
-	var _type4 = 'i';
-	var _params4 = ' class="' + 'fa fa-chevron-left' + '"';
-	var _children4 = '';
+	var _type4 = p1.components['i'] ? p1.components['i'] : 'i';
+	var _params4 = {
+	  'className': 'fa fa-chevron-left'
+	};
+	var _compParam4 = [_type4, _params4];
 
-	_children3 += '      ' + '<' + _type4 + _params4 + '>\n' + _children4 + '      ' + '</' + _type4 + '>\n';
+	_compParam3.push(p1.h.apply(null, _compParam4));
 
-	_children1 += '    ' + '<' + _type3 + _params3 + '>\n' + _children3 + '    ' + '</' + _type3 + '>\n';
+	_compParam1.push(p1.h.apply(null, _compParam3));
 
-	var _type5 = 'li';
-	var _children5 = '';
+	var _type5 = p1.components['li'] ? p1.components['li'] : 'li';
+	var _compParam5 = [_type5, null];
 
-	var _type6 = 'ul';
-	var _params5 = ' class="' + 'fj-pagn-pages' + '"';
-	var _children6 = '';
+	var _type6 = p1.components['ul'] ? p1.components['ul'] : 'ul';
+	var _params5 = {
+	  'className': 'fj-pagn-pages'
+	};
+	var _compParam6 = [_type6, _params5];
 
 	var _expr0 = p1.exprs['if'];
 	var _dataRefer0 = [
@@ -3328,16 +3380,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn2, p5);
-	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn14, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn2, p4);
+	_this0.inverse = p1.exprRet(p1, p2, p1.fn14, p4);
 
-	_children6 += _expr0.apply(_this0, _dataRefer0);
+	_compParam6.push(_expr0.apply(_this0, _dataRefer0));
 
-	_children5 += '      ' + '<' + _type6 + _params5 + '>\n' + _children6 + '      ' + '</' + _type6 + '>\n';
+	_compParam5.push(p1.h.apply(null, _compParam6));
 
-	_children1 += '    ' + '<' + _type5 + '>\n' + _children5 + '    ' + '</' + _type5 + '>\n';
+	_compParam1.push(p1.h.apply(null, _compParam5));
 
-	var _type7 = 'li';
+	var _type7 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value2 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter2 = p1.filters['clickbtn'];
@@ -3353,21 +3405,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value2 = _filter2.apply(_thisF2, [_value2, 'next']);
 	}
-	var _params6 = ' key="' + 'next' + '"'
-	  + ' class="' + 'fj-pagn-btn' + (p1.escape((!multiData ? data['nextDisabled'] : p1.getDatasValue(data, 'nextDisabled')))) + '"'
-	  + ' title="' + '下一页' + '"'
-	  + ' onClick="' + p1.escape(_value2) + '"';
-	var _children7 = '';
+	var _params6 = {
+	  'key': 'next',
+	  'className': 'fj-pagn-btn' + ((!multiData ? data['nextDisabled'] : p1.getDatasValue(data, 'nextDisabled'))),
+	  'title': '下一页',
+	  'onClick': _value2
+	};
+	var _compParam7 = [_type7, _params6];
 
-	var _type8 = 'i';
-	var _params7 = ' class="' + 'fa fa-chevron-right' + '"';
-	var _children8 = '';
+	var _type8 = p1.components['i'] ? p1.components['i'] : 'i';
+	var _params7 = {
+	  'className': 'fa fa-chevron-right'
+	};
+	var _compParam8 = [_type8, _params7];
 
-	_children7 += '      ' + '<' + _type8 + _params7 + '>\n' + _children8 + '      ' + '</' + _type8 + '>\n';
+	_compParam7.push(p1.h.apply(null, _compParam8));
 
-	_children1 += '    ' + '<' + _type7 + _params6 + '>\n' + _children7 + '    ' + '</' + _type7 + '>\n';
+	_compParam1.push(p1.h.apply(null, _compParam7));
 
-	var _type9 = 'li';
+	var _type9 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value3 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
 
 	var _filter3 = p1.filters['clickbtn'];
@@ -3383,15 +3439,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _value3 = _filter3.apply(_thisF3, [_value3, 'last']);
 	}
-	var _params8 = ' key="' + 'last' + '"'
-	  + ' class="' + 'fj-pagn-btn' + (p1.escape((!multiData ? data['lastDisabled'] : p1.getDatasValue(data, 'lastDisabled')))) + '"'
-	  + ' title="' + '末页' + '"'
-	  + ' onClick="' + p1.escape(_value3) + '"';
-	var _children9 = '';
+	var _params8 = {
+	  'key': 'last',
+	  'className': 'fj-pagn-btn' + ((!multiData ? data['lastDisabled'] : p1.getDatasValue(data, 'lastDisabled'))),
+	  'title': '末页',
+	  'onClick': _value3
+	};
+	var _compParam9 = [_type9, _params8];
 
-	_children9 += '      ' + '末页' + '\n';
+	_compParam9.push('末页');
 
-	_children1 += '    ' + '<' + _type9 + _params8 + '>\n' + _children9 + '    ' + '</' + _type9 + '>\n';
+	_compParam1.push(p1.h.apply(null, _compParam9));
 
 	var _expr1 = p1.exprs['if'];
 	var _dataRefer1 = [
@@ -3401,10 +3459,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this1 = p1.lightObj();
 	_this1.useString = p1.useString;
-	_this1.result = p1.exprRet(p1, p2, p3, p1.fn15, p5);
+	_this1.result = p1.exprRet(p1, p2, p1.fn15, p4);
 	_this1.inverse = p1.noop;
 
-	_children1 += _expr1.apply(_this1, _dataRefer1);
+	_compParam1.push(_expr1.apply(_this1, _dataRefer1));
 
 	var _expr2 = p1.exprs['if'];
 	var _dataRefer2 = [
@@ -3414,10 +3472,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this2 = p1.lightObj();
 	_this2.useString = p1.useString;
-	_this2.result = p1.exprRet(p1, p2, p3, p1.fn16, p5);
+	_this2.result = p1.exprRet(p1, p2, p1.fn16, p4);
 	_this2.inverse = p1.noop;
 
-	_children1 += _expr2.apply(_this2, _dataRefer2);
+	_compParam1.push(_expr2.apply(_this2, _dataRefer2));
 
 	var _expr3 = p1.exprs['if'];
 	var _dataRefer3 = [
@@ -3427,10 +3485,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this3 = p1.lightObj();
 	_this3.useString = p1.useString;
-	_this3.result = p1.exprRet(p1, p2, p3, p1.fn17, p5);
+	_this3.result = p1.exprRet(p1, p2, p1.fn17, p4);
 	_this3.inverse = p1.noop;
 
-	_children1 += _expr3.apply(_this3, _dataRefer3);
+	_compParam1.push(_expr3.apply(_this3, _dataRefer3));
 
 	var _expr4 = p1.exprs['if'];
 	var _dataRefer4 = [
@@ -3440,10 +3498,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this4 = p1.lightObj();
 	_this4.useString = p1.useString;
-	_this4.result = p1.exprRet(p1, p2, p3, p1.fn18, p5);
+	_this4.result = p1.exprRet(p1, p2, p1.fn18, p4);
 	_this4.inverse = p1.noop;
 
-	_children1 += _expr4.apply(_this4, _dataRefer4);
+	_compParam1.push(_expr4.apply(_this4, _dataRefer4));
 
 	var _expr5 = p1.exprs['if'];
 	var _dataRefer5 = [
@@ -3453,20 +3511,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this5 = p1.lightObj();
 	_this5.useString = p1.useString;
-	_this5.result = p1.exprRet(p1, p2, p3, p1.fn19, p5);
+	_this5.result = p1.exprRet(p1, p2, p1.fn19, p4);
 	_this5.inverse = p1.noop;
 
-	_children1 += _expr5.apply(_this5, _dataRefer5);
+	_compParam1.push(_expr5.apply(_this5, _dataRefer5));
 
-	_children0 += '  ' + '<' + _type1 + _params1 + '>\n' + _children1 + '  ' + '</' + _type1 + '>\n';
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	return '<' + _type0 + _params0 + '>\n' + _children0 + '</' + _type0 + '>\n';
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn20: function anonymous(p1,p2,p3,p4,p5
+	  fn20: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['emptyelem'];
 	p1.throwIf(_expr0, 'emptyelem', 'expr');
@@ -3476,17 +3534,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	_this0.data = parent.data;
 	_this0.parent = parent.parent;
 	_this0.index = parent.index;
-	_this0.paramsExpr = p5;
+	_this0.paramsExpr = p4;
 	_this0.result = p1.noop;
 	_this0.inverse = p1.noop;
 
 	return _expr0.apply(_this0);
 	},
-	  main: function anonymous(p1,p2,p3,p4,p5
+	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	if(!parent) {
 	  if (data) parent = { data: multiData ? data[0] : data };
 	  else parent = {};
@@ -3513,27 +3571,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn1, p5);
-	_this0.inverse = p1.exprRet(p1, p2, p3, p1.fn20, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn1, p4);
+	_this0.inverse = p1.exprRet(p1, p2, p1.fn20, p4);
 
 	return _expr0.apply(_this0, _dataRefer0);
 	}
 	},
 	  pageCount: {
-	  useString: true,
-	  main: function anonymous(p1,p2,p3,p4,p5
+	  useString: false,
+	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	if(!parent) {
 	  if (data) parent = { data: multiData ? data[0] : data };
 	  else parent = {};
 	  p2.parent = parent;
 	};
 
-	var _type0 = 'div';
-	var _params0 = '';
+	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
+	var _params0 = null;
 	var _paramsE0 = {};
 
 	var _expr0 = p1.exprs['spreadparam'];
@@ -3546,40 +3604,41 @@ return /******/ (function(modules) { // webpackBootstrap
 	_this0.paramsExpr = _paramsE0;
 
 	_expr0.apply(_this0, _dataRefer0);
-	_params0 += p1.assignStringProp(_paramsE0, { class: 1, ref: 1 });
-	_params0 += ' class="' + p1.escape((!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'))) + '"';
-	_params0 += ' ref="' + p1.escape((!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'))) + '"';
-	var _children0 = '';
 
-	_children0 += '  ' + '\n    ' + (p1.escape((!multiData ? data['prefix'] : p1.getDatasValue(data, 'prefix')))) + '\n';
+	_params0 = _paramsE0;
+	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
+	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	var _compParam0 = [_type0, _params0];
 
-	var _type1 = 'span';
-	var _children1 = '';
+	_compParam0.push('\n    ' + ((!multiData ? data['prefix'] : p1.getDatasValue(data, 'prefix'))));
 
-	_children1 += '    ' + p1.escape((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))) + '\n';
+	var _type1 = p1.components['span'] ? p1.components['span'] : 'span';
+	var _compParam1 = [_type1, null];
 
-	_children0 += '  ' + '<' + _type1 + '>\n' + _children1 + '  ' + '</' + _type1 + '>\n';
+	_compParam1.push((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')));
 
-	_children0 += '  ' + (p1.escape((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix')))) + '\n' + '\n';
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	return '<' + _type0 + _params0 + '>\n' + _children0 + '</' + _type0 + '>\n';
+	_compParam0.push(((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix'))) + '\n');
+
+	return p1.h.apply(null, _compParam0);
 	}
 	},
 	  pageDataCount: {
-	  useString: true,
-	  main: function anonymous(p1,p2,p3,p4,p5
+	  useString: false,
+	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	if(!parent) {
 	  if (data) parent = { data: multiData ? data[0] : data };
 	  else parent = {};
 	  p2.parent = parent;
 	};
 
-	var _type0 = 'div';
-	var _params0 = '';
+	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
+	var _params0 = null;
 	var _paramsE0 = {};
 
 	var _expr0 = p1.exprs['spreadparam'];
@@ -3592,56 +3651,59 @@ return /******/ (function(modules) { // webpackBootstrap
 	_this0.paramsExpr = _paramsE0;
 
 	_expr0.apply(_this0, _dataRefer0);
-	_params0 += p1.assignStringProp(_paramsE0, { class: 1, ref: 1 });
-	_params0 += ' class="' + p1.escape((!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'))) + '"';
-	_params0 += ' ref="' + p1.escape((!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'))) + '"';
-	var _children0 = '';
 
-	_children0 += '  ' + '\n    ' + (p1.escape((!multiData ? data['prefix'] : p1.getDatasValue(data, 'prefix')))) + '\n';
+	_params0 = _paramsE0;
+	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
+	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	var _compParam0 = [_type0, _params0];
 
-	var _type1 = 'span';
-	var _children1 = '';
+	_compParam0.push('\n    ' + ((!multiData ? data['prefix'] : p1.getDatasValue(data, 'prefix'))));
 
-	_children1 += '    ' + p1.escape((!multiData ? data['count'] : p1.getDatasValue(data, 'count'))) + '\n';
+	var _type1 = p1.components['span'] ? p1.components['span'] : 'span';
+	var _compParam1 = [_type1, null];
 
-	_children0 += '  ' + '<' + _type1 + '>\n' + _children1 + '  ' + '</' + _type1 + '>\n';
+	_compParam1.push((!multiData ? data['count'] : p1.getDatasValue(data, 'count')));
 
-	_children0 += '  ' + (p1.escape((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix')))) + '\n' + '\n';
+	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	return '<' + _type0 + _params0 + '>\n' + _children0 + '</' + _type0 + '>\n';
+	_compParam0.push(((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix'))) + '\n');
+
+	return p1.h.apply(null, _compParam0);
 	}
 	},
 	  pageSize: {
-	  useString: true,
-	  fn2: function anonymous(p1,p2,p3,p4,p5
+	  useString: false,
+	  fn2: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _newVars = p1.newContextVars(p1, p2, p3, p4),
-	  parent = _newVars._1,
-	  data = _newVars._2,
-	  multiData = _newVars._3,
-	  _p2 = _newVars._4,
-	  _p3 = _newVars._5;
+	var _p2 = p1.newContextVars(p1, p2, p3),
+	  parent = _p2.parent,
+	  data = _p2.data,
+	  multiData = _p2.multiData;
 
-	var _type0 = 'option';
-	var _params0 = ' key="' + p1.escape(parent.index) + '"'
-	  + ' value="' + p1.escape(parent.data) + '"';
-	var _children0 = '';
+	var _type0 = p1.components['option'] ? p1.components['option'] : 'option';
+	var _params0 = {
+	  'key': parent.index,
+	  'value': parent.data
+	};
+	var _compParam0 = [_type0, _params0];
 
-	_children0 += '      ' + p1.escape(parent.data) + '\n';
+	_compParam0.push(parent.data);
 
-	return '    ' + '<' + _type0 + _params0 + '>\n' + _children0 + '    ' + '</' + _type0 + '>\n';
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn1: function anonymous(p1,p2,p3,p4,p5
+	  fn1: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	var _type0 = 'select';
-	var _params0 = ' class="' + 'fj-form-elem fj-pagn-pagesize' + '"'
-	  + ' value="' + p1.escape((!multiData ? data['pageSize'] : p1.getDatasValue(data, 'pageSize'))) + '"'
-	  + ' onChange="' + p1.escape((!multiData ? data['pageSizeChange'] : p1.getDatasValue(data, 'pageSizeChange'))) + '"';
-	var _children0 = '';
+	var _type0 = p1.components['select'] ? p1.components['select'] : 'select';
+	var _params0 = {
+	  'className': 'fj-form-elem fj-pagn-pagesize',
+	  'value': (!multiData ? data['pageSize'] : p1.getDatasValue(data, 'pageSize')),
+	  'onChange': (!multiData ? data['pageSizeChange'] : p1.getDatasValue(data, 'pageSizeChange'))
+	};
+	var _compParam0 = [_type0, _params0];
 
 	var _expr0 = p1.exprs['each'];
 	var _dataRefer0 = [
@@ -3651,34 +3713,34 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this0 = p1.lightObj();
 	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p3, p1.fn2, p5);
+	_this0.result = p1.exprRet(p1, p2, p1.fn2, p4);
 	_this0.inverse = p1.noop;
 
-	_children0 += _expr0.apply(_this0, _dataRefer0);
+	_compParam0.push(_expr0.apply(_this0, _dataRefer0));
 
-	return '  ' + '<' + _type0 + _params0 + '>\n' + _children0 + '  ' + '</' + _type0 + '>\n';
+	return p1.h.apply(null, _compParam0);
 	},
-	  fn3: function anonymous(p1,p2,p3,p4,p5
+	  fn3: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 
-	return '  ' + p1.escape((!multiData ? data['pageSize'] : p1.getDatasValue(data, 'pageSize'))) + '\n';
+	return (!multiData ? data['pageSize'] : p1.getDatasValue(data, 'pageSize'));
 	},
-	  main: function anonymous(p1,p2,p3,p4,p5
+	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	if(!parent) {
 	  if (data) parent = { data: multiData ? data[0] : data };
 	  else parent = {};
 	  p2.parent = parent;
 	};
 
-	var _type0 = 'div';
-	var _params0 = '';
+	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
+	var _params0 = null;
 	var _paramsE0 = {};
 
 	var _expr0 = p1.exprs['spreadparam'];
@@ -3691,12 +3753,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	_this0.paramsExpr = _paramsE0;
 
 	_expr0.apply(_this0, _dataRefer0);
-	_params0 += p1.assignStringProp(_paramsE0, { class: 1, ref: 1 });
-	_params0 += ' class="' + p1.escape((!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'))) + '"';
-	_params0 += ' ref="' + p1.escape((!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'))) + '"';
-	var _children0 = '';
 
-	_children0 += '  ' + p1.escape((!multiData ? data['prefix'] : p1.getDatasValue(data, 'prefix'))) + '\n';
+	_params0 = _paramsE0;
+	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
+	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	var _compParam0 = [_type0, _params0];
+
+	_compParam0.push((!multiData ? data['prefix'] : p1.getDatasValue(data, 'prefix')));
 
 	var _expr1 = p1.exprs['if'];
 	var _dataRefer1 = [
@@ -3706,14 +3769,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _this1 = p1.lightObj();
 	_this1.useString = p1.useString;
-	_this1.result = p1.exprRet(p1, p2, p3, p1.fn1, p5);
-	_this1.inverse = p1.exprRet(p1, p2, p3, p1.fn3, p5);
+	_this1.result = p1.exprRet(p1, p2, p1.fn1, p4);
+	_this1.inverse = p1.exprRet(p1, p2, p1.fn3, p4);
 
-	_children0 += _expr1.apply(_this1, _dataRefer1);
+	_compParam0.push(_expr1.apply(_this1, _dataRefer1));
 
-	_children0 += '  ' + p1.escape((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix'))) + '\n';
+	_compParam0.push((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix')));
 
-	return '<' + _type0 + _params0 + '>\n' + _children0 + '</' + _type0 + '>\n';
+	return p1.h.apply(null, _compParam0);
 	}
 	}
 	};
@@ -4005,20 +4068,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = {
 	  row: {
-	  useString: true,
-	  main: function anonymous(p1,p2,p3,p4,p5
+	  useString: false,
+	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	if(!parent) {
 	  if (data) parent = { data: multiData ? data[0] : data };
 	  else parent = {};
 	  p2.parent = parent;
 	};
 
-	var _type0 = 'div';
-	var _params0 = '';
+	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
+	var _params0 = null;
 	var _paramsE0 = {};
 
 	var _expr0 = p1.exprs['spreadparam'];
@@ -4031,32 +4094,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	_this0.paramsExpr = _paramsE0;
 
 	_expr0.apply(_this0, _dataRefer0);
-	_params0 += p1.assignStringProp(_paramsE0, { class: 1, style: 1, ref: 1 });
-	_params0 += ' class="' + p1.escape((!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'))) + '"';
-	_params0 += ' style="' + p1.escape((!multiData ? data['styles'] : p1.getDatasValue(data, 'styles'))) + '"';
-	_params0 += ' ref="' + p1.escape((!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'))) + '"';
-	var _children0 = '';
 
-	_children0 += '  ' + p1.escape((!multiData ? data['children'] : p1.getDatasValue(data, 'children'))) + '\n';
+	_params0 = _paramsE0;
+	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
+	_params0['style'] = p1.styleProps((!multiData ? data['styles'] : p1.getDatasValue(data, 'styles')));
+	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	var _compParam0 = [_type0, _params0];
 
-	return '<' + _type0 + _params0 + '>\n' + _children0 + '</' + _type0 + '>\n';
+	_compParam0.push((!multiData ? data['children'] : p1.getDatasValue(data, 'children')));
+
+	return p1.h.apply(null, _compParam0);
 	}
 	},
 	  col: {
-	  useString: true,
-	  main: function anonymous(p1,p2,p3,p4,p5
+	  useString: false,
+	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	if(!parent) {
 	  if (data) parent = { data: multiData ? data[0] : data };
 	  else parent = {};
 	  p2.parent = parent;
 	};
 
-	var _type0 = 'div';
-	var _params0 = '';
+	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
+	var _params0 = null;
 	var _paramsE0 = {};
 
 	var _expr0 = p1.exprs['spreadparam'];
@@ -4069,31 +4133,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	_this0.paramsExpr = _paramsE0;
 
 	_expr0.apply(_this0, _dataRefer0);
-	_params0 += p1.assignStringProp(_paramsE0, { class: 1, ref: 1 });
-	_params0 += ' class="' + p1.escape((!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'))) + '"';
-	_params0 += ' ref="' + p1.escape((!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'))) + '"';
-	var _children0 = '';
 
-	_children0 += '  ' + p1.escape((!multiData ? data['children'] : p1.getDatasValue(data, 'children'))) + '\n';
+	_params0 = _paramsE0;
+	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
+	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	var _compParam0 = [_type0, _params0];
 
-	return '<' + _type0 + _params0 + '>\n' + _children0 + '</' + _type0 + '>\n';
+	_compParam0.push((!multiData ? data['children'] : p1.getDatasValue(data, 'children')));
+
+	return p1.h.apply(null, _compParam0);
 	}
 	},
 	  clearFix: {
-	  useString: true,
-	  main: function anonymous(p1,p2,p3,p4,p5
+	  useString: false,
+	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
 	var parent = p2.parent,
 	  data = p2.data,
-	  multiData = p3.multiData;
+	  multiData = p2.multiData;
 	if(!parent) {
 	  if (data) parent = { data: multiData ? data[0] : data };
 	  else parent = {};
 	  p2.parent = parent;
 	};
 
-	var _type0 = 'div';
-	var _params0 = '';
+	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
+	var _params0 = null;
 	var _paramsE0 = {};
 
 	var _expr0 = p1.exprs['spreadparam'];
@@ -4106,12 +4171,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	_this0.paramsExpr = _paramsE0;
 
 	_expr0.apply(_this0, _dataRefer0);
-	_params0 += p1.assignStringProp(_paramsE0, { class: 1, ref: 1 });
-	_params0 += ' class="' + p1.escape((!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'))) + '"';
-	_params0 += ' ref="' + p1.escape((!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'))) + '"';
-	var _children0 = '';
 
-	return '<' + _type0 + _params0 + ' />\n';
+	_params0 = _paramsE0;
+	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
+	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	var _compParam0 = [_type0, _params0];
+
+	return p1.h.apply(null, _compParam0);
 	}
 	}
 	};
