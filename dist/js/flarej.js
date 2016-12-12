@@ -1025,8 +1025,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function Pagination(props) {
 	    babelHelpers.classCallCheck(this, Pagination);
 	    return babelHelpers.possibleConstructorReturn(this, _Widget.call(this, props, {
-	      pageIndex: parseInt(props.pageIndex, 10),
-	      pageSize: parseInt(props.pageSize, 10)
+	      pageIndex: props.pageIndex,
+	      pageSize: props.pageSize
 	    }));
 	  }
 
@@ -1046,24 +1046,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        pageIndex = _props.pageIndex,
 	        count = _props.count,
 	        pageSize = _props.pageSize;
-
-	    pageIndex = parseInt(pageIndex, 10);
-	    pageSize = parseInt(pageSize, 10);
-	    count = parseInt(count, 10);
-
 	    var indexN = nextProps.pageIndex,
 	        countN = nextProps.count,
 	        pageSizeN = nextProps.pageSize;
 
-	    if (indexN != null) {
-	      indexN = parseInt(indexN, 10);
-	    }
-	    if (pageSizeN != null) {
-	      pageSizeN = parseInt(pageSizeN, 10);
-	    }
-	    if (countN != null) {
-	      countN = parseInt(countN, 10);
-	    }
 
 	    var newState = {},
 	        isSetState = false;

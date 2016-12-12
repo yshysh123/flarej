@@ -76,8 +76,8 @@ class Pagination extends Widget {
   
   constructor(props) {
     super(props, {
-      pageIndex: parseInt(props.pageIndex, 10),
-      pageSize: parseInt(props.pageSize, 10)
+      pageIndex: props.pageIndex,
+      pageSize: props.pageSize
     });
   }
 
@@ -93,24 +93,17 @@ class Pagination extends Widget {
   }
 
   componentWillReceiveProps (nextProps) {
-    let { pageIndex, count, pageSize } = this.props;
-    pageIndex = parseInt(pageIndex, 10);
-    pageSize = parseInt(pageSize, 10);
-    count = parseInt(count, 10);
+    let {
+      pageIndex,
+      count,
+      pageSize
+    } = this.props;
 
     let {
       pageIndex: indexN,
       count: countN,
-      pageSize: pageSizeN } = nextProps;
-    if(indexN != null) {
-      indexN = parseInt(indexN, 10);
-    }
-    if(pageSizeN != null) {
-      pageSizeN = parseInt(pageSizeN, 10);
-    }
-    if(countN != null) {
-      countN = parseInt(countN, 10);
-    }
+      pageSize: pageSizeN
+    } = nextProps;
 
     let newState = {},
       isSetState = false;
