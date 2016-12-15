@@ -114,7 +114,7 @@ class Col extends Component {
       l,
       m,
       s,
-      ms,
+      xs,
       right,
       left,
       shift,
@@ -124,16 +124,16 @@ class Col extends Component {
       rightS,
       leftS,
       shiftS,
-      rightMs,
-      leftMs,
-      shiftMs,
+      rightXs,
+      leftXs,
+      shiftXs,
       children, ...others } = this.props;
 
     const classes = classNames({
       ['fj-col' + l]: l != null,
       ['fj-col-m' + m]: m != null,
       ['fj-col-s' + s]: s != null,
-      ['fj-col-ms' + ms]: ms != null,
+      ['fj-col-xs' + xs]: xs != null,
       ['fj-col-right' + right]: right != null,
       ['fj-col-left' + left]: left != null,
       ['fj-col-shift' + shift]: shift != null,
@@ -143,9 +143,9 @@ class Col extends Component {
       ['fj-col-right-s' + rightS]: rightS != null,
       ['fj-col-left-s' + leftS]: leftS != null,
       ['fj-col-shift-s' + shiftS]: shiftS != null,
-      ['fj-col-right-ms' + rightMs]: rightMs != null,
-      ['fj-col-left-ms' + leftMs]: leftMs != null,
-      ['fj-col-shift-ms' + shiftMs]: shiftMs != null,
+      ['fj-col-right-xs' + rightXs]: rightXs != null,
+      ['fj-col-left-xs' + leftXs]: leftXs != null,
+      ['fj-col-shift-xs' + shiftXs]: shiftXs != null,
       [className]: className
     });
 
@@ -172,13 +172,13 @@ class ClearFix extends Component {
       l,
       m,
       s,
-      ms, ...others } = this.props;
+      xs, ...others } = this.props;
 
     const classes = classNames({
       ['fj-clearfix']: l != null,
       ['fj-clearfix-m']: m != null,
       ['fj-clearfix-s']: s != null,
-      ['fj-clearfix-ms']: ms != null,
+      ['fj-clearfix-xs']: xs != null,
       [className]: className
     });
 

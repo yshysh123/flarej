@@ -3967,7 +3967,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        l = _props3.l,
 	        m = _props3.m,
 	        s = _props3.s,
-	        ms = _props3.ms,
+	        xs = _props3.xs,
 	        right = _props3.right,
 	        left = _props3.left,
 	        shift = _props3.shift,
@@ -3977,14 +3977,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        rightS = _props3.rightS,
 	        leftS = _props3.leftS,
 	        shiftS = _props3.shiftS,
-	        rightMs = _props3.rightMs,
-	        leftMs = _props3.leftMs,
-	        shiftMs = _props3.shiftMs,
+	        rightXs = _props3.rightXs,
+	        leftXs = _props3.leftXs,
+	        shiftXs = _props3.shiftXs,
 	        children = _props3.children,
-	        others = babelHelpers.objectWithoutProperties(_props3, ['className', 'l', 'm', 's', 'ms', 'right', 'left', 'shift', 'rightM', 'leftM', 'shiftM', 'rightS', 'leftS', 'shiftS', 'rightMs', 'leftMs', 'shiftMs', 'children']);
+	        others = babelHelpers.objectWithoutProperties(_props3, ['className', 'l', 'm', 's', 'xs', 'right', 'left', 'shift', 'rightM', 'leftM', 'shiftM', 'rightS', 'leftS', 'shiftS', 'rightXs', 'leftXs', 'shiftXs', 'children']);
 
 
-	    var classes = (0, _classnames2.default)((_classNames3 = {}, babelHelpers.defineProperty(_classNames3, 'fj-col' + l, l != null), babelHelpers.defineProperty(_classNames3, 'fj-col-m' + m, m != null), babelHelpers.defineProperty(_classNames3, 'fj-col-s' + s, s != null), babelHelpers.defineProperty(_classNames3, 'fj-col-ms' + ms, ms != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right' + right, right != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left' + left, left != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift' + shift, shift != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-m' + rightM, rightM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-m' + leftM, leftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-m' + shiftM, shiftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-s' + rightS, rightS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-s' + leftS, leftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-s' + shiftS, shiftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-ms' + rightMs, rightMs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-ms' + leftMs, leftMs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-ms' + shiftMs, shiftMs != null), babelHelpers.defineProperty(_classNames3, className, className), _classNames3));
+	    var classes = (0, _classnames2.default)((_classNames3 = {}, babelHelpers.defineProperty(_classNames3, 'fj-col' + l, l != null), babelHelpers.defineProperty(_classNames3, 'fj-col-m' + m, m != null), babelHelpers.defineProperty(_classNames3, 'fj-col-s' + s, s != null), babelHelpers.defineProperty(_classNames3, 'fj-col-xs' + xs, xs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right' + right, right != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left' + left, left != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift' + shift, shift != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-m' + rightM, rightM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-m' + leftM, leftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-m' + shiftM, shiftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-s' + rightS, rightS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-s' + leftS, leftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-s' + shiftS, shiftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-xs' + rightXs, rightXs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-xs' + leftXs, leftXs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-xs' + shiftXs, shiftXs != null), babelHelpers.defineProperty(_classNames3, className, className), _classNames3));
 
 	    return this.template({
 	      props: others,
@@ -4023,11 +4023,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        l = _props4.l,
 	        m = _props4.m,
 	        s = _props4.s,
-	        ms = _props4.ms,
-	        others = babelHelpers.objectWithoutProperties(_props4, ['className', 'l', 'm', 's', 'ms']);
+	        xs = _props4.xs,
+	        others = babelHelpers.objectWithoutProperties(_props4, ['className', 'l', 'm', 's', 'xs']);
 
 
-	    var classes = (0, _classnames2.default)((_classNames4 = {}, babelHelpers.defineProperty(_classNames4, 'fj-clearfix', l != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-m', m != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-s', s != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-ms', ms != null), babelHelpers.defineProperty(_classNames4, className, className), _classNames4));
+	    var classes = (0, _classnames2.default)((_classNames4 = {}, babelHelpers.defineProperty(_classNames4, 'fj-clearfix', l != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-m', m != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-s', s != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-xs', xs != null), babelHelpers.defineProperty(_classNames4, className, className), _classNames4));
 
 	    return this.template({
 	      props: others,
