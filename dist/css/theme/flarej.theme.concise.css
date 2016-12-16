@@ -5,6 +5,7 @@
 */
 .fj-pagn-btn {
   border-color: #e1e1e1;
+  background-color: #fff;
 }
 .fj-pagn-btn i.fa {
   color: #ccc;
@@ -24,10 +25,11 @@
 }
 .fj-pagn-pageno {
   border-color: #e1e1e1;
+  background-color: #fff;
   color: #333;
 }
 .fj-pagn-pageno-c {
-  border-color: #fff;
+  border-color: transparent;
   color: #48a7e7;
 }
 .fj-pagn-pageno:hover,

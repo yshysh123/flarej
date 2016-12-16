@@ -1,6 +1,6 @@
 {
   "name": "flarej",
-  "version": "0.1.3-rc.26",
+  "version": "0.1.3-rc.27",
   "description": "A responsive ui component library",
   "main": "lib/base.js",
   "files": [
@@ -73,7 +73,7 @@
     "yargs": "^4.2.0"
   },
   "dependencies": {
-    "nornj": "^0.4.0-rc.13",
+    "nornj": "^0.4.0-rc.15",
     "nornj-react": "^0.4.0-rc.3"
   }
 }
