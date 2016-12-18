@@ -1072,7 +1072,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  Pagination.prototype.componentWillMount = function componentWillMount() {
 	    //初始化时默认执行刷新
-	    this.refresh();
+	    this.props.initialRefresh && this.refresh();
 	  };
 
 	  Pagination.prototype.getPageCount = function getPageCount() {
@@ -1213,6 +1213,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  hasPages: true, //是否显示页数链接
 	  hasBtnGo: true,
 	  emptyText: '没有数据',
+	  initialRefresh: true,
 	  responsive: false,
 	  responsiveDelay: 70,
 	  responsiveOnlyWidth: true,

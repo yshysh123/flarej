@@ -43,6 +43,7 @@ class Pagination extends Widget {
     hasPages: true,                         //是否显示页数链接
     hasBtnGo: true,
     emptyText: '没有数据',
+    initialRefresh: true,
     responsive: false,
     responsiveDelay: 70,
     responsiveOnlyWidth: true,
@@ -126,7 +127,7 @@ class Pagination extends Widget {
 
   componentWillMount () {
     //初始化时默认执行刷新
-    this.refresh();
+    this.props.initialRefresh && this.refresh();
   }
 
   getPageCount(pageSize = this.state.pageSize, count = this.props.count) {
