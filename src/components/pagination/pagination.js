@@ -43,7 +43,6 @@ class Pagination extends Widget {
     hasPages: true,                         //是否显示页数链接
     hasBtnGo: true,
     emptyText: '没有数据',
-    initialRefresh: true,
     responsive: false,
     responsiveDelay: 70,
     responsiveOnlyWidth: true,
@@ -126,8 +125,10 @@ class Pagination extends Widget {
   }
 
   componentWillMount () {
+    const { pageIndex, pageSize } = this.state;
+
     //初始化时默认执行刷新
-    this.props.initialRefresh && this.refresh();
+    this.refresh(pageIndex, pageSize, true);
   }
 
   getPageCount(pageSize = this.state.pageSize, count = this.props.count) {
@@ -154,7 +155,7 @@ class Pagination extends Widget {
   }
 
   //刷新分页
-  refresh(pageIndex = this.state.pageIndex, pageSize = this.state.pageSize) {
+  refresh(pageIndex = this.state.pageIndex, pageSize = this.state.pageSize, isInit) {
     let props = this.props,
       pageCount = this.getPageCount(pageSize);
 
@@ -174,7 +175,7 @@ class Pagination extends Widget {
     });
 
     if(props.onChange) {
-      props.onChange(pageIndex, pageSize);
+      props.onChange(pageIndex, pageSize, isInit);
     }
   }
 
