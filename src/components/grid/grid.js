@@ -2,7 +2,7 @@
 import { compileH } from 'nornj';
 import { registerTmpl } from 'nornj-react';
 import classNames from 'classnames';
-import tmpl from './gridLayout.t.html';
+import tmpl from './grid.t.html';
 const templateRow = compileH(tmpl.row);
 
 /**

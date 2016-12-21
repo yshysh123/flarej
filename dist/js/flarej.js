@@ -77,7 +77,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
-	var _gridLayout = __webpack_require__(30);
+	var _grid = __webpack_require__(30);
 
 	var _gesture = __webpack_require__(33);
 
@@ -86,11 +86,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	_core2.default.config = _config2.default;
 	babelHelpers.extends(_core2.default, utils, {
 	  Pagination: _pagination2.default,
-	  Row: _gridLayout.Row,
-	  RowLeft: _gridLayout.RowLeft,
-	  RowRight: _gridLayout.RowRight,
-	  Col: _gridLayout.Col,
-	  ClearFix: _gridLayout.ClearFix,
+	  Row: _grid.Row,
+	  RowLeft: _grid.RowLeft,
+	  RowRight: _grid.RowRight,
+	  Col: _grid.Col,
+	  ClearFix: _grid.ClearFix,
 	  Gesture: _gesture2.default
 	});
 
@@ -3783,14 +3783,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _gridLayout = __webpack_require__(31);
+	var _grid = __webpack_require__(31);
 
-	Object.keys(_gridLayout).forEach(function (key) {
+	Object.keys(_grid).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
 	  Object.defineProperty(exports, key, {
 	    enumerable: true,
 	    get: function get() {
-	      return _gridLayout[key];
+	      return _grid[key];
 	    }
 	  });
 	});
@@ -3818,11 +3818,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = babelHelpers.interopRequireDefault(_classnames);
 
-	var _gridLayoutT = __webpack_require__(32);
+	var _gridT = __webpack_require__(32);
 
-	var _gridLayoutT2 = babelHelpers.interopRequireDefault(_gridLayoutT);
+	var _gridT2 = babelHelpers.interopRequireDefault(_gridT);
 
-	var templateRow = (0, _nornj.compileH)(_gridLayoutT2.default.row);
+	var templateRow = (0, _nornj.compileH)(_gridT2.default.row);
 
 	/**
 	 * Grid row
@@ -3955,7 +3955,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var Col = (_dec4 = (0, _nornjReact.registerTmpl)({
 	  name: 'fj-Col',
-	  template: _gridLayoutT2.default.col
+	  template: _gridT2.default.col
 	}), _dec4(_class4 = function (_Component4) {
 	  babelHelpers.inherits(Col, _Component4);
 
@@ -4011,7 +4011,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var ClearFix = (_dec5 = (0, _nornjReact.registerTmpl)({
 	  name: 'fj-ClearFix',
-	  template: _gridLayoutT2.default.clearFix
+	  template: _gridT2.default.clearFix
 	}), _dec5(_class5 = function (_Component5) {
 	  babelHelpers.inherits(ClearFix, _Component5);
 

@@ -7,8 +7,8 @@
 目前已完成的组件(点击查看示例)：
 
 * [Pagination(分页)](https://github.com/joe-sky/flarej/blob/master/examples/pagination.html)
-* [GridLayout(栅格布局)](https://github.com/joe-sky/flarej/blob/master/examples/gridLayout.html)
-* [Gesture(触摸手势)](https://github.com/joe-sky/flarej/blob/master/examples/gesture.html)
+* [Grid(栅格)](https://github.com/joe-sky/flarej/blob/master/examples/grid.html)
+* [Gesture(手势)](https://github.com/joe-sky/flarej/blob/master/examples/gesture.html)
 
 ### 依赖的项目
 

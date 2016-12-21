@@ -9,7 +9,7 @@ import {
   RowRight,
   Col,
   ClearFix
-} from './components/gridLayout';
+} from './components/grid';
 import Gesture from './components/gesture';
 
 fj.config = config;
