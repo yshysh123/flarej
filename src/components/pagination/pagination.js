@@ -1,5 +1,5 @@
 ﻿import { Component, PropTypes } from 'react';
-import { registerFilter } from 'nornj';
+import { registerFilter, getDataValue } from 'nornj';
 import { registerTmpl } from 'nornj-react';
 import classNames from 'classnames';
 import Widget from '../widget';
@@ -228,7 +228,8 @@ class Pagination extends Widget {
 
 registerFilter({
   clickBtn: function(fn, type) {
-    let { pageIndex, pageCount } = this.data;
+    const pageIndex = getDataValue(this.data, 'pageIndex'),
+      pageCount = getDataValue(this.data, 'pageCount');
 
     switch(type){
       case 'first':
@@ -266,10 +267,10 @@ registerFilter({
     }
   },
   isCurrentPage: function(no) {
-    return parseInt(no, 10) == this.data.pageIndex ? '-c' : '';
+    return parseInt(no, 10) == getDataValue(this.data, 'pageIndex') ? '-c' : '';
   },
   showPartPage: function(no, type) {
-    let { pageCount } = this.data;
+    const pageCount = getDataValue(this.data, 'pageCount');
     switch(type){
       case '1':  //当前页码<=4:左侧显示所有+当前页码+右侧2个页码+...+尾页
         return no <= 4;

@@ -77,9 +77,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _pagination2 = babelHelpers.interopRequireDefault(_pagination);
 
-	var _grid = __webpack_require__(30);
+	var _grid = __webpack_require__(29);
 
-	var _gesture = __webpack_require__(33);
+	var _gesture = __webpack_require__(32);
 
 	var _gesture2 = babelHelpers.interopRequireDefault(_gesture);
 
@@ -1002,7 +1002,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var utils = babelHelpers.interopRequireWildcard(_utils);
 
-	var _paginationT = __webpack_require__(29);
+	var _paginationT = __webpack_require__(28);
 
 	var _paginationT2 = babelHelpers.interopRequireDefault(_paginationT);
 
@@ -1255,10 +1255,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  clickBtn: function clickBtn(fn, type) {
 	    var _this3 = this;
 
-	    var _data = this.data,
-	        pageIndex = _data.pageIndex,
-	        pageCount = _data.pageCount;
-
+	    var pageIndex = (0, _nornj.getDataValue)(this.data, 'pageIndex'),
+	        pageCount = (0, _nornj.getDataValue)(this.data, 'pageCount');
 
 	    switch (type) {
 	      case 'first':
@@ -1298,11 +1296,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  },
 	  isCurrentPage: function isCurrentPage(no) {
-	    return parseInt(no, 10) == this.data.pageIndex ? '-c' : '';
+	    return parseInt(no, 10) == (0, _nornj.getDataValue)(this.data, 'pageIndex') ? '-c' : '';
 	  },
 	  showPartPage: function showPartPage(no, type) {
-	    var pageCount = this.data.pageCount;
-
+	    var pageCount = (0, _nornj.getDataValue)(this.data, 'pageCount');
 	    switch (type) {
 	      case '1':
 	        //当前页码<=4:左侧显示所有+当前页码+右侧2个页码+...+尾页
@@ -1608,7 +1605,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var utils = babelHelpers.interopRequireWildcard(_utils);
 
-	__webpack_require__(28);
+	__webpack_require__(27);
 
 	var win = window;
 
@@ -1781,7 +1778,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 * @providesModule update
 	 */
 
 	/* global hasOwnProperty:true */
@@ -1791,8 +1787,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _prodInvariant = __webpack_require__(24),
 	    _assign = __webpack_require__(25);
 
-	var keyOf = __webpack_require__(26);
-	var invariant = __webpack_require__(27);
+	var invariant = __webpack_require__(26);
 	var hasOwnProperty = {}.hasOwnProperty;
 
 	function shallowCopy(x) {
@@ -1805,12 +1800,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 
-	var COMMAND_PUSH = keyOf({ $push: null });
-	var COMMAND_UNSHIFT = keyOf({ $unshift: null });
-	var COMMAND_SPLICE = keyOf({ $splice: null });
-	var COMMAND_SET = keyOf({ $set: null });
-	var COMMAND_MERGE = keyOf({ $merge: null });
-	var COMMAND_APPLY = keyOf({ $apply: null });
+	var COMMAND_PUSH = '$push';
+	var COMMAND_UNSHIFT = '$unshift';
+	var COMMAND_SPLICE = '$splice';
+	var COMMAND_SET = '$set';
+	var COMMAND_MERGE = '$merge';
+	var COMMAND_APPLY = '$apply';
 
 	var ALL_COMMANDS_LIST = [COMMAND_PUSH, COMMAND_UNSHIFT, COMMAND_SPLICE, COMMAND_SET, COMMAND_MERGE, COMMAND_APPLY];
 
@@ -1893,6 +1888,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	// shim for using process in browser
+
 	var process = module.exports = {};
 
 	// cached from whatever global is present so that test runners that stub it
@@ -1903,84 +1899,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	var cachedSetTimeout;
 	var cachedClearTimeout;
 
-	function defaultSetTimout() {
-	    throw new Error('setTimeout has not been defined');
-	}
-	function defaultClearTimeout () {
-	    throw new Error('clearTimeout has not been defined');
-	}
 	(function () {
-	    try {
-	        if (typeof setTimeout === 'function') {
-	            cachedSetTimeout = setTimeout;
-	        } else {
-	            cachedSetTimeout = defaultSetTimout;
-	        }
-	    } catch (e) {
-	        cachedSetTimeout = defaultSetTimout;
+	  try {
+	    cachedSetTimeout = setTimeout;
+	  } catch (e) {
+	    cachedSetTimeout = function () {
+	      throw new Error('setTimeout is not defined');
 	    }
-	    try {
-	        if (typeof clearTimeout === 'function') {
-	            cachedClearTimeout = clearTimeout;
-	        } else {
-	            cachedClearTimeout = defaultClearTimeout;
-	        }
-	    } catch (e) {
-	        cachedClearTimeout = defaultClearTimeout;
+	  }
+	  try {
+	    cachedClearTimeout = clearTimeout;
+	  } catch (e) {
+	    cachedClearTimeout = function () {
+	      throw new Error('clearTimeout is not defined');
 	    }
+	  }
 	} ())
-	function runTimeout(fun) {
-	    if (cachedSetTimeout === setTimeout) {
-	        //normal enviroments in sane situations
-	        return setTimeout(fun, 0);
-	    }
-	    // if setTimeout wasn't available but was latter defined
-	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-	        cachedSetTimeout = setTimeout;
-	        return setTimeout(fun, 0);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedSetTimeout(fun, 0);
-	    } catch(e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-	            return cachedSetTimeout.call(null, fun, 0);
-	        } catch(e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-	            return cachedSetTimeout.call(this, fun, 0);
-	        }
-	    }
-
-
-	}
-	function runClearTimeout(marker) {
-	    if (cachedClearTimeout === clearTimeout) {
-	        //normal enviroments in sane situations
-	        return clearTimeout(marker);
-	    }
-	    // if clearTimeout wasn't available but was latter defined
-	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-	        cachedClearTimeout = clearTimeout;
-	        return clearTimeout(marker);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedClearTimeout(marker);
-	    } catch (e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-	            return cachedClearTimeout.call(null, marker);
-	        } catch (e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-	            return cachedClearTimeout.call(this, marker);
-	        }
-	    }
-
-
-
-	}
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -2005,7 +1939,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = runTimeout(cleanUpNextTick);
+	    var timeout = cachedSetTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -2022,7 +1956,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    runClearTimeout(timeout);
+	    cachedClearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -2034,7 +1968,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        runTimeout(drainQueue);
+	        cachedSetTimeout(drainQueue, 0);
 	    }
 	};
 
@@ -2086,7 +2020,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 * @providesModule reactProdInvariant
 	 * 
 	 */
 	'use strict';
@@ -2209,45 +2142,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 26 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 */
-
-	/**
-	 * Allows extraction of a minified key. Let's the build system minify keys
-	 * without losing the ability to dynamically use key strings as values
-	 * themselves. Pass in an object with a single key/val pair and it will return
-	 * you the string key of that single record. Suppose you want to grab the
-	 * value for a key 'className' inside of an object. Key/val minification may
-	 * have aliased that key to be 'xa12'. keyOf({className: null}) will return
-	 * 'xa12' in that case. Resolve keys you want to use once at startup time, then
-	 * reuse those resolutions.
-	 */
-	var keyOf = function keyOf(oneKeyObj) {
-	  var key;
-	  for (key in oneKeyObj) {
-	    if (!oneKeyObj.hasOwnProperty(key)) {
-	      continue;
-	    }
-	    return key;
-	  }
-	  return null;
-	};
-
-	module.exports = keyOf;
-
-/***/ },
-/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2302,7 +2196,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)))
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2327,13 +2221,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  emptyElem: function emptyElem() {
 	    return _react2.default.createElement('div', { className: 'fj-empty-elem' });
 	  },
-	  cloneElem: function cloneElem(props) {
-	    return (0, _react.cloneElement)(this.result(), props);
+	  cloneElem: function cloneElem(props, options) {
+	    return (0, _react.cloneElement)(options.result(), props);
 	  }
 	});
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2343,172 +2237,115 @@ return /******/ (function(modules) { // webpackBootstrap
 	  useString: false,
 	  fn4: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _p2 = p1.newContextVars(p1, p2, p3),
-	  parent = _p2.parent,
-	  data = _p2.data,
-	  multiData = _p2.multiData;
+	p2 = p1.newContext(p2, p3);
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value0 = parent.index;
+	var _value0 = p2.index;
 
 	var _filter0 = p1.filters['iscurrentpage'];
 	if (!_filter0) {
 	  p1.warn('iscurrentpage', 'filter');
 	}
 	else {
-	  var _thisF0 = p1.lightObj();
-	  _thisF0.useString = p1.useString;
-	  _thisF0.data = parent.data;
-	  _thisF0.parent = parent.parent;
-	  _thisF0.index = parent.index;
-
-	  _value0 = _filter0.apply(_thisF0, [_value0]);
+	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value1 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter1 = p1.filters['clickbtn'];
 	if (!_filter1) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF1 = p1.lightObj();
-	  _thisF1.useString = p1.useString;
-	  _thisF1.data = parent.data;
-	  _thisF1.parent = parent.parent;
-	  _thisF1.index = parent.index;
-
-	  _value1 = _filter1.apply(_thisF1, [_value1, 'index']);
+	  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params0 = {
-	  'key': parent.index,
+	  'key': p2.index,
 	  'className': 'fj-pagn-pageno' + (_value0),
-	  'title': '第' + (parent.index) + '页',
+	  'title': '第' + (p2.index) + '页',
 	  'onClick': _value1
 	};
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push(parent.index);
+	_compParam0.push(p2.index);
 
 	return p1.h.apply(null, _compParam0);
 	},
 	  fn3: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['for'];
 	var _dataRefer0 = [
-	  '1',  (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))
+	  '1',  p1.getDataValue(p2.data, 'pageCount'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn4, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'for', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.useString = p1.useString;
-	_this0.data = parent.data;
-	_this0.result = p1.exprRet(p1, p2, p1.fn4, p4);
-	_this0.inverse = p1.noop;
-
-	return _expr0.apply(_this0, _dataRefer0);
+	return _expr0.apply(p2, _dataRefer0);
 	},
 	  fn7: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _p2 = p1.newContextVars(p1, p2, p3),
-	  parent = _p2.parent,
-	  data = _p2.data,
-	  multiData = _p2.multiData;
+	p2 = p1.newContext(p2, p3);
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value0 = parent.index;
+	var _value0 = p2.index;
 
 	var _filter0 = p1.filters['iscurrentpage'];
 	if (!_filter0) {
 	  p1.warn('iscurrentpage', 'filter');
 	}
 	else {
-	  var _thisF0 = p1.lightObj();
-	  _thisF0.useString = p1.useString;
-	  _thisF0.data = parent.data;
-	  _thisF0.parent = parent.parent;
-	  _thisF0.index = parent.index;
-
-	  _value0 = _filter0.apply(_thisF0, [_value0]);
+	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value1 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter1 = p1.filters['clickbtn'];
 	if (!_filter1) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF1 = p1.lightObj();
-	  _thisF1.useString = p1.useString;
-	  _thisF1.data = parent.data;
-	  _thisF1.parent = parent.parent;
-	  _thisF1.index = parent.index;
-
-	  _value1 = _filter1.apply(_thisF1, [_value1, 'index']);
+	  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params0 = {
-	  'key': parent.index,
+	  'key': p2.index,
 	  'className': 'fj-pagn-pageno' + (_value0),
-	  'title': '第' + (parent.index) + '页',
+	  'title': '第' + (p2.index) + '页',
 	  'onClick': _value1
 	};
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push(parent.index);
+	_compParam0.push(p2.index);
 
 	return p1.h.apply(null, _compParam0);
 	},
 	  fn6: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 	var ret = [];
 
 	var _expr0 = p1.exprs['for'];
-	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
+	var _value0 = p1.getDataValue(p2.data, 'pageIndex');
 
 	var _filter0 = p1.filters['add'];
 	if (!_filter0) {
 	  p1.warn('add', 'filter');
 	}
 	else {
-	  var _thisF0 = p1.lightObj();
-	  _thisF0.useString = p1.useString;
-
-	  _value0 = _filter0.apply(_thisF0, [_value0, '2']);
+	  _value0 = _filter0.apply(p2, [_value0, '2', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _dataRefer0 = [
-	  '1',  _value0
+	  '1',  _value0,{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn7, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'for', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.useString = p1.useString;
-	_this0.data = parent.data;
-	_this0.result = p1.exprRet(p1, p2, p1.fn7, p4);
-	_this0.inverse = p1.noop;
-
-	ret.push(_expr0.apply(_this0, _dataRefer0));
+	ret.push(_expr0.apply(p2, _dataRefer0));
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value1 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter1 = p1.filters['clickbtn'];
 	if (!_filter1) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF1 = p1.lightObj();
-	  _thisF1.useString = p1.useString;
-	  _thisF1.data = parent.data;
-	  _thisF1.parent = parent.parent;
-	  _thisF1.index = parent.index;
-
-	  _value1 = _filter1.apply(_thisF1, [_value1, 'next']);
+	  _value1 = _filter1.apply(p2, [_value1, 'next', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params0 = {
 	  'key': 'ellipsis2',
@@ -2521,104 +2358,74 @@ return /******/ (function(modules) { // webpackBootstrap
 	ret.push(p1.h.apply(null, _compParam0));
 
 	var _type1 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value2 = (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'));
+	var _value2 = p1.getDataValue(p2.data, 'pageCount');
 
 	var _filter2 = p1.filters['iscurrentpage'];
 	if (!_filter2) {
 	  p1.warn('iscurrentpage', 'filter');
 	}
 	else {
-	  var _thisF2 = p1.lightObj();
-	  _thisF2.useString = p1.useString;
-	  _thisF2.data = parent.data;
-	  _thisF2.parent = parent.parent;
-	  _thisF2.index = parent.index;
-
-	  _value2 = _filter2.apply(_thisF2, [_value2]);
+	  _value2 = _filter2.apply(p2, [_value2, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value3 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value3 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter3 = p1.filters['clickbtn'];
 	if (!_filter3) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF3 = p1.lightObj();
-	  _thisF3.useString = p1.useString;
-	  _thisF3.data = parent.data;
-	  _thisF3.parent = parent.parent;
-	  _thisF3.index = parent.index;
-
-	  _value3 = _filter3.apply(_thisF3, [_value3, 'last']);
+	  _value3 = _filter3.apply(p2, [_value3, 'last', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params1 = {
-	  'key': (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')),
+	  'key': p1.getDataValue(p2.data, 'pageCount'),
 	  'className': 'fj-pagn-pageno' + (_value2),
-	  'title': '第' + ((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))) + '页',
+	  'title': '第' + (p1.getDataValue(p2.data, 'pageCount')) + '页',
 	  'onClick': _value3
 	};
 	var _compParam1 = [_type1, _params1];
 
-	_compParam1.push((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')));
+	_compParam1.push(p1.getDataValue(p2.data, 'pageCount'));
 
 	ret.push(p1.h.apply(null, _compParam1));
 	return ret;
 	},
 	  fn10: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _p2 = p1.newContextVars(p1, p2, p3),
-	  parent = _p2.parent,
-	  data = _p2.data,
-	  multiData = _p2.multiData;
+	p2 = p1.newContext(p2, p3);
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value0 = parent.index;
+	var _value0 = p2.index;
 
 	var _filter0 = p1.filters['iscurrentpage'];
 	if (!_filter0) {
 	  p1.warn('iscurrentpage', 'filter');
 	}
 	else {
-	  var _thisF0 = p1.lightObj();
-	  _thisF0.useString = p1.useString;
-	  _thisF0.data = parent.data;
-	  _thisF0.parent = parent.parent;
-	  _thisF0.index = parent.index;
-
-	  _value0 = _filter0.apply(_thisF0, [_value0]);
+	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value1 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter1 = p1.filters['clickbtn'];
 	if (!_filter1) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF1 = p1.lightObj();
-	  _thisF1.useString = p1.useString;
-	  _thisF1.data = parent.data;
-	  _thisF1.parent = parent.parent;
-	  _thisF1.index = parent.index;
-
-	  _value1 = _filter1.apply(_thisF1, [_value1, 'index']);
+	  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params0 = {
-	  'key': parent.index,
+	  'key': p2.index,
 	  'className': 'fj-pagn-pageno' + (_value0),
-	  'title': '第' + (parent.index) + '页',
+	  'title': '第' + (p2.index) + '页',
 	  'onClick': _value1
 	};
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push(parent.index);
+	_compParam0.push(p2.index);
 
 	return p1.h.apply(null, _compParam0);
 	},
 	  fn9: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 	var ret = [];
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
@@ -2629,28 +2436,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('iscurrentpage', 'filter');
 	}
 	else {
-	  var _thisF0 = p1.lightObj();
-	  _thisF0.useString = p1.useString;
-	  _thisF0.data = parent.data;
-	  _thisF0.parent = parent.parent;
-	  _thisF0.index = parent.index;
-
-	  _value0 = _filter0.apply(_thisF0, [_value0]);
+	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value1 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter1 = p1.filters['clickbtn'];
 	if (!_filter1) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF1 = p1.lightObj();
-	  _thisF1.useString = p1.useString;
-	  _thisF1.data = parent.data;
-	  _thisF1.parent = parent.parent;
-	  _thisF1.index = parent.index;
-
-	  _value1 = _filter1.apply(_thisF1, [_value1, 'first']);
+	  _value1 = _filter1.apply(p2, [_value1, 'first', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params0 = {
 	  'key': '1',
@@ -2665,20 +2460,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	ret.push(p1.h.apply(null, _compParam0));
 
 	var _type1 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value2 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value2 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter2 = p1.filters['clickbtn'];
 	if (!_filter2) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF2 = p1.lightObj();
-	  _thisF2.useString = p1.useString;
-	  _thisF2.data = parent.data;
-	  _thisF2.parent = parent.parent;
-	  _thisF2.index = parent.index;
-
-	  _value2 = _filter2.apply(_thisF2, [_value2, 'prev']);
+	  _value2 = _filter2.apply(p2, [_value2, 'prev', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params1 = {
 	  'key': 'ellipsis1',
@@ -2691,58 +2480,40 @@ return /******/ (function(modules) { // webpackBootstrap
 	ret.push(p1.h.apply(null, _compParam1));
 
 	var _expr0 = p1.exprs['for'];
-	var _value3 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
+	var _value3 = p1.getDataValue(p2.data, 'pageIndex');
 
 	var _filter3 = p1.filters['add'];
 	if (!_filter3) {
 	  p1.warn('add', 'filter');
 	}
 	else {
-	  var _thisF3 = p1.lightObj();
-	  _thisF3.useString = p1.useString;
-
-	  _value3 = _filter3.apply(_thisF3, [_value3, '-2']);
+	  _value3 = _filter3.apply(p2, [_value3, '-2', { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value4 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
+	var _value4 = p1.getDataValue(p2.data, 'pageIndex');
 
 	var _filter4 = p1.filters['add'];
 	if (!_filter4) {
 	  p1.warn('add', 'filter');
 	}
 	else {
-	  var _thisF4 = p1.lightObj();
-	  _thisF4.useString = p1.useString;
-
-	  _value4 = _filter4.apply(_thisF4, [_value4, '2']);
+	  _value4 = _filter4.apply(p2, [_value4, '2', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _dataRefer0 = [
-	  _value3,  _value4
+	  _value3,  _value4,{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn10, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'for', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.useString = p1.useString;
-	_this0.data = parent.data;
-	_this0.result = p1.exprRet(p1, p2, p1.fn10, p4);
-	_this0.inverse = p1.noop;
-
-	ret.push(_expr0.apply(_this0, _dataRefer0));
+	ret.push(_expr0.apply(p2, _dataRefer0));
 
 	var _type2 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value5 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value5 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter5 = p1.filters['clickbtn'];
 	if (!_filter5) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF5 = p1.lightObj();
-	  _thisF5.useString = p1.useString;
-	  _thisF5.data = parent.data;
-	  _thisF5.parent = parent.parent;
-	  _thisF5.index = parent.index;
-
-	  _value5 = _filter5.apply(_thisF5, [_value5, 'next']);
+	  _value5 = _filter5.apply(p2, [_value5, 'next', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params2 = {
 	  'key': 'ellipsis2',
@@ -2755,104 +2526,74 @@ return /******/ (function(modules) { // webpackBootstrap
 	ret.push(p1.h.apply(null, _compParam2));
 
 	var _type3 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value6 = (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'));
+	var _value6 = p1.getDataValue(p2.data, 'pageCount');
 
 	var _filter6 = p1.filters['iscurrentpage'];
 	if (!_filter6) {
 	  p1.warn('iscurrentpage', 'filter');
 	}
 	else {
-	  var _thisF6 = p1.lightObj();
-	  _thisF6.useString = p1.useString;
-	  _thisF6.data = parent.data;
-	  _thisF6.parent = parent.parent;
-	  _thisF6.index = parent.index;
-
-	  _value6 = _filter6.apply(_thisF6, [_value6]);
+	  _value6 = _filter6.apply(p2, [_value6, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value7 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value7 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter7 = p1.filters['clickbtn'];
 	if (!_filter7) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF7 = p1.lightObj();
-	  _thisF7.useString = p1.useString;
-	  _thisF7.data = parent.data;
-	  _thisF7.parent = parent.parent;
-	  _thisF7.index = parent.index;
-
-	  _value7 = _filter7.apply(_thisF7, [_value7, 'last']);
+	  _value7 = _filter7.apply(p2, [_value7, 'last', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params3 = {
-	  'key': (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')),
+	  'key': p1.getDataValue(p2.data, 'pageCount'),
 	  'className': 'fj-pagn-pageno' + (_value6),
-	  'title': '第' + ((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))) + '页',
+	  'title': '第' + (p1.getDataValue(p2.data, 'pageCount')) + '页',
 	  'onClick': _value7
 	};
 	var _compParam3 = [_type3, _params3];
 
-	_compParam3.push((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')));
+	_compParam3.push(p1.getDataValue(p2.data, 'pageCount'));
 
 	ret.push(p1.h.apply(null, _compParam3));
 	return ret;
 	},
 	  fn13: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _p2 = p1.newContextVars(p1, p2, p3),
-	  parent = _p2.parent,
-	  data = _p2.data,
-	  multiData = _p2.multiData;
+	p2 = p1.newContext(p2, p3);
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value0 = parent.index;
+	var _value0 = p2.index;
 
 	var _filter0 = p1.filters['iscurrentpage'];
 	if (!_filter0) {
 	  p1.warn('iscurrentpage', 'filter');
 	}
 	else {
-	  var _thisF0 = p1.lightObj();
-	  _thisF0.useString = p1.useString;
-	  _thisF0.data = parent.data;
-	  _thisF0.parent = parent.parent;
-	  _thisF0.index = parent.index;
-
-	  _value0 = _filter0.apply(_thisF0, [_value0]);
+	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value1 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter1 = p1.filters['clickbtn'];
 	if (!_filter1) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF1 = p1.lightObj();
-	  _thisF1.useString = p1.useString;
-	  _thisF1.data = parent.data;
-	  _thisF1.parent = parent.parent;
-	  _thisF1.index = parent.index;
-
-	  _value1 = _filter1.apply(_thisF1, [_value1, 'index']);
+	  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params0 = {
-	  'key': parent.index,
+	  'key': p2.index,
 	  'className': 'fj-pagn-pageno' + (_value0),
-	  'title': '第' + (parent.index) + '页',
+	  'title': '第' + (p2.index) + '页',
 	  'onClick': _value1
 	};
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push(parent.index);
+	_compParam0.push(p2.index);
 
 	return p1.h.apply(null, _compParam0);
 	},
 	  fn12: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 	var ret = [];
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
@@ -2863,28 +2604,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('iscurrentpage', 'filter');
 	}
 	else {
-	  var _thisF0 = p1.lightObj();
-	  _thisF0.useString = p1.useString;
-	  _thisF0.data = parent.data;
-	  _thisF0.parent = parent.parent;
-	  _thisF0.index = parent.index;
-
-	  _value0 = _filter0.apply(_thisF0, [_value0]);
+	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value1 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter1 = p1.filters['clickbtn'];
 	if (!_filter1) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF1 = p1.lightObj();
-	  _thisF1.useString = p1.useString;
-	  _thisF1.data = parent.data;
-	  _thisF1.parent = parent.parent;
-	  _thisF1.index = parent.index;
-
-	  _value1 = _filter1.apply(_thisF1, [_value1, 'first']);
+	  _value1 = _filter1.apply(p2, [_value1, 'first', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params0 = {
 	  'key': '1',
@@ -2899,20 +2628,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	ret.push(p1.h.apply(null, _compParam0));
 
 	var _type1 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value2 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value2 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter2 = p1.filters['clickbtn'];
 	if (!_filter2) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF2 = p1.lightObj();
-	  _thisF2.useString = p1.useString;
-	  _thisF2.data = parent.data;
-	  _thisF2.parent = parent.parent;
-	  _thisF2.index = parent.index;
-
-	  _value2 = _filter2.apply(_thisF2, [_value2, 'prev']);
+	  _value2 = _filter2.apply(p2, [_value2, 'prev', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params1 = {
 	  'key': 'ellipsis1',
@@ -2925,187 +2648,119 @@ return /******/ (function(modules) { // webpackBootstrap
 	ret.push(p1.h.apply(null, _compParam1));
 
 	var _expr0 = p1.exprs['for'];
-	var _value3 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
+	var _value3 = p1.getDataValue(p2.data, 'pageIndex');
 
 	var _filter3 = p1.filters['add'];
 	if (!_filter3) {
 	  p1.warn('add', 'filter');
 	}
 	else {
-	  var _thisF3 = p1.lightObj();
-	  _thisF3.useString = p1.useString;
-
-	  _value3 = _filter3.apply(_thisF3, [_value3, '-2']);
+	  _value3 = _filter3.apply(p2, [_value3, '-2', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _dataRefer0 = [
-	  _value3,  (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))
+	  _value3,  p1.getDataValue(p2.data, 'pageCount'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn13, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'for', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.useString = p1.useString;
-	_this0.data = parent.data;
-	_this0.result = p1.exprRet(p1, p2, p1.fn13, p4);
-	_this0.inverse = p1.noop;
-
-	ret.push(_expr0.apply(_this0, _dataRefer0));
+	ret.push(_expr0.apply(p2, _dataRefer0));
 	return ret;
 	},
 	  fn11: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['if'];
-	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
+	var _value0 = p1.getDataValue(p2.data, 'pageIndex');
 
 	var _filter0 = p1.filters['showpartpage'];
 	if (!_filter0) {
 	  p1.warn('showpartpage', 'filter');
 	}
 	else {
-	  var _thisF0 = p1.lightObj();
-	  _thisF0.useString = p1.useString;
-	  _thisF0.data = parent.data;
-	  _thisF0.parent = parent.parent;
-	  _thisF0.index = parent.index;
-
-	  _value0 = _filter0.apply(_thisF0, [_value0, '3']);
+	  _value0 = _filter0.apply(p2, [_value0, '3', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _dataRefer0 = [
-	  _value0
+	  _value0,{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn12, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'if', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p1.fn12, p4);
-	_this0.inverse = p1.noop;
-
-	return _expr0.apply(_this0, _dataRefer0);
+	return _expr0.apply(p2, _dataRefer0);
 	},
 	  fn8: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['if'];
-	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
+	var _value0 = p1.getDataValue(p2.data, 'pageIndex');
 
 	var _filter0 = p1.filters['showpartpage'];
 	if (!_filter0) {
 	  p1.warn('showpartpage', 'filter');
 	}
 	else {
-	  var _thisF0 = p1.lightObj();
-	  _thisF0.useString = p1.useString;
-	  _thisF0.data = parent.data;
-	  _thisF0.parent = parent.parent;
-	  _thisF0.index = parent.index;
-
-	  _value0 = _filter0.apply(_thisF0, [_value0, '2']);
+	  _value0 = _filter0.apply(p2, [_value0, '2', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _dataRefer0 = [
-	  _value0
+	  _value0,{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn9, p4), inverse: p1.exprRet(p1, p2, p1.fn11, p4) }
 	];
 	p1.throwIf(_expr0, 'if', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p1.fn9, p4);
-	_this0.inverse = p1.exprRet(p1, p2, p1.fn11, p4);
-
-	return _expr0.apply(_this0, _dataRefer0);
+	return _expr0.apply(p2, _dataRefer0);
 	},
 	  fn5: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['if'];
-	var _value0 = (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'));
+	var _value0 = p1.getDataValue(p2.data, 'pageIndex');
 
 	var _filter0 = p1.filters['showpartpage'];
 	if (!_filter0) {
 	  p1.warn('showpartpage', 'filter');
 	}
 	else {
-	  var _thisF0 = p1.lightObj();
-	  _thisF0.useString = p1.useString;
-	  _thisF0.data = parent.data;
-	  _thisF0.parent = parent.parent;
-	  _thisF0.index = parent.index;
-
-	  _value0 = _filter0.apply(_thisF0, [_value0, '1']);
+	  _value0 = _filter0.apply(p2, [_value0, '1', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _dataRefer0 = [
-	  _value0
+	  _value0,{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn6, p4), inverse: p1.exprRet(p1, p2, p1.fn8, p4) }
 	];
 	p1.throwIf(_expr0, 'if', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p1.fn6, p4);
-	_this0.inverse = p1.exprRet(p1, p2, p1.fn8, p4);
-
-	return _expr0.apply(_this0, _dataRefer0);
+	return _expr0.apply(p2, _dataRefer0);
 	},
 	  fn2: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['if'];
-	var _value0 = (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'));
+	var _value0 = p1.getDataValue(p2.data, 'pageCount');
 
 	var _filter0 = p1.filters['lt'];
 	if (!_filter0) {
 	  p1.warn('lt', 'filter');
 	}
 	else {
-	  var _thisF0 = p1.lightObj();
-	  _thisF0.useString = p1.useString;
-
-	  _value0 = _filter0.apply(_thisF0, [_value0, '10']);
+	  _value0 = _filter0.apply(p2, [_value0, '10', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _dataRefer0 = [
-	  _value0
+	  _value0,{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn3, p4), inverse: p1.exprRet(p1, p2, p1.fn5, p4) }
 	];
 	p1.throwIf(_expr0, 'if', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p1.fn3, p4);
-	_this0.inverse = p1.exprRet(p1, p2, p1.fn5, p4);
-
-	return _expr0.apply(_this0, _dataRefer0);
+	return _expr0.apply(p2, _dataRefer0);
 	},
 	  fn14: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _params0 = {
 	  'className': 'fj-pagn-pageno-c',
-	  'title': '第' + ((!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex'))) + '页'
+	  'title': '第' + (p1.getDataValue(p2.data, 'pageIndex')) + '页'
 	};
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push((!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex')));
+	_compParam0.push(p1.getDataValue(p2.data, 'pageIndex'));
 
 	return p1.h.apply(null, _compParam0);
 	},
 	  fn15: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _params0 = {
@@ -3115,9 +2770,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _type1 = p1.components['fj-pagecount'] ? p1.components['fj-pagecount'] : 'fj-pagecount';
 	var _params1 = {
-	  'prefix': (!multiData ? data['pageCountPrefix'] : p1.getDatasValue(data, 'pageCountPrefix')),
-	  'suffix': (!multiData ? data['pageCountSuffix'] : p1.getDatasValue(data, 'pageCountSuffix')),
-	  'pageCount': (!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount'))
+	  'prefix': p1.getDataValue(p2.data, 'pageCountPrefix'),
+	  'suffix': p1.getDataValue(p2.data, 'pageCountSuffix'),
+	  'pageCount': p1.getDataValue(p2.data, 'pageCount')
 	};
 	var _compParam1 = [_type1, _params1];
 
@@ -3127,9 +2782,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	},
 	  fn16: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _params0 = {
@@ -3139,9 +2791,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _type1 = p1.components['fj-pagedatacount'] ? p1.components['fj-pagedatacount'] : 'fj-pagedatacount';
 	var _params1 = {
-	  'prefix': (!multiData ? data['countPrefix'] : p1.getDatasValue(data, 'countPrefix')),
-	  'suffix': (!multiData ? data['countSuffix'] : p1.getDatasValue(data, 'countSuffix')),
-	  'count': (!multiData ? data['count'] : p1.getDatasValue(data, 'count'))
+	  'prefix': p1.getDataValue(p2.data, 'countPrefix'),
+	  'suffix': p1.getDataValue(p2.data, 'countSuffix'),
+	  'count': p1.getDataValue(p2.data, 'count')
 	};
 	var _compParam1 = [_type1, _params1];
 
@@ -3151,9 +2803,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	},
 	  fn17: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _params0 = {
@@ -3163,12 +2812,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _type1 = p1.components['fj-pagesize'] ? p1.components['fj-pagesize'] : 'fj-pagesize';
 	var _params1 = {
-	  'prefix': (!multiData ? data['sizePrefix'] : p1.getDatasValue(data, 'sizePrefix')),
-	  'suffix': (!multiData ? data['sizeSuffix'] : p1.getDatasValue(data, 'sizeSuffix')),
-	  'pageSize': (!multiData ? data['pageSize'] : p1.getDatasValue(data, 'pageSize')),
-	  'pageSizes': (!multiData ? data['pageSizes'] : p1.getDatasValue(data, 'pageSizes')),
-	  'setPageSize': (!multiData ? data['setPageSize'] : p1.getDatasValue(data, 'setPageSize')),
-	  'onChange': (!multiData ? data['pageSizeChange'] : p1.getDatasValue(data, 'pageSizeChange'))
+	  'prefix': p1.getDataValue(p2.data, 'sizePrefix'),
+	  'suffix': p1.getDataValue(p2.data, 'sizeSuffix'),
+	  'pageSize': p1.getDataValue(p2.data, 'pageSize'),
+	  'pageSizes': p1.getDataValue(p2.data, 'pageSizes'),
+	  'setPageSize': p1.getDataValue(p2.data, 'setPageSize'),
+	  'onChange': p1.getDataValue(p2.data, 'pageSizeChange')
 	};
 	var _compParam1 = [_type1, _params1];
 
@@ -3178,9 +2827,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	},
 	  fn18: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _params0 = {
@@ -3194,10 +2840,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _params1 = {
 	  'type': 'text',
 	  'ref': 'pageTxt',
-	  'defaultValue': (!multiData ? data['pageIndex'] : p1.getDatasValue(data, 'pageIndex')),
+	  'defaultValue': p1.getDataValue(p2.data, 'pageIndex'),
 	  'className': 'fj-form-elem fj-pagn-pageindex',
 	  'autoComplete': 'off',
-	  'onBlur': (!multiData ? data['pageIndexBlur'] : p1.getDatasValue(data, 'pageIndexBlur'))
+	  'onBlur': p1.getDataValue(p2.data, 'pageIndexBlur')
 	};
 	var _compParam1 = [_type1, _params1];
 
@@ -3209,11 +2855,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _params2 = {
 	  'className': 'fj-btn fj-pagn-btn-go',
 	  'type': 'button',
-	  'onClick': (!multiData ? data['goPage'] : p1.getDatasValue(data, 'goPage'))
+	  'onClick': p1.getDataValue(p2.data, 'goPage')
 	};
 	var _compParam2 = [_type2, _params2];
 
-	_compParam2.push((!multiData ? data['btnGoName'] : p1.getDatasValue(data, 'btnGoName')));
+	_compParam2.push(p1.getDataValue(p2.data, 'btnGoName'));
 
 	_compParam0.push(p1.h.apply(null, _compParam2));
 
@@ -3221,9 +2867,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	},
 	  fn19: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = 'fj-pagn-btn-refresh';
@@ -3233,13 +2876,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('fixiconsize', 'filter');
 	}
 	else {
-	  var _thisF0 = p1.lightObj();
-	  _thisF0.useString = p1.useString;
-	  _thisF0.data = parent.data;
-	  _thisF0.parent = parent.parent;
-	  _thisF0.index = parent.index;
-
-	  _value0 = _filter0.apply(_thisF0, [_value0]);
+	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params0 = {
 	  'className': _value0
@@ -3247,20 +2884,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _compParam0 = [_type0, _params0];
 
 	var _type1 = p1.components['i'] ? p1.components['i'] : 'i';
-	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value1 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter1 = p1.filters['clickbtn'];
 	if (!_filter1) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF1 = p1.lightObj();
-	  _thisF1.useString = p1.useString;
-	  _thisF1.data = parent.data;
-	  _thisF1.parent = parent.parent;
-	  _thisF1.index = parent.index;
-
-	  _value1 = _filter1.apply(_thisF1, [_value1]);
+	  _value1 = _filter1.apply(p2, [_value1, { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params1 = {
 	  'className': 'fa fa-refresh',
@@ -3275,15 +2906,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	},
 	  fn1: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
 	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = {
-	  'className': (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes')),
-	  'style': p1.styleProps((!multiData ? data['style'] : p1.getDatasValue(data, 'style'))),
-	  'ref': (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'))
+	  'className': p1.getDataValue(p2.data, 'classes'),
+	  'style': p1.styleProps(p1.getDataValue(p2.data, 'style')),
+	  'ref': p1.getDataValue(p2.data, 'wrap')
 	};
 	var _compParam0 = [_type0, _params0];
 
@@ -3294,24 +2922,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _compParam1 = [_type1, _params1];
 
 	var _type2 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value0 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value0 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter0 = p1.filters['clickbtn'];
 	if (!_filter0) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF0 = p1.lightObj();
-	  _thisF0.useString = p1.useString;
-	  _thisF0.data = parent.data;
-	  _thisF0.parent = parent.parent;
-	  _thisF0.index = parent.index;
-
-	  _value0 = _filter0.apply(_thisF0, [_value0, 'first']);
+	  _value0 = _filter0.apply(p2, [_value0, 'first', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params2 = {
 	  'key': 'first',
-	  'className': 'fj-pagn-btn' + ((!multiData ? data['firstDisabled'] : p1.getDatasValue(data, 'firstDisabled'))),
+	  'className': 'fj-pagn-btn' + (p1.getDataValue(p2.data, 'firstDisabled')),
 	  'title': '首页',
 	  'onClick': _value0
 	};
@@ -3322,24 +2944,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	_compParam1.push(p1.h.apply(null, _compParam2));
 
 	var _type3 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value1 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value1 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter1 = p1.filters['clickbtn'];
 	if (!_filter1) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF1 = p1.lightObj();
-	  _thisF1.useString = p1.useString;
-	  _thisF1.data = parent.data;
-	  _thisF1.parent = parent.parent;
-	  _thisF1.index = parent.index;
-
-	  _value1 = _filter1.apply(_thisF1, [_value1, 'prev']);
+	  _value1 = _filter1.apply(p2, [_value1, 'prev', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params3 = {
 	  'key': 'prev',
-	  'className': 'fj-pagn-btn' + ((!multiData ? data['prevDisabled'] : p1.getDatasValue(data, 'prevDisabled'))),
+	  'className': 'fj-pagn-btn' + (p1.getDataValue(p2.data, 'prevDisabled')),
 	  'title': '上一页',
 	  'onClick': _value1
 	};
@@ -3366,40 +2982,29 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['if'];
 	var _dataRefer0 = [
-	  (!multiData ? data['hasPages'] : p1.getDatasValue(data, 'hasPages'))
+	  p1.getDataValue(p2.data, 'hasPages'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn2, p4), inverse: p1.exprRet(p1, p2, p1.fn14, p4) }
 	];
 	p1.throwIf(_expr0, 'if', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p1.fn2, p4);
-	_this0.inverse = p1.exprRet(p1, p2, p1.fn14, p4);
-
-	_compParam6.push(_expr0.apply(_this0, _dataRefer0));
+	_compParam6.push(_expr0.apply(p2, _dataRefer0));
 
 	_compParam5.push(p1.h.apply(null, _compParam6));
 
 	_compParam1.push(p1.h.apply(null, _compParam5));
 
 	var _type7 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value2 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value2 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter2 = p1.filters['clickbtn'];
 	if (!_filter2) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF2 = p1.lightObj();
-	  _thisF2.useString = p1.useString;
-	  _thisF2.data = parent.data;
-	  _thisF2.parent = parent.parent;
-	  _thisF2.index = parent.index;
-
-	  _value2 = _filter2.apply(_thisF2, [_value2, 'next']);
+	  _value2 = _filter2.apply(p2, [_value2, 'next', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params6 = {
 	  'key': 'next',
-	  'className': 'fj-pagn-btn' + ((!multiData ? data['nextDisabled'] : p1.getDatasValue(data, 'nextDisabled'))),
+	  'className': 'fj-pagn-btn' + (p1.getDataValue(p2.data, 'nextDisabled')),
 	  'title': '下一页',
 	  'onClick': _value2
 	};
@@ -3416,24 +3021,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	_compParam1.push(p1.h.apply(null, _compParam7));
 
 	var _type9 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value3 = (!multiData ? data['refresh'] : p1.getDatasValue(data, 'refresh'));
+	var _value3 = p1.getDataValue(p2.data, 'refresh');
 
 	var _filter3 = p1.filters['clickbtn'];
 	if (!_filter3) {
 	  p1.warn('clickbtn', 'filter');
 	}
 	else {
-	  var _thisF3 = p1.lightObj();
-	  _thisF3.useString = p1.useString;
-	  _thisF3.data = parent.data;
-	  _thisF3.parent = parent.parent;
-	  _thisF3.index = parent.index;
-
-	  _value3 = _filter3.apply(_thisF3, [_value3, 'last']);
+	  _value3 = _filter3.apply(p2, [_value3, 'last', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params8 = {
 	  'key': 'last',
-	  'className': 'fj-pagn-btn' + ((!multiData ? data['lastDisabled'] : p1.getDatasValue(data, 'lastDisabled'))),
+	  'className': 'fj-pagn-btn' + (p1.getDataValue(p2.data, 'lastDisabled')),
 	  'title': '末页',
 	  'onClick': _value3
 	};
@@ -3445,68 +3044,43 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr1 = p1.exprs['if'];
 	var _dataRefer1 = [
-	  (!multiData ? data['showPageCount'] : p1.getDatasValue(data, 'showPageCount'))
+	  p1.getDataValue(p2.data, 'showPageCount'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn15, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr1, 'if', 'expr');
 
-	var _this1 = p1.lightObj();
-	_this1.useString = p1.useString;
-	_this1.result = p1.exprRet(p1, p2, p1.fn15, p4);
-	_this1.inverse = p1.noop;
-
-	_compParam1.push(_expr1.apply(_this1, _dataRefer1));
+	_compParam1.push(_expr1.apply(p2, _dataRefer1));
 
 	var _expr2 = p1.exprs['if'];
 	var _dataRefer2 = [
-	  (!multiData ? data['showCount'] : p1.getDatasValue(data, 'showCount'))
+	  p1.getDataValue(p2.data, 'showCount'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn16, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr2, 'if', 'expr');
 
-	var _this2 = p1.lightObj();
-	_this2.useString = p1.useString;
-	_this2.result = p1.exprRet(p1, p2, p1.fn16, p4);
-	_this2.inverse = p1.noop;
-
-	_compParam1.push(_expr2.apply(_this2, _dataRefer2));
+	_compParam1.push(_expr2.apply(p2, _dataRefer2));
 
 	var _expr3 = p1.exprs['if'];
 	var _dataRefer3 = [
-	  (!multiData ? data['showPageSize'] : p1.getDatasValue(data, 'showPageSize'))
+	  p1.getDataValue(p2.data, 'showPageSize'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn17, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr3, 'if', 'expr');
 
-	var _this3 = p1.lightObj();
-	_this3.useString = p1.useString;
-	_this3.result = p1.exprRet(p1, p2, p1.fn17, p4);
-	_this3.inverse = p1.noop;
-
-	_compParam1.push(_expr3.apply(_this3, _dataRefer3));
+	_compParam1.push(_expr3.apply(p2, _dataRefer3));
 
 	var _expr4 = p1.exprs['if'];
 	var _dataRefer4 = [
-	  (!multiData ? data['hasBtnGo'] : p1.getDatasValue(data, 'hasBtnGo'))
+	  p1.getDataValue(p2.data, 'hasBtnGo'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn18, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr4, 'if', 'expr');
 
-	var _this4 = p1.lightObj();
-	_this4.useString = p1.useString;
-	_this4.result = p1.exprRet(p1, p2, p1.fn18, p4);
-	_this4.inverse = p1.noop;
-
-	_compParam1.push(_expr4.apply(_this4, _dataRefer4));
+	_compParam1.push(_expr4.apply(p2, _dataRefer4));
 
 	var _expr5 = p1.exprs['if'];
 	var _dataRefer5 = [
-	  (!multiData ? data['showRefresh'] : p1.getDatasValue(data, 'showRefresh'))
+	  p1.getDataValue(p2.data, 'showRefresh'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn19, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr5, 'if', 'expr');
 
-	var _this5 = p1.lightObj();
-	_this5.useString = p1.useString;
-	_this5.result = p1.exprRet(p1, p2, p1.fn19, p4);
-	_this5.inverse = p1.noop;
-
-	_compParam1.push(_expr5.apply(_this5, _dataRefer5));
+	_compParam1.push(_expr5.apply(p2, _dataRefer5));
 
 	_compParam0.push(p1.h.apply(null, _compParam1));
 
@@ -3514,73 +3088,40 @@ return /******/ (function(modules) { // webpackBootstrap
 	},
 	  fn20: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
 	var _expr0 = p1.exprs['emptyelem'];
+	var _dataRefer0 = [
+	{ _njOpts: true, useString: p1.useString, exprProps: p4, result: p1.noop, inverse: p1.noop }
+	];
 	p1.throwIf(_expr0, 'emptyelem', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.useString = p1.useString;
-	_this0.data = parent.data;
-	_this0.parent = parent.parent;
-	_this0.index = parent.index;
-	_this0.paramsExpr = p4;
-	_this0.result = p1.noop;
-	_this0.inverse = p1.noop;
-
-	return _expr0.apply(_this0);
+	return _expr0.apply(p2, _dataRefer0);
 	},
 	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
-	if(!parent) {
-	  if (data) parent = { data: multiData ? data[0] : data };
-	  else parent = {};
-	  p2.parent = parent;
-	};
 
 	var _expr0 = p1.exprs['if'];
-	var _value0 = (!multiData ? data['count'] : p1.getDatasValue(data, 'count'));
+	var _value0 = p1.getDataValue(p2.data, 'count');
 
 	var _filter0 = p1.filters['gt'];
 	if (!_filter0) {
 	  p1.warn('gt', 'filter');
 	}
 	else {
-	  var _thisF0 = p1.lightObj();
-	  _thisF0.useString = p1.useString;
-
-	  _value0 = _filter0.apply(_thisF0, [_value0, '1']);
+	  _value0 = _filter0.apply(p2, [_value0, '1', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _dataRefer0 = [
-	  _value0
+	  _value0,{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn1, p4), inverse: p1.exprRet(p1, p2, p1.fn20, p4) }
 	];
 	p1.throwIf(_expr0, 'if', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p1.fn1, p4);
-	_this0.inverse = p1.exprRet(p1, p2, p1.fn20, p4);
-
-	return _expr0.apply(_this0, _dataRefer0);
+	return _expr0.apply(p2, _dataRefer0);
 	}
 	},
 	  pageCount: {
 	  useString: false,
 	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
-	if(!parent) {
-	  if (data) parent = { data: multiData ? data[0] : data };
-	  else parent = {};
-	  p2.parent = parent;
-	};
 
 	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = null;
@@ -3588,30 +3129,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spreadparam'];
 	var _dataRefer0 = [
-	  (!multiData ? data['props'] : p1.getDatasValue(data, 'props'))
+	  p1.getDataValue(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spreadparam', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.paramsExpr = _paramsE0;
-
-	_expr0.apply(_this0, _dataRefer0);
+	_expr0.apply(p2, _dataRefer0);
 
 	_params0 = _paramsE0;
-	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
-	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	_params0['className'] = p1.getDataValue(p2.data, 'classes');
+	_params0['ref'] = p1.getDataValue(p2.data, 'wrap');
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push('\n    ' + ((!multiData ? data['prefix'] : p1.getDatasValue(data, 'prefix'))));
+	_compParam0.push('\n    ' + (p1.getDataValue(p2.data, 'prefix')));
 
 	var _type1 = p1.components['span'] ? p1.components['span'] : 'span';
 	var _compParam1 = [_type1, null];
 
-	_compParam1.push((!multiData ? data['pageCount'] : p1.getDatasValue(data, 'pageCount')));
+	_compParam1.push(p1.getDataValue(p2.data, 'pageCount'));
 
 	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	_compParam0.push(((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix'))) + '\n');
+	_compParam0.push((p1.getDataValue(p2.data, 'suffix')) + '\n');
 
 	return p1.h.apply(null, _compParam0);
 	}
@@ -3620,14 +3158,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  useString: false,
 	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
-	if(!parent) {
-	  if (data) parent = { data: multiData ? data[0] : data };
-	  else parent = {};
-	  p2.parent = parent;
-	};
 
 	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = null;
@@ -3635,30 +3165,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spreadparam'];
 	var _dataRefer0 = [
-	  (!multiData ? data['props'] : p1.getDatasValue(data, 'props'))
+	  p1.getDataValue(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spreadparam', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.paramsExpr = _paramsE0;
-
-	_expr0.apply(_this0, _dataRefer0);
+	_expr0.apply(p2, _dataRefer0);
 
 	_params0 = _paramsE0;
-	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
-	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	_params0['className'] = p1.getDataValue(p2.data, 'classes');
+	_params0['ref'] = p1.getDataValue(p2.data, 'wrap');
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push('\n    ' + ((!multiData ? data['prefix'] : p1.getDatasValue(data, 'prefix'))));
+	_compParam0.push('\n    ' + (p1.getDataValue(p2.data, 'prefix')));
 
 	var _type1 = p1.components['span'] ? p1.components['span'] : 'span';
 	var _compParam1 = [_type1, null];
 
-	_compParam1.push((!multiData ? data['count'] : p1.getDatasValue(data, 'count')));
+	_compParam1.push(p1.getDataValue(p2.data, 'count'));
 
 	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	_compParam0.push(((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix'))) + '\n');
+	_compParam0.push((p1.getDataValue(p2.data, 'suffix')) + '\n');
 
 	return p1.h.apply(null, _compParam0);
 	}
@@ -3667,69 +3194,47 @@ return /******/ (function(modules) { // webpackBootstrap
 	  useString: false,
 	  fn2: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var _p2 = p1.newContextVars(p1, p2, p3),
-	  parent = _p2.parent,
-	  data = _p2.data,
-	  multiData = _p2.multiData;
+	p2 = p1.newContext(p2, p3);
 
 	var _type0 = p1.components['option'] ? p1.components['option'] : 'option';
 	var _params0 = {
-	  'key': parent.index,
-	  'value': (!multiData ? data['this'] : p1.getDatasValue(data, 'this'))
+	  'key': p2.index,
+	  'value': p2.data[0]
 	};
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push((!multiData ? data['this'] : p1.getDatasValue(data, 'this')));
+	_compParam0.push(p2.data[0]);
 
 	return p1.h.apply(null, _compParam0);
 	},
 	  fn1: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
 	var _type0 = p1.components['select'] ? p1.components['select'] : 'select';
 	var _params0 = {
 	  'className': 'fj-form-elem fj-pagn-pagesize',
-	  'value': (!multiData ? data['pageSize'] : p1.getDatasValue(data, 'pageSize')),
-	  'onChange': (!multiData ? data['pageSizeChange'] : p1.getDatasValue(data, 'pageSizeChange'))
+	  'value': p1.getDataValue(p2.data, 'pageSize'),
+	  'onChange': p1.getDataValue(p2.data, 'pageSizeChange')
 	};
 	var _compParam0 = [_type0, _params0];
 
 	var _expr0 = p1.exprs['each'];
 	var _dataRefer0 = [
-	  (!multiData ? data['pageSizes'] : p1.getDatasValue(data, 'pageSizes'))
+	  p1.getDataValue(p2.data, 'pageSizes'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn2, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'each', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.useString = p1.useString;
-	_this0.result = p1.exprRet(p1, p2, p1.fn2, p4);
-	_this0.inverse = p1.noop;
-
-	_compParam0.push(_expr0.apply(_this0, _dataRefer0));
+	_compParam0.push(_expr0.apply(p2, _dataRefer0));
 
 	return p1.h.apply(null, _compParam0);
 	},
 	  fn3: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
 
-	return (!multiData ? data['pageSize'] : p1.getDatasValue(data, 'pageSize'));
+	return p1.getDataValue(p2.data, 'pageSize');
 	},
 	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
-	if(!parent) {
-	  if (data) parent = { data: multiData ? data[0] : data };
-	  else parent = {};
-	  p2.parent = parent;
-	};
 
 	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = null;
@@ -3737,36 +3242,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spreadparam'];
 	var _dataRefer0 = [
-	  (!multiData ? data['props'] : p1.getDatasValue(data, 'props'))
+	  p1.getDataValue(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spreadparam', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.paramsExpr = _paramsE0;
-
-	_expr0.apply(_this0, _dataRefer0);
+	_expr0.apply(p2, _dataRefer0);
 
 	_params0 = _paramsE0;
-	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
-	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	_params0['className'] = p1.getDataValue(p2.data, 'classes');
+	_params0['ref'] = p1.getDataValue(p2.data, 'wrap');
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push((!multiData ? data['prefix'] : p1.getDatasValue(data, 'prefix')));
+	_compParam0.push(p1.getDataValue(p2.data, 'prefix'));
 
 	var _expr1 = p1.exprs['if'];
 	var _dataRefer1 = [
-	  (!multiData ? data['setPageSize'] : p1.getDatasValue(data, 'setPageSize'))
+	  p1.getDataValue(p2.data, 'setPageSize'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn1, p4), inverse: p1.exprRet(p1, p2, p1.fn3, p4) }
 	];
 	p1.throwIf(_expr1, 'if', 'expr');
 
-	var _this1 = p1.lightObj();
-	_this1.useString = p1.useString;
-	_this1.result = p1.exprRet(p1, p2, p1.fn1, p4);
-	_this1.inverse = p1.exprRet(p1, p2, p1.fn3, p4);
+	_compParam0.push(_expr1.apply(p2, _dataRefer1));
 
-	_compParam0.push(_expr1.apply(_this1, _dataRefer1));
-
-	_compParam0.push((!multiData ? data['suffix'] : p1.getDatasValue(data, 'suffix')));
+	_compParam0.push(p1.getDataValue(p2.data, 'suffix'));
 
 	return p1.h.apply(null, _compParam0);
 	}
@@ -3774,7 +3271,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3783,7 +3280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _grid = __webpack_require__(31);
+	var _grid = __webpack_require__(30);
 
 	Object.keys(_grid).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -3796,7 +3293,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3818,7 +3315,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = babelHelpers.interopRequireDefault(_classnames);
 
-	var _gridT = __webpack_require__(32);
+	var _gridT = __webpack_require__(31);
 
 	var _gridT2 = babelHelpers.interopRequireDefault(_gridT);
 
@@ -4053,7 +3550,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.ClearFix = ClearFix;
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4063,14 +3560,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  useString: false,
 	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
-	if(!parent) {
-	  if (data) parent = { data: multiData ? data[0] : data };
-	  else parent = {};
-	  p2.parent = parent;
-	};
 
 	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = null;
@@ -4078,22 +3567,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spreadparam'];
 	var _dataRefer0 = [
-	  (!multiData ? data['props'] : p1.getDatasValue(data, 'props'))
+	  p1.getDataValue(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spreadparam', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.paramsExpr = _paramsE0;
-
-	_expr0.apply(_this0, _dataRefer0);
+	_expr0.apply(p2, _dataRefer0);
 
 	_params0 = _paramsE0;
-	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
-	_params0['style'] = p1.styleProps((!multiData ? data['styles'] : p1.getDatasValue(data, 'styles')));
-	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	_params0['className'] = p1.getDataValue(p2.data, 'classes');
+	_params0['style'] = p1.styleProps(p1.getDataValue(p2.data, 'styles'));
+	_params0['ref'] = p1.getDataValue(p2.data, 'wrap');
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push((!multiData ? data['children'] : p1.getDatasValue(data, 'children')));
+	_compParam0.push(p1.getDataValue(p2.data, 'children'));
 
 	return p1.h.apply(null, _compParam0);
 	}
@@ -4102,14 +3588,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  useString: false,
 	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
-	if(!parent) {
-	  if (data) parent = { data: multiData ? data[0] : data };
-	  else parent = {};
-	  p2.parent = parent;
-	};
 
 	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = null;
@@ -4117,21 +3595,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spreadparam'];
 	var _dataRefer0 = [
-	  (!multiData ? data['props'] : p1.getDatasValue(data, 'props'))
+	  p1.getDataValue(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spreadparam', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.paramsExpr = _paramsE0;
-
-	_expr0.apply(_this0, _dataRefer0);
+	_expr0.apply(p2, _dataRefer0);
 
 	_params0 = _paramsE0;
-	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
-	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	_params0['className'] = p1.getDataValue(p2.data, 'classes');
+	_params0['ref'] = p1.getDataValue(p2.data, 'wrap');
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push((!multiData ? data['children'] : p1.getDatasValue(data, 'children')));
+	_compParam0.push(p1.getDataValue(p2.data, 'children'));
 
 	return p1.h.apply(null, _compParam0);
 	}
@@ -4140,14 +3615,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  useString: false,
 	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
-	var parent = p2.parent,
-	  data = p2.data,
-	  multiData = p2.multiData;
-	if(!parent) {
-	  if (data) parent = { data: multiData ? data[0] : data };
-	  else parent = {};
-	  p2.parent = parent;
-	};
 
 	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = null;
@@ -4155,18 +3622,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spreadparam'];
 	var _dataRefer0 = [
-	  (!multiData ? data['props'] : p1.getDatasValue(data, 'props'))
+	  p1.getDataValue(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spreadparam', 'expr');
 
-	var _this0 = p1.lightObj();
-	_this0.paramsExpr = _paramsE0;
-
-	_expr0.apply(_this0, _dataRefer0);
+	_expr0.apply(p2, _dataRefer0);
 
 	_params0 = _paramsE0;
-	_params0['className'] = (!multiData ? data['classes'] : p1.getDatasValue(data, 'classes'));
-	_params0['ref'] = (!multiData ? data['wrap'] : p1.getDatasValue(data, 'wrap'));
+	_params0['className'] = p1.getDataValue(p2.data, 'classes');
+	_params0['ref'] = p1.getDataValue(p2.data, 'wrap');
 	var _compParam0 = [_type0, _params0];
 
 	return p1.h.apply(null, _compParam0);
@@ -4175,7 +3639,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 33 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4184,7 +3648,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _gesture = __webpack_require__(34);
+	var _gesture = __webpack_require__(33);
 
 	Object.keys(_gesture).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -4197,7 +3661,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 34 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
