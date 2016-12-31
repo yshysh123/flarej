@@ -1,5 +1,5 @@
 ﻿import { Component, PropTypes } from 'react';
-import { registerFilter, getDataValue } from 'nornj';
+import { getDataValue } from 'nornj';
 import { registerTmpl } from 'nornj-react';
 import classNames from 'classnames';
 import Widget from '../widget';
@@ -23,30 +23,30 @@ function getPageCount(count, pageSize) {
 class Pagination extends Widget {
   static defaultProps = {
     fjType: 'pagn',
-    pageSize: 15,                           //每页数据数
-    pageSizes: [15, 30, 50],                //可选择的每页数据数
-    pageIndex: 1,                           //当前页码,从1开始
+    pageSize: 15, //每页数据数
+    pageSizes: [15, 30, 50], //可选择的每页数据数
+    pageIndex: 1, //当前页码,从1开始
     pageCountPrefix: '共',
     pageCountSuffix: '页',
-    count: 0,                               //数据总数
+    count: 0, //数据总数
     countPrefix: '共',
     countSuffix: '条数据',
     sizePrefix: '每页',
     sizeSuffix: '条',
-    btnGoName: '跳转',                      //跳转按钮上的字
-    noCount: false,                         //为true则在无法获取数据总数时使用
-    setPageSize: false,                     //是否可以设置每页数据数
-    showCount: true,                        //是否显示数据总数
-    showPageSize: true,                     //是否显示每页数据数
-    showPageCount: true,                    //是否显示总页数
+    btnGoName: '跳转', //跳转按钮上的字
+    noCount: false, //为true则在无法获取数据总数时使用
+    setPageSize: false, //是否可以设置每页数据数
+    showCount: true, //是否显示数据总数
+    showPageSize: true, //是否显示每页数据数
+    showPageCount: true, //是否显示总页数
     showRefresh: true,
-    hasPages: true,                         //是否显示页数链接
+    hasPages: true, //是否显示页数链接
     hasBtnGo: true,
     emptyText: '没有数据',
     responsive: false,
     responsiveDelay: 70,
     responsiveOnlyWidth: true,
-    defaultResponsiveParam: {               //默认响应式参数
+    defaultResponsiveParam: { //默认响应式参数
       '(max-width: 480px)': {
         state: {
           showCount: false,
@@ -73,7 +73,7 @@ class Pagination extends Widget {
       }
     }
   };
-  
+
   constructor(props) {
     super(props, {
       pageIndex: props.pageIndex,
@@ -82,7 +82,7 @@ class Pagination extends Widget {
   }
 
   init() {
-    this.state.pageCount = this.getPageCount()  //总页数
+    this.state.pageCount = this.getPageCount() //总页数
     super.init();
 
     this.pageSizeChange = this.pageSizeChange.bind(this);
@@ -92,7 +92,7 @@ class Pagination extends Widget {
     this.refresh = this.refresh.bind(this);
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     let {
       pageIndex,
       count,
@@ -119,12 +119,12 @@ class Pagination extends Widget {
       newState.pageCount = this.getPageCount(newState.pageSize, countN);
     }
 
-    if(isSetState) {
+    if (isSetState) {
       this.setState(newState);
     }
   }
 
-  componentWillMount () {
+  componentWillMount() {
     const { pageIndex, pageSize } = this.state;
 
     //初始化时默认执行刷新
@@ -142,14 +142,14 @@ class Pagination extends Widget {
 
   //页数文本框失去焦点
   pageIndexBlur(e) {
-    if(!utils.RegExp.num.test(e.target.value.trim())) {
+    if (!utils.RegExp.num.test(e.target.value.trim())) {
       e.target.value = 1;
     }
   }
 
   //设置跳转页码
   setGoPage(pageIndex) {
-    if(this.refs.pageTxt) {
+    if (this.refs.pageTxt) {
       this.refs.pageTxt.value = pageIndex;
     }
   }
@@ -160,10 +160,10 @@ class Pagination extends Widget {
       pageCount = this.getPageCount(pageSize);
 
     //如果当前页大于总页数,则设置总页数为当前页
-    if(pageIndex > pageCount) {
+    if (pageIndex > pageCount) {
       pageIndex = pageCount;
     }
-    if(pageIndex < 1) {
+    if (pageIndex < 1) {
       pageIndex = 1;
     }
 
@@ -174,7 +174,7 @@ class Pagination extends Widget {
       pageCount: pageCount
     });
 
-    if(props.onChange) {
+    if (props.onChange) {
       props.onChange(pageIndex, pageSize, isInit);
     }
   }
@@ -184,15 +184,67 @@ class Pagination extends Widget {
     this.refresh(parseInt(this.refs.pageTxt.value, 10));
   }
 
+  clickBtn(fn, type) {
+    const pageIndex = getDataValue(this.data, 'pageIndex'),
+      pageCount = getDataValue(this.data, 'pageCount');
+
+    switch (type) {
+      case 'first':
+        return () => {
+          if (pageIndex != 1) {
+            fn(1);
+          }
+        };
+      case 'prev':
+        return () => {
+          if (pageIndex > 1) {
+            fn(pageIndex - 1);
+          }
+        };
+      case 'next':
+        return () => {
+          if (pageIndex < pageCount) {
+            fn(pageIndex + 1);
+          }
+        };
+      case 'last':
+        return () => {
+          if (pageIndex != pageCount) {
+            fn(pageCount);
+          }
+        };
+      case 'index':
+        return () => {
+          if (this.index != pageIndex) {
+            fn(this.index);
+          }
+        };
+      default:
+        return () => fn();
+    }
+  }
+
+  isCurrentPage(no) {
+    return parseInt(no, 10) == getDataValue(this.data, 'pageIndex') ? '-c' : '';
+  }
+
+  showPartPage(no, type) {
+    const pageCount = getDataValue(this.data, 'pageCount');
+    switch (type) {
+      case '1': //当前页码<=4:左侧显示所有+当前页码+右侧2个页码+...+尾页
+        return no <= 4;
+      case '2': //当前页码>4,且<=页面总数(n)-3:首页+...+左侧2个页码+ 当前页码+右侧2个页码+...+尾页
+        return no > 4 && no <= pageCount - 3;
+      case '3': //当前页码>页面总数(n)- 3:首页+...+左侧2个页面+当前页码+右侧显示所有
+        return no > pageCount - 3;
+    }
+  }
+
   render() {
     let disabled = ' fj-disabled',
       state = this.state,
       props = this.props,
       extra = {
-        pageSizeChange: this.pageSizeChange,
-        pageIndexBlur: this.pageIndexBlur,
-        goPage: this.goPage,
-        refresh: this.refresh,
         firstDisabled: '',
         prevDisabled: '',
         nextDisabled: '',
@@ -201,17 +253,15 @@ class Pagination extends Widget {
     let { className } = props;
 
     //翻页按钮展示逻辑
-    if (state.pageCount <= 1) {  //只有一页
+    if (state.pageCount <= 1) { //只有一页
       extra.firstDisabled = disabled;
       extra.prevDisabled = disabled;
       extra.nextDisabled = disabled;
       extra.lastDisabled = disabled;
-    }
-    else if (state.pageIndex == 1) {  //首页
+    } else if (state.pageIndex == 1) { //首页
       extra.firstDisabled = disabled;
       extra.prevDisabled = disabled;
-    }
-    else if (state.pageIndex == state.pageCount) {  //尾页
+    } else if (state.pageIndex == state.pageCount) { //尾页
       extra.nextDisabled = disabled;
       extra.lastDisabled = disabled;
     }
@@ -222,65 +272,9 @@ class Pagination extends Widget {
     });
     extra.wrap = c => this.wrap = c;
 
-    return this.template(state, props, extra);
+    return this.template(state, props, this, extra);
   }
 }
-
-registerFilter({
-  clickBtn: function(fn, type) {
-    const pageIndex = getDataValue(this.data, 'pageIndex'),
-      pageCount = getDataValue(this.data, 'pageCount');
-
-    switch(type){
-      case 'first':
-        return () => {
-          if(pageIndex != 1) {
-            fn(1);
-          }
-        };
-      case 'prev':
-        return () => {
-          if(pageIndex > 1) {
-            fn(pageIndex - 1);
-          }
-        };
-      case 'next':
-        return () => {
-          if(pageIndex < pageCount) {
-            fn(pageIndex + 1);
-          }
-        };
-      case 'last':
-        return () => {
-          if(pageIndex != pageCount) {
-            fn(pageCount);
-          }
-        };
-      case 'index':
-        return () => {
-          if(this.index != pageIndex) {
-            fn(this.index);
-          }
-        };
-      default:
-        return () => fn();
-    }
-  },
-  isCurrentPage: function(no) {
-    return parseInt(no, 10) == getDataValue(this.data, 'pageIndex') ? '-c' : '';
-  },
-  showPartPage: function(no, type) {
-    const pageCount = getDataValue(this.data, 'pageCount');
-    switch(type){
-      case '1':  //当前页码<=4:左侧显示所有+当前页码+右侧2个页码+...+尾页
-        return no <= 4;
-      case '2':  //当前页码>4,且<=页面总数(n)-3:首页+...+左侧2个页码+ 当前页码+右侧2个页码+...+尾页
-        return no > 4 && no <= pageCount - 3;
-      case '3':  //当前页码>页面总数(n)- 3:首页+...+左侧2个页面+当前页码+右侧显示所有
-        return no > pageCount - 3;
-    }
-  }
-});
 
 /**
  * 总页数组件
@@ -302,18 +296,20 @@ class PageCount extends Component {
       pageCount,
       count,
       pageSize,
-      suffix, ...others } = this.props;
-    
+      suffix,
+      ...others
+    } = this.props;
+
     const classes = classNames({
       'fj-pagn-part': true,
       [className]: className
     });
-    
+
     //计算总页数
-    if(count != null && pageSize != null) {
+    if (count != null && pageSize != null) {
       pageCount = getPageCount(count, pageSize);
     }
-    
+
     return this.template({
       props: others,
       classes,
@@ -345,13 +341,15 @@ class PageDataCount extends Component {
       className,
       prefix,
       count,
-      suffix, ...others } = this.props;
-    
+      suffix,
+      ...others
+    } = this.props;
+
     const classes = classNames({
       'fj-pagn-part': true,
       [className]: className
     });
-    
+
     return this.template({
       props: others,
       classes,
@@ -386,9 +384,9 @@ class PageSize extends Component {
   };
 
   static defaultProps = {
-    pageSize: 15,                           //每页数据数
-    pageSizes: [15, 30, 50],                //可选择的每页数据数
-    setPageSize: false,                     //是否可以设置每页数据数
+    pageSize: 15, //每页数据数
+    pageSizes: [15, 30, 50], //可选择的每页数据数
+    setPageSize: false, //是否可以设置每页数据数
     prefix: '每页',
     suffix: '条'
   };
@@ -396,7 +394,7 @@ class PageSize extends Component {
   state = {
     pageSize: null
   };
-  
+
   constructor(props) {
     super(props);
 
@@ -404,7 +402,7 @@ class PageSize extends Component {
     this.pageSizeChange = this.pageSizeChange.bind(this);
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.setState({
       pageSize: nextProps.pageSize
     });
@@ -417,7 +415,7 @@ class PageSize extends Component {
     this.setState({
       pageSize
     }, () => {
-      if(props.onChange) {
+      if (props.onChange) {
         props.onChange(pageSize);
       }
     });
@@ -431,8 +429,10 @@ class PageSize extends Component {
       pageSize,
       pageSizes,
       suffix,
-      onChange, ...others } = this.props;
-    
+      onChange,
+      ...others
+    } = this.props;
+
     const classes = classNames({
       'fj-pagn-part': true,
       [className]: className
