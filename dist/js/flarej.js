@@ -1153,8 +1153,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Pagination.prototype.clickBtn = function clickBtn(fn, type) {
 	    var _this2 = this;
 
-	    var pageIndex = (0, _nornj.getDataValue)(this.data, 'pageIndex'),
-	        pageCount = (0, _nornj.getDataValue)(this.data, 'pageCount');
+	    var pageIndex = (0, _nornj.getData)(this.data, 'pageIndex'),
+	        pageCount = (0, _nornj.getData)(this.data, 'pageCount');
 
 	    switch (type) {
 	      case 'first':
@@ -1195,11 +1195,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Pagination.prototype.isCurrentPage = function isCurrentPage(no) {
-	    return parseInt(no, 10) == (0, _nornj.getDataValue)(this.data, 'pageIndex') ? '-c' : '';
+	    return parseInt(no, 10) == (0, _nornj.getData)(this.data, 'pageIndex') ? '-c' : '';
 	  };
 
 	  Pagination.prototype.showPartPage = function showPartPage(no, type) {
-	    var pageCount = (0, _nornj.getDataValue)(this.data, 'pageCount');
+	    var pageCount = (0, _nornj.getData)(this.data, 'pageCount');
 	    switch (type) {
 	      case '1':
 	        //当前页码<=4:左侧显示所有+当前页码+右侧2个页码+...+尾页
@@ -2238,7 +2238,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = p2.index;
 
-	var _filter0 = p1.getDataValue(p2.data, 'isCurrentPage');
+	var _filter0 = p1.getData(p2.data, 'isCurrentPage');
 	if(!_filter0) _filter0 = p1.filters['isCurrentPage'];
 	if (!_filter0) {
 	  p1.warn('isCurrentPage', 'filter');
@@ -2246,9 +2246,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	else {
 	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value1 = p1.getDataValue(p2.data, 'refresh');
+	var _value1 = p1.getData(p2.data, 'refresh');
 
-	var _filter1 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter1 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter1) _filter1 = p1.filters['clickBtn'];
 	if (!_filter1) {
 	  p1.warn('clickBtn', 'filter');
@@ -2273,7 +2273,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['for'];
 	var _dataRefer0 = [
-	  '1',  p1.getDataValue(p2.data, 'pageCount'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn4, p4), inverse: p1.noop }
+	  '1',  p1.getData(p2.data, 'pageCount'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn4, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'for', 'expr');
 
@@ -2286,7 +2286,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = p2.index;
 
-	var _filter0 = p1.getDataValue(p2.data, 'isCurrentPage');
+	var _filter0 = p1.getData(p2.data, 'isCurrentPage');
 	if(!_filter0) _filter0 = p1.filters['isCurrentPage'];
 	if (!_filter0) {
 	  p1.warn('isCurrentPage', 'filter');
@@ -2294,9 +2294,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	else {
 	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value1 = p1.getDataValue(p2.data, 'refresh');
+	var _value1 = p1.getData(p2.data, 'refresh');
 
-	var _filter1 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter1 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter1) _filter1 = p1.filters['clickBtn'];
 	if (!_filter1) {
 	  p1.warn('clickBtn', 'filter');
@@ -2321,7 +2321,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var ret = [];
 
 	var _expr0 = p1.exprs['for'];
-	var _value0 = p1.getDataValue(p2.data, 'pageIndex');
+	var _value0 = p1.getData(p2.data, 'pageIndex');
 
 	var _filter0 = p1.filters['add'];
 	if (!_filter0) {
@@ -2338,9 +2338,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	ret.push(_expr0.apply(p2, _dataRefer0));
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value1 = p1.getDataValue(p2.data, 'refresh');
+	var _value1 = p1.getData(p2.data, 'refresh');
 
-	var _filter1 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter1 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter1) _filter1 = p1.filters['clickBtn'];
 	if (!_filter1) {
 	  p1.warn('clickBtn', 'filter');
@@ -2359,9 +2359,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	ret.push(p1.h.apply(null, _compParam0));
 
 	var _type1 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value2 = p1.getDataValue(p2.data, 'pageCount');
+	var _value2 = p1.getData(p2.data, 'pageCount');
 
-	var _filter2 = p1.getDataValue(p2.data, 'isCurrentPage');
+	var _filter2 = p1.getData(p2.data, 'isCurrentPage');
 	if(!_filter2) _filter2 = p1.filters['isCurrentPage'];
 	if (!_filter2) {
 	  p1.warn('isCurrentPage', 'filter');
@@ -2369,9 +2369,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	else {
 	  _value2 = _filter2.apply(p2, [_value2, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value3 = p1.getDataValue(p2.data, 'refresh');
+	var _value3 = p1.getData(p2.data, 'refresh');
 
-	var _filter3 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter3 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter3) _filter3 = p1.filters['clickBtn'];
 	if (!_filter3) {
 	  p1.warn('clickBtn', 'filter');
@@ -2380,14 +2380,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _value3 = _filter3.apply(p2, [_value3, 'last', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params1 = {
-	  'key': p1.getDataValue(p2.data, 'pageCount'),
+	  'key': p1.getData(p2.data, 'pageCount'),
 	  'className': 'fj-pagn-pageno' + (_value2),
-	  'title': '第' + (p1.getDataValue(p2.data, 'pageCount')) + '页',
+	  'title': '第' + (p1.getData(p2.data, 'pageCount')) + '页',
 	  'onClick': _value3
 	};
 	var _compParam1 = [_type1, _params1];
 
-	_compParam1.push(p1.getDataValue(p2.data, 'pageCount'));
+	_compParam1.push(p1.getData(p2.data, 'pageCount'));
 
 	ret.push(p1.h.apply(null, _compParam1));
 	return ret;
@@ -2399,7 +2399,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = p2.index;
 
-	var _filter0 = p1.getDataValue(p2.data, 'isCurrentPage');
+	var _filter0 = p1.getData(p2.data, 'isCurrentPage');
 	if(!_filter0) _filter0 = p1.filters['isCurrentPage'];
 	if (!_filter0) {
 	  p1.warn('isCurrentPage', 'filter');
@@ -2407,9 +2407,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	else {
 	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value1 = p1.getDataValue(p2.data, 'refresh');
+	var _value1 = p1.getData(p2.data, 'refresh');
 
-	var _filter1 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter1 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter1) _filter1 = p1.filters['clickBtn'];
 	if (!_filter1) {
 	  p1.warn('clickBtn', 'filter');
@@ -2436,7 +2436,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = '1';
 
-	var _filter0 = p1.getDataValue(p2.data, 'isCurrentPage');
+	var _filter0 = p1.getData(p2.data, 'isCurrentPage');
 	if(!_filter0) _filter0 = p1.filters['isCurrentPage'];
 	if (!_filter0) {
 	  p1.warn('isCurrentPage', 'filter');
@@ -2444,9 +2444,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	else {
 	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value1 = p1.getDataValue(p2.data, 'refresh');
+	var _value1 = p1.getData(p2.data, 'refresh');
 
-	var _filter1 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter1 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter1) _filter1 = p1.filters['clickBtn'];
 	if (!_filter1) {
 	  p1.warn('clickBtn', 'filter');
@@ -2467,9 +2467,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	ret.push(p1.h.apply(null, _compParam0));
 
 	var _type1 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value2 = p1.getDataValue(p2.data, 'refresh');
+	var _value2 = p1.getData(p2.data, 'refresh');
 
-	var _filter2 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter2 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter2) _filter2 = p1.filters['clickBtn'];
 	if (!_filter2) {
 	  p1.warn('clickBtn', 'filter');
@@ -2488,7 +2488,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	ret.push(p1.h.apply(null, _compParam1));
 
 	var _expr0 = p1.exprs['for'];
-	var _value3 = p1.getDataValue(p2.data, 'pageIndex');
+	var _value3 = p1.getData(p2.data, 'pageIndex');
 
 	var _filter3 = p1.filters['add'];
 	if (!_filter3) {
@@ -2497,7 +2497,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	else {
 	  _value3 = _filter3.apply(p2, [_value3, '-2', { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value4 = p1.getDataValue(p2.data, 'pageIndex');
+	var _value4 = p1.getData(p2.data, 'pageIndex');
 
 	var _filter4 = p1.filters['add'];
 	if (!_filter4) {
@@ -2514,9 +2514,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	ret.push(_expr0.apply(p2, _dataRefer0));
 
 	var _type2 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value5 = p1.getDataValue(p2.data, 'refresh');
+	var _value5 = p1.getData(p2.data, 'refresh');
 
-	var _filter5 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter5 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter5) _filter5 = p1.filters['clickBtn'];
 	if (!_filter5) {
 	  p1.warn('clickBtn', 'filter');
@@ -2535,9 +2535,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	ret.push(p1.h.apply(null, _compParam2));
 
 	var _type3 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value6 = p1.getDataValue(p2.data, 'pageCount');
+	var _value6 = p1.getData(p2.data, 'pageCount');
 
-	var _filter6 = p1.getDataValue(p2.data, 'isCurrentPage');
+	var _filter6 = p1.getData(p2.data, 'isCurrentPage');
 	if(!_filter6) _filter6 = p1.filters['isCurrentPage'];
 	if (!_filter6) {
 	  p1.warn('isCurrentPage', 'filter');
@@ -2545,9 +2545,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	else {
 	  _value6 = _filter6.apply(p2, [_value6, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value7 = p1.getDataValue(p2.data, 'refresh');
+	var _value7 = p1.getData(p2.data, 'refresh');
 
-	var _filter7 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter7 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter7) _filter7 = p1.filters['clickBtn'];
 	if (!_filter7) {
 	  p1.warn('clickBtn', 'filter');
@@ -2556,14 +2556,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _value7 = _filter7.apply(p2, [_value7, 'last', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _params3 = {
-	  'key': p1.getDataValue(p2.data, 'pageCount'),
+	  'key': p1.getData(p2.data, 'pageCount'),
 	  'className': 'fj-pagn-pageno' + (_value6),
-	  'title': '第' + (p1.getDataValue(p2.data, 'pageCount')) + '页',
+	  'title': '第' + (p1.getData(p2.data, 'pageCount')) + '页',
 	  'onClick': _value7
 	};
 	var _compParam3 = [_type3, _params3];
 
-	_compParam3.push(p1.getDataValue(p2.data, 'pageCount'));
+	_compParam3.push(p1.getData(p2.data, 'pageCount'));
 
 	ret.push(p1.h.apply(null, _compParam3));
 	return ret;
@@ -2575,7 +2575,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = p2.index;
 
-	var _filter0 = p1.getDataValue(p2.data, 'isCurrentPage');
+	var _filter0 = p1.getData(p2.data, 'isCurrentPage');
 	if(!_filter0) _filter0 = p1.filters['isCurrentPage'];
 	if (!_filter0) {
 	  p1.warn('isCurrentPage', 'filter');
@@ -2583,9 +2583,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	else {
 	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value1 = p1.getDataValue(p2.data, 'refresh');
+	var _value1 = p1.getData(p2.data, 'refresh');
 
-	var _filter1 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter1 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter1) _filter1 = p1.filters['clickBtn'];
 	if (!_filter1) {
 	  p1.warn('clickBtn', 'filter');
@@ -2612,7 +2612,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = '1';
 
-	var _filter0 = p1.getDataValue(p2.data, 'isCurrentPage');
+	var _filter0 = p1.getData(p2.data, 'isCurrentPage');
 	if(!_filter0) _filter0 = p1.filters['isCurrentPage'];
 	if (!_filter0) {
 	  p1.warn('isCurrentPage', 'filter');
@@ -2620,9 +2620,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	else {
 	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, useString: p1.useString }]);
 	}
-	var _value1 = p1.getDataValue(p2.data, 'refresh');
+	var _value1 = p1.getData(p2.data, 'refresh');
 
-	var _filter1 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter1 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter1) _filter1 = p1.filters['clickBtn'];
 	if (!_filter1) {
 	  p1.warn('clickBtn', 'filter');
@@ -2643,9 +2643,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	ret.push(p1.h.apply(null, _compParam0));
 
 	var _type1 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value2 = p1.getDataValue(p2.data, 'refresh');
+	var _value2 = p1.getData(p2.data, 'refresh');
 
-	var _filter2 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter2 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter2) _filter2 = p1.filters['clickBtn'];
 	if (!_filter2) {
 	  p1.warn('clickBtn', 'filter');
@@ -2664,7 +2664,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	ret.push(p1.h.apply(null, _compParam1));
 
 	var _expr0 = p1.exprs['for'];
-	var _value3 = p1.getDataValue(p2.data, 'pageIndex');
+	var _value3 = p1.getData(p2.data, 'pageIndex');
 
 	var _filter3 = p1.filters['add'];
 	if (!_filter3) {
@@ -2674,7 +2674,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _value3 = _filter3.apply(p2, [_value3, '-2', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _dataRefer0 = [
-	  _value3,  p1.getDataValue(p2.data, 'pageCount'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn13, p4), inverse: p1.noop }
+	  _value3,  p1.getData(p2.data, 'pageCount'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn13, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'for', 'expr');
 
@@ -2685,9 +2685,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**/) {
 
 	var _expr0 = p1.exprs['if'];
-	var _value0 = p1.getDataValue(p2.data, 'pageIndex');
+	var _value0 = p1.getData(p2.data, 'pageIndex');
 
-	var _filter0 = p1.getDataValue(p2.data, 'showPartPage');
+	var _filter0 = p1.getData(p2.data, 'showPartPage');
 	if(!_filter0) _filter0 = p1.filters['showPartPage'];
 	if (!_filter0) {
 	  p1.warn('showPartPage', 'filter');
@@ -2706,9 +2706,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**/) {
 
 	var _expr0 = p1.exprs['if'];
-	var _value0 = p1.getDataValue(p2.data, 'pageIndex');
+	var _value0 = p1.getData(p2.data, 'pageIndex');
 
-	var _filter0 = p1.getDataValue(p2.data, 'showPartPage');
+	var _filter0 = p1.getData(p2.data, 'showPartPage');
 	if(!_filter0) _filter0 = p1.filters['showPartPage'];
 	if (!_filter0) {
 	  p1.warn('showPartPage', 'filter');
@@ -2727,9 +2727,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**/) {
 
 	var _expr0 = p1.exprs['if'];
-	var _value0 = p1.getDataValue(p2.data, 'pageIndex');
+	var _value0 = p1.getData(p2.data, 'pageIndex');
 
-	var _filter0 = p1.getDataValue(p2.data, 'showPartPage');
+	var _filter0 = p1.getData(p2.data, 'showPartPage');
 	if(!_filter0) _filter0 = p1.filters['showPartPage'];
 	if (!_filter0) {
 	  p1.warn('showPartPage', 'filter');
@@ -2748,7 +2748,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**/) {
 
 	var _expr0 = p1.exprs['if'];
-	var _value0 = p1.getDataValue(p2.data, 'pageCount');
+	var _value0 = p1.getData(p2.data, 'pageCount');
 
 	var _filter0 = p1.filters['lt'];
 	if (!_filter0) {
@@ -2770,11 +2770,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _params0 = {
 	  'className': 'fj-pagn-pageno-c',
-	  'title': '第' + (p1.getDataValue(p2.data, 'pageIndex')) + '页'
+	  'title': '第' + (p1.getData(p2.data, 'pageIndex')) + '页'
 	};
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push(p1.getDataValue(p2.data, 'pageIndex'));
+	_compParam0.push(p1.getData(p2.data, 'pageIndex'));
 
 	return p1.h.apply(null, _compParam0);
 	},
@@ -2787,11 +2787,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	var _compParam0 = [_type0, _params0];
 
-	var _type1 = p1.components['fj-pagecount'] ? p1.components['fj-pagecount'] : 'fj-pagecount';
+	var _type1 = p1.components['fj-pagecount'] ? p1.components['fj-pagecount'] : 'fj-PageCount';
 	var _params1 = {
-	  'prefix': p1.getDataValue(p2.data, 'pageCountPrefix'),
-	  'suffix': p1.getDataValue(p2.data, 'pageCountSuffix'),
-	  'pageCount': p1.getDataValue(p2.data, 'pageCount')
+	  'prefix': p1.getData(p2.data, 'pageCountPrefix'),
+	  'suffix': p1.getData(p2.data, 'pageCountSuffix'),
+	  'pageCount': p1.getData(p2.data, 'pageCount')
 	};
 	var _compParam1 = [_type1, _params1];
 
@@ -2808,11 +2808,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	var _compParam0 = [_type0, _params0];
 
-	var _type1 = p1.components['fj-pagedatacount'] ? p1.components['fj-pagedatacount'] : 'fj-pagedatacount';
+	var _type1 = p1.components['fj-pagedatacount'] ? p1.components['fj-pagedatacount'] : 'fj-PageDataCount';
 	var _params1 = {
-	  'prefix': p1.getDataValue(p2.data, 'countPrefix'),
-	  'suffix': p1.getDataValue(p2.data, 'countSuffix'),
-	  'count': p1.getDataValue(p2.data, 'count')
+	  'prefix': p1.getData(p2.data, 'countPrefix'),
+	  'suffix': p1.getData(p2.data, 'countSuffix'),
+	  'count': p1.getData(p2.data, 'count')
 	};
 	var _compParam1 = [_type1, _params1];
 
@@ -2829,14 +2829,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	var _compParam0 = [_type0, _params0];
 
-	var _type1 = p1.components['fj-pagesize'] ? p1.components['fj-pagesize'] : 'fj-pagesize';
+	var _type1 = p1.components['fj-pagesize'] ? p1.components['fj-pagesize'] : 'fj-PageSize';
 	var _params1 = {
-	  'prefix': p1.getDataValue(p2.data, 'sizePrefix'),
-	  'suffix': p1.getDataValue(p2.data, 'sizeSuffix'),
-	  'pageSize': p1.getDataValue(p2.data, 'pageSize'),
-	  'pageSizes': p1.getDataValue(p2.data, 'pageSizes'),
-	  'setPageSize': p1.getDataValue(p2.data, 'setPageSize'),
-	  'onChange': p1.getDataValue(p2.data, 'pageSizeChange')
+	  'prefix': p1.getData(p2.data, 'sizePrefix'),
+	  'suffix': p1.getData(p2.data, 'sizeSuffix'),
+	  'pageSize': p1.getData(p2.data, 'pageSize'),
+	  'pageSizes': p1.getData(p2.data, 'pageSizes'),
+	  'setPageSize': p1.getData(p2.data, 'setPageSize'),
+	  'onChange': p1.getData(p2.data, 'pageSizeChange')
 	};
 	var _compParam1 = [_type1, _params1];
 
@@ -2859,10 +2859,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _params1 = {
 	  'type': 'text',
 	  'ref': 'pageTxt',
-	  'defaultValue': p1.getDataValue(p2.data, 'pageIndex'),
+	  'defaultValue': p1.getData(p2.data, 'pageIndex'),
 	  'className': 'fj-form-elem fj-pagn-pageindex',
 	  'autoComplete': 'off',
-	  'onBlur': p1.getDataValue(p2.data, 'pageIndexBlur')
+	  'onBlur': p1.getData(p2.data, 'pageIndexBlur')
 	};
 	var _compParam1 = [_type1, _params1];
 
@@ -2874,11 +2874,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _params2 = {
 	  'className': 'fj-btn fj-pagn-btn-go',
 	  'type': 'button',
-	  'onClick': p1.getDataValue(p2.data, 'goPage')
+	  'onClick': p1.getData(p2.data, 'goPage')
 	};
 	var _compParam2 = [_type2, _params2];
 
-	_compParam2.push(p1.getDataValue(p2.data, 'btnGoName'));
+	_compParam2.push(p1.getData(p2.data, 'btnGoName'));
 
 	_compParam0.push(p1.h.apply(null, _compParam2));
 
@@ -2890,7 +2890,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
 	var _value0 = 'fj-pagn-btn-refresh';
 
-	var _filter0 = p1.getDataValue(p2.data, 'fixIconSize');
+	var _filter0 = p1.getData(p2.data, 'fixIconSize');
 	if(!_filter0) _filter0 = p1.filters['fixIconSize'];
 	if (!_filter0) {
 	  p1.warn('fixIconSize', 'filter');
@@ -2904,9 +2904,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _compParam0 = [_type0, _params0];
 
 	var _type1 = p1.components['i'] ? p1.components['i'] : 'i';
-	var _value1 = p1.getDataValue(p2.data, 'refresh');
+	var _value1 = p1.getData(p2.data, 'refresh');
 
-	var _filter1 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter1 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter1) _filter1 = p1.filters['clickBtn'];
 	if (!_filter1) {
 	  p1.warn('clickBtn', 'filter');
@@ -2930,9 +2930,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _type0 = p1.components['div'] ? p1.components['div'] : 'div';
 	var _params0 = {
-	  'className': p1.getDataValue(p2.data, 'classes'),
-	  'style': p1.styleProps(p1.getDataValue(p2.data, 'style')),
-	  'ref': p1.getDataValue(p2.data, 'wrap')
+	  'className': p1.getData(p2.data, 'classes'),
+	  'style': p1.styleProps(p1.getData(p2.data, 'style')),
+	  'ref': p1.getData(p2.data, 'wrap')
 	};
 	var _compParam0 = [_type0, _params0];
 
@@ -2943,9 +2943,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _compParam1 = [_type1, _params1];
 
 	var _type2 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value0 = p1.getDataValue(p2.data, 'refresh');
+	var _value0 = p1.getData(p2.data, 'refresh');
 
-	var _filter0 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter0 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter0) _filter0 = p1.filters['clickBtn'];
 	if (!_filter0) {
 	  p1.warn('clickBtn', 'filter');
@@ -2955,7 +2955,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	var _params2 = {
 	  'key': 'first',
-	  'className': 'fj-pagn-btn' + (p1.getDataValue(p2.data, 'firstDisabled')),
+	  'className': 'fj-pagn-btn' + (p1.getData(p2.data, 'firstDisabled')),
 	  'title': '首页',
 	  'onClick': _value0
 	};
@@ -2966,9 +2966,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	_compParam1.push(p1.h.apply(null, _compParam2));
 
 	var _type3 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value1 = p1.getDataValue(p2.data, 'refresh');
+	var _value1 = p1.getData(p2.data, 'refresh');
 
-	var _filter1 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter1 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter1) _filter1 = p1.filters['clickBtn'];
 	if (!_filter1) {
 	  p1.warn('clickBtn', 'filter');
@@ -2978,7 +2978,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	var _params3 = {
 	  'key': 'prev',
-	  'className': 'fj-pagn-btn' + (p1.getDataValue(p2.data, 'prevDisabled')),
+	  'className': 'fj-pagn-btn' + (p1.getData(p2.data, 'prevDisabled')),
 	  'title': '上一页',
 	  'onClick': _value1
 	};
@@ -3005,7 +3005,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['if'];
 	var _dataRefer0 = [
-	  p1.getDataValue(p2.data, 'hasPages'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn2, p4), inverse: p1.exprRet(p1, p2, p1.fn14, p4) }
+	  p1.getData(p2.data, 'hasPages'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn2, p4), inverse: p1.exprRet(p1, p2, p1.fn14, p4) }
 	];
 	p1.throwIf(_expr0, 'if', 'expr');
 
@@ -3016,9 +3016,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	_compParam1.push(p1.h.apply(null, _compParam5));
 
 	var _type7 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value2 = p1.getDataValue(p2.data, 'refresh');
+	var _value2 = p1.getData(p2.data, 'refresh');
 
-	var _filter2 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter2 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter2) _filter2 = p1.filters['clickBtn'];
 	if (!_filter2) {
 	  p1.warn('clickBtn', 'filter');
@@ -3028,7 +3028,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	var _params6 = {
 	  'key': 'next',
-	  'className': 'fj-pagn-btn' + (p1.getDataValue(p2.data, 'nextDisabled')),
+	  'className': 'fj-pagn-btn' + (p1.getData(p2.data, 'nextDisabled')),
 	  'title': '下一页',
 	  'onClick': _value2
 	};
@@ -3045,9 +3045,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	_compParam1.push(p1.h.apply(null, _compParam7));
 
 	var _type9 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value3 = p1.getDataValue(p2.data, 'refresh');
+	var _value3 = p1.getData(p2.data, 'refresh');
 
-	var _filter3 = p1.getDataValue(p2.data, 'clickBtn');
+	var _filter3 = p1.getData(p2.data, 'clickBtn');
 	if(!_filter3) _filter3 = p1.filters['clickBtn'];
 	if (!_filter3) {
 	  p1.warn('clickBtn', 'filter');
@@ -3057,7 +3057,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	var _params8 = {
 	  'key': 'last',
-	  'className': 'fj-pagn-btn' + (p1.getDataValue(p2.data, 'lastDisabled')),
+	  'className': 'fj-pagn-btn' + (p1.getData(p2.data, 'lastDisabled')),
 	  'title': '末页',
 	  'onClick': _value3
 	};
@@ -3069,7 +3069,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr1 = p1.exprs['if'];
 	var _dataRefer1 = [
-	  p1.getDataValue(p2.data, 'showPageCount'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn15, p4), inverse: p1.noop }
+	  p1.getData(p2.data, 'showPageCount'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn15, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr1, 'if', 'expr');
 
@@ -3077,7 +3077,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr2 = p1.exprs['if'];
 	var _dataRefer2 = [
-	  p1.getDataValue(p2.data, 'showCount'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn16, p4), inverse: p1.noop }
+	  p1.getData(p2.data, 'showCount'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn16, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr2, 'if', 'expr');
 
@@ -3085,7 +3085,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr3 = p1.exprs['if'];
 	var _dataRefer3 = [
-	  p1.getDataValue(p2.data, 'showPageSize'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn17, p4), inverse: p1.noop }
+	  p1.getData(p2.data, 'showPageSize'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn17, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr3, 'if', 'expr');
 
@@ -3093,7 +3093,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr4 = p1.exprs['if'];
 	var _dataRefer4 = [
-	  p1.getDataValue(p2.data, 'hasBtnGo'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn18, p4), inverse: p1.noop }
+	  p1.getData(p2.data, 'hasBtnGo'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn18, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr4, 'if', 'expr');
 
@@ -3101,7 +3101,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr5 = p1.exprs['if'];
 	var _dataRefer5 = [
-	  p1.getDataValue(p2.data, 'showRefresh'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn19, p4), inverse: p1.noop }
+	  p1.getData(p2.data, 'showRefresh'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn19, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr5, 'if', 'expr');
 
@@ -3114,7 +3114,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  fn20: function anonymous(p1,p2,p3,p4
 	/**/) {
 
-	var _expr0 = p1.getDataValue(p2.data, 'emptyElem');
+	var _expr0 = p1.getData(p2.data, 'emptyElem');
 	if(!_expr0) _expr0 = p1.exprs['emptyElem'];
 	var _dataRefer0 = [
 	{ _njOpts: true, useString: p1.useString, exprProps: p4, result: p1.noop, inverse: p1.noop }
@@ -3127,7 +3127,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**/) {
 
 	var _expr0 = p1.exprs['if'];
-	var _value0 = p1.getDataValue(p2.data, 'count');
+	var _value0 = p1.getData(p2.data, 'count');
 
 	var _filter0 = p1.filters['gt'];
 	if (!_filter0) {
@@ -3155,27 +3155,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spread'];
 	var _dataRefer0 = [
-	  p1.getDataValue(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
+	  p1.getData(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spread', 'expr');
 
 	_expr0.apply(p2, _dataRefer0);
 
 	_params0 = _paramsE0;
-	_params0['className'] = p1.getDataValue(p2.data, 'classes');
-	_params0['ref'] = p1.getDataValue(p2.data, 'wrap');
+	_params0['className'] = p1.getData(p2.data, 'classes');
+	_params0['ref'] = p1.getData(p2.data, 'wrap');
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push('\n    ' + (p1.getDataValue(p2.data, 'prefix')));
+	_compParam0.push('\n    ' + (p1.getData(p2.data, 'prefix')));
 
 	var _type1 = p1.components['span'] ? p1.components['span'] : 'span';
 	var _compParam1 = [_type1, null];
 
-	_compParam1.push(p1.getDataValue(p2.data, 'pageCount'));
+	_compParam1.push(p1.getData(p2.data, 'pageCount'));
 
 	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	_compParam0.push((p1.getDataValue(p2.data, 'suffix')) + '\n');
+	_compParam0.push((p1.getData(p2.data, 'suffix')) + '\n');
 
 	return p1.h.apply(null, _compParam0);
 	}
@@ -3191,27 +3191,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spread'];
 	var _dataRefer0 = [
-	  p1.getDataValue(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
+	  p1.getData(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spread', 'expr');
 
 	_expr0.apply(p2, _dataRefer0);
 
 	_params0 = _paramsE0;
-	_params0['className'] = p1.getDataValue(p2.data, 'classes');
-	_params0['ref'] = p1.getDataValue(p2.data, 'wrap');
+	_params0['className'] = p1.getData(p2.data, 'classes');
+	_params0['ref'] = p1.getData(p2.data, 'wrap');
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push('\n    ' + (p1.getDataValue(p2.data, 'prefix')));
+	_compParam0.push('\n    ' + (p1.getData(p2.data, 'prefix')));
 
 	var _type1 = p1.components['span'] ? p1.components['span'] : 'span';
 	var _compParam1 = [_type1, null];
 
-	_compParam1.push(p1.getDataValue(p2.data, 'count'));
+	_compParam1.push(p1.getData(p2.data, 'count'));
 
 	_compParam0.push(p1.h.apply(null, _compParam1));
 
-	_compParam0.push((p1.getDataValue(p2.data, 'suffix')) + '\n');
+	_compParam0.push((p1.getData(p2.data, 'suffix')) + '\n');
 
 	return p1.h.apply(null, _compParam0);
 	}
@@ -3239,14 +3239,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _type0 = p1.components['select'] ? p1.components['select'] : 'select';
 	var _params0 = {
 	  'className': 'fj-form-elem fj-pagn-pagesize',
-	  'value': p1.getDataValue(p2.data, 'pageSize'),
-	  'onChange': p1.getDataValue(p2.data, 'pageSizeChange')
+	  'value': p1.getData(p2.data, 'pageSize'),
+	  'onChange': p1.getData(p2.data, 'pageSizeChange')
 	};
 	var _compParam0 = [_type0, _params0];
 
 	var _expr0 = p1.exprs['each'];
 	var _dataRefer0 = [
-	  p1.getDataValue(p2.data, 'pageSizes'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn2, p4), inverse: p1.noop }
+	  p1.getData(p2.data, 'pageSizes'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn2, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'each', 'expr');
 
@@ -3257,7 +3257,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  fn3: function anonymous(p1,p2,p3,p4
 	/**/) {
 
-	return p1.getDataValue(p2.data, 'pageSize');
+	return p1.getData(p2.data, 'pageSize');
 	},
 	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
@@ -3268,28 +3268,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spread'];
 	var _dataRefer0 = [
-	  p1.getDataValue(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
+	  p1.getData(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spread', 'expr');
 
 	_expr0.apply(p2, _dataRefer0);
 
 	_params0 = _paramsE0;
-	_params0['className'] = p1.getDataValue(p2.data, 'classes');
-	_params0['ref'] = p1.getDataValue(p2.data, 'wrap');
+	_params0['className'] = p1.getData(p2.data, 'classes');
+	_params0['ref'] = p1.getData(p2.data, 'wrap');
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push(p1.getDataValue(p2.data, 'prefix'));
+	_compParam0.push(p1.getData(p2.data, 'prefix'));
 
 	var _expr1 = p1.exprs['if'];
 	var _dataRefer1 = [
-	  p1.getDataValue(p2.data, 'setPageSize'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn1, p4), inverse: p1.exprRet(p1, p2, p1.fn3, p4) }
+	  p1.getData(p2.data, 'setPageSize'),{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn1, p4), inverse: p1.exprRet(p1, p2, p1.fn3, p4) }
 	];
 	p1.throwIf(_expr1, 'if', 'expr');
 
 	_compParam0.push(_expr1.apply(p2, _dataRefer1));
 
-	_compParam0.push(p1.getDataValue(p2.data, 'suffix'));
+	_compParam0.push(p1.getData(p2.data, 'suffix'));
 
 	return p1.h.apply(null, _compParam0);
 	}
@@ -3593,19 +3593,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spread'];
 	var _dataRefer0 = [
-	  p1.getDataValue(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
+	  p1.getData(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spread', 'expr');
 
 	_expr0.apply(p2, _dataRefer0);
 
 	_params0 = _paramsE0;
-	_params0['className'] = p1.getDataValue(p2.data, 'classes');
-	_params0['style'] = p1.styleProps(p1.getDataValue(p2.data, 'styles'));
-	_params0['ref'] = p1.getDataValue(p2.data, 'wrap');
+	_params0['className'] = p1.getData(p2.data, 'classes');
+	_params0['style'] = p1.styleProps(p1.getData(p2.data, 'styles'));
+	_params0['ref'] = p1.getData(p2.data, 'wrap');
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push(p1.getDataValue(p2.data, 'children'));
+	_compParam0.push(p1.getData(p2.data, 'children'));
 
 	return p1.h.apply(null, _compParam0);
 	}
@@ -3621,18 +3621,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spread'];
 	var _dataRefer0 = [
-	  p1.getDataValue(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
+	  p1.getData(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spread', 'expr');
 
 	_expr0.apply(p2, _dataRefer0);
 
 	_params0 = _paramsE0;
-	_params0['className'] = p1.getDataValue(p2.data, 'classes');
-	_params0['ref'] = p1.getDataValue(p2.data, 'wrap');
+	_params0['className'] = p1.getData(p2.data, 'classes');
+	_params0['ref'] = p1.getData(p2.data, 'wrap');
 	var _compParam0 = [_type0, _params0];
 
-	_compParam0.push(p1.getDataValue(p2.data, 'children'));
+	_compParam0.push(p1.getData(p2.data, 'children'));
 
 	return p1.h.apply(null, _compParam0);
 	}
@@ -3648,15 +3648,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spread'];
 	var _dataRefer0 = [
-	  p1.getDataValue(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
+	  p1.getData(p2.data, 'props'),{ _njOpts: true, exprProps: _paramsE0, result: p1.noop, inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spread', 'expr');
 
 	_expr0.apply(p2, _dataRefer0);
 
 	_params0 = _paramsE0;
-	_params0['className'] = p1.getDataValue(p2.data, 'classes');
-	_params0['ref'] = p1.getDataValue(p2.data, 'wrap');
+	_params0['className'] = p1.getData(p2.data, 'classes');
+	_params0['ref'] = p1.getData(p2.data, 'wrap');
 	var _compParam0 = [_type0, _params0];
 
 	return p1.h.apply(null, _compParam0);
