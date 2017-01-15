@@ -23,6 +23,6 @@ Object.assign(fj, utils, {
   Gesture
 });
 
-let global = typeof self !== 'undefined' ? self : this;
+let _global = typeof self !== 'undefined' ? self : global;
 
-module.exports = global.FlareJ = global.fj = fj;
+module.exports = _global.FlareJ = _global.fj = fj;
