@@ -1,5 +1,4 @@
 ﻿import { Component, PropTypes } from 'react';
-import { getData } from 'nornj';
 import { registerTmpl } from 'nornj-react';
 import classNames from 'classnames';
 import Widget from '../widget';
@@ -185,8 +184,8 @@ class Pagination extends Widget {
   }
 
   clickBtn(fn, type) {
-    const pageIndex = getData(this.data, 'pageIndex'),
-      pageCount = getData(this.data, 'pageCount');
+    const pageIndex = this.getData('pageIndex'),
+      pageCount = this.getData('pageCount');
 
     switch (type) {
       case 'first':
@@ -225,11 +224,11 @@ class Pagination extends Widget {
   }
 
   isCurrentPage(no) {
-    return parseInt(no, 10) == getData(this.data, 'pageIndex') ? '-c' : '';
+    return parseInt(no, 10) == this.getData('pageIndex') ? '-c' : '';
   }
 
   showPartPage(no, type) {
-    const pageCount = getData(this.data, 'pageCount');
+    const pageCount = this.getData('pageCount');
     switch (type) {
       case '1': //当前页码<=4:左侧显示所有+当前页码+右侧2个页码+...+尾页
         return no <= 4;
