@@ -2330,7 +2330,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _value0 = _filter0.apply(p2, [_value0, '2', { _njOpts: true, useString: p1.useString }]);
 	}
 	var _dataRefer0 = [
-	  '1',  _value0,{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn7, p4), inverse: p1.noop }
+	  1,  _value0,{ _njOpts: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn7, p4), inverse: p1.noop }
 	];
 	p1.throwIf(_expr0, 'for', 'expr');
 
@@ -2433,7 +2433,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var ret = [];
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value0 = '1';
+	var _value0 = 1;
 
 	var _filter0 = p2.getData('isCurrentPage');
 	if(!_filter0) _filter0 = p1.filters['isCurrentPage'];
@@ -2609,7 +2609,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var ret = [];
 
 	var _type0 = p1.components['li'] ? p1.components['li'] : 'li';
-	var _value0 = '1';
+	var _value0 = 1;
 
 	var _filter0 = p2.getData('isCurrentPage');
 	if(!_filter0) _filter0 = p1.filters['isCurrentPage'];
