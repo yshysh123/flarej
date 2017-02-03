@@ -17,6 +17,7 @@ import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 import { argv } from 'yargs';
 import glob from 'glob';
+import 'nornj-react';
 
 function getJsLibName() {
   let libName = 'flarej.js';
