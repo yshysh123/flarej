@@ -1015,10 +1015,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * 分页组件
 	 */
-	var Pagination = (_dec = (0, _nornjReact.registerTmpl)({
-	  name: 'fj-Pagination',
-	  template: _paginationT2.default.pagination
-	}), _dec(_class = (_temp = _class2 = function (_Widget) {
+	var Pagination = (_dec = (0, _nornjReact.registerTmpl)('fj-Pagination'), _dec(_class = (_temp = _class2 = function (_Widget) {
 	  babelHelpers.inherits(Pagination, _Widget);
 
 	  function Pagination(props) {
@@ -1251,7 +1248,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return _this3.wrap = c;
 	    };
 
-	    return this.template(state, props, this, extra);
+	    return _paginationT2.default.pagination(state, props, this, extra);
 	  };
 
 	  return Pagination;
@@ -1312,10 +1309,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * 总页数组件
 	 */
 
-	var PageCount = (_dec2 = (0, _nornjReact.registerTmpl)({
-	  name: 'fj-PageCount',
-	  template: _paginationT2.default.pageCount
-	}), _dec2(_class3 = (_temp2 = _class4 = function (_Component) {
+	var PageCount = (_dec2 = (0, _nornjReact.registerTmpl)('fj-PageCount'), _dec2(_class3 = (_temp2 = _class4 = function (_Component) {
 	  babelHelpers.inherits(PageCount, _Component);
 
 	  function PageCount() {
@@ -1345,7 +1339,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      pageCount = _getPageCount(count, pageSize);
 	    }
 
-	    return this.template({
+	    return _paginationT2.default.pageCount({
 	      props: others,
 	      classes: classes,
 	      prefix: prefix,
@@ -1369,10 +1363,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * 数据总数组件
 	 */
-	var PageDataCount = (_dec3 = (0, _nornjReact.registerTmpl)({
-	  name: 'fj-PageDataCount',
-	  template: _paginationT2.default.pageDataCount
-	}), _dec3(_class5 = (_temp3 = _class6 = function (_Component2) {
+	var PageDataCount = (_dec3 = (0, _nornjReact.registerTmpl)('fj-PageDataCount'), _dec3(_class5 = (_temp3 = _class6 = function (_Component2) {
 	  babelHelpers.inherits(PageDataCount, _Component2);
 
 	  function PageDataCount() {
@@ -1395,7 +1386,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      'fj-pagn-part': true
 	    }, className, className));
 
-	    return this.template({
+	    return _paginationT2.default.pageDataCount({
 	      props: others,
 	      classes: classes,
 	      prefix: prefix,
@@ -1419,10 +1410,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * 每页展示数量组件
 	 */
-	var PageSize = (_dec4 = (0, _nornjReact.registerTmpl)({
-	  name: 'fj-PageSize',
-	  template: _paginationT2.default.pageSize
-	}), _dec4(_class7 = (_temp4 = _class8 = function (_Component3) {
+	var PageSize = (_dec4 = (0, _nornjReact.registerTmpl)('fj-PageSize'), _dec4(_class7 = (_temp4 = _class8 = function (_Component3) {
 	  babelHelpers.inherits(PageSize, _Component3);
 
 	  function PageSize(props) {
@@ -1477,7 +1465,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      'fj-pagn-part': true
 	    }, className, className));
 
-	    return this.template(this.state, {
+	    return _paginationT2.default.pageSize(this.state, {
 	      pageSizeChange: this.pageSizeChange,
 	      props: others,
 	      classes: classes,
@@ -2326,12 +2314,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 29 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
+	var nj = __webpack_require__(2);
+
 	module.exports = {
-	  pagination: {
+	  pagination: nj.compileH({
+	  _njTmplKey: 340643886,
 	  useString: false,
 	  fn1: function anonymous(p1,p2,p3,p4
 	/**/) {
@@ -2339,7 +2330,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _expr0 = p2.getData('emptyElem');
 	if(!_expr0) _expr0 = p1.exprs['emptyElem'];
 	var _dataRefer0 = [
-	{ _njOpts: true, ctx: p2, useString: false, exprProps: p4, result: p1.noop }
+	{ _njOpts: true, ctx: p2, outputH: true, useString: false, exprProps: p4, result: p1.noop }
 	];
 	p1.throwIf(_expr0, 'emptyElem', 'expr');
 
@@ -2372,7 +2363,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('isCurrentPage', 'filter');
 	}
 	else {
-	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, ctx: p2, useString: false }]);
+	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _value1 = p2.getData('refresh');
 
@@ -2382,7 +2373,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params0 = {
 	  'key': p2.index,
@@ -2408,10 +2399,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('+', 'filter');
 	}
 	else {
-	  _value0 = _filter0.apply(p2, [_value0, 2, { _njOpts: true, ctx: p2 }]);
+	  _value0 = _filter0.apply(p2, [_value0, 2, { _njOpts: true, ctx: p2, outputH: true }]);
 	}
 	var _dataRefer0 = [
-	  1,  _value0,{ _njOpts: true, ctx: p2, useString: false, result: p1.exprRet(p1, p2, p1.fn6, p4) }
+	  1,  _value0,{ _njOpts: true, ctx: p2, outputH: true, useString: false, result: p1.exprRet(p1, p2, p1.fn6, p4) }
 	];
 	p1.throwIf(_expr0, 'for', 'expr');
 
@@ -2426,7 +2417,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value1 = _filter1.apply(p2, [_value1, 'next', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value1 = _filter1.apply(p2, [_value1, 'next', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params0 = {
 	  'key': 'ellipsis2',
@@ -2447,7 +2438,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('isCurrentPage', 'filter');
 	}
 	else {
-	  _value2 = _filter2.apply(p2, [_value2, { _njOpts: true, ctx: p2, useString: false }]);
+	  _value2 = _filter2.apply(p2, [_value2, { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _value3 = p2.getData('refresh');
 
@@ -2457,7 +2448,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value3 = _filter3.apply(p2, [_value3, 'last', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value3 = _filter3.apply(p2, [_value3, 'last', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params1 = {
 	  'key': p2.getData('pageCount'),
@@ -2485,7 +2476,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('isCurrentPage', 'filter');
 	}
 	else {
-	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, ctx: p2, useString: false }]);
+	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _value1 = p2.getData('refresh');
 
@@ -2495,7 +2486,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params0 = {
 	  'key': p2.index,
@@ -2522,7 +2513,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('isCurrentPage', 'filter');
 	}
 	else {
-	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, ctx: p2, useString: false }]);
+	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _value1 = p2.getData('refresh');
 
@@ -2532,7 +2523,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value1 = _filter1.apply(p2, [_value1, 'first', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value1 = _filter1.apply(p2, [_value1, 'first', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params0 = {
 	  'key': '1',
@@ -2555,7 +2546,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value2 = _filter2.apply(p2, [_value2, 'prev', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value2 = _filter2.apply(p2, [_value2, 'prev', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params1 = {
 	  'key': 'ellipsis1',
@@ -2575,7 +2566,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('-', 'filter');
 	}
 	else {
-	  _value3 = _filter3.apply(p2, [_value3, 2, { _njOpts: true, ctx: p2 }]);
+	  _value3 = _filter3.apply(p2, [_value3, 2, { _njOpts: true, ctx: p2, outputH: true }]);
 	}
 	var _value4 = p2.getData('pageIndex');
 
@@ -2584,10 +2575,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('+', 'filter');
 	}
 	else {
-	  _value4 = _filter4.apply(p2, [_value4, 2, { _njOpts: true, ctx: p2 }]);
+	  _value4 = _filter4.apply(p2, [_value4, 2, { _njOpts: true, ctx: p2, outputH: true }]);
 	}
 	var _dataRefer0 = [
-	  _value3,  _value4,{ _njOpts: true, ctx: p2, useString: false, result: p1.exprRet(p1, p2, p1.fn8, p4) }
+	  _value3,  _value4,{ _njOpts: true, ctx: p2, outputH: true, useString: false, result: p1.exprRet(p1, p2, p1.fn8, p4) }
 	];
 	p1.throwIf(_expr0, 'for', 'expr');
 
@@ -2602,7 +2593,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value5 = _filter5.apply(p2, [_value5, 'next', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value5 = _filter5.apply(p2, [_value5, 'next', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params2 = {
 	  'key': 'ellipsis2',
@@ -2623,7 +2614,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('isCurrentPage', 'filter');
 	}
 	else {
-	  _value6 = _filter6.apply(p2, [_value6, { _njOpts: true, ctx: p2, useString: false }]);
+	  _value6 = _filter6.apply(p2, [_value6, { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _value7 = p2.getData('refresh');
 
@@ -2633,7 +2624,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value7 = _filter7.apply(p2, [_value7, 'last', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value7 = _filter7.apply(p2, [_value7, 'last', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params3 = {
 	  'key': p2.getData('pageCount'),
@@ -2661,7 +2652,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('isCurrentPage', 'filter');
 	}
 	else {
-	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, ctx: p2, useString: false }]);
+	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _value1 = p2.getData('refresh');
 
@@ -2671,7 +2662,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params0 = {
 	  'key': p2.index,
@@ -2698,7 +2689,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('isCurrentPage', 'filter');
 	}
 	else {
-	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, ctx: p2, useString: false }]);
+	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _value1 = p2.getData('refresh');
 
@@ -2708,7 +2699,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value1 = _filter1.apply(p2, [_value1, 'first', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value1 = _filter1.apply(p2, [_value1, 'first', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params0 = {
 	  'key': '1',
@@ -2731,7 +2722,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value2 = _filter2.apply(p2, [_value2, 'prev', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value2 = _filter2.apply(p2, [_value2, 'prev', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params1 = {
 	  'key': 'ellipsis1',
@@ -2751,10 +2742,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('-', 'filter');
 	}
 	else {
-	  _value3 = _filter3.apply(p2, [_value3, 2, { _njOpts: true, ctx: p2 }]);
+	  _value3 = _filter3.apply(p2, [_value3, 2, { _njOpts: true, ctx: p2, outputH: true }]);
 	}
 	var _dataRefer0 = [
-	  _value3,  p2.getData('pageCount'),{ _njOpts: true, ctx: p2, useString: false, result: p1.exprRet(p1, p2, p1.fn10, p4) }
+	  _value3,  p2.getData('pageCount'),{ _njOpts: true, ctx: p2, outputH: true, useString: false, result: p1.exprRet(p1, p2, p1.fn10, p4) }
 	];
 	p1.throwIf(_expr0, 'for', 'expr');
 
@@ -2774,7 +2765,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('isCurrentPage', 'filter');
 	}
 	else {
-	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, ctx: p2, useString: false }]);
+	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _value1 = p2.getData('refresh');
 
@@ -2784,7 +2775,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params0 = {
 	  'key': p2.index,
@@ -2803,7 +2794,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['for'];
 	var _dataRefer0 = [
-	  1,  p2.getData('pageCount'),{ _njOpts: true, ctx: p2, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn12, p4) }
+	  1,  p2.getData('pageCount'),{ _njOpts: true, ctx: p2, outputH: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn12, p4) }
 	];
 	p1.throwIf(_expr0, 'for', 'expr');
 
@@ -2825,10 +2816,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('showPartPage', 'filter');
 	}
 	else {
-	  _value1 = _filter1.apply(p2, [_value1, 1, { _njOpts: true, ctx: p2, useString: false }]);
+	  _value1 = _filter1.apply(p2, [_value1, 1, { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _dataRefer1 = [
-	  _value1,{ _njOpts: true, ctx: p2, exprProps: _paramsE0, result: p1.exprRet(p1, p2, p1.fn5, _paramsE0) }
+	  _value1,{ _njOpts: true, ctx: p2, outputH: true, exprProps: _paramsE0, result: p1.exprRet(p1, p2, p1.fn5, _paramsE0) }
 	];
 	p1.throwIf(_expr1, 'elseif', 'expr');
 
@@ -2843,10 +2834,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('showPartPage', 'filter');
 	}
 	else {
-	  _value2 = _filter2.apply(p2, [_value2, 2, { _njOpts: true, ctx: p2, useString: false }]);
+	  _value2 = _filter2.apply(p2, [_value2, 2, { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _dataRefer2 = [
-	  _value2,{ _njOpts: true, ctx: p2, exprProps: _paramsE0, result: p1.exprRet(p1, p2, p1.fn7, _paramsE0) }
+	  _value2,{ _njOpts: true, ctx: p2, outputH: true, exprProps: _paramsE0, result: p1.exprRet(p1, p2, p1.fn7, _paramsE0) }
 	];
 	p1.throwIf(_expr2, 'elseif', 'expr');
 
@@ -2861,10 +2852,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('showPartPage', 'filter');
 	}
 	else {
-	  _value3 = _filter3.apply(p2, [_value3, 3, { _njOpts: true, ctx: p2, useString: false }]);
+	  _value3 = _filter3.apply(p2, [_value3, 3, { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _dataRefer3 = [
-	  _value3,{ _njOpts: true, ctx: p2, exprProps: _paramsE0, result: p1.exprRet(p1, p2, p1.fn9, _paramsE0) }
+	  _value3,{ _njOpts: true, ctx: p2, outputH: true, exprProps: _paramsE0, result: p1.exprRet(p1, p2, p1.fn9, _paramsE0) }
 	];
 	p1.throwIf(_expr3, 'elseif', 'expr');
 
@@ -2878,10 +2869,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('lte', 'filter');
 	}
 	else {
-	  _value0 = _filter0.apply(p2, [_value0, 10, { _njOpts: true, ctx: p2 }]);
+	  _value0 = _filter0.apply(p2, [_value0, 10, { _njOpts: true, ctx: p2, outputH: true }]);
 	}
 	var _dataRefer0 = [
-	  _value0,{ _njOpts: true, ctx: p2, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn11, p4), props: _params0 }
+	  _value0,{ _njOpts: true, ctx: p2, outputH: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn11, p4), props: _params0 }
 	];
 	p1.throwIf(_expr0, 'if', 'expr');
 
@@ -3005,7 +2996,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('fixIconSize', 'filter');
 	}
 	else {
-	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, ctx: p2, useString: false }]);
+	  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params0 = {
 	  'className': _value0
@@ -3021,7 +3012,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value1 = _filter1.apply(p2, [_value1, { _njOpts: true, ctx: p2, useString: false }]);
+	  _value1 = _filter1.apply(p2, [_value1, { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params1 = {
 	  'className': 'fa fa-refresh',
@@ -3060,7 +3051,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value0 = _filter0.apply(p2, [_value0, 'first', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value0 = _filter0.apply(p2, [_value0, 'first', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params2 = {
 	  'key': 'first',
@@ -3083,7 +3074,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value1 = _filter1.apply(p2, [_value1, 'prev', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value1 = _filter1.apply(p2, [_value1, 'prev', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params3 = {
 	  'key': 'prev',
@@ -3118,7 +3109,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr1 = p1.exprs['else'];
 	var _dataRefer1 = [
-	{ _njOpts: true, ctx: p2, exprProps: _paramsE0, result: p1.exprRet(p1, p2, p1.fn3, _paramsE0) }
+	{ _njOpts: true, ctx: p2, outputH: true, exprProps: _paramsE0, result: p1.exprRet(p1, p2, p1.fn3, _paramsE0) }
 	];
 	p1.throwIf(_expr1, 'else', 'expr');
 
@@ -3126,7 +3117,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_params6 = _paramsE0;
 	var _dataRefer0 = [
-	  p2.getData('hasPages'),{ _njOpts: true, ctx: p2, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn4, p4), props: _params6 }
+	  p2.getData('hasPages'),{ _njOpts: true, ctx: p2, outputH: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn4, p4), props: _params6 }
 	];
 	p1.throwIf(_expr0, 'if', 'expr');
 
@@ -3145,7 +3136,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value2 = _filter2.apply(p2, [_value2, 'next', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value2 = _filter2.apply(p2, [_value2, 'next', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params7 = {
 	  'key': 'next',
@@ -3174,7 +3165,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('clickBtn', 'filter');
 	}
 	else {
-	  _value3 = _filter3.apply(p2, [_value3, 'last', { _njOpts: true, ctx: p2, useString: false }]);
+	  _value3 = _filter3.apply(p2, [_value3, 'last', { _njOpts: true, ctx: p2, outputH: true, useString: false }]);
 	}
 	var _params9 = {
 	  'key': 'last',
@@ -3190,7 +3181,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr2 = p1.exprs['if'];
 	var _dataRefer2 = [
-	  p2.getData('showPageCount'),{ _njOpts: true, ctx: p2, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn13, p4) }
+	  p2.getData('showPageCount'),{ _njOpts: true, ctx: p2, outputH: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn13, p4) }
 	];
 	p1.throwIf(_expr2, 'if', 'expr');
 
@@ -3198,7 +3189,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr3 = p1.exprs['if'];
 	var _dataRefer3 = [
-	  p2.getData('showCount'),{ _njOpts: true, ctx: p2, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn14, p4) }
+	  p2.getData('showCount'),{ _njOpts: true, ctx: p2, outputH: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn14, p4) }
 	];
 	p1.throwIf(_expr3, 'if', 'expr');
 
@@ -3206,7 +3197,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr4 = p1.exprs['if'];
 	var _dataRefer4 = [
-	  p2.getData('showPageSize'),{ _njOpts: true, ctx: p2, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn15, p4) }
+	  p2.getData('showPageSize'),{ _njOpts: true, ctx: p2, outputH: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn15, p4) }
 	];
 	p1.throwIf(_expr4, 'if', 'expr');
 
@@ -3214,7 +3205,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr5 = p1.exprs['if'];
 	var _dataRefer5 = [
-	  p2.getData('hasBtnGo'),{ _njOpts: true, ctx: p2, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn16, p4) }
+	  p2.getData('hasBtnGo'),{ _njOpts: true, ctx: p2, outputH: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn16, p4) }
 	];
 	p1.throwIf(_expr5, 'if', 'expr');
 
@@ -3222,7 +3213,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr6 = p1.exprs['if'];
 	var _dataRefer6 = [
-	  p2.getData('showRefresh'),{ _njOpts: true, ctx: p2, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn17, p4) }
+	  p2.getData('showRefresh'),{ _njOpts: true, ctx: p2, outputH: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn17, p4) }
 	];
 	p1.throwIf(_expr6, 'if', 'expr');
 
@@ -3241,7 +3232,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr1 = p1.exprs['else'];
 	var _dataRefer1 = [
-	{ _njOpts: true, ctx: p2, exprProps: _paramsE0, result: p1.exprRet(p1, p2, p1.fn1, _paramsE0) }
+	{ _njOpts: true, ctx: p2, outputH: true, exprProps: _paramsE0, result: p1.exprRet(p1, p2, p1.fn1, _paramsE0) }
 	];
 	p1.throwIf(_expr1, 'else', 'expr');
 
@@ -3255,17 +3246,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  p1.warn('gte', 'filter');
 	}
 	else {
-	  _value0 = _filter0.apply(p2, [_value0, 1, { _njOpts: true, ctx: p2 }]);
+	  _value0 = _filter0.apply(p2, [_value0, 1, { _njOpts: true, ctx: p2, outputH: true }]);
 	}
 	var _dataRefer0 = [
-	  _value0,{ _njOpts: true, ctx: p2, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn2, p4), props: _params0 }
+	  _value0,{ _njOpts: true, ctx: p2, outputH: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn2, p4), props: _params0 }
 	];
 	p1.throwIf(_expr0, 'if', 'expr');
 
 	return _expr0.apply(p2, _dataRefer0);
 	}
-	},
-	  pageCount: {
+	}),
+	  pageCount: nj.compileH({
+	  _njTmplKey: -403858224,
 	  useString: false,
 	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
@@ -3276,7 +3268,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spread'];
 	var _dataRefer0 = [
-	  p2.getData('props'),{ _njOpts: true, ctx: p2, exprProps: _paramsE0, result: p1.noop }
+	  p2.getData('props'),{ _njOpts: true, ctx: p2, outputH: true, exprProps: _paramsE0, result: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spread', 'expr');
 
@@ -3300,8 +3292,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	return p1.h.apply(null, _compParam0);
 	}
-	},
-	  pageDataCount: {
+	}),
+	  pageDataCount: nj.compileH({
+	  _njTmplKey: -1267742177,
 	  useString: false,
 	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
@@ -3312,7 +3305,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spread'];
 	var _dataRefer0 = [
-	  p2.getData('props'),{ _njOpts: true, ctx: p2, exprProps: _paramsE0, result: p1.noop }
+	  p2.getData('props'),{ _njOpts: true, ctx: p2, outputH: true, exprProps: _paramsE0, result: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spread', 'expr');
 
@@ -3336,8 +3329,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	return p1.h.apply(null, _compParam0);
 	}
-	},
-	  pageSize: {
+	}),
+	  pageSize: nj.compileH({
+	  _njTmplKey: 1123603552,
 	  useString: false,
 	  fn1: function anonymous(p1,p2,p3,p4
 	/**/) {
@@ -3372,7 +3366,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['each'];
 	var _dataRefer0 = [
-	  p2.getData('pageSizes'),{ _njOpts: true, ctx: p2, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn3, p4) }
+	  p2.getData('pageSizes'),{ _njOpts: true, ctx: p2, outputH: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn3, p4) }
 	];
 	p1.throwIf(_expr0, 'each', 'expr');
 
@@ -3389,7 +3383,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spread'];
 	var _dataRefer0 = [
-	  p2.getData('props'),{ _njOpts: true, ctx: p2, exprProps: _paramsE0, result: p1.noop }
+	  p2.getData('props'),{ _njOpts: true, ctx: p2, outputH: true, exprProps: _paramsE0, result: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spread', 'expr');
 
@@ -3408,7 +3402,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr2 = p1.exprs['else'];
 	var _dataRefer2 = [
-	{ _njOpts: true, ctx: p2, exprProps: _paramsE1, result: p1.exprRet(p1, p2, p1.fn1, _paramsE1) }
+	{ _njOpts: true, ctx: p2, outputH: true, exprProps: _paramsE1, result: p1.exprRet(p1, p2, p1.fn1, _paramsE1) }
 	];
 	p1.throwIf(_expr2, 'else', 'expr');
 
@@ -3416,7 +3410,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	_params1 = _paramsE1;
 	var _dataRefer1 = [
-	  p2.getData('setPageSize'),{ _njOpts: true, ctx: p2, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn2, p4), props: _params1 }
+	  p2.getData('setPageSize'),{ _njOpts: true, ctx: p2, outputH: true, useString: p1.useString, result: p1.exprRet(p1, p2, p1.fn2, p4), props: _params1 }
 	];
 	p1.throwIf(_expr1, 'if', 'expr');
 
@@ -3426,7 +3420,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	return p1.h.apply(null, _compParam0);
 	}
-	}
+	})
 	};
 
 /***/ },
@@ -3478,8 +3472,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _gridT2 = babelHelpers.interopRequireDefault(_gridT);
 
-	var templateRow = (0, _nornj.compileH)(_gridT2.default.row);
-
 	/**
 	 * Grid row
 	 */
@@ -3518,7 +3510,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      styles.marginRight = parseInt(right, 10);
 	    }
 
-	    return templateRow({
+	    return _gridT2.default.row({
 	      props: others,
 	      classes: classes,
 	      styles: styles,
@@ -3556,7 +3548,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      styles.width = parseInt(width, 10);
 	    }
 
-	    return templateRow({
+	    return _gridT2.default.row({
 	      props: others,
 	      classes: classes,
 	      styles: styles,
@@ -3609,10 +3601,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Grid col
 	 */
 
-	var Col = (_dec4 = (0, _nornjReact.registerTmpl)({
-	  name: 'fj-Col',
-	  template: _gridT2.default.col
-	}), _dec4(_class4 = function (_Component4) {
+	var Col = (_dec4 = (0, _nornjReact.registerTmpl)('fj-Col'), _dec4(_class4 = function (_Component4) {
 	  babelHelpers.inherits(Col, _Component4);
 
 	  function Col() {
@@ -3648,7 +3637,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var classes = (0, _classnames2.default)((_classNames3 = {}, babelHelpers.defineProperty(_classNames3, 'fj-col' + l, l != null), babelHelpers.defineProperty(_classNames3, 'fj-col-m' + m, m != null), babelHelpers.defineProperty(_classNames3, 'fj-col-s' + s, s != null), babelHelpers.defineProperty(_classNames3, 'fj-col-xs' + xs, xs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right' + right, right != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left' + left, left != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift' + shift, shift != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-m' + rightM, rightM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-m' + leftM, leftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-m' + shiftM, shiftM != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-s' + rightS, rightS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-s' + leftS, leftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-s' + shiftS, shiftS != null), babelHelpers.defineProperty(_classNames3, 'fj-col-right-xs' + rightXs, rightXs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-left-xs' + leftXs, leftXs != null), babelHelpers.defineProperty(_classNames3, 'fj-col-shift-xs' + shiftXs, shiftXs != null), babelHelpers.defineProperty(_classNames3, className, className), _classNames3));
 
-	    return this.template({
+	    return _gridT2.default.col({
 	      props: others,
 	      classes: classes,
 	      children: children,
@@ -3665,10 +3654,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Clear the float style
 	 */
 
-	var ClearFix = (_dec5 = (0, _nornjReact.registerTmpl)({
-	  name: 'fj-ClearFix',
-	  template: _gridT2.default.clearFix
-	}), _dec5(_class5 = function (_Component5) {
+	var ClearFix = (_dec5 = (0, _nornjReact.registerTmpl)('fj-ClearFix'), _dec5(_class5 = function (_Component5) {
 	  babelHelpers.inherits(ClearFix, _Component5);
 
 	  function ClearFix() {
@@ -3691,7 +3677,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var classes = (0, _classnames2.default)((_classNames4 = {}, babelHelpers.defineProperty(_classNames4, 'fj-clearfix', l != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-m', m != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-s', s != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-xs', xs != null), babelHelpers.defineProperty(_classNames4, className, className), _classNames4));
 
-	    return this.template({
+	    return _gridT2.default.clearFix({
 	      props: others,
 	      classes: classes,
 	      wrap: function wrap(c) {
@@ -3710,12 +3696,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 32 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
+	var nj = __webpack_require__(2);
+
 	module.exports = {
-	  row: {
+	  row: nj.compileH({
+	  _njTmplKey: -1610585625,
 	  useString: false,
 	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
@@ -3726,7 +3715,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spread'];
 	var _dataRefer0 = [
-	  p2.getData('props'),{ _njOpts: true, ctx: p2, exprProps: _paramsE0, result: p1.noop }
+	  p2.getData('props'),{ _njOpts: true, ctx: p2, outputH: true, exprProps: _paramsE0, result: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spread', 'expr');
 
@@ -3742,8 +3731,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	return p1.h.apply(null, _compParam0);
 	}
-	},
-	  col: {
+	}),
+	  col: nj.compileH({
+	  _njTmplKey: 2064437297,
 	  useString: false,
 	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
@@ -3754,7 +3744,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spread'];
 	var _dataRefer0 = [
-	  p2.getData('props'),{ _njOpts: true, ctx: p2, exprProps: _paramsE0, result: p1.noop }
+	  p2.getData('props'),{ _njOpts: true, ctx: p2, outputH: true, exprProps: _paramsE0, result: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spread', 'expr');
 
@@ -3769,8 +3759,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	return p1.h.apply(null, _compParam0);
 	}
-	},
-	  clearFix: {
+	}),
+	  clearFix: nj.compileH({
+	  _njTmplKey: 1111967379,
 	  useString: false,
 	  main: function anonymous(p1,p2,p3,p4
 	/**/) {
@@ -3781,7 +3772,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _expr0 = p1.exprs['spread'];
 	var _dataRefer0 = [
-	  p2.getData('props'),{ _njOpts: true, ctx: p2, exprProps: _paramsE0, result: p1.noop }
+	  p2.getData('props'),{ _njOpts: true, ctx: p2, outputH: true, exprProps: _paramsE0, result: p1.noop }
 	];
 	p1.throwIf(_expr0, 'spread', 'expr');
 
@@ -3794,7 +3785,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	return p1.h.apply(null, _compParam0);
 	}
-	}
+	})
 	};
 
 /***/ },

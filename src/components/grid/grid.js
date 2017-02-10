@@ -3,7 +3,6 @@ import { compileH } from 'nornj';
 import { registerTmpl } from 'nornj-react';
 import classNames from 'classnames';
 import tmpl from './grid.t.html';
-const templateRow = compileH(tmpl.row);
 
 /**
  * Grid row
@@ -34,7 +33,7 @@ class Row extends Component {
       styles.marginRight = parseInt(right, 10);
     }
 
-    return templateRow({
+    return tmpl.row({
       props: others,
       classes,
       styles,
@@ -66,7 +65,7 @@ function _createRowRender(context, compClass) {
       styles.width = parseInt(width, 10);
     }
 
-    return templateRow({
+    return tmpl.row({
       props: others,
       classes,
       styles,
@@ -103,10 +102,7 @@ class RowRight extends Component {
 /**
  * Grid col
  */
-@registerTmpl({
-  name: 'fj-Col',
-  template: tmpl.col
-})
+@registerTmpl('fj-Col')
 class Col extends Component {
   render() {
     const {
@@ -149,7 +145,7 @@ class Col extends Component {
       [className]: className
     });
 
-    return this.template({
+    return tmpl.col({
       props: others,
       classes,
       children,
@@ -161,10 +157,7 @@ class Col extends Component {
 /**
  * Clear the float style
  */
-@registerTmpl({
-  name: 'fj-ClearFix',
-  template: tmpl.clearFix
-})
+@registerTmpl('fj-ClearFix')
 class ClearFix extends Component {
   render() {
     const {
@@ -182,7 +175,7 @@ class ClearFix extends Component {
       [className]: className
     });
 
-    return this.template({
+    return tmpl.clearFix({
       props: others,
       classes,
       wrap: c => this.wrap = c

@@ -15,10 +15,7 @@ function getPageCount(count, pageSize) {
 /**
  * 分页组件
  */
-@registerTmpl({
-  name: 'fj-Pagination',
-  template: tmpl.pagination
-})
+@registerTmpl('fj-Pagination')
 class Pagination extends Widget {
   static defaultProps = {
     fjType: 'pagn',
@@ -271,17 +268,14 @@ class Pagination extends Widget {
     });
     extra.wrap = c => this.wrap = c;
 
-    return this.template(state, props, this, extra);
+    return tmpl.pagination(state, props, this, extra);
   }
 }
 
 /**
  * 总页数组件
  */
-@registerTmpl({
-  name: 'fj-PageCount',
-  template: tmpl.pageCount
-})
+@registerTmpl('fj-PageCount')
 class PageCount extends Component {
   static defaultProps = {
     prefix: '共',
@@ -309,7 +303,7 @@ class PageCount extends Component {
       pageCount = getPageCount(count, pageSize);
     }
 
-    return this.template({
+    return tmpl.pageCount({
       props: others,
       classes,
       prefix,
@@ -325,10 +319,7 @@ Pagination.PageCount = PageCount;
 /**
  * 数据总数组件
  */
-@registerTmpl({
-  name: 'fj-PageDataCount',
-  template: tmpl.pageDataCount
-})
+@registerTmpl('fj-PageDataCount')
 class PageDataCount extends Component {
   static defaultProps = {
     prefix: '共',
@@ -349,7 +340,7 @@ class PageDataCount extends Component {
       [className]: className
     });
 
-    return this.template({
+    return tmpl.pageDataCount({
       props: others,
       classes,
       prefix,
@@ -365,10 +356,7 @@ Pagination.PageDataCount = PageDataCount;
 /**
  * 每页展示数量组件
  */
-@registerTmpl({
-  name: 'fj-PageSize',
-  template: tmpl.pageSize
-})
+@registerTmpl('fj-PageSize')
 class PageSize extends Component {
   static propTypes = {
     pageSize: PropTypes.number,
@@ -437,7 +425,7 @@ class PageSize extends Component {
       [className]: className
     });
 
-    return this.template(this.state, {
+    return tmpl.pageSize(this.state, {
       pageSizeChange: this.pageSizeChange,
       props: others,
       classes,
