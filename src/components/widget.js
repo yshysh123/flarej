@@ -1,6 +1,6 @@
 ﻿import { Component } from 'react';
 import update from 'react-addons-update';
-import { each } from 'nornj';
+import nj from 'nornj';
 import * as utils from '../utils';
 import './njHelpers';
 let win = window;
@@ -68,7 +68,7 @@ class Widget extends Component {
 
     //处理响应参数
     [props.defaultResponsiveParam, props.responsiveParam].forEach((responsiveParam) => {
-      each(responsiveParam, (rpp, media) => {
+      nj.each(responsiveParam, (rpp, media) => {
         if (utils.mediaQuery(media)) {  //符合条件时执行响应式处理
           if (rpp.state) {  //设置响应状态值
             newState = update(newState, { $merge: rpp.state });
@@ -93,7 +93,7 @@ class Widget extends Component {
 
     //执行响应后操作
     const runHandlers = () => {
-      each(handlers, (h) => {
+      nj.each(handlers, (h) => {
         const fnH = () => {
           h.handler.call(this, isInit);
         };
