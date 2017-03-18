@@ -168,7 +168,7 @@ class ClearFix extends Component {
       xs, ...others } = this.props;
 
     const classes = classNames({
-      ['fj-clearfix']: l != null,
+      ['fj-clearfix']: l != null || (m == null && s == null && xs == null),
       ['fj-clearfix-m']: m != null,
       ['fj-clearfix-s']: s != null,
       ['fj-clearfix-xs']: xs != null,

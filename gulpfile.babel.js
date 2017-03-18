@@ -17,7 +17,7 @@ import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 import { argv } from 'yargs';
 import glob from 'glob';
-import 'nornj-react';
+import env from 'gulp-env';
 
 function getJsLibName() {
   let libName = 'flarej.js';
@@ -99,11 +99,11 @@ function concatBabelHelpers(jsLibName) {
 gulp.task('build-js', () => {
   let jsLibName = getJsLibName(),
     plugins = [
-      new webpack.NoErrorsPlugin()
+      new webpack.NoEmitOnErrorsPlugin()
     ],
     lastHash = null;
 
-  if(argv.p) {
+  if (argv.p) {
     plugins.push(new webpack.optimize.UglifyJsPlugin({
       compressor: {
         pure_getters: true,
@@ -111,13 +111,17 @@ gulp.task('build-js', () => {
         unsafe_comps: true,
         screw_ie8: false,
         warnings: false
-      }
+      },
+      sourceMap: true
     }));
   }
 
   return gulp.src('./src/base.js')
+    .pipe(env.set({
+      BABEL_ENV: 'webpack'
+    }))
     .pipe(webpackStream({
-      devtool: argv.p ? 'source-map' : null,
+      devtool: argv.p ? 'source-map' : false,
       watch: argv.w ? true : false,
       externals: webpackExternals,
       output: {
@@ -126,22 +130,29 @@ gulp.task('build-js', () => {
         libraryTarget: 'umd'
       },
       module: {
-        loaders: [
-          { test: /\.js$/, loader: 'babel', exclude: /node_modules/,
-            query: {
+        rules: [{
+          test: /\.js$/,
+          use: [{
+            loader: 'babel-loader',
+            options: {
               plugins: ['external-helpers']
             }
-          },
-          { test: /\.t.html(\?[\s\S]+)*$/, loader: 'nornj',
-            query: {
-              outputH: true
+          }],
+          exclude: /node_modules/
+        }, {
+          test: /\.t.html(\?[\s\S]+)*$/,
+          use: [{
+            loader: 'nornj-loader',
+            options: {
+              outputH: true,
+              delimiters: 'react'
             }
-          }
-        ],
+          }]
+        }]
       },
       plugins
-    }, null, function(err, stats) {
-      if(argv.w && stats.hash != lastHash) {
+    }, webpack, (err, stats) => {
+      if (argv.w && stats.hash != lastHash) {
         lastHash = stats.hash;
         concatBabelHelpers(jsLibName);
       }
@@ -154,7 +165,7 @@ gulp.task('build-js', () => {
     }))
     .on('error', handlebuildError)
     .pipe(gulp.dest('./dist/js').on('end', () => {
-      if(!argv.w) {
+      if (!argv.w) {
         concatBabelHelpers(jsLibName);
       }
     }));
@@ -232,6 +243,9 @@ gulp.task("lib", () => {
 
   //Convert js files
   return gulp.src('./src/**/*.js')
+    .pipe(env.set({
+      BABEL_ENV: 'development'
+    }))
     .pipe(babel())
     .pipe(gulp.dest('./lib'));
 });
@@ -263,8 +277,7 @@ gulp.task('eslint', () => {
 let defaultTasks = ['build-js', 'build-all-lib'];
 if (argv.w) {
   defaultTasks.push('watch-css', 'watch-theme');
-}
-else {
+} else {
   defaultTasks.push('build-all-css');
 }
 gulp.task('default', defaultTasks);

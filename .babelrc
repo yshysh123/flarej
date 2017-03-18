@@ -1,23 +1,53 @@
 {
-  "presets": [ "es2015", "stage-1", "react" ],
-  "plugins": [
-    "transform-decorators-legacy",
-    [
-      "transform-class-properties",
-      { "loose": false }
-    ],
-    "transform-object-assign",
-    [
-      "transform-es2015-classes",
-      { "loose": true }
-    ],
-    [
-      "transform-es2015-modules-commonjs",
-      { "loose": false }
-    ],
-    [
-      "transform-es2015-for-of",
-      { "loose": true }
-    ]
-  ]
+  "presets": [ "stage-1", "react" ],
+  "env": {
+    "development": {
+      "presets": ["es2015"],
+      "plugins": [
+        "transform-decorators-legacy",
+        [
+          "transform-class-properties",
+          { "loose": false }
+        ],
+        "transform-object-assign",
+        [
+          "transform-es2015-classes",
+          { "loose": true }
+        ],
+        [
+          "transform-es2015-modules-commonjs",
+          { "loose": false }
+        ],
+        [
+          "transform-es2015-for-of",
+          { "loose": true }
+        ]
+      ]
+    },
+    "webpack": {
+      "presets": [
+        ["es2015", { "modules": false }]
+      ],
+      "plugins": [
+        "transform-decorators-legacy",
+        [
+          "transform-class-properties",
+          { "loose": false }
+        ],
+        "transform-object-assign",
+        [
+          "transform-es2015-classes",
+          { "loose": true }
+        ],
+        [
+          "transform-es2015-modules-commonjs",
+          { "loose": false }
+        ],
+        [
+          "transform-es2015-for-of",
+          { "loose": true }
+        ]
+      ]
+    }
+  }
 }

@@ -1,6 +1,7 @@
 ﻿import React, { cloneElement } from 'react';
-import nj, { registerFilter, registerExpr } from 'nornj';
+import nj, { registerFilter, registerExtension } from 'nornj';
 import { isWebkit } from '../utils';
+import tmpls from './njHelpers.t.html';
 
 registerFilter({
   fixIconSize: (val) => {
@@ -8,9 +9,7 @@ registerFilter({
   }
 });
 
-registerExpr({
-  emptyElem: () => <div className="fj-empty-elem"></div>,
-  cloneElem: function(props, options) {
-    return cloneElement(options.result(), props);
-  }
+registerExtension({
+  emptyElem: () => tmpls.emptyElem(),
+  cloneElem: (props, options) => cloneElement(options.result(), props)
 });
