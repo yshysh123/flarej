@@ -1,0 +1,13 @@
+<div style="touch-action: none;">
+  <#cloneElem ref={ref}>
+    <#props>
+      <#if {isMobile}>
+        <@onTouchStart>{touchStart}</@onTouchStart>
+        <@onTouchMove>{touchMove}</@onTouchMove>
+        <@onTouchEnd>{touchEnd}</@onTouchEnd>
+        <@onTouchCancel>{touchEnd}</@onTouchCancel>
+      </#if>
+    </#props>
+    {children}
+  </#cloneElem>
+</div>

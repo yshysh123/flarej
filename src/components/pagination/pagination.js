@@ -2,8 +2,9 @@
 import { registerTmpl } from 'nornj-react';
 import classNames from 'classnames';
 import Widget from '../widget';
-import * as utils from '../../utils';
+import * as regExp from '../../utils/regexp';
 import tmpl from './pagination.t.html';
+import autobind from 'core-decorators/lib/autobind';
 
 /**
  * 计算总页数
@@ -80,12 +81,6 @@ class Pagination extends Widget {
   init() {
     this.state.pageCount = this.getPageCount() //总页数
     super.init();
-
-    this.pageSizeChange = this.pageSizeChange.bind(this);
-    this.pageIndexBlur = this.pageIndexBlur.bind(this);
-    this.setGoPage = this.setGoPage.bind(this);
-    this.goPage = this.goPage.bind(this);
-    this.refresh = this.refresh.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -132,18 +127,20 @@ class Pagination extends Widget {
   }
 
   //切换每页数据数
+  @autobind
   pageSizeChange(pageSize) {
     this.refresh(this.state.pageIndex, parseInt(pageSize, 10));
   }
 
   //页数文本框失去焦点
   pageIndexBlur(e) {
-    if (!utils.RegExp.num.test(e.target.value.trim())) {
+    if (!regExp.num.test(e.target.value.trim())) {
       e.target.value = 1;
     }
   }
 
   //设置跳转页码
+  @autobind
   setGoPage(pageIndex) {
     if (this.refs.pageTxt) {
       this.refs.pageTxt.value = pageIndex;
@@ -151,6 +148,7 @@ class Pagination extends Widget {
   }
 
   //刷新分页
+  @autobind
   refresh(pageIndex = this.state.pageIndex, pageSize = this.state.pageSize, isInit) {
     let props = this.props,
       pageCount = this.getPageCount(pageSize);
@@ -176,6 +174,7 @@ class Pagination extends Widget {
   }
 
   //跳转页数
+  @autobind
   goPage(e) {
     this.refresh(parseInt(this.refs.pageTxt.value, 10));
   }
@@ -386,7 +385,6 @@ class PageSize extends Component {
     super(props);
 
     this.state.pageSize = this.props.pageSize;
-    this.pageSizeChange = this.pageSizeChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -395,6 +393,7 @@ class PageSize extends Component {
     });
   }
 
+  @autobind
   pageSizeChange(e) {
     let props = this.props,
       pageSize = e.target.value;

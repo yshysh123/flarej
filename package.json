@@ -46,6 +46,7 @@
     "babel-preset-stage-1": "^6.5.0",
     "babel-register": "^6.11.5",
     "classnames": "^2.2.5",
+    "core-decorators": "^0.15.0",
     "glob": "^7.0.3",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",

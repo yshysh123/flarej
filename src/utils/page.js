@@ -1,9 +1,9 @@
 ﻿import fj from '../core';
-let win = window,
+const win = window,
   doc = document;
 
 //Media query
-export const mediaQuery = (media) => {
+export function mediaQuery(media) {
   var ret = false;
 
   if (win.matchMedia) {  //If the browser support matchMedia
@@ -18,20 +18,26 @@ export const mediaQuery = (media) => {
   }
 
   return ret;
-};
+}
 
 //Get current width of page
-export const pageWidth = () => {
+export function pageWidth() {
   return win.innerWidth != null ? win.innerWidth : doc.documentElement && doc.documentElement.clientWidth != null ? doc.documentElement.clientWidth : doc.body != null ? doc.body.clientWidth : null;
-};
+}
 
 //Save initial width of page
 fj.globalWidth = pageWidth();
 
 //Get current height of page
-export const pageHeight = () => {
+export function pageHeight() {
   return win.innerHeight != null ? win.innerHeight : doc.documentElement && doc.documentElement.clientHeight != null ? doc.documentElement.clientHeight : doc.body != null ? doc.body.clientHeight : null;
-};
+}
 
 //Save initial height of page
 fj.globalHeight = pageHeight();
+
+Object.assign(fj, {
+  mediaQuery,
+  pageWidth,
+  pageHeight
+});

@@ -1,5 +1,7 @@
-﻿//Lazy to do something
-export const lazyDo = (fn, timeOut, doName, obj) => {
+﻿import fj from '../core';
+
+//Lazy to do something
+export function lazyDo(fn, timeOut, doName, obj) {
   let sto = null;
 
   if (!obj) {
@@ -24,10 +26,10 @@ export const lazyDo = (fn, timeOut, doName, obj) => {
   }
 
   return sto;
-};
+}
 
 //Poll to do something
-export const pollDo = (fn, timeOut, doName, obj) => {
+export function pollDo(fn, timeOut, doName, obj) {
   var siv = null;
 
   if (!obj) {
@@ -54,4 +56,9 @@ export const pollDo = (fn, timeOut, doName, obj) => {
   }
 
   return siv;
-};
+}
+
+Object.assign(fj, {
+  lazyDo,
+  pollDo
+});

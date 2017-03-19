@@ -1,13 +1,16 @@
 ﻿import { Component } from 'react';
 import update from 'react-addons-update';
 import nj from 'nornj';
-import * as utils from '../utils';
+import { guid } from '../utils/common';
+import { lazyDo } from '../utils/delayOperate';
+import { mediaQuery, pageWidth } from '../utils/page';
+import { on, off } from '../utils/domEvent';
 import './njHelpers';
-let win = window;
+const win = window;
 
-class Widget extends Component {
+export default class Widget extends Component {
   state = {
-    objId: utils.guid()
+    objId: guid()
   };
   
   constructor(props, initialState) {
@@ -31,12 +34,12 @@ class Widget extends Component {
 
     //页面尺寸改变时触发响应式处理
     const fn = this.responsiveResize = () => {
-      utils.lazyDo(() => {
+      lazyDo(() => {
         let isRh = true;
 
         //只有在页面宽度改变时执行响应式处理
         if (props.responsiveOnlyWidth) {
-          let w = utils.pageWidth();
+          let w = pageWidth();
 
           //页面宽度和上一次不同
           if (w !== this.globalWidth) {
@@ -54,7 +57,7 @@ class Widget extends Component {
       }, props.responsiveDelay, `ld_${props.fjType}_responsive`, this);
     };
 
-    utils.on('resize', fn, win);
+    on('resize', fn, win);
 
     //初始化时执行一次响应式处理
     this.responsiveHandle(true);
@@ -69,7 +72,7 @@ class Widget extends Component {
     //处理响应参数
     [props.defaultResponsiveParam, props.responsiveParam].forEach((responsiveParam) => {
       nj.each(responsiveParam, (rpp, media) => {
-        if (utils.mediaQuery(media)) {  //符合条件时执行响应式处理
+        if (mediaQuery(media)) {  //符合条件时执行响应式处理
           if (rpp.state) {  //设置响应状态值
             newState = update(newState, { $merge: rpp.state });
           }
@@ -99,7 +102,7 @@ class Widget extends Component {
         };
       
         if(h.delay) {  //可延迟执行时间
-          utils.lazyDo(() => {
+          lazyDo(() => {
             fnH();
           }, h.delay);
         }
@@ -124,9 +127,7 @@ class Widget extends Component {
 
     //移除响应式事件
     if (responsiveResize) {
-      utils.off("resize", responsiveResize, win);
+      off("resize", responsiveResize, win);
     }
   }
 }
-
-export default Widget;

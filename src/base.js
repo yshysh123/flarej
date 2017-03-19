@@ -1,28 +1,33 @@
 ﻿import fj from './core';
-import nj from 'nornj';
 import config from './config';
-import * as utils from './utils';
+import * as RegExp from './utils/regexp';
+import * as Sort from './utils/sort';
+import * as Math from './utils/math';
+import * as Date from './utils/date';
 import Pagination from './components/pagination';
-import {
-  Row,
-  RowLeft,
-  RowRight,
-  Col,
-  ClearFix
-} from './components/grid';
 import Gesture from './components/gesture';
 
-fj.config = config;
-Object.assign(fj, utils, {
+Object.assign(fj, {
+  config,
   Pagination,
-  Row,
-  RowLeft,
-  RowRight,
-  Col,
-  ClearFix,
   Gesture
 });
 
-let _global = typeof self !== 'undefined' ? self : global;
+const _global = typeof self !== 'undefined' ? self : global;
+_global.FlareJ = _global.fj = fj;
 
-module.exports = _global.FlareJ = _global.fj = fj;
+export * from './utils/browsers';
+export * from './utils/common';
+export * from './utils/page';
+export * from './utils/delayOperate';
+export * from './utils/domEvent';
+export * from './components/grid';
+export {
+  Pagination,
+  Gesture,
+  RegExp,
+  Sort,
+  Math,
+  Date
+};
+export default fj;

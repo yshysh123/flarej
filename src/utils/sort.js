@@ -3,16 +3,16 @@ import * as regExp from './regexp';
 import * as date from './date';
 
 //取字符串的第一个字符
-const getFirstChar = (s) => {
+export function getFirstChar(s) {
   if (s == '') {
     return '';
   }
 
   return (s + '').substr(0, 1);
-};
+}
 
 //取得汉字的拼音
-const getGB2312Pinyin = (str, sp) => {
+export function getGB2312Pinyin(str, sp) {
   let i, l, t, p, ret = '';
   if (sp == null) {
     sp = '';
@@ -36,10 +36,10 @@ const getGB2312Pinyin = (str, sp) => {
   }
 
   return ret.substr(0, ret.length - sp.length);
-};
+}
 
 //简单值比较算法
-const compare = (x, y, isAsc = true, spC, spC2, spV) => {
+export function compare(x, y, isAsc = true, spC, spC2, spV) {
   spV = spV != null ? spV : -1;
   if (spC && !spC2) {  //如有禁止排序标记则拍在最低位置
     return -1;
@@ -59,18 +59,18 @@ const compare = (x, y, isAsc = true, spC, spC2, spV) => {
   else {
     return 0;
   }
-};
+}
 
 //数字比较算法
-const compareNumber = (x, y, isAsc = true, spC, spC2, spV) => {
+export function compareNumber(x, y, isAsc = true, spC, spC2, spV) {
   let r = /[^d|.|-]/g;
   x = (x + '').replace(r, '');
   y = (y + '').replace(r, '');
   return compare(x * 1, y * 1, isAsc, spC, spC2, spV);
-};
+}
 
 //日期比较算法
-const compareDate = (x, y, isAsc = true, spC, spC2, spV) => {
+export function compareDate(x, y, isAsc = true, spC, spC2, spV) {
   let d = '1900-01-01';
   x = date.parse(x == '' ? d : x);
   y = date.parse(y == '' ? d : y);
@@ -87,17 +87,17 @@ const compareDate = (x, y, isAsc = true, spC, spC2, spV) => {
     return 0;
   }
   return !isAsc ? z * (-1) : z;
-};
+}
 
 //英文字符串比较算法
-const compareStringEN = (x, y, isAsc = true, spC, spC2, spV) => {
+export function compareStringEN(x, y, isAsc = true, spC, spC2, spV) {
   x = getFirstChar(x);
   y = getFirstChar(y);
   return compare(x, y, isAsc, spC, spC2, spV);
-};
+}
 
 //中文字符串比较算法
-const compareStringCH = (x, y, isAsc = true, spC, spC2, spV) => {
+export function compareStringCH(x, y, isAsc = true, spC, spC2, spV) {
   if (fj.GB2312Pinyin.fonts) {  //如果第一个字符非中文的则不获取拼音直接用第一个字符比较
     x = x == '' ? '' : regExp.chFirst.test(x) ? getGB2312Pinyin(getFirstChar(x)) : getFirstChar(x);
     y = y == '' ? '' : regExp.chFirst.test(y) ? getGB2312Pinyin(getFirstChar(y)) : getFirstChar(y);
@@ -106,14 +106,4 @@ const compareStringCH = (x, y, isAsc = true, spC, spC2, spV) => {
   else {
     return compareStringEN(x, y, isAsc, spC, spC2, spV);
   }
-};
-
-export {
-  getFirstChar,
-  getGB2312Pinyin,
-  compare,
-  compareNumber,
-  compareDate,
-  compareStringEN,
-  compareStringCH
-};
+}

@@ -1,4 +1,6 @@
-﻿let _docMode = document.documentMode,
+﻿import fj from '../core';
+
+let _docMode = document.documentMode,
   _ua = navigator.userAgent.toLowerCase();
 
 let _browser = {
@@ -41,7 +43,7 @@ export const isIEgt10 = isIE10 || isIE11;
 export const isIEgt9 = isIE9 || isIEgt10;
 
 //FireFox
-export const isFF = _browser.mozilla;
+export const isFirefox = _browser.mozilla;
 
 //Chrome
 export const isChrome = _browser.chrome;
@@ -75,3 +77,26 @@ export const isMobile = isAndroid || isIos || isWindowsPhone;
 
 //Webkit and blink core browser
 export const isWebkit = isChrome || isSafari || isAndroid || isIos;
+
+Object.assign(fj, {
+  isIE,
+  isIE9,
+  isIE10,
+  isIE11,
+  isIElt9,
+  isIElt11,
+  isIEgt10,
+  isIEgt9,
+  isFirefox,
+  isChrome,
+  isSafari,
+  isOpera,
+  isAndroid,
+  isIphone,
+  isIpad,
+  isIpod,
+  isIos,
+  isWindowsPhone,
+  isMobile,
+  isWebkit
+});

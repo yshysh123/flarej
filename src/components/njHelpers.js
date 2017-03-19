@@ -1,6 +1,6 @@
 ﻿import React, { cloneElement } from 'react';
 import nj, { registerFilter, registerExtension } from 'nornj';
-import { isWebkit } from '../utils';
+import { isWebkit } from '../utils/browsers';
 import tmpls from './njHelpers.t.html';
 
 registerFilter({
@@ -11,5 +11,5 @@ registerFilter({
 
 registerExtension({
   emptyElem: () => tmpls.emptyElem(),
-  cloneElem: (props, options) => cloneElement(options.result(), props)
+  cloneElem: options => cloneElement(options.result(), options.props)
 });

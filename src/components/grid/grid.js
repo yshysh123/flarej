@@ -1,21 +1,23 @@
-﻿import { Component } from 'react';
-import { compileH } from 'nornj';
+﻿import fj from '../../core';
+import { Component } from 'react';
 import { registerTmpl } from 'nornj-react';
 import classNames from 'classnames';
-import tmpl from './grid.t.html';
+import tmpls from './grid.t.html';
 
 /**
  * Grid row
  */
 @registerTmpl('fj-Row')
-class Row extends Component {
+export class Row extends Component {
   render() {
     const {
       className,
       style,
       left,
       right,
-      children, ...others } = this.props;
+      children,
+      ...others
+    } = this.props;
 
     const classes = classNames({
       'fj-row': true,
@@ -23,17 +25,17 @@ class Row extends Component {
     });
 
     let styles = {};
-    if(style) {
+    if (style) {
       Object.assign(styles, style);
     }
-    if(left) {
+    if (left) {
       styles.marginLeft = parseInt(left, 10);
     }
-    if(right) {
+    if (right) {
       styles.marginRight = parseInt(right, 10);
     }
 
-    return tmpl.row({
+    return tmpls.row({
       props: others,
       classes,
       styles,
@@ -49,8 +51,9 @@ function _createRowRender(context, compClass) {
       className,
       style,
       width,
-      children
-    , ...others } = this.props;
+      children,
+      ...others
+    } = this.props;
 
     const classes = classNames({
       [compClass]: true,
@@ -58,14 +61,14 @@ function _createRowRender(context, compClass) {
     });
 
     let styles = {};
-    if(style) {
+    if (style) {
       Object.assign(styles, style);
     }
-    if(width) {
+    if (width) {
       styles.width = parseInt(width, 10);
     }
 
-    return tmpl.row({
+    return tmpls.row({
       props: others,
       classes,
       styles,
@@ -79,7 +82,7 @@ function _createRowRender(context, compClass) {
  * Grid row left container
  */
 @registerTmpl('fj-RowLeft')
-class RowLeft extends Component {
+export class RowLeft extends Component {
   constructor(props) {
     super(props);
 
@@ -91,7 +94,7 @@ class RowLeft extends Component {
  * Grid row right container
  */
 @registerTmpl('fj-RowRight')
-class RowRight extends Component {
+export class RowRight extends Component {
   constructor(props) {
     super(props);
 
@@ -103,7 +106,7 @@ class RowRight extends Component {
  * Grid col
  */
 @registerTmpl('fj-Col')
-class Col extends Component {
+export class Col extends Component {
   render() {
     const {
       className,
@@ -123,7 +126,9 @@ class Col extends Component {
       rightXs,
       leftXs,
       shiftXs,
-      children, ...others } = this.props;
+      children,
+      ...others
+    } = this.props;
 
     const classes = classNames({
       ['fj-col' + l]: l != null,
@@ -145,7 +150,7 @@ class Col extends Component {
       [className]: className
     });
 
-    return tmpl.col({
+    return tmpls.col({
       props: others,
       classes,
       children,
@@ -158,14 +163,16 @@ class Col extends Component {
  * Clear the float style
  */
 @registerTmpl('fj-ClearFix')
-class ClearFix extends Component {
+export class ClearFix extends Component {
   render() {
     const {
       className,
       l,
       m,
       s,
-      xs, ...others } = this.props;
+      xs,
+      ...others
+    } = this.props;
 
     const classes = classNames({
       ['fj-clearfix']: l != null || (m == null && s == null && xs == null),
@@ -175,7 +182,7 @@ class ClearFix extends Component {
       [className]: className
     });
 
-    return tmpl.clearFix({
+    return tmpls.clearFix({
       props: others,
       classes,
       wrap: c => this.wrap = c
@@ -183,10 +190,10 @@ class ClearFix extends Component {
   }
 }
 
-export {
+Object.assign(fj, {
   Row,
   RowLeft,
   RowRight,
   Col,
   ClearFix
-};
+});
