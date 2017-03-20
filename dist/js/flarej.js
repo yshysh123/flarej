@@ -1945,12 +1945,21 @@ var Gesture = (_dec = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj_re
   Gesture.prototype.render = function render() {
     var _this4 = this;
 
-    return __WEBPACK_IMPORTED_MODULE_5__gesture_t_html___default()(this.props, this, {
+    var childrenOnly = __WEBPACK_IMPORTED_MODULE_0_react__["Children"].only(this.props.children);
+    var style = childrenOnly.props.style;
+
+    if (__WEBPACK_IMPORTED_MODULE_2__utils_browsers__["s" /* isMobile */]) {
+      style = babelHelpers.extends({}, style, { touchAction: 'none' });
+    }
+
+    return __WEBPACK_IMPORTED_MODULE_5__gesture_t_html___default()({
       isMobile: __WEBPACK_IMPORTED_MODULE_2__utils_browsers__["s" /* isMobile */],
       ref: function ref(c) {
         return _this4.wrapper = c;
-      }
-    });
+      },
+      children: childrenOnly,
+      style: style
+    }, this);
   };
 
   return Gesture;
@@ -3139,7 +3148,7 @@ module.exports = invariant;
 var nj = __webpack_require__(1);
 
 module.exports = nj.compileH({
-  _njTmplKey: 1486694688,
+  _njTmplKey: -1666284539,
   useString: false,
   fn2: function anonymous(p1,p2,p3,p4,p5
 /**/) {
@@ -3207,15 +3216,9 @@ return p2.getData('children');
   main: function anonymous(p1,p2,p3,p4,p5
 /**/) {
 
-var _type0 = p1.getElement('div', p1);
-var _params0 = {
-  'style': p1.styleProps('touch-action: none;')
-};
-var _compParam0 = [_type0, _params0];
-
 var _ex0 = p2.getData('cloneElem');
 if(!_ex0) _ex0 = p1.extensions['cloneElem'];
-var _params1 = null;
+var _params0 = null;
 var _paramsE0 = {};
 
 var _ex1 = p1.extensions['if'];
@@ -3226,17 +3229,16 @@ p1.throwIf(_ex1, 'if', 'ex');
 
 _ex1.apply(p2, _dataRefer1);
 
-_params1 = _paramsE0;
-_params1['ref'] = p2.getData('ref');
+_params0 = _paramsE0;
+_params0['ref'] = p2.getData('ref');
+_params0['style'] = p1.styleProps(p2.getData('style'));
 var _dataRefer0 = [
-{ _njOpts: true, _njFnsNo: 6, global: p1, context: p2, outputH: true, useString: p1.useString, exProps: p4, subExProps: p5, result: p1.exRet(p1, p2, p1.fn6, p4, p5), props: _params1 }
+{ _njOpts: true, _njFnsNo: 6, global: p1, context: p2, outputH: true, useString: p1.useString, exProps: p4, subExProps: p5, result: p1.exRet(p1, p2, p1.fn6, p4, p5), props: _params0 }
 ];
-p1.addArgs(_params1, _dataRefer0);
+p1.addArgs(_params0, _dataRefer0);
 p1.throwIf(_ex0, 'cloneElem', 'ex');
 
-_compParam0.push(_ex0.apply(p2, _dataRefer0));
-
-return p1.h.apply(null, _compParam0);
+return _ex0.apply(p2, _dataRefer0);
 }
 });
 

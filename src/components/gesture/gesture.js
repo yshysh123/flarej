@@ -466,9 +466,17 @@ export default class Gesture extends Component {
   }
 
   render() {
-    return tmpl(this.props, this, {
+    const childrenOnly = Children.only(this.props.children);
+    let { style } = childrenOnly.props;
+    if (isMobile) {
+      style = Object.assign({}, style, { touchAction: 'none' });
+    }
+
+    return tmpl({
       isMobile,
-      ref: c => this.wrapper = c
-    });
+      ref: c => this.wrapper = c,
+      children: childrenOnly,
+      style
+    }, this);
   }
 }
