@@ -217,19 +217,7 @@ gulp.task("watch-theme", () => {
   gulp.start('build-theme');
 });
 
-//Copy the third party libraries
-gulp.task('build-lib-css', () => {
-  return gulp.src('./vendor/font-awesome/css/*.css')
-    .pipe(gulp.dest('./dist/css'));
-});
-
-gulp.task('build-lib-font', () => {
-  return gulp.src('./vendor/font-awesome/fonts/*.*')
-    .pipe(gulp.dest('./dist/fonts'));
-});
-
-gulp.task('build-all-lib', ['build-lib-css', 'build-lib-font']);
-gulp.task('build', ['build-js', 'build-all-css', 'build-all-lib']);
+gulp.task('build', ['build-js', 'build-all-css']);
 
 //Convert es6 code to es5 from src to lib
 gulp.task("lib", () => {
@@ -274,7 +262,7 @@ gulp.task('eslint', () => {
 });
 
 //Default task
-let defaultTasks = ['build-js', 'build-all-lib'];
+let defaultTasks = ['build-js'];
 if (argv.w) {
   defaultTasks.push('watch-css', 'watch-theme');
 } else {

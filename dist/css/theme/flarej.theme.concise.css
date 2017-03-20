@@ -7,7 +7,7 @@
   border-color: #e1e1e1;
   background-color: #fff;
 }
-.fj-pagn-btn i.fa {
+.fj-pagn-btn span.fa {
   color: #ccc;
 }
 .fj-pagn-btn.fj-disabled {
@@ -17,7 +17,7 @@
 .fj-pagn-btn:hover {
   background-color: #def2ff;
 }
-.fj-pagn-btn:hover i.fa {
+.fj-pagn-btn:hover span.fa {
   color: #aad8f6;
 }
 .fj-pagn-pagesize {

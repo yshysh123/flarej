@@ -29,7 +29,7 @@
     首页
   </li>
   <li key=prev class="fj-pagn-btn{prevDisabled}" title=上一页 onClick="{refresh | clickBtn('prev')}">
-    <i class="fa fa-chevron-left"></i>
+    <fa name="chevron-left" />
   </li>
   <li>
     <ul class=fj-pagn-pages>
@@ -55,7 +55,7 @@
     </ul>
   </li>
   <li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick="{refresh | clickBtn('next')}">
-    <i class="fa fa-chevron-right"></i>
+    <fa name="chevron-right" />
   </li>
   <li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick="{refresh | clickBtn('last')}">
     末页
@@ -94,7 +94,7 @@
         </#if>
         <#if {showRefresh}>
           <li class="{'fj-pagn-btn-refresh' | fixIconSize}">
-            <i class="fa fa-refresh" title=刷新 onClick="{refresh | clickBtn}"></i>
+            <fa name="refresh" title=刷新 onClick="{refresh | clickBtn}" />
           </li>
         </#if>
       </ul>
