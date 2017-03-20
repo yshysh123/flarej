@@ -58,8 +58,8 @@
   <script src="../node_modules/nornj/dist/nornj.js"></script>
   <script src="../node_modules/nornj-react/dist/nornj-react.js"></script>
   <script src="../dist/js/flarej.js"></script>
-  <script src="./vendor/lodash.min.js"></script>
-  <script src="./vendor/aviator.min.js"></script>
+  <script src="../vendor/lodash.min.js"></script>
+  <script src="../vendor/aviator.min.js"></script>
   <script>
     var datas = _.times(500, function (i) {
       var no = i + 1;
@@ -152,8 +152,7 @@
               //  return newState;
               //},
               state: {
-                objId: 10000,
-                //showCount: false
+                //showCount: true
               },
               handler: function (isInit) {
                 //alert(isInit);
@@ -162,9 +161,8 @@
             },
             '(min-width: 769px)': {
               state: {
-                objId: 20000,
-                //hasBtnGo: false
-                //showCount: true
+                // hasBtnGo: false,
+                // showCount: false
               }
             }
           },

@@ -5,7 +5,7 @@ import nj, {
   registerComponent
 } from 'nornj';
 import FontAwesome from 'react-fontawesome';
-import { isWebkit } from '../utils/browsers';
+import { isWebkit } from './utils/browsers';
 import tmpls from './njHelpers.t.html';
 
 registerFilter({

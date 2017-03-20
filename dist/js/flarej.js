@@ -1,13 +1,13 @@
 (function(e){var r=e.babelHelpers={};r.typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(e){return typeof e}:function(e){return e&&typeof Symbol==="function"&&e.constructor===Symbol?"symbol":typeof e};r.jsx=function(){var e=typeof Symbol==="function"&&Symbol.for&&Symbol.for("react.element")||60103;return function r(t,n,o,i){var f=t&&t.defaultProps;var u=arguments.length-3;if(!n&&u!==0){n={}}if(n&&f){for(var a in f){if(n[a]===void 0){n[a]=f[a]}}}else if(!n){n=f||{}}if(u===1){n.children=i}else if(u>1){var l=Array(u);for(var c=0;c<u;c++){l[c]=arguments[c+3]}n.children=l}return{$$typeof:e,type:t,key:o===undefined?null:""+o,ref:null,props:n,_owner:null}}}();r.asyncToGenerator=function(e){return function(){var r=e.apply(this,arguments);return new Promise(function(e,t){function n(o,i){try{var f=r[o](i);var u=f.value}catch(e){t(e);return}if(f.done){e(u)}else{Promise.resolve(u).then(function(e){n("next",e)},function(e){n("throw",e)})}}n("next")})}};r.classCallCheck=function(e,r){if(!(e instanceof r)){throw new TypeError("Cannot call a class as a function")}};r.createClass=function(){function e(e,r){for(var t=0;t<r.length;t++){var n=r[t];n.enumerable=n.enumerable||false;n.configurable=true;if("value"in n)n.writable=true;Object.defineProperty(e,n.key,n)}}return function(r,t,n){if(t)e(r.prototype,t);if(n)e(r,n);return r}}();r.defineEnumerableProperties=function(e,r){for(var t in r){var n=r[t];n.configurable=n.enumerable=true;if("value"in n)n.writable=true;Object.defineProperty(e,t,n)}return e};r.defaults=function(e,r){var t=Object.getOwnPropertyNames(r);for(var n=0;n<t.length;n++){var o=t[n];var i=Object.getOwnPropertyDescriptor(r,o);if(i&&i.configurable&&e[o]===undefined){Object.defineProperty(e,o,i)}}return e};r.defineProperty=function(e,r,t){if(r in e){Object.defineProperty(e,r,{value:t,enumerable:true,configurable:true,writable:true})}else{e[r]=t}return e};r.extends=Object.assign||function(e){for(var r=1;r<arguments.length;r++){var t=arguments[r];for(var n in t){if(Object.prototype.hasOwnProperty.call(t,n)){e[n]=t[n]}}}return e};r.get=function e(r,t,n){if(r===null)r=Function.prototype;var o=Object.getOwnPropertyDescriptor(r,t);if(o===undefined){var i=Object.getPrototypeOf(r);if(i===null){return undefined}else{return e(i,t,n)}}else if("value"in o){return o.value}else{var f=o.get;if(f===undefined){return undefined}return f.call(n)}};r.inherits=function(e,r){if(typeof r!=="function"&&r!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof r)}e.prototype=Object.create(r&&r.prototype,{constructor:{value:e,enumerable:false,writable:true,configurable:true}});if(r)Object.setPrototypeOf?Object.setPrototypeOf(e,r):e.__proto__=r};r.instanceof=function(e,r){if(r!=null&&typeof Symbol!=="undefined"&&r[Symbol.hasInstance]){return r[Symbol.hasInstance](e)}else{return e instanceof r}};r.interopRequireDefault=function(e){return e&&e.__esModule?e:{default:e}};r.interopRequireWildcard=function(e){if(e&&e.__esModule){return e}else{var r={};if(e!=null){for(var t in e){if(Object.prototype.hasOwnProperty.call(e,t))r[t]=e[t]}}r.default=e;return r}};r.newArrowCheck=function(e,r){if(e!==r){throw new TypeError("Cannot instantiate an arrow function")}};r.objectDestructuringEmpty=function(e){if(e==null)throw new TypeError("Cannot destructure undefined")};r.objectWithoutProperties=function(e,r){var t={};for(var n in e){if(r.indexOf(n)>=0)continue;if(!Object.prototype.hasOwnProperty.call(e,n))continue;t[n]=e[n]}return t};r.possibleConstructorReturn=function(e,r){if(!e){throw new ReferenceError("this hasn't been initialised - super() hasn't been called")}return r&&(typeof r==="object"||typeof r==="function")?r:e};r.selfGlobal=typeof e==="undefined"?self:e;r.set=function e(r,t,n,o){var i=Object.getOwnPropertyDescriptor(r,t);if(i===undefined){var f=Object.getPrototypeOf(r);if(f!==null){e(f,t,n,o)}}else if("value"in i&&i.writable){i.value=n}else{var u=i.set;if(u!==undefined){u.call(o,n)}}return n};r.slicedToArray=function(){function e(e,r){var t=[];var n=true;var o=false;var i=undefined;try{for(var f=e[Symbol.iterator](),u;!(n=(u=f.next()).done);n=true){t.push(u.value);if(r&&t.length===r)break}}catch(e){o=true;i=e}finally{try{if(!n&&f["return"])f["return"]()}finally{if(o)throw i}}return t}return function(r,t){if(Array.isArray(r)){return r}else if(Symbol.iterator in Object(r)){return e(r,t)}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}}}();r.slicedToArrayLoose=function(e,r){if(Array.isArray(e)){return e}else if(Symbol.iterator in Object(e)){var t=[];for(var n=e[Symbol.iterator](),o;!(o=n.next()).done;){t.push(o.value);if(r&&t.length===r)break}return t}else{throw new TypeError("Invalid attempt to destructure non-iterable instance")}};r.taggedTemplateLiteral=function(e,r){return Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(r)}}))};r.taggedTemplateLiteralLoose=function(e,r){e.raw=r;return e};r.temporalRef=function(e,r,t){if(e===t){throw new ReferenceError(r+" is not defined - temporal dead zone")}else{return e}};r.temporalUndefined={};r.toArray=function(e){return Array.isArray(e)?e:Array.from(e)};r.toConsumableArray=function(e){if(Array.isArray(e)){for(var r=0,t=Array(e.length);r<e.length;r++)t[r]=e[r];return t}else{return Array.from(e)}}})(typeof global==="undefined"?self:global);
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"), require("nornj"), require("nornj-react"));
+		module.exports = factory(require("nornj"), require("react"), require("nornj-react"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react", "nornj", "nornj-react"], factory);
+		define(["nornj", "react", "nornj-react"], factory);
 	else if(typeof exports === 'object')
-		exports["FlareJ"] = factory(require("react"), require("nornj"), require("nornj-react"));
+		exports["FlareJ"] = factory(require("nornj"), require("react"), require("nornj-react"));
 	else
-		root["FlareJ"] = factory(root["React"], root["nj"], root["njr"]);
+		root["FlareJ"] = factory(root["nj"], root["React"], root["njr"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_7__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -74,7 +74,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1235,7 +1235,7 @@ process.umask = function() { return 0; };
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pagination__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pagination__ = __webpack_require__(24);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__pagination__["a"]; });
 
 
@@ -1439,7 +1439,7 @@ module.exports = g;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nornj_react__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nornj_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_nornj_react__);
@@ -2016,7 +2016,7 @@ var Gesture = (_dec = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj_re
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nornj_react__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nornj_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_nornj_react__);
@@ -2268,56 +2268,21 @@ babelHelpers.extends(__WEBPACK_IMPORTED_MODULE_0__core__["a" /* default */], {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nornj__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nornj__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nornj___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_nornj__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_fontawesome__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_fontawesome___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_fontawesome__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_browsers__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__njHelpers_t_html__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__njHelpers_t_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__njHelpers_t_html__);
-
-
-
-
-
-
-__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj__["registerFilter"])({
-  fixIconSize: function fixIconSize(val) {
-    return val + (!__WEBPACK_IMPORTED_MODULE_3__utils_browsers__["t" /* isWebkit */] ? ' fj-fixsize' : '');
-  }
-});
-
-__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj__["registerExtension"])({
-  emptyElem: function emptyElem() {
-    return __WEBPACK_IMPORTED_MODULE_4__njHelpers_t_html___default.a.emptyElem();
-  },
-  cloneElem: function cloneElem(options) {
-    return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_react__["cloneElement"])(options.result(), options.props);
-  }
-});
-
-__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj__["registerComponent"])('fa', __WEBPACK_IMPORTED_MODULE_2_react_fontawesome___default.a);
-
-/***/ }),
-/* 25 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nornj_react__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nornj_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_nornj_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__widget__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nornj_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nornj_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_nornj_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_regexp__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pagination_t_html__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pagination_t_html__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pagination_t_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__pagination_t_html__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_core_decorators_lib_autobind__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_core_decorators_lib_autobind___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_core_decorators_lib_autobind__);
-var _dec, _class, _desc, _value, _class2, _class3, _temp, _dec2, _class4, _class5, _temp2, _dec3, _class6, _class7, _temp3, _dec4, _class8, _desc2, _value2, _class9, _class10, _temp4;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__higherOrders_responsive__ = __webpack_require__(25);
+var _desc, _value, _class, _class2, _temp, _dec, _class3, _class4, _temp2, _dec2, _class5, _class6, _temp3, _dec3, _class7, _desc2, _value2, _class8, _class9, _temp4;
 
 function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
   var desc = {};
@@ -2356,6 +2321,7 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
 
 
 
+
 /**
  * 计算总页数
  */
@@ -2366,21 +2332,22 @@ function _getPageCount(count, pageSize) {
 /**
  * 分页组件
  */
-var Pagination = (_dec = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj_react__["registerTmpl"])('fj-Pagination'), _dec(_class = (_class2 = (_temp = _class3 = function (_Widget) {
-  babelHelpers.inherits(Pagination, _Widget);
+var Pagination = (_class = (_temp = _class2 = function (_Component) {
+  babelHelpers.inherits(Pagination, _Component);
 
   function Pagination(props) {
     babelHelpers.classCallCheck(this, Pagination);
-    return babelHelpers.possibleConstructorReturn(this, _Widget.call(this, props, {
-      pageIndex: props.pageIndex,
-      pageSize: props.pageSize
-    }));
-  }
 
-  Pagination.prototype.init = function init() {
-    this.state.pageCount = this.getPageCount(); //总页数
-    _Widget.prototype.init.call(this);
-  };
+    var _this = babelHelpers.possibleConstructorReturn(this, _Component.call(this, props));
+
+    _this.state = {};
+
+
+    _this.state.pageIndex = props.pageIndex;
+    _this.state.pageSize = props.pageSize;
+    _this.state.pageCount = _this.getPageCount(); //总页数
+    return _this;
+  }
 
   Pagination.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
     var _props = this.props,
@@ -2586,7 +2553,7 @@ var Pagination = (_dec = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj
       extra.lastDisabled = disabled;
     }
 
-    extra.classes = __WEBPACK_IMPORTED_MODULE_2_classnames___default()(babelHelpers.defineProperty({
+    extra.classes = __WEBPACK_IMPORTED_MODULE_3_classnames___default()(babelHelpers.defineProperty({
       'fj-pagn': true
     }, className, className));
     extra.wrap = function (c) {
@@ -2597,8 +2564,7 @@ var Pagination = (_dec = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj
   };
 
   return Pagination;
-}(__WEBPACK_IMPORTED_MODULE_3__widget__["a" /* default */]), _class3.defaultProps = {
-  fjType: 'pagn',
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]), _class2.defaultProps = {
   pageSize: 15, //每页数据数
   pageSizes: [15, 30, 50], //可选择的每页数据数
   pageIndex: 1, //当前页码,从1开始
@@ -2618,7 +2584,12 @@ var Pagination = (_dec = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj
   showRefresh: true,
   hasPages: true, //是否显示页数链接
   hasBtnGo: true,
-  emptyText: '没有数据',
+  emptyText: '没有数据'
+}, _temp), (_applyDecoratedDescriptor(_class.prototype, 'pageSizeChange', [__WEBPACK_IMPORTED_MODULE_6_core_decorators_lib_autobind___default.a], Object.getOwnPropertyDescriptor(_class.prototype, 'pageSizeChange'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'setGoPage', [__WEBPACK_IMPORTED_MODULE_6_core_decorators_lib_autobind___default.a], Object.getOwnPropertyDescriptor(_class.prototype, 'setGoPage'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'refresh', [__WEBPACK_IMPORTED_MODULE_6_core_decorators_lib_autobind___default.a], Object.getOwnPropertyDescriptor(_class.prototype, 'refresh'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'goPage', [__WEBPACK_IMPORTED_MODULE_6_core_decorators_lib_autobind___default.a], Object.getOwnPropertyDescriptor(_class.prototype, 'goPage'), _class.prototype)), _class);
+
+
+var PaginationR = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__higherOrders_responsive__["a" /* default */])(Pagination, {
+  compType: 'pagn',
   responsive: false,
   responsiveDelay: 70,
   responsiveOnlyWidth: true,
@@ -2648,18 +2619,18 @@ var Pagination = (_dec = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj
       }
     }
   }
-}, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'pageSizeChange', [__WEBPACK_IMPORTED_MODULE_6_core_decorators_lib_autobind___default.a], Object.getOwnPropertyDescriptor(_class2.prototype, 'pageSizeChange'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'setGoPage', [__WEBPACK_IMPORTED_MODULE_6_core_decorators_lib_autobind___default.a], Object.getOwnPropertyDescriptor(_class2.prototype, 'setGoPage'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'refresh', [__WEBPACK_IMPORTED_MODULE_6_core_decorators_lib_autobind___default.a], Object.getOwnPropertyDescriptor(_class2.prototype, 'refresh'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'goPage', [__WEBPACK_IMPORTED_MODULE_6_core_decorators_lib_autobind___default.a], Object.getOwnPropertyDescriptor(_class2.prototype, 'goPage'), _class2.prototype)), _class2)) || _class);
+});
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj__["registerComponent"])({ 'fj-Pagination': PaginationR });
 
 /**
  * 总页数组件
  */
-
-var PageCount = (_dec2 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj_react__["registerTmpl"])('fj-PageCount'), _dec2(_class4 = (_temp2 = _class5 = function (_Component) {
-  babelHelpers.inherits(PageCount, _Component);
+var PageCount = (_dec = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_react__["registerTmpl"])('fj-PageCount'), _dec(_class3 = (_temp2 = _class4 = function (_Component2) {
+  babelHelpers.inherits(PageCount, _Component2);
 
   function PageCount() {
     babelHelpers.classCallCheck(this, PageCount);
-    return babelHelpers.possibleConstructorReturn(this, _Component.apply(this, arguments));
+    return babelHelpers.possibleConstructorReturn(this, _Component2.apply(this, arguments));
   }
 
   PageCount.prototype.render = function render() {
@@ -2675,7 +2646,7 @@ var PageCount = (_dec2 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj
         others = babelHelpers.objectWithoutProperties(_props2, ['className', 'prefix', 'pageCount', 'count', 'pageSize', 'suffix']);
 
 
-    var classes = __WEBPACK_IMPORTED_MODULE_2_classnames___default()(babelHelpers.defineProperty({
+    var classes = __WEBPACK_IMPORTED_MODULE_3_classnames___default()(babelHelpers.defineProperty({
       'fj-pagn-part': true
     }, className, className));
 
@@ -2697,23 +2668,23 @@ var PageCount = (_dec2 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj
   };
 
   return PageCount;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]), _class5.defaultProps = {
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]), _class4.defaultProps = {
   prefix: '共',
   suffix: '页'
-}, _temp2)) || _class4);
+}, _temp2)) || _class3);
 
 
-Pagination.PageCount = PageCount;
+PaginationR.PageCount = PageCount;
 
 /**
  * 数据总数组件
  */
-var PageDataCount = (_dec3 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj_react__["registerTmpl"])('fj-PageDataCount'), _dec3(_class6 = (_temp3 = _class7 = function (_Component2) {
-  babelHelpers.inherits(PageDataCount, _Component2);
+var PageDataCount = (_dec2 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_react__["registerTmpl"])('fj-PageDataCount'), _dec2(_class5 = (_temp3 = _class6 = function (_Component3) {
+  babelHelpers.inherits(PageDataCount, _Component3);
 
   function PageDataCount() {
     babelHelpers.classCallCheck(this, PageDataCount);
-    return babelHelpers.possibleConstructorReturn(this, _Component2.apply(this, arguments));
+    return babelHelpers.possibleConstructorReturn(this, _Component3.apply(this, arguments));
   }
 
   PageDataCount.prototype.render = function render() {
@@ -2727,7 +2698,7 @@ var PageDataCount = (_dec3 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_n
         others = babelHelpers.objectWithoutProperties(_props3, ['className', 'prefix', 'count', 'suffix']);
 
 
-    var classes = __WEBPACK_IMPORTED_MODULE_2_classnames___default()(babelHelpers.defineProperty({
+    var classes = __WEBPACK_IMPORTED_MODULE_3_classnames___default()(babelHelpers.defineProperty({
       'fj-pagn-part': true
     }, className, className));
 
@@ -2744,24 +2715,24 @@ var PageDataCount = (_dec3 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_n
   };
 
   return PageDataCount;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]), _class7.defaultProps = {
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]), _class6.defaultProps = {
   prefix: '共',
   suffix: '条数据'
-}, _temp3)) || _class6);
+}, _temp3)) || _class5);
 
 
-Pagination.PageDataCount = PageDataCount;
+PaginationR.PageDataCount = PageDataCount;
 
 /**
  * 每页展示数量组件
  */
-var PageSize = (_dec4 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj_react__["registerTmpl"])('fj-PageSize'), _dec4(_class8 = (_class9 = (_temp4 = _class10 = function (_Component3) {
-  babelHelpers.inherits(PageSize, _Component3);
+var PageSize = (_dec3 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_react__["registerTmpl"])('fj-PageSize'), _dec3(_class7 = (_class8 = (_temp4 = _class9 = function (_Component4) {
+  babelHelpers.inherits(PageSize, _Component4);
 
   function PageSize(props) {
     babelHelpers.classCallCheck(this, PageSize);
 
-    var _this8 = babelHelpers.possibleConstructorReturn(this, _Component3.call(this, props));
+    var _this8 = babelHelpers.possibleConstructorReturn(this, _Component4.call(this, props));
 
     _this8.state = {
       pageSize: null
@@ -2805,7 +2776,7 @@ var PageSize = (_dec4 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj_
         others = babelHelpers.objectWithoutProperties(_props4, ['className', 'prefix', 'setPageSize', 'pageSize', 'pageSizes', 'suffix', 'onChange']);
 
 
-    var classes = __WEBPACK_IMPORTED_MODULE_2_classnames___default()(babelHelpers.defineProperty({
+    var classes = __WEBPACK_IMPORTED_MODULE_3_classnames___default()(babelHelpers.defineProperty({
       'fj-pagn-part': true
     }, className, className));
 
@@ -2824,43 +2795,45 @@ var PageSize = (_dec4 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj_
   };
 
   return PageSize;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]), _class10.propTypes = {
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]), _class9.propTypes = {
   pageSize: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].number,
   pageSizes: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].array,
   setPageSize: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].oneOfType([__WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].bool, __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].string]),
   prefix: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].string,
   suffix: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].string,
   onChange: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].func
-}, _class10.defaultProps = {
+}, _class9.defaultProps = {
   pageSize: 15, //每页数据数
   pageSizes: [15, 30, 50], //可选择的每页数据数
   setPageSize: false, //是否可以设置每页数据数
   prefix: '每页',
   suffix: '条'
-}, _temp4), (_applyDecoratedDescriptor(_class9.prototype, 'pageSizeChange', [__WEBPACK_IMPORTED_MODULE_6_core_decorators_lib_autobind___default.a], Object.getOwnPropertyDescriptor(_class9.prototype, 'pageSizeChange'), _class9.prototype)), _class9)) || _class8);
+}, _temp4), (_applyDecoratedDescriptor(_class8.prototype, 'pageSizeChange', [__WEBPACK_IMPORTED_MODULE_6_core_decorators_lib_autobind___default.a], Object.getOwnPropertyDescriptor(_class8.prototype, 'pageSizeChange'), _class8.prototype)), _class8)) || _class7);
 
 
-Pagination.PageSize = PageSize;
+PaginationR.PageSize = PageSize;
 
-/* harmony default export */ __webpack_exports__["a"] = Pagination;
+/* harmony default export */ __webpack_exports__["a"] = PaginationR;
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_addons_update__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_addons_update__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_addons_update___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_addons_update__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nornj__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nornj__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nornj___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_nornj__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_common__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_delayOperate__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_page__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_domEvent__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__njHelpers__ = __webpack_require__(24);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Widget; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__njHelpers__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__higherOrders_t_html__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__higherOrders_t_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__higherOrders_t_html__);
+
 
 
 
@@ -2871,156 +2844,205 @@ Pagination.PageSize = PageSize;
 
 var win = window;
 
-var Widget = function (_Component) {
-  babelHelpers.inherits(Widget, _Component);
+/* harmony default export */ __webpack_exports__["a"] = function (ComposedComponent, initialProps) {
+  var _class, _temp;
 
-  function Widget(props, initialState) {
-    babelHelpers.classCallCheck(this, Widget);
+  return _temp = _class = function (_Component) {
+    babelHelpers.inherits(Responsive, _Component);
 
-    var _this = babelHelpers.possibleConstructorReturn(this, _Component.call(this, props));
+    function Responsive(props) {
+      babelHelpers.classCallCheck(this, Responsive);
 
-    _this.state = {
-      objId: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils_common__["a" /* guid */])()
-    };
+      //Initialize
+      var _this = babelHelpers.possibleConstructorReturn(this, _Component.call(this, props));
 
-
-    babelHelpers.extends(_this.state, initialState);
-    _this.init();
-    return _this;
-  }
-
-  //Initialize
-
-
-  Widget.prototype.init = function init() {
-    this.bindResponsiveEvts();
-  };
-
-  //绑定响应式事件
-
-
-  Widget.prototype.bindResponsiveEvts = function bindResponsiveEvts() {
-    var _this2 = this;
-
-    var props = this.props;
-    if (!props.responsive) {
-      return;
+      _this.state = {};
+      _this.bindResponsiveEvts();
+      return _this;
     }
 
-    //页面尺寸改变时触发响应式处理
-    var fn = this.responsiveResize = function () {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils_delayOperate__["a" /* lazyDo */])(function () {
-        var isRh = true;
-
-        //只有在页面宽度改变时执行响应式处理
-        if (props.responsiveOnlyWidth) {
-          var w = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__utils_page__["b" /* pageWidth */])();
-
-          //页面宽度和上一次不同
-          if (w !== _this2.globalWidth) {
-            _this2.globalWidth = w;
-            isRh = true;
-          } else {
-            isRh = false;
-          }
-        }
-
-        if (isRh) {
-          //响应式处理
-          _this2.responsiveHandle();
-        }
-      }, props.responsiveDelay, 'ld_' + props.fjType + '_responsive', _this2);
-    };
-
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__utils_domEvent__["a" /* on */])('resize', fn, win);
-
-    //初始化时执行一次响应式处理
-    this.responsiveHandle(true);
-  };
-
-  //响应式处理
+    //绑定响应式事件
 
 
-  Widget.prototype.responsiveHandle = function responsiveHandle(isInit) {
-    var _this3 = this;
+    Responsive.prototype.bindResponsiveEvts = function bindResponsiveEvts() {
+      var _this2 = this;
 
-    var props = this.props;
-    var newState = this.state,
-        handlers = [];
+      var props = this.props;
+      if (!props.responsive) {
+        return;
+      }
 
-    //处理响应参数
-    [props.defaultResponsiveParam, props.responsiveParam].forEach(function (responsiveParam) {
-      __WEBPACK_IMPORTED_MODULE_2_nornj___default.a.each(responsiveParam, function (rpp, media) {
-        if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__utils_page__["a" /* mediaQuery */])(media)) {
-          //符合条件时执行响应式处理
-          if (rpp.state) {
-            //设置响应状态值
-            newState = __WEBPACK_IMPORTED_MODULE_1_react_addons_update___default()(newState, { $merge: rpp.state });
-          }
+      //页面尺寸改变时触发响应式处理
+      var fn = this.responsiveResize = function () {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils_delayOperate__["a" /* lazyDo */])(function () {
+          var isRh = true;
 
-          if (rpp.preHandler) {
-            //响应前操作
-            var ret = rpp.preHandler.call(_this3, isInit, __WEBPACK_IMPORTED_MODULE_1_react_addons_update___default()(newState, { $merge: {} }));
-            if (ret) {
-              newState = ret;
+          //只有在页面宽度改变时执行响应式处理
+          if (props.responsiveOnlyWidth) {
+            var w = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__utils_page__["b" /* pageWidth */])();
+
+            //页面宽度和上一次不同
+            if (w !== _this2.globalWidth) {
+              _this2.globalWidth = w;
+              isRh = true;
+            } else {
+              isRh = false;
             }
           }
 
-          if (rpp.handler) {
-            //响应后操作
-            handlers[handlers.length] = {
-              handler: rpp.handler,
-              delay: rpp.delay
-            };
+          if (isRh) {
+            //响应式处理
+            _this2.responsiveHandle();
           }
-        }
-      }, false, false);
-    });
+        }, props.responsiveDelay, 'ld_' + props.compType + '_responsive', _this2);
+      };
 
-    //执行响应后操作
-    var runHandlers = function runHandlers() {
-      __WEBPACK_IMPORTED_MODULE_2_nornj___default.a.each(handlers, function (h) {
-        var fnH = function fnH() {
-          h.handler.call(_this3, isInit);
-        };
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__utils_domEvent__["a" /* on */])('resize', fn, win);
 
-        if (h.delay) {
-          //可延迟执行时间
-          __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils_delayOperate__["a" /* lazyDo */])(function () {
-            fnH();
-          }, h.delay);
-        } else {
-          fnH();
-        }
-      }, false, true);
+      //初始化时执行一次响应式处理
+      this.responsiveHandle(true);
     };
 
-    //重置state
-    if (isInit) {
-      //在初始化时需要重新设置state
-      this.state = newState;
-      runHandlers();
-    } else {
-      //非初始化时执行setState
-      this.setState(newState, function () {
-        return runHandlers();
+    //响应式处理
+
+
+    Responsive.prototype.responsiveHandle = function responsiveHandle(isInit) {
+      var _this3 = this;
+
+      var props = this.props;
+      var newState = this.state,
+          handlers = [];
+
+      //处理响应参数
+      [props.defaultResponsiveParam, props.responsiveParam].forEach(function (responsiveParam) {
+        __WEBPACK_IMPORTED_MODULE_2_nornj___default.a.each(responsiveParam, function (rpp, media) {
+          if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__utils_page__["a" /* mediaQuery */])(media)) {
+            //符合条件时执行响应式处理
+            if (rpp.state) {
+              //设置响应状态值
+              newState = __WEBPACK_IMPORTED_MODULE_1_react_addons_update___default()(newState, { $merge: rpp.state });
+            }
+
+            if (rpp.preHandler) {
+              //响应前操作
+              var ret = rpp.preHandler.call(_this3, isInit, __WEBPACK_IMPORTED_MODULE_1_react_addons_update___default()(newState, { $merge: {} }));
+              if (ret) {
+                newState = ret;
+              }
+            }
+
+            if (rpp.handler) {
+              //响应后操作
+              handlers[handlers.length] = {
+                handler: rpp.handler,
+                delay: rpp.delay
+              };
+            }
+          }
+        }, null, false);
       });
-    }
-  };
 
-  Widget.prototype.componentWillUnmount = function componentWillUnmount() {
-    var responsiveResize = this.responsiveResize;
+      //执行响应后操作
+      var runHandlers = function runHandlers() {
+        __WEBPACK_IMPORTED_MODULE_2_nornj___default.a.each(handlers, function (h) {
+          var fnH = function fnH() {
+            h.handler.call(_this3, isInit);
+          };
 
-    //移除响应式事件
-    if (responsiveResize) {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__utils_domEvent__["b" /* off */])("resize", responsiveResize, win);
-    }
-  };
+          if (h.delay) {
+            //可延迟执行时间
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils_delayOperate__["a" /* lazyDo */])(function () {
+              fnH();
+            }, h.delay);
+          } else {
+            fnH();
+          }
+        }, null, true);
+      };
 
-  return Widget;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+      //重置state
+      if (isInit) {
+        //在初始化时需要重新设置state
+        this.state = newState;
+        runHandlers();
+      } else {
+        //非初始化时执行setState
+        this.setState(newState, function () {
+          return runHandlers();
+        });
+      }
+    };
+
+    Responsive.prototype.componentWillUnmount = function componentWillUnmount() {
+      var responsiveResize = this.responsiveResize;
+
+      //移除响应式事件
+      if (responsiveResize) {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__utils_domEvent__["b" /* off */])("resize", responsiveResize, win);
+      }
+    };
+
+    Responsive.prototype.render = function render() {
+      var _this4 = this;
+
+      return __WEBPACK_IMPORTED_MODULE_8__higherOrders_t_html___default.a.responsive({
+        ComposedComponent: ComposedComponent,
+        ref: function ref(c) {
+          return _this4.component = c;
+        }
+      }, this);
+    };
+
+    return Responsive;
+  }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]), _class.propTypes = {
+    responsive: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].bool,
+    responsiveDelay: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].number,
+    responsiveOnlyWidth: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].bool,
+    responsiveParam: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].object,
+    defaultResponsiveParam: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].object
+  }, _class.defaultProps = babelHelpers.extends({
+    responsive: false,
+    responsiveDelay: 70,
+    responsiveOnlyWidth: true
+  }, initialProps), _temp;
+};
+
+/***/ }),
+/* 26 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nornj__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nornj___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_nornj__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_fontawesome__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_fontawesome___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_fontawesome__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_browsers__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__njHelpers_t_html__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__njHelpers_t_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__njHelpers_t_html__);
 
 
+
+
+
+
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj__["registerFilter"])({
+  fixIconSize: function fixIconSize(val) {
+    return val + (!__WEBPACK_IMPORTED_MODULE_3__utils_browsers__["t" /* isWebkit */] ? ' fj-fixsize' : '');
+  }
+});
+
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj__["registerExtension"])({
+  emptyElem: function emptyElem() {
+    return __WEBPACK_IMPORTED_MODULE_4__njHelpers_t_html___default.a.emptyElem();
+  },
+  cloneElem: function cloneElem(options) {
+    return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_react__["cloneElement"])(options.result(), options.props);
+  }
+});
+
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj__["registerComponent"])('fa', __WEBPACK_IMPORTED_MODULE_2_react_fontawesome___default.a);
 
 /***/ }),
 /* 27 */
@@ -3150,7 +3172,7 @@ module.exports = invariant;
 "use strict";
 
 
-var nj = __webpack_require__(2);
+var nj = __webpack_require__(1);
 
 module.exports = nj.compileH({
   _njTmplKey: -1666284539,
@@ -3254,7 +3276,7 @@ return _ex0.apply(p2, _dataRefer0);
 "use strict";
 
 
-var nj = __webpack_require__(2);
+var nj = __webpack_require__(1);
 
 module.exports = {
   row: nj.compileH({
@@ -3349,34 +3371,7 @@ return p1.h.apply(null, _compParam0);
 "use strict";
 
 
-var nj = __webpack_require__(2);
-
-module.exports = {
-  emptyElem: nj.compileH({
-  _njTmplKey: -1513055049,
-  useString: false,
-  main: function anonymous(p1,p2,p3,p4,p5
-/**/) {
-
-var _type0 = p1.getElement('div', p1);
-var _params0 = {
-  'className': 'fj-empty-elem'
-};
-var _compParam0 = [_type0, _params0];
-
-return p1.h.apply(null, _compParam0);
-}
-})
-};
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var nj = __webpack_require__(2);
+var nj = __webpack_require__(1);
 
 module.exports = {
   pagination: nj.compileH({
@@ -4486,7 +4481,80 @@ return p1.h.apply(null, _compParam0);
 };
 
 /***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var nj = __webpack_require__(1);
+
+module.exports = {
+  responsive: nj.compileH({
+  _njTmplKey: 1248492026,
+  useString: false,
+  main: function anonymous(p1,p2,p3,p4,p5
+/**/) {
+
+var _typeRefer0 = p2.getData('ComposedComponent');
+var _type0 = _typeRefer0 ? _typeRefer0 : (p1.getElement('composedcomponent', p1));
+var _params0 = null;
+var _paramsE0 = {};
+
+var _ex0 = p1.extensions['spread'];
+var _dataRefer0 = [
+  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, exProps: _paramsE0, subExProps: p5, result: p1.noop }
+];
+p1.throwIf(_ex0, 'spread', 'ex');
+
+_ex0.apply(p2, _dataRefer0);
+
+var _ex1 = p1.extensions['spread'];
+var _dataRefer1 = [
+  p2.getData('state'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, exProps: _paramsE0, subExProps: p5, result: p1.noop }
+];
+p1.throwIf(_ex1, 'spread', 'ex');
+
+_ex1.apply(p2, _dataRefer1);
+
+_params0 = _paramsE0;
+_params0['ref'] = p2.getData('ref');
+var _compParam0 = [_type0, _params0];
+
+return p1.h.apply(null, _compParam0);
+}
+})
+};
+
+/***/ }),
 /* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var nj = __webpack_require__(1);
+
+module.exports = {
+  emptyElem: nj.compileH({
+  _njTmplKey: -1513055049,
+  useString: false,
+  main: function anonymous(p1,p2,p3,p4,p5
+/**/) {
+
+var _type0 = p1.getElement('div', p1);
+var _params0 = {
+  'className': 'fj-empty-elem'
+};
+var _compParam0 = [_type0, _params0];
+
+return p1.h.apply(null, _compParam0);
+}
+})
+};
+
+/***/ }),
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4576,13 +4644,13 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(38);
+module.exports = __webpack_require__(39);
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4594,11 +4662,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _screenReaderStyles = __webpack_require__(36);
+var _screenReaderStyles = __webpack_require__(37);
 
 var _screenReaderStyles2 = _interopRequireDefault(_screenReaderStyles);
 
@@ -4704,7 +4772,7 @@ exports.default = _react2.default.createClass({
 module.exports = exports['default'];
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4726,7 +4794,7 @@ exports.default = {
 module.exports = exports['default'];
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4770,7 +4838,7 @@ function reactProdInvariant(code) {
 module.exports = reactProdInvariant;
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4788,8 +4856,8 @@ module.exports = reactProdInvariant;
 
 
 
-var _prodInvariant = __webpack_require__(37),
-    _assign = __webpack_require__(33);
+var _prodInvariant = __webpack_require__(38),
+    _assign = __webpack_require__(34);
 
 var invariant = __webpack_require__(28);
 var hasOwnProperty = {}.hasOwnProperty;
@@ -4888,7 +4956,7 @@ module.exports = update;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

@@ -1,10 +1,11 @@
 ﻿import { Component, PropTypes } from 'react';
+import { registerComponent } from 'nornj';
 import { registerTmpl } from 'nornj-react';
 import classNames from 'classnames';
-import Widget from '../widget';
 import * as regExp from '../../utils/regexp';
 import tmpl from './pagination.t.html';
 import autobind from 'core-decorators/lib/autobind';
+import responsive from '../../higherOrders/responsive';
 
 /**
  * 计算总页数
@@ -16,10 +17,8 @@ function getPageCount(count, pageSize) {
 /**
  * 分页组件
  */
-@registerTmpl('fj-Pagination')
-class Pagination extends Widget {
+class Pagination extends Component {
   static defaultProps = {
-    fjType: 'pagn',
     pageSize: 15, //每页数据数
     pageSizes: [15, 30, 50], //可选择的每页数据数
     pageIndex: 1, //当前页码,从1开始
@@ -39,48 +38,17 @@ class Pagination extends Widget {
     showRefresh: true,
     hasPages: true, //是否显示页数链接
     hasBtnGo: true,
-    emptyText: '没有数据',
-    responsive: false,
-    responsiveDelay: 70,
-    responsiveOnlyWidth: true,
-    defaultResponsiveParam: { //默认响应式参数
-      '(max-width: 480px)': {
-        state: {
-          showCount: false,
-          showPageSize: false,
-          hasPages: false,
-          hasBtnGo: false
-        }
-      },
-      '(min-width: 481px) and (max-width: 768px)': {
-        state: {
-          showCount: false,
-          showPageSize: false,
-          hasPages: true,
-          hasBtnGo: true
-        }
-      },
-      '(min-width: 769px)': {
-        state: {
-          showCount: true,
-          showPageSize: true,
-          hasPages: true,
-          hasBtnGo: true
-        }
-      }
-    }
+    emptyText: '没有数据'
   };
 
-  constructor(props) {
-    super(props, {
-      pageIndex: props.pageIndex,
-      pageSize: props.pageSize
-    });
-  }
+  state = {};
 
-  init() {
+  constructor(props) {
+    super(props);
+
+    this.state.pageIndex = props.pageIndex;
+    this.state.pageSize = props.pageSize;
     this.state.pageCount = this.getPageCount() //总页数
-    super.init();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -271,6 +239,40 @@ class Pagination extends Widget {
   }
 }
 
+const PaginationR = responsive(Pagination, {
+  compType: 'pagn',
+  responsive: false,
+  responsiveDelay: 70,
+  responsiveOnlyWidth: true,
+  defaultResponsiveParam: { //默认响应式参数
+    '(max-width: 480px)': {
+      state: {
+        showCount: false,
+        showPageSize: false,
+        hasPages: false,
+        hasBtnGo: false
+      }
+    },
+    '(min-width: 481px) and (max-width: 768px)': {
+      state: {
+        showCount: false,
+        showPageSize: false,
+        hasPages: true,
+        hasBtnGo: true
+      }
+    },
+    '(min-width: 769px)': {
+      state: {
+        showCount: true,
+        showPageSize: true,
+        hasPages: true,
+        hasBtnGo: true
+      }
+    }
+  }
+});
+registerComponent({ 'fj-Pagination': PaginationR });
+
 /**
  * 总页数组件
  */
@@ -313,7 +315,7 @@ class PageCount extends Component {
   }
 }
 
-Pagination.PageCount = PageCount;
+PaginationR.PageCount = PageCount;
 
 /**
  * 数据总数组件
@@ -350,7 +352,7 @@ class PageDataCount extends Component {
   }
 }
 
-Pagination.PageDataCount = PageDataCount;
+PaginationR.PageDataCount = PageDataCount;
 
 /**
  * 每页展示数量组件
@@ -437,6 +439,6 @@ class PageSize extends Component {
   }
 }
 
-Pagination.PageSize = PageSize;
+PaginationR.PageSize = PageSize;
 
-export default Pagination;
+export default PaginationR;
