@@ -18,6 +18,7 @@ import autoprefixer from 'autoprefixer';
 import { argv } from 'yargs';
 import glob from 'glob';
 import env from 'gulp-env';
+import { Server } from 'karma';
 
 function getJsLibName() {
   let libName = 'flarej.js';
@@ -239,9 +240,18 @@ gulp.task("lib", () => {
 });
 
 //Unit testing
-gulp.task("test", () => {
-  return gulp.src(["./test/**/**Spec.js"])
-    .pipe(jasmine());
+gulp.task('tdd', () => gulp.src('./test/**/*.spec.js')
+  .pipe(jasmine({
+    includeStackTrace: true
+  }))
+);
+
+//Run test specs with Karma
+gulp.task('test', done => {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, () => done()).start();
 });
 
 //Run eslint

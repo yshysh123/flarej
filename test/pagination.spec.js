@@ -1,4 +1,4 @@
-﻿var fj = require('../jsdom'),
+﻿var fj = require('../src/base'),
   jsdom = require('jsdom'),
   React = require('react'),
   ReactDOM = require('react-dom'),
