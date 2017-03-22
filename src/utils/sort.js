@@ -4,7 +4,7 @@ import * as date from './date';
 
 //取字符串的第一个字符
 export function getFirstChar(s) {
-  if (s == '') {
+  if (s === '') {
     return '';
   }
 
@@ -64,16 +64,16 @@ export function compare(x, y, isAsc = true, spC, spC2, spV) {
 //数字比较算法
 export function compareNumber(x, y, isAsc = true, spC, spC2, spV) {
   let r = /[^d|.|-]/g;
-  x = (x + '').replace(r, '');
-  y = (y + '').replace(r, '');
+  x = (x != null ? x + '' : '').replace(r, '');
+  y = (y != null ? y + '' : '').replace(r, '');
   return compare(x * 1, y * 1, isAsc, spC, spC2, spV);
 }
 
 //日期比较算法
 export function compareDate(x, y, isAsc = true, spC, spC2, spV) {
   let d = '1900-01-01';
-  x = date.parse(x == '' ? d : x);
-  y = date.parse(y == '' ? d : y);
+  x = date.parse((x == null || x === '') ? d : x);
+  y = date.parse((y == null || y === '') ? d : y);
   let z = x - y;
 
   spV = spV != null ? spV : -1;
@@ -99,8 +99,8 @@ export function compareStringEN(x, y, isAsc = true, spC, spC2, spV) {
 //中文字符串比较算法
 export function compareStringCH(x, y, isAsc = true, spC, spC2, spV) {
   if (fj.GB2312Pinyin.fonts) {  //如果第一个字符非中文的则不获取拼音直接用第一个字符比较
-    x = x == '' ? '' : regExp.chFirst.test(x) ? getGB2312Pinyin(getFirstChar(x)) : getFirstChar(x);
-    y = y == '' ? '' : regExp.chFirst.test(y) ? getGB2312Pinyin(getFirstChar(y)) : getFirstChar(y);
+    x = (x == null || x === '') ? '' : regExp.chFirst.test(x) ? getGB2312Pinyin(getFirstChar(x)) : getFirstChar(x);
+    y = (y == null || y === '') ? '' : regExp.chFirst.test(y) ? getGB2312Pinyin(getFirstChar(y)) : getFirstChar(y);
     return compare(x, y, isAsc, spC, spC2, spV);
   }
   else {

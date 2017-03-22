@@ -4,11 +4,13 @@ import * as RegExp from './utils/regexp';
 import * as Sort from './utils/sort';
 import * as Math from './utils/math';
 import * as Date from './utils/date';
+import responsive from './higherOrders/responsive';
 import Pagination from './components/pagination';
 import Gesture from './components/gesture';
 
 Object.assign(fj, {
   config,
+  responsive,
   Pagination,
   Gesture
 });

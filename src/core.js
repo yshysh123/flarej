@@ -1,11 +1,7 @@
-﻿const fj = {
-  rootPath: '../../flarej/',
-  initTheme: 'concise',
-  ver: null,
-  themeStoreName: 'fj_theme',
+﻿export default function fj() {
+  return fj.responsive.apply(null, arguments);
+}
 
-  //Chinese pinyin fonts
-  GB2312Pinyin: {},
-};
-
-export default fj;
+fj.theme = 'concise';
+fj.themeStoreName = 'fj_theme';
+fj.GB2312Pinyin = {}; //Chinese pinyin fonts

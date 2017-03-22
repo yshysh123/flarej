@@ -1,5 +1,5 @@
 ﻿//千分位转换
-export const outputMoney = (number, bit = 2) => {
+export function outputMoney(number, bit = 2) {
   let numO = number; //保存原先值
   if (isNaN(number) || number == '') {
     return '0';
@@ -15,7 +15,7 @@ export const outputMoney = (number, bit = 2) => {
   } catch (e) { //出现异常时返回原先值
     return numO;
   }
-};
+}
 
 function _outputDollars(number) {
   if (number.length <= 3) {
@@ -33,7 +33,7 @@ function _outputDollars(number) {
 
     return (output);
   }
-};
+}
 
 function _outputCents(amount, bit) {
   if (bit != null) {
@@ -50,7 +50,7 @@ function _outputCents(amount, bit) {
   }
 
   return amount;
-};
+}
 
 //在1位数字前补零
 export function addZero(n) {
