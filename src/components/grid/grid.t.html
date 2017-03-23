@@ -1,6 +1,21 @@
 <template name="row">
   <div {...props} class={classes} style={styles} ref={wrap}>
-    {children}
+    <#if {gutter &&(gutter >(0))}>
+      <#childrenEach {children}>
+        <#cloneElem>
+          <@style>
+            <#assign from={@child.props.style}>
+              <#obj paddingLeft="{gutter /(2)}"
+                    paddingRight="{gutter /(2)}" />
+            </#assign>
+          </@style>
+          {@child}
+        </#cloneElem>
+      </#childrenEach>
+      <#else>
+        {children}
+      </#else>
+    </#if>
   </div>
 </template>
 

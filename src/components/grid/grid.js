@@ -2,6 +2,7 @@
 import { Component } from 'react';
 import { registerTmpl } from 'nornj-react';
 import classNames from 'classnames';
+import '../../njHelpers';
 import tmpls from './grid.t.html';
 
 /**
@@ -15,6 +16,7 @@ export class Row extends Component {
       style,
       left,
       right,
+      gutter,
       children,
       ...others
     } = this.props;
@@ -24,21 +26,35 @@ export class Row extends Component {
       [className]: className
     });
 
-    let styles = {};
-    if (style) {
-      Object.assign(styles, style);
+    let styles = {},
+      mLeft = 0,
+      mRight = 0;
+
+    if (gutter && gutter > 0) {
+      mLeft += gutter / -2;
+      mRight += gutter / -2
     }
     if (left) {
-      styles.marginLeft = parseInt(left, 10);
+      mLeft += parseInt(left, 10);
     }
     if (right) {
-      styles.marginRight = parseInt(right, 10);
+      mRight += parseInt(right, 10);
+    }
+    if(mLeft > 0) {
+      styles.marginLeft = mLeft;
+    }
+    if(mRight > 0) {
+      styles.marginRight = mRight;
+    }
+    if (style) {
+      Object.assign(styles, style);
     }
 
     return tmpls.row({
       props: others,
       classes,
       styles,
+      gutter,
       children,
       wrap: c => this.wrap = c
     });
@@ -114,18 +130,18 @@ export class Col extends Component {
       m,
       s,
       xs,
-      right,
-      left,
-      shift,
-      rightM,
-      leftM,
-      shiftM,
-      rightS,
-      leftS,
-      shiftS,
-      rightXs,
-      leftXs,
-      shiftXs,
+      push,
+      pull,
+      offset,
+      pushM,
+      pullM,
+      offsetM,
+      pushS,
+      pullS,
+      offsetS,
+      pushXs,
+      pullXs,
+      offsetXs,
       children,
       ...others
     } = this.props;
@@ -135,18 +151,18 @@ export class Col extends Component {
       ['fj-col-m' + m]: m != null,
       ['fj-col-s' + s]: s != null,
       ['fj-col-xs' + xs]: xs != null,
-      ['fj-col-right' + right]: right != null,
-      ['fj-col-left' + left]: left != null,
-      ['fj-col-shift' + shift]: shift != null,
-      ['fj-col-right-m' + rightM]: rightM != null,
-      ['fj-col-left-m' + leftM]: leftM != null,
-      ['fj-col-shift-m' + shiftM]: shiftM != null,
-      ['fj-col-right-s' + rightS]: rightS != null,
-      ['fj-col-left-s' + leftS]: leftS != null,
-      ['fj-col-shift-s' + shiftS]: shiftS != null,
-      ['fj-col-right-xs' + rightXs]: rightXs != null,
-      ['fj-col-left-xs' + leftXs]: leftXs != null,
-      ['fj-col-shift-xs' + shiftXs]: shiftXs != null,
+      ['fj-col-push' + push]: push != null,
+      ['fj-col-pull' + pull]: pull != null,
+      ['fj-col-offset' + offset]: offset != null,
+      ['fj-col-push-m' + pushM]: pushM != null,
+      ['fj-col-pull-m' + pullM]: pullM != null,
+      ['fj-col-offset-m' + offsetM]: offsetM != null,
+      ['fj-col-push-s' + pushS]: pushS != null,
+      ['fj-col-pull-s' + pullS]: pullS != null,
+      ['fj-col-offset-s' + offsetS]: offsetS != null,
+      ['fj-col-push-xs' + pushXs]: pushXs != null,
+      ['fj-col-pull-xs' + pullXs]: pullXs != null,
+      ['fj-col-offset-xs' + offsetXs]: offsetXs != null,
       [className]: className
     });
 
