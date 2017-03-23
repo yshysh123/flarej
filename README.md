@@ -20,6 +20,7 @@
 * [react-fontawesome](https://github.com/danawoodman/react-fontawesome)
 * [core-decorators.js](https://github.com/jayphelps/core-decorators.js)
 * [classnames](https://github.com/JedWatson/classnames)
+* [fecha](https://github.com/taylorhakes/fecha)
 
 ## 安装
 

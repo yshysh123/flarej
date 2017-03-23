@@ -2,8 +2,6 @@
 import babel from 'gulp-babel';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
-import uglify from 'gulp-uglify';
-import jasmine from 'gulp-jasmine';
 import template from 'gulp-template';
 import sourcemaps from 'gulp-sourcemaps';
 import rename from 'gulp-rename';
@@ -239,13 +237,6 @@ gulp.task("lib", () => {
     .pipe(gulp.dest('./lib'));
 });
 
-//Unit testing
-gulp.task('tdd', () => gulp.src('./test/**/*.spec.js')
-  .pipe(jasmine({
-    includeStackTrace: true
-  }))
-);
-
 //Run test specs with Karma
 gulp.task('test', done => {
   new Server({
@@ -278,4 +269,4 @@ if (argv.w) {
 } else {
   defaultTasks.push('build-all-css');
 }
-gulp.task('default', defaultTasks);
+gulp.task('default', defaultTasks, () => gulp.start('lib'));

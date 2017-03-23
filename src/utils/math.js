@@ -53,6 +53,7 @@ function _outputCents(amount, bit) {
 }
 
 //在1位数字前补零
-export function addZero(n) {
-  return (('00' + n).substr(('00' + n).length - 2));
+export function fillZero(n) {
+  n = '00' + n;
+  return n.substr(n.length - 2);
 }

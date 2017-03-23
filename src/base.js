@@ -1,9 +1,9 @@
 ﻿import fj from './core';
 import config from './config';
-import * as RegExp from './utils/regexp';
-import * as Sort from './utils/sort';
-import * as Math from './utils/math';
-import * as Date from './utils/date';
+import * as regexp from './utils/regexp';
+import * as sort from './utils/sort';
+import * as math from './utils/math';
+import * as date from './utils/date';
 import responsive from './higherOrders/responsive';
 import Pagination from './components/pagination';
 import Gesture from './components/gesture';
@@ -25,11 +25,12 @@ export * from './utils/delayOperate';
 export * from './utils/domEvent';
 export * from './components/grid';
 export {
+  responsive,
   Pagination,
   Gesture,
-  RegExp,
-  Sort,
-  Math,
-  Date
+  regexp,
+  sort,
+  math,
+  date
 };
 export default fj;
