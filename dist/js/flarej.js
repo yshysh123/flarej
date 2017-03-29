@@ -4894,8 +4894,7 @@ module.exports = {
   main: function anonymous(p1,p2,p3,p4,p5
 /**/) {
 
-var _typeRefer0 = p2.getData('ComposedComponent');
-var _type0 = _typeRefer0 ? _typeRefer0 : (p1.getElement('composedcomponent', p1));
+var _type0 = p1.getElementRefer(p2.getData('ComposedComponent'), 'composedcomponent', p1);
 var _params0 = null;
 var _paramsE0 = {};
 

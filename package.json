@@ -1,6 +1,6 @@
 {
   "name": "flarej",
-  "version": "0.1.3-rc.47",
+  "version": "0.1.3",
   "description": "A responsive ui component library",
   "main": "lib/base.js",
   "files": [
@@ -9,7 +9,8 @@
     "src/",
     "tools/",
     "vendor/",
-    "LICENSE"
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
     "test": "gulp test"
@@ -33,8 +34,8 @@
     "classnames": "^2.2.5",
     "core-decorators": "^0.15.0",
     "fecha": "^2.3.0",
-    "nornj": "0.4.1-rc.23",
-    "nornj-react": "0.4.1-rc.11",
+    "nornj": "^0.4.1",
+    "nornj-react": "^0.4.1",
     "react-fontawesome": "^1.5.0"
   },
   "devDependencies": {
@@ -42,7 +43,7 @@
     "babel-cli": "^6.7.7",
     "babel-core": "^6.7.7",
     "babel-eslint": "^6.1.2",
-    "babel-loader": "^7.0.0-alpha.3",
+    "babel-loader": "^7.0.0-beta.1",
     "babel-plugin-external-helpers": "^6.4.0",
     "babel-plugin-transform-class-properties": "^6.6.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -84,7 +85,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.30",
     "karma-webpack": "^2.0.3",
-    "nornj-loader": "^0.4.1-rc.10",
+    "nornj-loader": "^0.4.1",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-addons-update": "^15.4.2",

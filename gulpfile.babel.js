@@ -247,17 +247,8 @@ gulp.task('test', done => {
 
 //Run eslint
 gulp.task('eslint', () => {
-  return gulp.src(['./src/**/*.js', '!./src/**/*.tmpl.js'])
-    .pipe(eslint({
-      "rules": {
-        "camelcase": [2, { "properties": "always" }],
-        "comma-dangle": [2, "never"],
-        "semi": [2, "always"],
-        "quotes": [2, "single"],
-        "strict": [2, "global"]
-      },
-      "parser": "babel-eslint"
-    }))
+  return gulp.src('./src/**/*.js')
+    .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 });
