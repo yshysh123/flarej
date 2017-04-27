@@ -3560,7 +3560,7 @@ if (!_filter0) {
   p1.warn('/', 'filter');
 }
 else {
-  _value0 = _filter0.apply(p2, [_value0, 2, { _njOpts: true, _njFnsNo: 5, global: p1, context: p2, outputH: true }]);
+  _value0 = _filter0.apply(p2, [_value0, 2, { _njOpts: true, _njFnsNo: 5, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _value1 = p2.getData('gutter');
 
@@ -3569,14 +3569,14 @@ if (!_filter1) {
   p1.warn('/', 'filter');
 }
 else {
-  _value1 = _filter1.apply(p2, [_value1, 2, { _njOpts: true, _njFnsNo: 5, global: p1, context: p2, outputH: true }]);
+  _value1 = _filter1.apply(p2, [_value1, 2, { _njOpts: true, _njFnsNo: 5, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params0 = {
   'paddingLeft': _value0,
   'paddingRight': _value1
 };
 var _dataRefer0 = [
-{ _njOpts: true, _njFnsNo: 5, global: p1, context: p2, outputH: true, result: p1.noop, props: _params0 }
+{ _njOpts: true, _njFnsNo: 5, global: p1, context: p2, outputH: true, useString: false, result: p1.noop, props: _params0 }
 ];
 p1.addArgs(_params0, _dataRefer0);
 p1.throwIf(_ex0, 'obj', 'ex');
@@ -3652,7 +3652,7 @@ var _paramsE0 = {};
 
 var _ex0 = p1.extensions['spread'];
 var _dataRefer0 = [
-  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, exProps: _paramsE0, subExProps: p5, result: p1.noop }
+  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, useString: false, exProps: _paramsE0, subExProps: p5, result: p1.noop }
 ];
 p1.throwIf(_ex0, 'spread', 'ex');
 
@@ -3670,7 +3670,7 @@ var _paramsE1 = {};
 
 var _ex2 = p1.extensions['else'];
 var _dataRefer2 = [
-{ _njOpts: true, _njFnsNo: 1, global: p1, context: p2, outputH: true, subExProps: _paramsE1, result: p1.exRet(p1, p2, p1.fn1, p4, _paramsE1) }
+{ _njOpts: true, _njFnsNo: 1, global: p1, context: p2, outputH: true, useString: false, subExProps: _paramsE1, result: p1.exRet(p1, p2, p1.fn1, p4, _paramsE1) }
 ];
 p1.throwIf(_ex2, 'else', 'ex');
 
@@ -3691,9 +3691,9 @@ if (!_filter1) {
   p1.warn('gt', 'filter');
 }
 else {
-  _value1 = _filter1.apply(p2, [_value1, 0, { _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true }]);
+  _value1 = _filter1.apply(p2, [_value1, 0, { _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, useString: p1.useString }]);
 }
-  _value0 = _filter0.apply(p2, [_value0, _value1, { _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true }]);
+  _value0 = _filter0.apply(p2, [_value0, _value1, { _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, useString: p1.useString }]);
 }
 var _dataRefer1 = [
   _value0,{ _njOpts: true, _njFnsNo: 6, global: p1, context: p2, outputH: true, useString: p1.useString, result: p1.exRet(p1, p2, p1.fn2, p4, p5), props: _params1 }
@@ -3718,7 +3718,7 @@ var _paramsE0 = {};
 
 var _ex0 = p1.extensions['spread'];
 var _dataRefer0 = [
-  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, exProps: _paramsE0, subExProps: p5, result: p1.noop }
+  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, useString: false, exProps: _paramsE0, subExProps: p5, result: p1.noop }
 ];
 p1.throwIf(_ex0, 'spread', 'ex');
 
@@ -3746,7 +3746,7 @@ var _paramsE0 = {};
 
 var _ex0 = p1.extensions['spread'];
 var _dataRefer0 = [
-  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, exProps: _paramsE0, subExProps: p5, result: p1.noop }
+  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, useString: false, exProps: _paramsE0, subExProps: p5, result: p1.noop }
 ];
 p1.throwIf(_ex0, 'spread', 'ex');
 
@@ -3773,7 +3773,7 @@ var nj = __webpack_require__(1);
 
 module.exports = {
   pagination: nj.compileH({
-  _njTmplKey: 1718170331,
+  _njTmplKey: -1703711481,
   useString: false,
   fn1: function anonymous(p1,p2,p3,p4,p5
 /**/) {
@@ -3843,6 +3843,9 @@ return p1.h.apply(null, _compParam0);
 var ret = [];
 
 var _ex0 = p1.extensions['for'];
+var _params0 = {
+  'loopLast': true
+};
 var _value0 = p2.getData('pageIndex');
 
 var _filter0 = p1.filters['+'];
@@ -3850,11 +3853,12 @@ if (!_filter0) {
   p1.warn('+', 'filter');
 }
 else {
-  _value0 = _filter0.apply(p2, [_value0, 2, { _njOpts: true, _njFnsNo: 5, global: p1, context: p2, outputH: true }]);
+  _value0 = _filter0.apply(p2, [_value0, 2, { _njOpts: true, _njFnsNo: 5, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _dataRefer0 = [
-  1,  _value0,{ _njOpts: true, _njFnsNo: 6, global: p1, context: p2, outputH: true, useString: false, result: p1.exRet(p1, p2, p1.fn6, p4, p5) }
+  1,  _value0,{ _njOpts: true, _njFnsNo: 6, global: p1, context: p2, outputH: true, useString: false, result: p1.exRet(p1, p2, p1.fn6, p4, p5), props: _params0 }
 ];
+p1.addArgs(_params0, _dataRefer0);
 p1.throwIf(_ex0, 'for', 'ex');
 
 ret.push(_ex0.apply(p2, _dataRefer0));
@@ -3870,11 +3874,11 @@ if (!_filter1) {
 else {
   _value1 = _filter1.apply(p2, [_value1, 'next', { _njOpts: true, _njFnsNo: 6, global: p1, context: p2, outputH: true, useString: false }]);
 }
-var _params0 = {
+var _params1 = {
   'key': 'ellipsis2',
   'onClick': _value1
 };
-var _compParam0 = [_type0, _params0];
+var _compParam0 = [_type0, _params1];
 
 _compParam0.push('...');
 
@@ -3901,13 +3905,13 @@ if (!_filter3) {
 else {
   _value3 = _filter3.apply(p2, [_value3, 'last', { _njOpts: true, _njFnsNo: 6, global: p1, context: p2, outputH: true, useString: false }]);
 }
-var _params1 = {
+var _params2 = {
   'key': p2.getData('pageCount'),
   'className': 'fj-pagn-pageno' + (_value2),
   'title': '第' + (p2.getData('pageCount')) + '页',
   'onClick': _value3
 };
-var _compParam1 = [_type1, _params1];
+var _compParam1 = [_type1, _params2];
 
 _compParam1.push(p2.getData('pageCount'));
 
@@ -4010,6 +4014,9 @@ _compParam1.push('...');
 ret.push(p1.h.apply(null, _compParam1));
 
 var _ex0 = p1.extensions['for'];
+var _params2 = {
+  'loopLast': true
+};
 var _value3 = p2.getData('pageIndex');
 
 var _filter3 = p1.filters['-'];
@@ -4017,7 +4024,7 @@ if (!_filter3) {
   p1.warn('-', 'filter');
 }
 else {
-  _value3 = _filter3.apply(p2, [_value3, 2, { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true }]);
+  _value3 = _filter3.apply(p2, [_value3, 2, { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _value4 = p2.getData('pageIndex');
 
@@ -4026,11 +4033,12 @@ if (!_filter4) {
   p1.warn('+', 'filter');
 }
 else {
-  _value4 = _filter4.apply(p2, [_value4, 2, { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true }]);
+  _value4 = _filter4.apply(p2, [_value4, 2, { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _dataRefer0 = [
-  _value3,  _value4,{ _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, useString: false, result: p1.exRet(p1, p2, p1.fn8, p4, p5) }
+  _value3,  _value4,{ _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, useString: false, result: p1.exRet(p1, p2, p1.fn8, p4, p5), props: _params2 }
 ];
+p1.addArgs(_params2, _dataRefer0);
 p1.throwIf(_ex0, 'for', 'ex');
 
 ret.push(_ex0.apply(p2, _dataRefer0));
@@ -4046,11 +4054,11 @@ if (!_filter5) {
 else {
   _value5 = _filter5.apply(p2, [_value5, 'next', { _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, useString: false }]);
 }
-var _params2 = {
+var _params3 = {
   'key': 'ellipsis2',
   'onClick': _value5
 };
-var _compParam2 = [_type2, _params2];
+var _compParam2 = [_type2, _params3];
 
 _compParam2.push('...');
 
@@ -4077,13 +4085,13 @@ if (!_filter7) {
 else {
   _value7 = _filter7.apply(p2, [_value7, 'last', { _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, useString: false }]);
 }
-var _params3 = {
+var _params4 = {
   'key': p2.getData('pageCount'),
   'className': 'fj-pagn-pageno' + (_value6),
   'title': '第' + (p2.getData('pageCount')) + '页',
   'onClick': _value7
 };
-var _compParam3 = [_type3, _params3];
+var _compParam3 = [_type3, _params4];
 
 _compParam3.push(p2.getData('pageCount'));
 
@@ -4186,6 +4194,9 @@ _compParam1.push('...');
 ret.push(p1.h.apply(null, _compParam1));
 
 var _ex0 = p1.extensions['for'];
+var _params2 = {
+  'loopLast': true
+};
 var _value3 = p2.getData('pageIndex');
 
 var _filter3 = p1.filters['-'];
@@ -4193,11 +4204,12 @@ if (!_filter3) {
   p1.warn('-', 'filter');
 }
 else {
-  _value3 = _filter3.apply(p2, [_value3, 2, { _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true }]);
+  _value3 = _filter3.apply(p2, [_value3, 2, { _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _dataRefer0 = [
-  _value3,  p2.getData('pageCount'),{ _njOpts: true, _njFnsNo: 10, global: p1, context: p2, outputH: true, useString: false, result: p1.exRet(p1, p2, p1.fn10, p4, p5) }
+  _value3,  p2.getData('pageCount'),{ _njOpts: true, _njFnsNo: 10, global: p1, context: p2, outputH: true, useString: false, result: p1.exRet(p1, p2, p1.fn10, p4, p5), props: _params2 }
 ];
+p1.addArgs(_params2, _dataRefer0);
 p1.throwIf(_ex0, 'for', 'ex');
 
 ret.push(_ex0.apply(p2, _dataRefer0));
@@ -4244,9 +4256,13 @@ return p1.h.apply(null, _compParam0);
 /**/) {
 
 var _ex0 = p1.extensions['for'];
+var _params0 = {
+  'loopLast': true
+};
 var _dataRefer0 = [
-  1,  p2.getData('pageCount'),{ _njOpts: true, _njFnsNo: 12, global: p1, context: p2, outputH: true, useString: p1.useString, result: p1.exRet(p1, p2, p1.fn12, p4, p5) }
+  1,  p2.getData('pageCount'),{ _njOpts: true, _njFnsNo: 12, global: p1, context: p2, outputH: true, useString: p1.useString, result: p1.exRet(p1, p2, p1.fn12, p4, p5), props: _params0 }
 ];
+p1.addArgs(_params0, _dataRefer0);
 p1.throwIf(_ex0, 'for', 'ex');
 
 return _ex0.apply(p2, _dataRefer0);
@@ -4270,7 +4286,7 @@ else {
   _value1 = _filter1.apply(p2, [_value1, 1, { _njOpts: true, _njFnsNo: 4, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _dataRefer1 = [
-  _value1,{ _njOpts: true, _njFnsNo: 6, global: p1, context: p2, outputH: true, subExProps: _paramsE0, result: p1.exRet(p1, p2, p1.fn5, p4, _paramsE0) }
+  _value1,{ _njOpts: true, _njFnsNo: 6, global: p1, context: p2, outputH: true, useString: false, subExProps: _paramsE0, result: p1.exRet(p1, p2, p1.fn5, p4, _paramsE0) }
 ];
 p1.throwIf(_ex1, 'elseif', 'ex');
 
@@ -4288,7 +4304,7 @@ else {
   _value2 = _filter2.apply(p2, [_value2, 2, { _njOpts: true, _njFnsNo: 6, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _dataRefer2 = [
-  _value2,{ _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, subExProps: _paramsE0, result: p1.exRet(p1, p2, p1.fn7, p4, _paramsE0) }
+  _value2,{ _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, useString: false, subExProps: _paramsE0, result: p1.exRet(p1, p2, p1.fn7, p4, _paramsE0) }
 ];
 p1.throwIf(_ex2, 'elseif', 'ex');
 
@@ -4306,7 +4322,7 @@ else {
   _value3 = _filter3.apply(p2, [_value3, 3, { _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _dataRefer3 = [
-  _value3,{ _njOpts: true, _njFnsNo: 10, global: p1, context: p2, outputH: true, subExProps: _paramsE0, result: p1.exRet(p1, p2, p1.fn9, p4, _paramsE0) }
+  _value3,{ _njOpts: true, _njFnsNo: 10, global: p1, context: p2, outputH: true, useString: false, subExProps: _paramsE0, result: p1.exRet(p1, p2, p1.fn9, p4, _paramsE0) }
 ];
 p1.throwIf(_ex3, 'elseif', 'ex');
 
@@ -4320,7 +4336,7 @@ if (!_filter0) {
   p1.warn('lte', 'filter');
 }
 else {
-  _value0 = _filter0.apply(p2, [_value0, 10, { _njOpts: true, _njFnsNo: 4, global: p1, context: p2, outputH: true }]);
+  _value0 = _filter0.apply(p2, [_value0, 10, { _njOpts: true, _njFnsNo: 4, global: p1, context: p2, outputH: true, useString: p1.useString }]);
 }
 var _dataRefer0 = [
   _value0,{ _njOpts: true, _njFnsNo: 12, global: p1, context: p2, outputH: true, useString: p1.useString, result: p1.exRet(p1, p2, p1.fn11, p4, p5), props: _params0 }
@@ -4561,7 +4577,7 @@ var _paramsE0 = {};
 
 var _ex1 = p1.extensions['else'];
 var _dataRefer1 = [
-{ _njOpts: true, _njFnsNo: 3, global: p1, context: p2, outputH: true, subExProps: _paramsE0, result: p1.exRet(p1, p2, p1.fn3, p4, _paramsE0) }
+{ _njOpts: true, _njFnsNo: 3, global: p1, context: p2, outputH: true, useString: false, subExProps: _paramsE0, result: p1.exRet(p1, p2, p1.fn3, p4, _paramsE0) }
 ];
 p1.throwIf(_ex1, 'else', 'ex');
 
@@ -4685,7 +4701,7 @@ var _paramsE0 = {};
 
 var _ex1 = p1.extensions['else'];
 var _dataRefer1 = [
-{ _njOpts: true, _njFnsNo: 1, global: p1, context: p2, outputH: true, subExProps: _paramsE0, result: p1.exRet(p1, p2, p1.fn1, p4, _paramsE0) }
+{ _njOpts: true, _njFnsNo: 1, global: p1, context: p2, outputH: true, useString: false, subExProps: _paramsE0, result: p1.exRet(p1, p2, p1.fn1, p4, _paramsE0) }
 ];
 p1.throwIf(_ex1, 'else', 'ex');
 
@@ -4699,7 +4715,7 @@ if (!_filter0) {
   p1.warn('gte', 'filter');
 }
 else {
-  _value0 = _filter0.apply(p2, [_value0, 1, { _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true }]);
+  _value0 = _filter0.apply(p2, [_value0, 1, { _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, useString: p1.useString }]);
 }
 var _dataRefer0 = [
   _value0,{ _njOpts: true, _njFnsNo: 17, global: p1, context: p2, outputH: true, useString: p1.useString, result: p1.exRet(p1, p2, p1.fn2, p4, p5), props: _params0 }
@@ -4722,7 +4738,7 @@ var _paramsE0 = {};
 
 var _ex0 = p1.extensions['spread'];
 var _dataRefer0 = [
-  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, exProps: _paramsE0, subExProps: p5, result: p1.noop }
+  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, useString: false, exProps: _paramsE0, subExProps: p5, result: p1.noop }
 ];
 p1.throwIf(_ex0, 'spread', 'ex');
 
@@ -4759,7 +4775,7 @@ var _paramsE0 = {};
 
 var _ex0 = p1.extensions['spread'];
 var _dataRefer0 = [
-  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, exProps: _paramsE0, subExProps: p5, result: p1.noop }
+  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, useString: false, exProps: _paramsE0, subExProps: p5, result: p1.noop }
 ];
 p1.throwIf(_ex0, 'spread', 'ex');
 
@@ -4837,7 +4853,7 @@ var _paramsE0 = {};
 
 var _ex0 = p1.extensions['spread'];
 var _dataRefer0 = [
-  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, exProps: _paramsE0, subExProps: p5, result: p1.noop }
+  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, useString: false, exProps: _paramsE0, subExProps: p5, result: p1.noop }
 ];
 p1.throwIf(_ex0, 'spread', 'ex');
 
@@ -4856,7 +4872,7 @@ var _paramsE1 = {};
 
 var _ex2 = p1.extensions['else'];
 var _dataRefer2 = [
-{ _njOpts: true, _njFnsNo: 1, global: p1, context: p2, outputH: true, subExProps: _paramsE1, result: p1.exRet(p1, p2, p1.fn1, p4, _paramsE1) }
+{ _njOpts: true, _njFnsNo: 1, global: p1, context: p2, outputH: true, useString: false, subExProps: _paramsE1, result: p1.exRet(p1, p2, p1.fn1, p4, _paramsE1) }
 ];
 p1.throwIf(_ex2, 'else', 'ex');
 
@@ -4900,7 +4916,7 @@ var _paramsE0 = {};
 
 var _ex0 = p1.extensions['spread'];
 var _dataRefer0 = [
-  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, exProps: _paramsE0, subExProps: p5, result: p1.noop }
+  p2.getData('props'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, useString: false, exProps: _paramsE0, subExProps: p5, result: p1.noop }
 ];
 p1.throwIf(_ex0, 'spread', 'ex');
 
@@ -4908,7 +4924,7 @@ _ex0.apply(p2, _dataRefer0);
 
 var _ex1 = p1.extensions['spread'];
 var _dataRefer1 = [
-  p2.getData('state'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, exProps: _paramsE0, subExProps: p5, result: p1.noop }
+  p2.getData('state'),{ _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, useString: false, exProps: _paramsE0, subExProps: p5, result: p1.noop }
 ];
 p1.throwIf(_ex1, 'spread', 'ex');
 

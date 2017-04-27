@@ -1,6 +1,6 @@
 {
   "name": "flarej",
-  "version": "0.1.3",
+  "version": "0.1.4-rc.1",
   "description": "A responsive ui component library",
   "main": "lib/base.js",
   "files": [
@@ -34,8 +34,8 @@
     "classnames": "^2.2.5",
     "core-decorators": "^0.15.0",
     "fecha": "^2.3.0",
-    "nornj": "^0.4.1",
-    "nornj-react": "^0.4.1",
+    "nornj": "^0.4.2-beta.5",
+    "nornj-react": "^0.4.2-alpha.5",
     "react-fontawesome": "^1.5.0"
   },
   "devDependencies": {
@@ -85,7 +85,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.30",
     "karma-webpack": "^2.0.3",
-    "nornj-loader": "^0.4.1",
+    "nornj-loader": "^0.4.2-alpha.7",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-addons-update": "^15.4.2",
