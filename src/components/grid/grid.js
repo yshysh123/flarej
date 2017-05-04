@@ -40,10 +40,10 @@ export class Row extends Component {
     if (right) {
       mRight += parseInt(right, 10);
     }
-    if(mLeft > 0) {
+    if(mLeft !== 0) {
       styles.marginLeft = mLeft;
     }
-    if(mRight > 0) {
+    if(mRight !== 0) {
       styles.marginRight = mRight;
     }
     if (style) {

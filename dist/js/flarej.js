@@ -2215,10 +2215,10 @@ var Row = (_dec = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_react_
     if (right) {
       mRight += parseInt(right, 10);
     }
-    if (mLeft > 0) {
+    if (mLeft !== 0) {
       styles.marginLeft = mLeft;
     }
-    if (mRight > 0) {
+    if (mRight !== 0) {
       styles.marginRight = mRight;
     }
     if (style) {
