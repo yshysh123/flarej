@@ -36,6 +36,8 @@ class Pagination extends Component {
     showPageSize: true, //是否显示每页数据数
     showPageCount: true, //是否显示总页数
     showRefresh: true,
+    hasFirst: true,
+    hasLast: true,
     hasPages: true, //是否显示页数链接
     hasBtnGo: true,
     emptyText: '没有数据'

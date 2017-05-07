@@ -25,9 +25,11 @@
 </template>
 
 <template name="pageBtns" local>
-  <li key=first class="fj-pagn-btn{firstDisabled}" title=首页 onClick="{refresh | clickBtn('first')}">
-    首页
-  </li>
+  <#if {hasFirst}>
+    <li key=first class="fj-pagn-btn{firstDisabled}" title=首页 onClick="{refresh | clickBtn('first')}">
+      首页
+    </li>
+  </#if>
   <li key=prev class="fj-pagn-btn{prevDisabled}" title=上一页 onClick="{refresh | clickBtn('prev')}">
     <fa name="chevron-left" />
   </li>
@@ -57,9 +59,11 @@
   <li key=next class=fj-pagn-btn{nextDisabled} title=下一页 onClick="{refresh | clickBtn('next')}">
     <fa name="chevron-right" />
   </li>
-  <li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick="{refresh | clickBtn('last')}">
-    末页
-  </li>
+  <#if {hasLast}>
+    <li key=last class=fj-pagn-btn{lastDisabled} title=末页 onClick="{refresh | clickBtn('last')}">
+      末页
+    </li>
+  </#if>
 </template>
 
 <template name="pagination">
