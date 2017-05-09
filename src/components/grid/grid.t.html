@@ -2,15 +2,17 @@
   <div {...props} class={classes} style={styles} ref={wrap}>
     <#if {gutter &&(gutter >(0))}>
       <#childrenEach {children}>
-        <#cloneElem>
-          <@style>
-            <#assign from={@child.props.style}>
-              <#obj paddingLeft="{gutter /(2)}"
-                    paddingRight="{gutter /(2)}" />
-            </#assign>
-          </@style>
-          {@child}
-        </#cloneElem>
+        <#if {@child !=(null)}>
+          <#cloneElem>
+            <@style>
+              <#assign from={@child.props.style}>
+                <#obj paddingLeft="{gutter /(2)}"
+                      paddingRight="{gutter /(2)}" />
+              </#assign>
+            </@style>
+            {@child}
+          </#cloneElem>
+        </#if>
       </#childrenEach>
       <#else>
         {children}
