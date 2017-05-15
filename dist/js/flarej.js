@@ -2608,11 +2608,16 @@ var Pagination = (_class = (_temp = _class2 = function (_Component) {
     this.refresh(parseInt(this.refs.pageTxt.value, 10));
   };
 
-  Pagination.prototype.clickBtn = function clickBtn(fn, type) {
-    var _this2 = this;
+  Pagination.prototype.clickBtn = function clickBtn(fn, type, options) {
+    if (type._njOpts) {
+      options = type;
+    }
 
-    var pageIndex = this.getData('pageIndex'),
-        pageCount = this.getData('pageCount');
+    var _options = options,
+        context = _options.context;
+
+    var pageIndex = context.getData('pageIndex'),
+        pageCount = context.getData('pageCount');
 
     switch (type) {
       case 'first':
@@ -2641,8 +2646,8 @@ var Pagination = (_class = (_temp = _class2 = function (_Component) {
         };
       case 'index':
         return function () {
-          if (_this2.index != pageIndex) {
-            fn(_this2.index);
+          if (context.index != pageIndex) {
+            fn(context.index);
           }
         };
       default:
@@ -2652,12 +2657,12 @@ var Pagination = (_class = (_temp = _class2 = function (_Component) {
     }
   };
 
-  Pagination.prototype.isCurrentPage = function isCurrentPage(no) {
-    return no == this.getData('pageIndex') ? '-c' : '';
+  Pagination.prototype.isCurrentPage = function isCurrentPage(no, options) {
+    return no == options.context.getData('pageIndex') ? '-c' : '';
   };
 
-  Pagination.prototype.showPartPage = function showPartPage(no, type) {
-    var pageCount = this.getData('pageCount');
+  Pagination.prototype.showPartPage = function showPartPage(no, type, options) {
+    var pageCount = options.context.getData('pageCount');
     switch (type) {
       case 1:
         //当前页码<=4:左侧显示所有+当前页码+右侧2个页码+...+尾页
@@ -2672,7 +2677,7 @@ var Pagination = (_class = (_temp = _class2 = function (_Component) {
   };
 
   Pagination.prototype.render = function render() {
-    var _this3 = this;
+    var _this2 = this;
 
     var disabled = ' fj-disabled',
         state = this.state,
@@ -2707,7 +2712,7 @@ var Pagination = (_class = (_temp = _class2 = function (_Component) {
       'fj-pagn': true
     }, className, className));
     extra.wrap = function (c) {
-      return _this3.wrap = c;
+      return _this2.wrap = c;
     };
 
     return __WEBPACK_IMPORTED_MODULE_5__pagination_t_html___default.a.pagination(state, props, this, extra);
@@ -2786,7 +2791,7 @@ var PageCount = (_dec = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_
   }
 
   PageCount.prototype.render = function render() {
-    var _this5 = this;
+    var _this4 = this;
 
     var _props2 = this.props,
         className = _props2.className,
@@ -2814,7 +2819,7 @@ var PageCount = (_dec = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_
       pageCount: pageCount,
       suffix: suffix,
       wrap: function wrap(c) {
-        return _this5.wrap = c;
+        return _this4.wrap = c;
       }
     });
   };
@@ -2840,7 +2845,7 @@ var PageDataCount = (_dec2 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_n
   }
 
   PageDataCount.prototype.render = function render() {
-    var _this7 = this;
+    var _this6 = this;
 
     var _props3 = this.props,
         className = _props3.className,
@@ -2861,7 +2866,7 @@ var PageDataCount = (_dec2 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_n
       count: count,
       suffix: suffix,
       wrap: function wrap(c) {
-        return _this7.wrap = c;
+        return _this6.wrap = c;
       }
     });
   };
@@ -2884,15 +2889,15 @@ var PageSize = (_dec3 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_
   function PageSize(props) {
     babelHelpers.classCallCheck(this, PageSize);
 
-    var _this8 = babelHelpers.possibleConstructorReturn(this, _Component4.call(this, props));
+    var _this7 = babelHelpers.possibleConstructorReturn(this, _Component4.call(this, props));
 
-    _this8.state = {
+    _this7.state = {
       pageSize: null
     };
 
 
-    _this8.state.pageSize = _this8.props.pageSize;
-    return _this8;
+    _this7.state.pageSize = _this7.props.pageSize;
+    return _this7;
   }
 
   PageSize.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
@@ -2915,7 +2920,7 @@ var PageSize = (_dec3 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_
   };
 
   PageSize.prototype.render = function render() {
-    var _this9 = this;
+    var _this8 = this;
 
     var _props4 = this.props,
         className = _props4.className,
@@ -2941,7 +2946,7 @@ var PageSize = (_dec3 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_
       pageSizes: pageSizes,
       suffix: suffix,
       wrap: function wrap(c) {
-        return _this9.wrap = c;
+        return _this8.wrap = c;
       }
     });
   };
@@ -3506,8 +3511,13 @@ return p2.getData('children');
   main: function anonymous(p1,p2,p3,p4,p5
 /**/) {
 
-var _ex0 = p2.getData('cloneElem');
-if(!_ex0) _ex0 = p1.extensions['cloneElem'];
+var _ex0;
+var _fnH0 = p2.getData('cloneElem', null, true);
+if (_fnH0) {
+  _ex0 = _fnH0.val;
+} else {
+  _ex0 = p1.extensions['cloneElem'];
+}
 var _params0 = null;
 var _paramsE0 = {};
 
@@ -3528,7 +3538,7 @@ var _dataRefer0 = [
 p1.addArgs(_params0, _dataRefer0);
 p1.throwIf(_ex0, 'cloneElem', 'ex');
 
-return _ex0.apply(p2, _dataRefer0);
+return _ex0.apply(_fnH0 ? _fnH0.ctx : p2, _dataRefer0);
 }
 });
 
@@ -3560,8 +3570,7 @@ var _value0 = p2.getData('gutter');
 var _filter0 = p1.filters['/'];
 if (!_filter0) {
   p1.warn('/', 'filter');
-}
-else {
+} else {
   _value0 = _filter0.apply(p2, [_value0, 2, { _njOpts: true, _njFnsNo: 6, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _value1 = p2.getData('gutter');
@@ -3569,8 +3578,7 @@ var _value1 = p2.getData('gutter');
 var _filter1 = p1.filters['/'];
 if (!_filter1) {
   p1.warn('/', 'filter');
-}
-else {
+} else {
   _value1 = _filter1.apply(p2, [_value1, 2, { _njOpts: true, _njFnsNo: 6, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params0 = {
@@ -3588,8 +3596,13 @@ return _ex0.apply(p2, _dataRefer0);
   fn5: function anonymous(p1,p2,p3,p4,p5
 /**/) {
 
-var _ex0 = p2.getData('assign');
-if(!_ex0) _ex0 = p1.extensions['assign'];
+var _ex0;
+var _fnH0 = p2.getData('assign', null, true);
+if (_fnH0) {
+  _ex0 = _fnH0.val;
+} else {
+  _ex0 = p1.extensions['assign'];
+}
 var _params0 = {
   'from': p2.getData('@child').props.style
 };
@@ -3599,7 +3612,7 @@ var _dataRefer0 = [
 p1.addArgs(_params0, _dataRefer0);
 p1.throwIf(_ex0, 'assign', 'ex');
 
-return _ex0.apply(p2, _dataRefer0);
+return _ex0.apply(_fnH0 ? _fnH0.ctx : p2, _dataRefer0);
 },
   fn7: function anonymous(p1,p2,p3,p4,p5
 /**/) {
@@ -3610,8 +3623,13 @@ return p2.getData('@child');
   fn4: function anonymous(p1,p2,p3,p4,p5
 /**/) {
 
-var _ex0 = p2.getData('cloneElem');
-if(!_ex0) _ex0 = p1.extensions['cloneElem'];
+var _ex0;
+var _fnH0 = p2.getData('cloneElem', null, true);
+if (_fnH0) {
+  _ex0 = _fnH0.val;
+} else {
+  _ex0 = p1.extensions['cloneElem'];
+}
 var _params0 = null;
 var _paramsE0 = {};
 
@@ -3630,7 +3648,7 @@ var _dataRefer0 = [
 p1.addArgs(_params0, _dataRefer0);
 p1.throwIf(_ex0, 'cloneElem', 'ex');
 
-return _ex0.apply(p2, _dataRefer0);
+return _ex0.apply(_fnH0 ? _fnH0.ctx : p2, _dataRefer0);
 },
   fn3: function anonymous(p1,p2,p3,p4,p5
 /**/) {
@@ -3642,8 +3660,7 @@ var _value0 = p2.getData('@child');
 var _filter0 = p1.filters['!='];
 if (!_filter0) {
   p1.warn('!=', 'filter');
-}
-else {
+} else {
   _value0 = _filter0.apply(p2, [_value0, null, { _njOpts: true, _njFnsNo: 3, global: p1, context: p2, outputH: true, useString: p1.useString }]);
 }
 var _dataRefer0 = [
@@ -3656,14 +3673,19 @@ return _ex0.apply(p2, _dataRefer0);
   fn2: function anonymous(p1,p2,p3,p4,p5
 /**/) {
 
-var _ex0 = p2.getData('childrenEach');
-if(!_ex0) _ex0 = p1.extensions['childrenEach'];
+var _ex0;
+var _fnH0 = p2.getData('childrenEach', null, true);
+if (_fnH0) {
+  _ex0 = _fnH0.val;
+} else {
+  _ex0 = p1.extensions['childrenEach'];
+}
 var _dataRefer0 = [
   p2.getData('children'),{ _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: p1.useString, exProps: p4, subExProps: p5, result: p1.exRet(p1, p2, p1.fn3, p4, p5) }
 ];
 p1.throwIf(_ex0, 'childrenEach', 'ex');
 
-return _ex0.apply(p2, _dataRefer0);
+return _ex0.apply(_fnH0 ? _fnH0.ctx : p2, _dataRefer0);
 },
   main: function anonymous(p1,p2,p3,p4,p5
 /**/) {
@@ -3704,15 +3726,13 @@ var _value0 = p2.getData('gutter');
 var _filter0 = p1.filters['&&'];
 if (!_filter0) {
   p1.warn('&&', 'filter');
-}
-else {
+} else {
 var _value1 = p2.getData('gutter');
 
 var _filter1 = p1.filters['gt'];
 if (!_filter1) {
   p1.warn('gt', 'filter');
-}
-else {
+} else {
   _value1 = _filter1.apply(p2, [_value1, 0, { _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, useString: p1.useString }]);
 }
   _value0 = _filter0.apply(p2, [_value0, _value1, { _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, useString: p1.useString }]);
@@ -3800,14 +3820,19 @@ module.exports = {
   fn1: function anonymous(p1,p2,p3,p4,p5
 /**/) {
 
-var _ex0 = p2.getData('emptyElem');
-if(!_ex0) _ex0 = p1.extensions['emptyElem'];
+var _ex0;
+var _fnH0 = p2.getData('emptyElem', null, true);
+if (_fnH0) {
+  _ex0 = _fnH0.val;
+} else {
+  _ex0 = p1.extensions['emptyElem'];
+}
 var _dataRefer0 = [
 { _njOpts: true, _njFnsNo: 1, global: p1, context: p2, outputH: true, useString: false, exProps: p4, subExProps: p5, result: p1.noop }
 ];
 p1.throwIf(_ex0, 'emptyElem', 'ex');
 
-return _ex0.apply(p2, _dataRefer0);
+return _ex0.apply(_fnH0 ? _fnH0.ctx : p2, _dataRefer0);
 },
   fn3: function anonymous(p1,p2,p3,p4,p5
 /**/) {
@@ -3815,13 +3840,17 @@ return _ex0.apply(p2, _dataRefer0);
 var _type0 = p1.getElement('li', p1);
 var _value0 = p2.getData('refresh');
 
-var _filter0 = p2.getData('clickBtn');
-if(!_filter0) _filter0 = p1.filters['clickBtn'];
+var _filter0;
+var _fnH0 = p2.getData('clickBtn', null, true);
+if (_fnH0) {
+  _filter0 = _fnH0.val;
+} else {
+  _filter0 = p1.filters['clickBtn'];
+}
 if (!_filter0) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value0 = _filter0.apply(p2, [_value0, 'first', { _njOpts: true, _njFnsNo: 3, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value0 = _filter0.apply(_fnH0 ? _fnH0.ctx : p2, [_value0, 'first', { _njOpts: true, _njFnsNo: 3, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params0 = {
   'key': 'first',
@@ -3856,23 +3885,31 @@ p2 = p1.newContext(p2, p3);
 var _type0 = p1.getElement('li', p1);
 var _value0 = p2.index;
 
-var _filter0 = p2.getData('isCurrentPage');
-if(!_filter0) _filter0 = p1.filters['isCurrentPage'];
+var _filter0;
+var _fnH0 = p2.getData('isCurrentPage', null, true);
+if (_fnH0) {
+  _filter0 = _fnH0.val;
+} else {
+  _filter0 = p1.filters['isCurrentPage'];
+}
 if (!_filter0) {
   p1.warn('isCurrentPage', 'filter');
-}
-else {
-  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value0 = _filter0.apply(_fnH0 ? _fnH0.ctx : p2, [_value0, { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _value1 = p2.getData('refresh');
 
-var _filter1 = p2.getData('clickBtn');
-if(!_filter1) _filter1 = p1.filters['clickBtn'];
+var _filter1;
+var _fnH1 = p2.getData('clickBtn', null, true);
+if (_fnH1) {
+  _filter1 = _fnH1.val;
+} else {
+  _filter1 = p1.filters['clickBtn'];
+}
 if (!_filter1) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value1 = _filter1.apply(_fnH1 ? _fnH1.ctx : p2, [_value1, 'index', { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params0 = {
   'key': p2.index,
@@ -3899,8 +3936,7 @@ var _value0 = p2.getData('pageIndex');
 var _filter0 = p1.filters['+'];
 if (!_filter0) {
   p1.warn('+', 'filter');
-}
-else {
+} else {
   _value0 = _filter0.apply(p2, [_value0, 2, { _njOpts: true, _njFnsNo: 6, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _dataRefer0 = [
@@ -3914,13 +3950,17 @@ ret.push(_ex0.apply(p2, _dataRefer0));
 var _type0 = p1.getElement('li', p1);
 var _value1 = p2.getData('refresh');
 
-var _filter1 = p2.getData('clickBtn');
-if(!_filter1) _filter1 = p1.filters['clickBtn'];
+var _filter1;
+var _fnH0 = p2.getData('clickBtn', null, true);
+if (_fnH0) {
+  _filter1 = _fnH0.val;
+} else {
+  _filter1 = p1.filters['clickBtn'];
+}
 if (!_filter1) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value1 = _filter1.apply(p2, [_value1, 'next', { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value1 = _filter1.apply(_fnH0 ? _fnH0.ctx : p2, [_value1, 'next', { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params1 = {
   'key': 'ellipsis2',
@@ -3935,23 +3975,31 @@ ret.push(p1.h.apply(null, _compParam0));
 var _type1 = p1.getElement('li', p1);
 var _value2 = p2.getData('pageCount');
 
-var _filter2 = p2.getData('isCurrentPage');
-if(!_filter2) _filter2 = p1.filters['isCurrentPage'];
+var _filter2;
+var _fnH1 = p2.getData('isCurrentPage', null, true);
+if (_fnH1) {
+  _filter2 = _fnH1.val;
+} else {
+  _filter2 = p1.filters['isCurrentPage'];
+}
 if (!_filter2) {
   p1.warn('isCurrentPage', 'filter');
-}
-else {
-  _value2 = _filter2.apply(p2, [_value2, { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value2 = _filter2.apply(_fnH1 ? _fnH1.ctx : p2, [_value2, { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _value3 = p2.getData('refresh');
 
-var _filter3 = p2.getData('clickBtn');
-if(!_filter3) _filter3 = p1.filters['clickBtn'];
+var _filter3;
+var _fnH2 = p2.getData('clickBtn', null, true);
+if (_fnH2) {
+  _filter3 = _fnH2.val;
+} else {
+  _filter3 = p1.filters['clickBtn'];
+}
 if (!_filter3) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value3 = _filter3.apply(p2, [_value3, 'last', { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value3 = _filter3.apply(_fnH2 ? _fnH2.ctx : p2, [_value3, 'last', { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params2 = {
   'key': p2.getData('pageCount'),
@@ -3973,23 +4021,31 @@ p2 = p1.newContext(p2, p3);
 var _type0 = p1.getElement('li', p1);
 var _value0 = p2.index;
 
-var _filter0 = p2.getData('isCurrentPage');
-if(!_filter0) _filter0 = p1.filters['isCurrentPage'];
+var _filter0;
+var _fnH0 = p2.getData('isCurrentPage', null, true);
+if (_fnH0) {
+  _filter0 = _fnH0.val;
+} else {
+  _filter0 = p1.filters['isCurrentPage'];
+}
 if (!_filter0) {
   p1.warn('isCurrentPage', 'filter');
-}
-else {
-  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value0 = _filter0.apply(_fnH0 ? _fnH0.ctx : p2, [_value0, { _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _value1 = p2.getData('refresh');
 
-var _filter1 = p2.getData('clickBtn');
-if(!_filter1) _filter1 = p1.filters['clickBtn'];
+var _filter1;
+var _fnH1 = p2.getData('clickBtn', null, true);
+if (_fnH1) {
+  _filter1 = _fnH1.val;
+} else {
+  _filter1 = p1.filters['clickBtn'];
+}
 if (!_filter1) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value1 = _filter1.apply(_fnH1 ? _fnH1.ctx : p2, [_value1, 'index', { _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params0 = {
   'key': p2.index,
@@ -4010,23 +4066,31 @@ var ret = [];
 var _type0 = p1.getElement('li', p1);
 var _value0 = 1;
 
-var _filter0 = p2.getData('isCurrentPage');
-if(!_filter0) _filter0 = p1.filters['isCurrentPage'];
+var _filter0;
+var _fnH0 = p2.getData('isCurrentPage', null, true);
+if (_fnH0) {
+  _filter0 = _fnH0.val;
+} else {
+  _filter0 = p1.filters['isCurrentPage'];
+}
 if (!_filter0) {
   p1.warn('isCurrentPage', 'filter');
-}
-else {
-  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value0 = _filter0.apply(_fnH0 ? _fnH0.ctx : p2, [_value0, { _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _value1 = p2.getData('refresh');
 
-var _filter1 = p2.getData('clickBtn');
-if(!_filter1) _filter1 = p1.filters['clickBtn'];
+var _filter1;
+var _fnH1 = p2.getData('clickBtn', null, true);
+if (_fnH1) {
+  _filter1 = _fnH1.val;
+} else {
+  _filter1 = p1.filters['clickBtn'];
+}
 if (!_filter1) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value1 = _filter1.apply(p2, [_value1, 'first', { _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value1 = _filter1.apply(_fnH1 ? _fnH1.ctx : p2, [_value1, 'first', { _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params0 = {
   'key': '1',
@@ -4043,13 +4107,17 @@ ret.push(p1.h.apply(null, _compParam0));
 var _type1 = p1.getElement('li', p1);
 var _value2 = p2.getData('refresh');
 
-var _filter2 = p2.getData('clickBtn');
-if(!_filter2) _filter2 = p1.filters['clickBtn'];
+var _filter2;
+var _fnH2 = p2.getData('clickBtn', null, true);
+if (_fnH2) {
+  _filter2 = _fnH2.val;
+} else {
+  _filter2 = p1.filters['clickBtn'];
+}
 if (!_filter2) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value2 = _filter2.apply(p2, [_value2, 'prev', { _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value2 = _filter2.apply(_fnH2 ? _fnH2.ctx : p2, [_value2, 'prev', { _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params1 = {
   'key': 'ellipsis1',
@@ -4070,8 +4138,7 @@ var _value3 = p2.getData('pageIndex');
 var _filter3 = p1.filters['-'];
 if (!_filter3) {
   p1.warn('-', 'filter');
-}
-else {
+} else {
   _value3 = _filter3.apply(p2, [_value3, 2, { _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _value4 = p2.getData('pageIndex');
@@ -4079,8 +4146,7 @@ var _value4 = p2.getData('pageIndex');
 var _filter4 = p1.filters['+'];
 if (!_filter4) {
   p1.warn('+', 'filter');
-}
-else {
+} else {
   _value4 = _filter4.apply(p2, [_value4, 2, { _njOpts: true, _njFnsNo: 8, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _dataRefer0 = [
@@ -4094,13 +4160,17 @@ ret.push(_ex0.apply(p2, _dataRefer0));
 var _type2 = p1.getElement('li', p1);
 var _value5 = p2.getData('refresh');
 
-var _filter5 = p2.getData('clickBtn');
-if(!_filter5) _filter5 = p1.filters['clickBtn'];
+var _filter5;
+var _fnH3 = p2.getData('clickBtn', null, true);
+if (_fnH3) {
+  _filter5 = _fnH3.val;
+} else {
+  _filter5 = p1.filters['clickBtn'];
+}
 if (!_filter5) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value5 = _filter5.apply(p2, [_value5, 'next', { _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value5 = _filter5.apply(_fnH3 ? _fnH3.ctx : p2, [_value5, 'next', { _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params3 = {
   'key': 'ellipsis2',
@@ -4115,23 +4185,31 @@ ret.push(p1.h.apply(null, _compParam2));
 var _type3 = p1.getElement('li', p1);
 var _value6 = p2.getData('pageCount');
 
-var _filter6 = p2.getData('isCurrentPage');
-if(!_filter6) _filter6 = p1.filters['isCurrentPage'];
+var _filter6;
+var _fnH4 = p2.getData('isCurrentPage', null, true);
+if (_fnH4) {
+  _filter6 = _fnH4.val;
+} else {
+  _filter6 = p1.filters['isCurrentPage'];
+}
 if (!_filter6) {
   p1.warn('isCurrentPage', 'filter');
-}
-else {
-  _value6 = _filter6.apply(p2, [_value6, { _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value6 = _filter6.apply(_fnH4 ? _fnH4.ctx : p2, [_value6, { _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _value7 = p2.getData('refresh');
 
-var _filter7 = p2.getData('clickBtn');
-if(!_filter7) _filter7 = p1.filters['clickBtn'];
+var _filter7;
+var _fnH5 = p2.getData('clickBtn', null, true);
+if (_fnH5) {
+  _filter7 = _fnH5.val;
+} else {
+  _filter7 = p1.filters['clickBtn'];
+}
 if (!_filter7) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value7 = _filter7.apply(p2, [_value7, 'last', { _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value7 = _filter7.apply(_fnH5 ? _fnH5.ctx : p2, [_value7, 'last', { _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params4 = {
   'key': p2.getData('pageCount'),
@@ -4153,23 +4231,31 @@ p2 = p1.newContext(p2, p3);
 var _type0 = p1.getElement('li', p1);
 var _value0 = p2.index;
 
-var _filter0 = p2.getData('isCurrentPage');
-if(!_filter0) _filter0 = p1.filters['isCurrentPage'];
+var _filter0;
+var _fnH0 = p2.getData('isCurrentPage', null, true);
+if (_fnH0) {
+  _filter0 = _fnH0.val;
+} else {
+  _filter0 = p1.filters['isCurrentPage'];
+}
 if (!_filter0) {
   p1.warn('isCurrentPage', 'filter');
-}
-else {
-  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, _njFnsNo: 11, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value0 = _filter0.apply(_fnH0 ? _fnH0.ctx : p2, [_value0, { _njOpts: true, _njFnsNo: 11, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _value1 = p2.getData('refresh');
 
-var _filter1 = p2.getData('clickBtn');
-if(!_filter1) _filter1 = p1.filters['clickBtn'];
+var _filter1;
+var _fnH1 = p2.getData('clickBtn', null, true);
+if (_fnH1) {
+  _filter1 = _fnH1.val;
+} else {
+  _filter1 = p1.filters['clickBtn'];
+}
 if (!_filter1) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, _njFnsNo: 11, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value1 = _filter1.apply(_fnH1 ? _fnH1.ctx : p2, [_value1, 'index', { _njOpts: true, _njFnsNo: 11, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params0 = {
   'key': p2.index,
@@ -4190,23 +4276,31 @@ var ret = [];
 var _type0 = p1.getElement('li', p1);
 var _value0 = 1;
 
-var _filter0 = p2.getData('isCurrentPage');
-if(!_filter0) _filter0 = p1.filters['isCurrentPage'];
+var _filter0;
+var _fnH0 = p2.getData('isCurrentPage', null, true);
+if (_fnH0) {
+  _filter0 = _fnH0.val;
+} else {
+  _filter0 = p1.filters['isCurrentPage'];
+}
 if (!_filter0) {
   p1.warn('isCurrentPage', 'filter');
-}
-else {
-  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, _njFnsNo: 10, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value0 = _filter0.apply(_fnH0 ? _fnH0.ctx : p2, [_value0, { _njOpts: true, _njFnsNo: 10, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _value1 = p2.getData('refresh');
 
-var _filter1 = p2.getData('clickBtn');
-if(!_filter1) _filter1 = p1.filters['clickBtn'];
+var _filter1;
+var _fnH1 = p2.getData('clickBtn', null, true);
+if (_fnH1) {
+  _filter1 = _fnH1.val;
+} else {
+  _filter1 = p1.filters['clickBtn'];
+}
 if (!_filter1) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value1 = _filter1.apply(p2, [_value1, 'first', { _njOpts: true, _njFnsNo: 10, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value1 = _filter1.apply(_fnH1 ? _fnH1.ctx : p2, [_value1, 'first', { _njOpts: true, _njFnsNo: 10, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params0 = {
   'key': '1',
@@ -4223,13 +4317,17 @@ ret.push(p1.h.apply(null, _compParam0));
 var _type1 = p1.getElement('li', p1);
 var _value2 = p2.getData('refresh');
 
-var _filter2 = p2.getData('clickBtn');
-if(!_filter2) _filter2 = p1.filters['clickBtn'];
+var _filter2;
+var _fnH2 = p2.getData('clickBtn', null, true);
+if (_fnH2) {
+  _filter2 = _fnH2.val;
+} else {
+  _filter2 = p1.filters['clickBtn'];
+}
 if (!_filter2) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value2 = _filter2.apply(p2, [_value2, 'prev', { _njOpts: true, _njFnsNo: 10, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value2 = _filter2.apply(_fnH2 ? _fnH2.ctx : p2, [_value2, 'prev', { _njOpts: true, _njFnsNo: 10, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params1 = {
   'key': 'ellipsis1',
@@ -4250,8 +4348,7 @@ var _value3 = p2.getData('pageIndex');
 var _filter3 = p1.filters['-'];
 if (!_filter3) {
   p1.warn('-', 'filter');
-}
-else {
+} else {
   _value3 = _filter3.apply(p2, [_value3, 2, { _njOpts: true, _njFnsNo: 10, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _dataRefer0 = [
@@ -4270,23 +4367,31 @@ p2 = p1.newContext(p2, p3);
 var _type0 = p1.getElement('li', p1);
 var _value0 = p2.index;
 
-var _filter0 = p2.getData('isCurrentPage');
-if(!_filter0) _filter0 = p1.filters['isCurrentPage'];
+var _filter0;
+var _fnH0 = p2.getData('isCurrentPage', null, true);
+if (_fnH0) {
+  _filter0 = _fnH0.val;
+} else {
+  _filter0 = p1.filters['isCurrentPage'];
+}
 if (!_filter0) {
   p1.warn('isCurrentPage', 'filter');
-}
-else {
-  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, _njFnsNo: 13, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value0 = _filter0.apply(_fnH0 ? _fnH0.ctx : p2, [_value0, { _njOpts: true, _njFnsNo: 13, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _value1 = p2.getData('refresh');
 
-var _filter1 = p2.getData('clickBtn');
-if(!_filter1) _filter1 = p1.filters['clickBtn'];
+var _filter1;
+var _fnH1 = p2.getData('clickBtn', null, true);
+if (_fnH1) {
+  _filter1 = _fnH1.val;
+} else {
+  _filter1 = p1.filters['clickBtn'];
+}
 if (!_filter1) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value1 = _filter1.apply(p2, [_value1, 'index', { _njOpts: true, _njFnsNo: 13, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value1 = _filter1.apply(_fnH1 ? _fnH1.ctx : p2, [_value1, 'index', { _njOpts: true, _njFnsNo: 13, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params0 = {
   'key': p2.index,
@@ -4325,13 +4430,17 @@ var _paramsE0 = {};
 var _ex1 = p1.extensions['elseif'];
 var _value1 = p2.getData('pageIndex');
 
-var _filter1 = p2.getData('showPartPage');
-if(!_filter1) _filter1 = p1.filters['showPartPage'];
+var _filter1;
+var _fnH0 = p2.getData('showPartPage', null, true);
+if (_fnH0) {
+  _filter1 = _fnH0.val;
+} else {
+  _filter1 = p1.filters['showPartPage'];
+}
 if (!_filter1) {
   p1.warn('showPartPage', 'filter');
-}
-else {
-  _value1 = _filter1.apply(p2, [_value1, 1, { _njOpts: true, _njFnsNo: 5, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value1 = _filter1.apply(_fnH0 ? _fnH0.ctx : p2, [_value1, 1, { _njOpts: true, _njFnsNo: 5, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _dataRefer1 = [
   _value1,{ _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false, subExProps: _paramsE0, result: p1.exRet(p1, p2, p1.fn6, p4, _paramsE0) }
@@ -4343,13 +4452,17 @@ _ex1.apply(p2, _dataRefer1);
 var _ex2 = p1.extensions['elseif'];
 var _value2 = p2.getData('pageIndex');
 
-var _filter2 = p2.getData('showPartPage');
-if(!_filter2) _filter2 = p1.filters['showPartPage'];
+var _filter2;
+var _fnH1 = p2.getData('showPartPage', null, true);
+if (_fnH1) {
+  _filter2 = _fnH1.val;
+} else {
+  _filter2 = p1.filters['showPartPage'];
+}
 if (!_filter2) {
   p1.warn('showPartPage', 'filter');
-}
-else {
-  _value2 = _filter2.apply(p2, [_value2, 2, { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value2 = _filter2.apply(_fnH1 ? _fnH1.ctx : p2, [_value2, 2, { _njOpts: true, _njFnsNo: 7, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _dataRefer2 = [
   _value2,{ _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true, useString: false, subExProps: _paramsE0, result: p1.exRet(p1, p2, p1.fn8, p4, _paramsE0) }
@@ -4361,13 +4474,17 @@ _ex2.apply(p2, _dataRefer2);
 var _ex3 = p1.extensions['elseif'];
 var _value3 = p2.getData('pageIndex');
 
-var _filter3 = p2.getData('showPartPage');
-if(!_filter3) _filter3 = p1.filters['showPartPage'];
+var _filter3;
+var _fnH2 = p2.getData('showPartPage', null, true);
+if (_fnH2) {
+  _filter3 = _fnH2.val;
+} else {
+  _filter3 = p1.filters['showPartPage'];
+}
 if (!_filter3) {
   p1.warn('showPartPage', 'filter');
-}
-else {
-  _value3 = _filter3.apply(p2, [_value3, 3, { _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value3 = _filter3.apply(_fnH2 ? _fnH2.ctx : p2, [_value3, 3, { _njOpts: true, _njFnsNo: 9, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _dataRefer3 = [
   _value3,{ _njOpts: true, _njFnsNo: 11, global: p1, context: p2, outputH: true, useString: false, subExProps: _paramsE0, result: p1.exRet(p1, p2, p1.fn10, p4, _paramsE0) }
@@ -4382,8 +4499,7 @@ var _value0 = p2.getData('pageCount');
 var _filter0 = p1.filters['lte'];
 if (!_filter0) {
   p1.warn('lte', 'filter');
-}
-else {
+} else {
   _value0 = _filter0.apply(p2, [_value0, 10, { _njOpts: true, _njFnsNo: 5, global: p1, context: p2, outputH: true, useString: p1.useString }]);
 }
 var _dataRefer0 = [
@@ -4400,13 +4516,17 @@ return _ex0.apply(p2, _dataRefer0);
 var _type0 = p1.getElement('li', p1);
 var _value0 = p2.getData('refresh');
 
-var _filter0 = p2.getData('clickBtn');
-if(!_filter0) _filter0 = p1.filters['clickBtn'];
+var _filter0;
+var _fnH0 = p2.getData('clickBtn', null, true);
+if (_fnH0) {
+  _filter0 = _fnH0.val;
+} else {
+  _filter0 = p1.filters['clickBtn'];
+}
 if (!_filter0) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value0 = _filter0.apply(p2, [_value0, 'last', { _njOpts: true, _njFnsNo: 14, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value0 = _filter0.apply(_fnH0 ? _fnH0.ctx : p2, [_value0, 'last', { _njOpts: true, _njFnsNo: 14, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params0 = {
   'key': 'last',
@@ -4532,13 +4652,17 @@ return p1.h.apply(null, _compParam0);
 var _type0 = p1.getElement('li', p1);
 var _value0 = 'fj-pagn-btn-refresh';
 
-var _filter0 = p2.getData('fixIconSize');
-if(!_filter0) _filter0 = p1.filters['fixIconSize'];
+var _filter0;
+var _fnH0 = p2.getData('fixIconSize', null, true);
+if (_fnH0) {
+  _filter0 = _fnH0.val;
+} else {
+  _filter0 = p1.filters['fixIconSize'];
+}
 if (!_filter0) {
   p1.warn('fixIconSize', 'filter');
-}
-else {
-  _value0 = _filter0.apply(p2, [_value0, { _njOpts: true, _njFnsNo: 19, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value0 = _filter0.apply(_fnH0 ? _fnH0.ctx : p2, [_value0, { _njOpts: true, _njFnsNo: 19, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params0 = {
   'className': _value0
@@ -4548,13 +4672,17 @@ var _compParam0 = [_type0, _params0];
 var _type1 = p1.getElement('fa', p1);
 var _value1 = p2.getData('refresh');
 
-var _filter1 = p2.getData('clickBtn');
-if(!_filter1) _filter1 = p1.filters['clickBtn'];
+var _filter1;
+var _fnH1 = p2.getData('clickBtn', null, true);
+if (_fnH1) {
+  _filter1 = _fnH1.val;
+} else {
+  _filter1 = p1.filters['clickBtn'];
+}
 if (!_filter1) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value1 = _filter1.apply(p2, [_value1, { _njOpts: true, _njFnsNo: 19, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value1 = _filter1.apply(_fnH1 ? _fnH1.ctx : p2, [_value1, { _njOpts: true, _njFnsNo: 19, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params1 = {
   'name': 'refresh',
@@ -4595,13 +4723,17 @@ _compParam1.push(_ex0.apply(p2, _dataRefer0));
 var _type2 = p1.getElement('li', p1);
 var _value0 = p2.getData('refresh');
 
-var _filter0 = p2.getData('clickBtn');
-if(!_filter0) _filter0 = p1.filters['clickBtn'];
+var _filter0;
+var _fnH0 = p2.getData('clickBtn', null, true);
+if (_fnH0) {
+  _filter0 = _fnH0.val;
+} else {
+  _filter0 = p1.filters['clickBtn'];
+}
 if (!_filter0) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value0 = _filter0.apply(p2, [_value0, 'prev', { _njOpts: true, _njFnsNo: 3, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value0 = _filter0.apply(_fnH0 ? _fnH0.ctx : p2, [_value0, 'prev', { _njOpts: true, _njFnsNo: 3, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params2 = {
   'key': 'prev',
@@ -4658,13 +4790,17 @@ _compParam1.push(p1.h.apply(null, _compParam4));
 var _type6 = p1.getElement('li', p1);
 var _value1 = p2.getData('refresh');
 
-var _filter1 = p2.getData('clickBtn');
-if(!_filter1) _filter1 = p1.filters['clickBtn'];
+var _filter1;
+var _fnH1 = p2.getData('clickBtn', null, true);
+if (_fnH1) {
+  _filter1 = _fnH1.val;
+} else {
+  _filter1 = p1.filters['clickBtn'];
+}
 if (!_filter1) {
   p1.warn('clickBtn', 'filter');
-}
-else {
-  _value1 = _filter1.apply(p2, [_value1, 'next', { _njOpts: true, _njFnsNo: 13, global: p1, context: p2, outputH: true, useString: false }]);
+} else {
+  _value1 = _filter1.apply(_fnH1 ? _fnH1.ctx : p2, [_value1, 'next', { _njOpts: true, _njFnsNo: 13, global: p1, context: p2, outputH: true, useString: false }]);
 }
 var _params6 = {
   'key': 'next',
@@ -4757,8 +4893,7 @@ var _value0 = p2.getData('count');
 var _filter0 = p1.filters['gte'];
 if (!_filter0) {
   p1.warn('gte', 'filter');
-}
-else {
+} else {
   _value0 = _filter0.apply(p2, [_value0, 1, { _njOpts: true, _njFnsNo: 0, global: p1, context: p2, outputH: true, useString: p1.useString }]);
 }
 var _dataRefer0 = [

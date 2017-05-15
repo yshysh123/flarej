@@ -149,9 +149,14 @@ class Pagination extends Component {
     this.refresh(parseInt(this.refs.pageTxt.value, 10));
   }
 
-  clickBtn(fn, type) {
-    const pageIndex = this.getData('pageIndex'),
-      pageCount = this.getData('pageCount');
+  clickBtn(fn, type, options) {
+    if (type._njOpts) {
+      options = type;
+    }
+
+    const { context } = options;
+    const pageIndex = context.getData('pageIndex'),
+      pageCount = context.getData('pageCount');
 
     switch (type) {
       case 'first':
@@ -180,8 +185,8 @@ class Pagination extends Component {
         };
       case 'index':
         return () => {
-          if (this.index != pageIndex) {
-            fn(this.index);
+          if (context.index != pageIndex) {
+            fn(context.index);
           }
         };
       default:
@@ -189,12 +194,12 @@ class Pagination extends Component {
     }
   }
 
-  isCurrentPage(no) {
-    return no == this.getData('pageIndex') ? '-c' : '';
+  isCurrentPage(no, options) {
+    return no == options.context.getData('pageIndex') ? '-c' : '';
   }
 
-  showPartPage(no, type) {
-    const pageCount = this.getData('pageCount');
+  showPartPage(no, type, options) {
+    const pageCount = options.context.getData('pageCount');
     switch (type) {
       case 1: //当前页码<=4:左侧显示所有+当前页码+右侧2个页码+...+尾页
         return no <= 4;
