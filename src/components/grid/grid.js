@@ -17,12 +17,20 @@ export class Row extends Component {
       left,
       right,
       gutter,
+      clearfix,
+      clearfixM,
+      clearfixS,
+      clearfixXs,
       children,
       ...others
     } = this.props;
 
     const classes = classNames({
       'fj-row': true,
+      'fj-clearfix': clearfix != null,
+      'fj-clearfix-m': clearfixM != null,
+      'fj-clearfix-s': clearfixS != null,
+      'fj-clearfix-xs': clearfixXs != null,
       [className]: className
     });
 
@@ -178,8 +186,8 @@ export class Col extends Component {
 /**
  * Clear the float style
  */
-@registerTmpl('fj-ClearFix')
-export class ClearFix extends Component {
+@registerTmpl('fj-Clearfix')
+export class Clearfix extends Component {
   render() {
     const {
       className,
@@ -191,10 +199,10 @@ export class ClearFix extends Component {
     } = this.props;
 
     const classes = classNames({
-      ['fj-clearfix']: l != null || (m == null && s == null && xs == null),
-      ['fj-clearfix-m']: m != null,
-      ['fj-clearfix-s']: s != null,
-      ['fj-clearfix-xs']: xs != null,
+      'fj-clearfix': l != null || (m == null && s == null && xs == null),
+      'fj-clearfix-m': m != null,
+      'fj-clearfix-s': s != null,
+      'fj-clearfix-xs': xs != null,
       [className]: className
     });
 
@@ -211,5 +219,5 @@ Object.assign(fj, {
   RowLeft,
   RowRight,
   Col,
-  ClearFix
+  Clearfix
 });

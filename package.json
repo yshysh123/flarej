@@ -1,6 +1,6 @@
 {
   "name": "flarej",
-  "version": "0.1.4-rc.7",
+  "version": "0.1.4-rc.9",
   "description": "A responsive ui component library",
   "main": "lib/base.js",
   "files": [

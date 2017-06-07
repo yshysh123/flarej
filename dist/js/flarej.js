@@ -2162,7 +2162,7 @@ var Gesture = (_dec = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_nornj_re
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return RowLeft; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return RowRight; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return Col; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return ClearFix; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return Clearfix; });
 var _dec, _class, _dec2, _class2, _dec3, _class3, _dec4, _class4, _dec5, _class5;
 
 
@@ -2193,12 +2193,20 @@ var Row = (_dec = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_react_
         left = _props.left,
         right = _props.right,
         gutter = _props.gutter,
+        clearfix = _props.clearfix,
+        clearfixM = _props.clearfixM,
+        clearfixS = _props.clearfixS,
+        clearfixXs = _props.clearfixXs,
         children = _props.children,
-        others = babelHelpers.objectWithoutProperties(_props, ['className', 'style', 'left', 'right', 'gutter', 'children']);
+        others = babelHelpers.objectWithoutProperties(_props, ['className', 'style', 'left', 'right', 'gutter', 'clearfix', 'clearfixM', 'clearfixS', 'clearfixXs', 'children']);
 
 
     var classes = __WEBPACK_IMPORTED_MODULE_3_classnames___default()(babelHelpers.defineProperty({
-      'fj-row': true
+      'fj-row': true,
+      'fj-clearfix': clearfix != null,
+      'fj-clearfix-m': clearfixM != null,
+      'fj-clearfix-s': clearfixS != null,
+      'fj-clearfix-xs': clearfixXs != null
     }, className, className));
 
     var styles = {},
@@ -2370,17 +2378,16 @@ var Col = (_dec4 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_react
  * Clear the float style
  */
 
-var ClearFix = (_dec5 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_react__["registerTmpl"])('fj-ClearFix'), _dec5(_class5 = function (_Component5) {
-  babelHelpers.inherits(ClearFix, _Component5);
+var Clearfix = (_dec5 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_react__["registerTmpl"])('fj-Clearfix'), _dec5(_class5 = function (_Component5) {
+  babelHelpers.inherits(Clearfix, _Component5);
 
-  function ClearFix() {
-    babelHelpers.classCallCheck(this, ClearFix);
+  function Clearfix() {
+    babelHelpers.classCallCheck(this, Clearfix);
     return babelHelpers.possibleConstructorReturn(this, _Component5.apply(this, arguments));
   }
 
-  ClearFix.prototype.render = function render() {
-    var _classNames4,
-        _this9 = this;
+  Clearfix.prototype.render = function render() {
+    var _this9 = this;
 
     var _props4 = this.props,
         className = _props4.className,
@@ -2391,7 +2398,12 @@ var ClearFix = (_dec5 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_
         others = babelHelpers.objectWithoutProperties(_props4, ['className', 'l', 'm', 's', 'xs']);
 
 
-    var classes = __WEBPACK_IMPORTED_MODULE_3_classnames___default()((_classNames4 = {}, babelHelpers.defineProperty(_classNames4, 'fj-clearfix', l != null || m == null && s == null && xs == null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-m', m != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-s', s != null), babelHelpers.defineProperty(_classNames4, 'fj-clearfix-xs', xs != null), babelHelpers.defineProperty(_classNames4, className, className), _classNames4));
+    var classes = __WEBPACK_IMPORTED_MODULE_3_classnames___default()(babelHelpers.defineProperty({
+      'fj-clearfix': l != null || m == null && s == null && xs == null,
+      'fj-clearfix-m': m != null,
+      'fj-clearfix-s': s != null,
+      'fj-clearfix-xs': xs != null
+    }, className, className));
 
     return __WEBPACK_IMPORTED_MODULE_5__grid_t_html___default.a.clearFix({
       props: others,
@@ -2402,7 +2414,7 @@ var ClearFix = (_dec5 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_nornj_
     });
   };
 
-  return ClearFix;
+  return Clearfix;
 }(__WEBPACK_IMPORTED_MODULE_1_react__["Component"])) || _class5);
 
 babelHelpers.extends(__WEBPACK_IMPORTED_MODULE_0__core__["a" /* default */], {
@@ -2410,7 +2422,7 @@ babelHelpers.extends(__WEBPACK_IMPORTED_MODULE_0__core__["a" /* default */], {
   RowLeft: RowLeft,
   RowRight: RowRight,
   Col: Col,
-  ClearFix: ClearFix
+  Clearfix: Clearfix
 });
 
 /***/ }),
@@ -5600,7 +5612,7 @@ module.exports = update;
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "RowLeft", function() { return __WEBPACK_IMPORTED_MODULE_14__components_grid__["b"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "RowRight", function() { return __WEBPACK_IMPORTED_MODULE_14__components_grid__["c"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Col", function() { return __WEBPACK_IMPORTED_MODULE_14__components_grid__["d"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ClearFix", function() { return __WEBPACK_IMPORTED_MODULE_14__components_grid__["e"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Clearfix", function() { return __WEBPACK_IMPORTED_MODULE_14__components_grid__["e"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "responsive", function() { return __WEBPACK_IMPORTED_MODULE_6__higherOrders_responsive__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Pagination", function() { return __WEBPACK_IMPORTED_MODULE_7__components_pagination__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Gesture", function() { return __WEBPACK_IMPORTED_MODULE_8__components_gesture__["a"]; });
