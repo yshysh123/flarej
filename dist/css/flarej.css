@@ -649,11 +649,20 @@ ul {
   right: 0;
 }
 /*---large screen size---*/
+.fj-row::before,
+.fj-row::after,
+.fj-row-left::before,
+.fj-row-left::after,
+.fj-row-right::before,
+.fj-row-right::after,
 .fj-clearfix::before,
 .fj-clearfix::after {
   display: table;
   content: ' ';
 }
+.fj-row::after,
+.fj-row-left::after,
+.fj-row-right::after,
 .fj-clearfix::after {
   clear: both;
 }

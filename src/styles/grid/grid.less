@@ -21,12 +21,21 @@
 }
 
 /*---large screen size---*/
+.@{ns}row::before,
+.@{ns}row::after,
+.@{ns}row-left::before,
+.@{ns}row-left::after,
+.@{ns}row-right::before,
+.@{ns}row-right::after,
 .@{ns}clearfix::before,
 .@{ns}clearfix::after {
   display: table;
   content: ' ';
 }
 
+.@{ns}row::after,
+.@{ns}row-left::after,
+.@{ns}row-right::after,
 .@{ns}clearfix::after {
   clear: both;
 }

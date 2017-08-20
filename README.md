@@ -1,6 +1,6 @@
 # FlareJ
 
-`FlareJ`是一个基于`React`的响应式Web设计UI组件库
+`FlareJ`是一个基于`React`和`NornJ`的UI组件库
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][npm-url]

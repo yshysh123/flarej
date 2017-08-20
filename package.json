@@ -1,7 +1,7 @@
 {
   "name": "flarej",
-  "version": "0.1.4-rc.9",
-  "description": "A responsive ui component library",
+  "version": "0.1.4",
+  "description": "An ui component library based on React and NornJ",
   "main": "lib/base.js",
   "files": [
     "dist/",
@@ -34,8 +34,8 @@
     "classnames": "^2.2.5",
     "core-decorators": "^0.15.0",
     "fecha": "^2.3.0",
-    "nornj": "^0.4.2-beta.10",
-    "nornj-react": "^0.4.2-beta.1",
+    "nornj": "^0.4.2-beta.24",
+    "nornj-react": "^0.4.2-beta.8",
     "react-fontawesome": "^1.5.0"
   },
   "devDependencies": {

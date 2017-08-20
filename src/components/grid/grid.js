@@ -17,20 +17,12 @@ export class Row extends Component {
       left,
       right,
       gutter,
-      clearfix,
-      clearfixM,
-      clearfixS,
-      clearfixXs,
       children,
       ...others
     } = this.props;
 
     const classes = classNames({
       'fj-row': true,
-      'fj-clearfix': clearfix != null,
-      'fj-clearfix-m': clearfixM != null,
-      'fj-clearfix-s': clearfixS != null,
-      'fj-clearfix-xs': clearfixXs != null,
       [className]: className
     });
 

@@ -1,13 +1,13 @@
 <template name="row">
   <div {...props} class={classes} style={styles} ref={wrap}>
-    <#if {gutter &&(gutter >(0))}>
+    <#if {gutter && (gutter > 0)}>
       <#childrenEach {children}>
-        <#if {@child !=(null)}>
+        <#if {@child != null}>
           <#cloneElem>
             <@style>
               <#assign from={@child.props.style}>
-                <#obj paddingLeft="{gutter /(2)}"
-                      paddingRight="{gutter /(2)}" />
+                <#obj paddingLeft="{gutter / 2}"
+                      paddingRight="{gutter / 2}" />
               </#assign>
             </@style>
             {@child}
