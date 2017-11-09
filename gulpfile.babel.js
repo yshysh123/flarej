@@ -9,14 +9,12 @@ import concat from 'gulp-concat';
 import gulpif from 'gulp-if';
 import less from 'gulp-less';
 import cssnano from 'gulp-cssnano';
-import eslint from 'gulp-eslint';
 import notify from 'gulp-notify';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 import { argv } from 'yargs';
 import glob from 'glob';
 import env from 'gulp-env';
-import { Server } from 'karma';
 
 function getJsLibName() {
   let libName = 'flarej.js';
@@ -74,14 +72,12 @@ const webpackExternals = {
 };
 
 //Handle error
-function handlebuildError() {
-  let args = Array.prototype.slice.call(arguments);
-
+function handleError() {
   // Send error to notification center with gulp-notify
   notify.onError({
     title: "Compile Error",
     message: "<%= error.message %>"
-  }).apply(this, args);
+  }).apply(this, arguments);
 
   // Keep gulp from hanging on this task
   this.emit('end');
@@ -162,7 +158,7 @@ gulp.task('build-js', () => {
         //hash: false
       }));
     }))
-    .on('error', handlebuildError)
+    .on('error', handleError)
     .pipe(gulp.dest('./dist/js').on('end', () => {
       if (!argv.w) {
         concatBabelHelpers(jsLibName);
@@ -235,22 +231,6 @@ gulp.task("lib", () => {
     }))
     .pipe(babel())
     .pipe(gulp.dest('./lib'));
-});
-
-//Run test specs with Karma
-gulp.task('test', done => {
-  new Server({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  }, () => done()).start();
-});
-
-//Run eslint
-gulp.task('eslint', () => {
-  return gulp.src('./src/**/*.js')
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
 });
 
 //Default task

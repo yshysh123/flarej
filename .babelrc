@@ -2,7 +2,7 @@
   "presets": [ "stage-1", "react" ],
   "env": {
     "development": {
-      "presets": ["es2015"],
+      "presets": ["env"],
       "plugins": [
         "transform-decorators-legacy",
         "transform-class-properties",
@@ -19,7 +19,7 @@
     },
     "webpack": {
       "presets": [
-        ["es2015", { "modules": false }]
+        ["env", { "modules": false }]
       ],
       "plugins": [
         "transform-decorators-legacy",

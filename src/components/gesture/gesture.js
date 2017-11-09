@@ -94,7 +94,7 @@ export default class Gesture extends Component {
         this.lastTime = 0;
         this.freezeShake = false;
 
-        on("devicemotion", this.deviceMotion, window);
+        on('devicemotion', this.deviceMotion, window);
       }
     }
   }

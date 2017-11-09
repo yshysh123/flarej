@@ -32,7 +32,7 @@ export class Row extends Component {
 
     if (gutter && gutter > 0) {
       mLeft += gutter / -2;
-      mRight += gutter / -2
+      mRight += gutter / -2;
     }
     if (left) {
       mLeft += parseInt(left, 10);

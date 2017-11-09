@@ -50,7 +50,7 @@ class Pagination extends Component {
 
     this.state.pageIndex = props.pageIndex;
     this.state.pageSize = props.pageSize;
-    this.state.pageCount = this.getPageCount() //总页数
+    this.state.pageCount = this.getPageCount(); //总页数
   }
 
   componentWillReceiveProps(nextProps) {

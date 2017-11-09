@@ -143,5 +143,5 @@ export default function(ComposedComponent, initialProps) {
         ref: c => this.component = c
       }, this);
     }
-  }
+  };
 }
