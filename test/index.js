@@ -1,3 +1,5 @@
+import 'nornj-react';
+
 // require all test files (files that ends with .spec.js)
 // require 所有的测试文件 *.spec.js
 const testsContext = require.context('.', true, /\.spec\.js$/);
