@@ -1,4 +1,5 @@
-﻿import { Component, PropTypes } from 'react';
+﻿import { Component } from 'react';
+import PropTypes from 'prop-types';
 import update from 'react-addons-update';
 import nj from 'nornj';
 import { guid } from '../utils/common';
