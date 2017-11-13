@@ -1,4 +1,5 @@
 const path = require('path');
+const autoprefixer = require('autoprefixer');
 
 module.exports = function(config) {
   config.set({
@@ -105,6 +106,16 @@ module.exports = function(config) {
               delimiters: 'react'
             }
           }]
+        }, {
+          test: /\.less$/,
+          use: ['style-loader', 'css-loader',  {
+            loader: 'postcss-loader',
+            options: {
+              plugins: (loader) => [
+                autoprefixer({ browsers: ['last 50 versions'] }),
+              ]
+            }
+          }, 'less-loader']
         }]
       }
     },
