@@ -1,0 +1,12 @@
+﻿import { registerComponent } from 'nornj';
+import Icon from 'antd/lib/icon';
+
+registerComponent({
+  'ant-Icon': Icon
+});
+
+export {
+  Icon
+};
+
+export default Icon;
