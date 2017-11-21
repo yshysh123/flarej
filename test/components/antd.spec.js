@@ -57,7 +57,7 @@ describe('Antd spec', function() {
   });
 
   describe('default', () => {
-    const defaultWrapper1 = shallow(nj `<ant-Breadcrumb><ant-Breadcrumb.Item>Home</ant-Breadcrumb.Item></ant-Breadcrumb>` ());
+    const defaultWrapper1 = shallow(nj `<ant-Breadcrumb><ant-BreadcrumbItem>Home</ant-BreadcrumbItem></ant-Breadcrumb>` ());
 
     it('should be div tag by default', () => {
       expect(defaultWrapper1).toHaveTagName('div');
@@ -121,7 +121,7 @@ describe('Antd spec', function() {
   });
 
   describe('default', () => {
-    const defaultWrapper1 = mount(nj `<ant-datePicker />` ());
+    const defaultWrapper1 = mount(nj `<ant-DatePicker />` ());
 
     it('should be span tag with class name "ant-calendar-picker" by default', () => {
       expect(defaultWrapper1.find('span').at(0)).toHaveClassName('ant-calendar-picker');
