@@ -81,7 +81,13 @@ module.exports = function(config) {
         jsdom: 'window',
         'react/addons': true,
         'react/lib/ReactContext': true,
-        'react/lib/ExecutionEnvironment': true,
+        'react/lib/ExecutionEnvironment': true
+      },
+      resolve: {
+        alias: {
+          'react/lib/Object.assign': 'object-assign'
+        },
+        extensions: ['.web.js', '.ts', '.tsx', '.js', '.jsx', '.css', '.scss', '.less']
       },
       module: {
         rules: [{
@@ -116,6 +122,15 @@ module.exports = function(config) {
               ]
             }
           }, 'less-loader']
+        }, {
+          test: /\.(svg)$/i,
+          loader: 'svg-sprite-loader',
+          include: [
+            require.resolve('antd-mobile').replace(/warn\.js$/, '')
+          ]
+        }, {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader']
         }]
       }
     },
