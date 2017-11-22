@@ -6,6 +6,7 @@ import {
   createChart,
   updateChart
 } from '../../utils/ecConfig';
+import '../../styles/echarts';
 import template from './ECharts.t.html';
 
 const EChartsEnhance = (ComposedComponent) => {
@@ -79,7 +80,7 @@ const EChartsEnhance = (ComposedComponent) => {
       } = this.props;
 
       const classes = classNames({
-        'vic-area-chart-area': true,
+        'fj-area-chart-area': true,
         [className]: className
       });
 

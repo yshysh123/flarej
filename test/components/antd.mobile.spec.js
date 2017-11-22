@@ -28,7 +28,7 @@ describe('antd mobile spec', function() {
 
   describe('default', () => {
     const defaultWrapper1 = mount(nj `<antm-Accordion><antm-AccordionPanel></antm-AccordionPanel></antm-Accordion>` ());
-    console.log(defaultWrapper1.html());
+
     it('should be div tag with class name "am-accordion" by default', () => {
       expect(defaultWrapper1.find("div").at(0)).toHaveClassName('am-accordion');
     });
@@ -112,7 +112,7 @@ describe('antd mobile spec', function() {
 
   describe('default', () => {
     const defaultWrapper1 = mount(nj `<antm-Carousel><img/></antm-Carousel>` ());
-    console.log(defaultWrapper1.html());
+
     it('should be div tag with class name "am-carousel" by default', () => {
       expect(defaultWrapper1.find('div').at(0)).toHaveClassName('am-carousel');
     });
@@ -120,7 +120,7 @@ describe('antd mobile spec', function() {
 
   describe('default', () => {
     const defaultWrapper1 = mount(nj `<antm-CheckboxItem key="test">test</antm-CheckboxItem>` ());
-    console.log(defaultWrapper1.html());
+
     it('should be div tag with class name "am-checkbox-item" by default', () => {
       expect(defaultWrapper1.find("div").at(0)).toHaveClassName('am-checkbox-item');
     });
@@ -175,7 +175,7 @@ describe('antd mobile spec', function() {
 
   describe('default', () => {
     const defaultWrapper1 = mount(nj `<antm-Modal visible={true}/>` ());
-    console.log(5, defaultWrapper1.html());
+
     it('its props visible equal to true', () => {
       expect(defaultWrapper1.props().visible).toEqual(true);
     });

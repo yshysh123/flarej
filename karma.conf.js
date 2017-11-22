@@ -118,7 +118,7 @@ module.exports = function(config) {
             loader: 'postcss-loader',
             options: {
               plugins: (loader) => [
-                autoprefixer({ browsers: ['last 50 versions'] }),
+                autoprefixer({ browsers: ['last 50 versions'] })
               ]
             }
           }, 'less-loader']
@@ -148,4 +148,4 @@ module.exports = function(config) {
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true
   });
-}
+};
