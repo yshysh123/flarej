@@ -7,11 +7,14 @@
 
 ## 组件
 
-目前已完成的组件(点击查看示例)：
+目前已完成的组件(点击查看示例或文档)：
 
 * [Pagination(分页)](https://github.com/joe-sky/flarej/blob/master/examples/pagination.html)
 * [Grid(栅格)](https://github.com/joe-sky/flarej/blob/master/examples/grid.html)
 * [Gesture(手势)](https://github.com/joe-sky/flarej/blob/master/examples/gesture.html)
+* [antd文档](https://github.com/joe-sky/flarej/blob/master/docs/antd.md)
+* [antd-mobile文档](https://github.com/joe-sky/flarej/blob/master/docs/antd-mobile.md)
+* [Echarts文档](https://github.com/joe-sky/flarej/blob/master/docs/echarts.md)
 
 ## 依赖的项目
 
@@ -21,6 +24,7 @@
 * [core-decorators.js](https://github.com/jayphelps/core-decorators.js)
 * [classnames](https://github.com/JedWatson/classnames)
 * [fecha](https://github.com/taylorhakes/fecha)
+* [querystring](https://github.com/Gozala/querystring)
 
 ## 安装
 

@@ -3,7 +3,7 @@ import Popover from 'antd/lib/popover';
 import 'antd/lib/popover/style/index';
 
 registerComponent({
-  'ant-popover': Popover
+  'ant-Popover': Popover
 });
 
 export {
