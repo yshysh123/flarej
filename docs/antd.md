@@ -55,6 +55,8 @@ class DemoPage extends React.Component {
 * ant-Tree
 * ant-TreeSelect
 * ant-Upload
+* ant-Steps
+* ant-Dropdown
 * (其他的antd组件待添加)
 
 
