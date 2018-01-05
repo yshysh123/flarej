@@ -33,10 +33,12 @@ export function fetchData(url, callback, params, cfgs) {
     if (configs.method === 'get' || configs.method === 'delete') {
       url += '?' + querystring.encode(params);
     } else if (configs.method === 'post' || configs.method === 'put') {
-      configs.headers = {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      };
+      if (!configs.headers) {
+        configs.headers = {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        };
+      }
       configs.body = JSON.stringify(params);
     }
   }
