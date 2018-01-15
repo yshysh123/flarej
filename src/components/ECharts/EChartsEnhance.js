@@ -75,6 +75,7 @@ const EChartsEnhance = (ComposedComponent) => {
       const {
         className,
         style,
+        width,
         height,
         ...others
       } = this.props;
@@ -85,6 +86,9 @@ const EChartsEnhance = (ComposedComponent) => {
       });
 
       let styles = {};
+      if (width != null) {
+        styles.width = width;
+      }
       if (height != null) {
         styles.height = height;
       }
