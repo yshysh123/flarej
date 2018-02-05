@@ -1,8 +1,5 @@
 ﻿import querystring from 'querystring';
 
-/**
- * 捕获错误
- */
 export function handleErrors(response) {
   if (!response.ok) {
     throw Error(response.statusText);
@@ -10,23 +7,18 @@ export function handleErrors(response) {
   return response;
 }
 
-function customHeaders(options) {
-  options = options || {};
-  options.headers = options.headers || {};
-  options.headers['X-Requested-With'] = 'XMLHttpRequest';
-  return options;
+const _defaultOptions = {};
+export function setDefaultOptions(options = {}) {
+  return Object.assign(_defaultOptions, options);
 }
 
-/**
- * 获取数据
- */
 export function fetchData(url, callback, params, cfgs) {
   const configs = Object.assign({
     method: 'get',
     credentials: 'include',
     mode: 'cors',
     cache: 'reload'
-  }, cfgs);
+  }, _defaultOptions, cfgs);
 
   configs.method = configs.method.toLowerCase();
   if (params) {
@@ -34,16 +26,19 @@ export function fetchData(url, callback, params, cfgs) {
       url += '?' + querystring.encode(params);
     } else if (configs.method === 'post' || configs.method === 'put') {
       if (!configs.headers) {
-        configs.headers = {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        };
+        configs.headers = {};
+      }
+      if (!configs.headers.Accept) {
+        configs.headers.Accept = 'application/json';
+      }
+      if (!configs.headers['Content-Type']) {
+        configs.headers['Content-Type'] = 'application/json';
       }
       configs.body = JSON.stringify(params);
     }
   }
 
-  return fetch(url, customHeaders(configs))
+  return fetch(url, configs)
     .then(handleErrors)
     .then((response) => {
       return response.json();
