@@ -5,7 +5,7 @@ import 'antd/lib/input/style/index';
 registerComponent({
   'ant-Input': Input,
   'ant-InputGroup': Input.Group,
-  'ant-TextArea': Input.default.TextArea
+  'ant-TextArea': Input.TextArea
 });
 
 export {
