@@ -7,7 +7,7 @@ export function handleErrors(response) {
   return response;
 }
 
-const _defaultOptions = {};
+const _defaultOptions = { useApplicationJson: true };
 export function setDefaultOptions(options = {}) {
   return Object.assign(_defaultOptions, options);
 }
@@ -25,16 +25,20 @@ export function fetchData(url, callback, params, cfgs) {
     if (configs.method === 'get' || configs.method === 'delete') {
       url += '?' + querystring.encode(params);
     } else if (configs.method === 'post' || configs.method === 'put') {
-      if (!configs.headers) {
-        configs.headers = {};
+      if (configs.useApplicationJson) {
+        if (!configs.headers) {
+          configs.headers = {};
+        }
+        if (!configs.headers.Accept) {
+          configs.headers.Accept = 'application/json';
+        }
+        if (!configs.headers['Content-Type']) {
+          configs.headers['Content-Type'] = 'application/json';
+        }
+        configs.body = JSON.stringify(params);
+      } else {
+        configs.body = params;
       }
-      if (!configs.headers.Accept) {
-        configs.headers.Accept = 'application/json';
-      }
-      if (!configs.headers['Content-Type']) {
-        configs.headers['Content-Type'] = 'application/json';
-      }
-      configs.body = JSON.stringify(params);
     }
   }
 
