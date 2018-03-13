@@ -36,6 +36,11 @@ export function fetchData(url, callback, params, cfgs) {
           configs.headers['Content-Type'] = 'application/json';
         }
         configs.body = JSON.stringify(params);
+      } else if (configs.useApplicationForm) {
+        if (!configs.headers['Content-Type']) {
+          configs.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        }
+        configs.body = querystring.encode(params);
       } else {
         configs.body = params;
       }
